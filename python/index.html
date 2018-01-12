@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Python</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="" />
+  <meta name="description" content="Throughout the course you will use the Python language to analyze the data you collect, to plot figures and calculate physical quantities. This tutorial covers the basics of using Python, saving and loading data, and plotting data and fitting the data using curve_fit.
+You can find alternate material on the Department of Physics compwiki that covers many of the same topics but written by different people. In the 3rd and 4th year courses (e.g PHY407) you will use a textbook called Computational Physics with Python, and sample chapters introducing Python and the plotting libraries can be found at the author&amp;rsquo;s website.
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@gohugoio" />
+    <meta name="twitter:title" content="Python" />
+    <meta name="twitter:description" content="Throughout the course you will use the Python language to analyze the data you collect, to plot figures and calculate physical quantities. This tutorial covers the basics of using Python, saving and loading data, and plotting data and fitting the data using curve_fit.
+You can find alternate material on the Department of Physics compwiki that covers many of the same topics but written by different people. In the 3rd and 4th year courses (e.g PHY407) you will use a textbook called Computational Physics with Python, and sample chapters introducing Python and the plotting libraries can be found at the author&amp;rsquo;s website.
+
+" />
+    <meta name="twitter:image" content="http://phy224.ca/img/avatar.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<link rel="canonical" href="http://phy224.ca/python/" />
+<link rel="alternative" href="/index.xml" title="PHY224" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="PHY224" />
+<meta name="msapplication-tooltip" content="PHY224" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  
+  <h2 class="title"><a href="/">PHY224</a></h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="/introduction">Introduction</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="/python">Python</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="/instruments">Instruments and Wiring</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="/experiments">Experiments</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="/markingscheme">Marking Scheme</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+ 
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Python</h1>
+    </header>
+    <article class="post-content"><p>Throughout the course you will use the Python language to analyze the data you collect, to plot figures and calculate physical quantities. This tutorial covers the basics of using Python, saving and loading data, and plotting data and fitting the data using <code>curve_fit</code>.</p>
+
+<p>You can find alternate material on the Department of Physics <a href="http://compwiki.physics.utoronto.ca/">compwiki</a> that covers many of the same topics but written by different people. In the 3rd and 4th year courses (e.g PHY407) you will use a textbook called <a href="http://www-personal.umich.edu/~mejn/computational-physics/">Computational Physics with Python</a>, and sample chapters introducing Python and the plotting libraries can be found at the author&rsquo;s website.</p>
+
+<p></p>
+
+<p>If you have taken a class covering Python before and want to skip ahead. Try answering the exercises below or the exercises on the Physics <a href="http://compwiki.physics.utoronto.ca/Questions+and+Solutions">compwiki Questions and Solutions page</a>. More advanced material can also be provided.</p>
+
+<ul>
+<li><a href="#exercise-1">Exercise 1</a></li>
+<li><a href="#exercise-2">Exercise 2</a></li>
+<li><a href="#exercise-3">Exercise 3</a></li>
+<li><a href="#exercise-4">Exercise 4</a></li>
+<li><a href="#exercise-5">Exercise 5</a></li>
+<li><a href="#exercise-6">Exercise 6</a></li>
+</ul>
+
+<!--```python
+import matplotlib as mpl
+%matplotlib inline
+mpl.rcParams['savefig.dpi']=300             #72 m
+```
+-->
+
+<p>Python is generally used as a scripting language : Scripts are files that contain programs and functions. Scripts interact with data files and other programs. A script file (here named <em>script.py</em>) can be run from the command line using the <code>python</code> command.</p>
+
+<pre><code>python script.py
+</code></pre>
+
+<p>Expressions and functions can also be called from an <em>interactive interpreter</em> launched by the <code>python</code> command without listing a script to run.</p>
+
+<pre><code>python 
+
+#My version prints the following at the start
+Python 3.6.0 |Anaconda custom (x86_64)| (default, Dec 23 2016, 13:19:00)
+[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;
+</code></pre>
+
+<h2 id="introduction">Introduction</h2>
+
+<h3 id="interpreter-shell">Interpreter / Shell</h3>
+
+<p>You can use the Python interpreter as a calculator</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="mi">3</span><span class="o">+</span><span class="mi">5</span></code></pre></div>
+<pre><code>8
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="mf">3.141592</span> <span class="o">/</span> <span class="mi">2</span></code></pre></div>
+<pre><code>1.570796
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span> <span class="o">-</span> <span class="mi">24</span><span class="o">/</span><span class="mi">3</span></code></pre></div>
+<pre><code>52.0
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="mi">9</span><span class="o">**</span><span class="mi">2</span></code></pre></div>
+<pre><code>81
+</code></pre>
+
+<p>Python is an evolving language and has some quirks. In Python 2 (the older version of Python) the calculation <code>9/4</code> produces a different answer to Python 3 (the latest version of Python).</p>
+
+<p>This happens because the &lsquo;/&rsquo; operator is treated differently in the two versions, but produces the right answer in both cases if you understand the behavior. In Python 2, when you divide two <code>integers</code> (numbers without a decimal point), the answer will also be the nearest <code>integer</code>. In Python 3, the divide operator always converts <code>integers</code> into <code>floating point</code> (or <code>real</code>) numbers. Including the decimal point in your floating point numbers will help protect you from this problem. Unlike in <em>Matlab</em>, there is no <code>./</code> operator to force a floating point division.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="mi">9</span> <span class="o">/</span> <span class="mi">4</span></code></pre></div>
+<pre><code>2.25
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="mf">9.</span> <span class="o">/</span> <span class="mi">4</span></code></pre></div>
+<pre><code>2.25
+</code></pre>
+
+<p>You can force an integer division using the // operator</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="mi">9</span><span class="o">//</span><span class="mi">4</span></code></pre></div>
+<pre><code>2
+</code></pre>
+
+<h3 id="whitespace">Whitespace</h3>
+
+<p>Whitespace is often important in Python. Whitespace characters are characters in the program that often appear empty, like spaces and tabs. When writing Python code everything with the same indentation is treated as the same block of code, to be executed in order.</p>
+
+<p>The number of spaces or tabs at the start of each line is important and needs to be consistent. The number of spaces/tabs you use is not important but 4 spaces for each indentation level is common. Some text editors allow you to show whitespace characters (to maintain a consistent indentation) and convert tabs to spaces (to save typing 4 spaces each time, for example).</p>
+
+<h3 id="comments">Comments</h3>
+
+<p>Any text appearing after a <code>#</code> will be treated as a comment and ignored by Python, e.g.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="c1"># A comment at the start of a line</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="mf">1.</span> <span class="c1">#another comment, val is a value.</span>
+    <span class="c1">#val= -1</span></code></pre></div>
+<p><code>val</code> is set to <code>1</code> in the above code. The line changing it to -1 is a comment and is not executed.</p>
+
+<h3 id="functions">Functions</h3>
+
+<p>A function is a block of code that can be called by other programs or functions. Functions usually perform some work, and might return a value, save a file, plot a graph, etc.</p>
+
+<p>Functions are called using their name and providing the function values in a comma separated list in parentheses (also known as the arguments to the function), e.g.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span></code></pre></div>
+<p>calls the function <code>add</code> with two arguments, 3 and 2. The function name can be meaningless but should describe the behavior of the function if possible. If the answer from <code>add(3,2)</code> was not 5 you would be annoyed!</p>
+
+<h3 id="numbers">Numbers</h3>
+
+<p>Python has built in numerical types like <code>integers</code>, <code>float</code>, <code>long</code>, and <code>complex</code>.</p>
+
+<ul>
+<li><code>integers</code> range from -2 billion to + 2 billion.</li>
+<li><code>long</code> numbers are integers that can be infinitely large.</li>
+<li><code>float</code> numbers are 64-bits long, and can hold numbers from about -2e300 to 2e300, and can be as small as 2e-300. <code>float</code>ing point numbers typically hold 14 digits of accuracy.</li>
+<li><code>complex</code> numbers are made from two <code>float</code> numbers.
+<br /></li>
+</ul>
+
+<p>If you mix numerical types in your code, Python will convert values to the <code>largest</code> type it needs, usually <code>integers</code> -&gt; <code>long</code> -&gt; <code>floats</code> -&gt; <code>complex</code>. You can force a conversion using the functions <code>float</code>,<code>int</code>,<code>long</code>, and <code>complex</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">float</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code></pre></div>
+<pre><code>1.0
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">int</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">)</span></code></pre></div>
+<pre><code>3
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></code></pre></div>
+<pre><code>(3+0j)
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">complex</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="mf">3.14159</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="mf">2.71828</span><span class="p">))</span></code></pre></div>
+<pre><code>(3.14159+2j)
+</code></pre>
+
+<p>You can check the type of a variable with the <code>type</code> function</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">type</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span></code></pre></div>
+<pre><code>float
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">type</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code></pre></div>
+<pre><code>int
+</code></pre>
+
+<h3 id="strings">Strings</h3>
+
+<p>Strings are defined using single or double quotation marks</p>
+
+<pre><code>'a string'
+&quot;also a string&quot;
+</code></pre>
+
+<p>Strings can be concatenated with the <em>+</em> operator, and duplicated with the *** operator.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;eggs &#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></code></pre></div>
+<pre><code>eggs 
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">a</span><span class="p">)</span></code></pre></div>
+<pre><code>eggs eggs 
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span></code></pre></div>
+<pre><code>eggs eggs eggs eggs 
+</code></pre>
+
+<p>Characters in a string can be accessed using square brackets, e.g.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">*</span><span class="mi">4</span> <span class="c1"># eggs eggs eggs eggs</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#indexing starts at 0! This is the first &#39;e&#39;</span></code></pre></div>
+<pre><code>e
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span> <span class="c1">#The space between words is also a character</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span> <span class="c1">#s in Python 2</span></code></pre></div>
+<pre><code>s
+</code></pre>
+
+<h3 id="logic-and-boolean-data-types">Logic and Boolean data types.</h3>
+
+<p>Python supports logical values (also known as Boolean data types) with the values <em>True</em> and <em>False</em>. Every other data type in Python can be interpreted as a Boolean data type, most of them are equivalent to the Boolean <em>True</em>. Special Values that are equivalent to  <em>False</em> include the number 0, an empty string, an empty list/array. In general, you shouldn&rsquo;t rely on these equivalent values and should check explicitly for the values you want to consider.</p>
+
+<p>Python also supports the logical operators <em>and</em>, <em>or</em>, and <em>not</em>, and the comparison operators <code>&lt;</code>,<em>&lt;=</em>,<em>==</em>,<em>!=</em>,<em>&gt;=</em>,<em>&gt;</em>.</p>
+
+<pre><code>True and False #False
+True or False #True
+not True #False
+True and not False #True
+a &lt; b # True if a is less than b
+a &lt;= b # True if a is less than or equal to b
+a == b # True if a is equal to b
+a != b # True if a is not equal to b
+a &gt;= b # True if a is greater than or equal to b
+a &gt; b # True if a is greater than b
+a and True # True if a is interpreted as True
+a and False # False always.
+</code></pre>
+
+<p>and four examples of possibly unexpected resultsv (assuming a is defined)</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">a</span> <span class="ow">or</span> <span class="bp">True</span> <span class="c1"># a</span>
+    <span class="bp">True</span> <span class="ow">or</span> <span class="n">a</span> <span class="c1"># True</span>
+    <span class="n">a</span> <span class="ow">or</span> <span class="bp">False</span> <span class="c1"># a</span>
+    <span class="bp">False</span> <span class="ow">or</span> <span class="n">a</span> <span class="c1"># a</span></code></pre></div>
+<h3 id="variables">Variables</h3>
+
+<p>You can save values in <code>variables</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">x</span><span class="o">=</span><span class="mi">3</span></code></pre></div>
+<p>means save the value of 3 in the variable <code>x</code>. Whatever value was previously in <code>x</code> is lost unless you store it somewhere else. Variables can be reused in other expressions, including saving them to other variables</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">x</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">x</span>
+    <span class="n">z</span><span class="o">=</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#changes x from 3 to 0, but doesn&#39;t affect y or z</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#changes y to 0</span></code></pre></div>
+<h3 id="operators">Operators</h3>
+
+<p>The common mathematical operators work as expected in Python</p>
+
+<ul>
+<li>x + y -&gt; add</li>
+<li>x - y -&gt; subtract</li>
+<li>x * y -&gt; multiply</li>
+<li>x / y -&gt; quotient (divide)</li>
+<li>x // y -&gt; integer quotient (divide)</li>
+<li>-x -&gt; negate x (unary minus)</li>
+<li>x**y -&gt; raise x to the power of y</li>
+<li>x % y -&gt; remainder of x / y
+<br /></li>
+</ul>
+
+<h3 id="loading-modules-libraries-or-packages">Loading modules, libraries, or packages</h3>
+
+<p>Python provides many standard modules (also called libraries, or packages) for you to use, and many others are available for free from package <em>repositories</em> like <strong>pypi.python.org</strong></p>
+
+<p>Loading a module is called *import*ing. You can import an entire module using</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span></code></pre></div>
+<p>or just part of the package</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span></code></pre></div>
+<p>You can import a module and keep it as a separate <em>namespace</em> to protect your functions from being overwritten,</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">import</span> <span class="nn">math</span> <span class="c1">#use math.sin instead of just sin</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">math</span> <span class="c1">#import the library</span>
+<span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span> <span class="c1">#Calculate the sin of 0.5</span></code></pre></div>
+<pre><code>0.479425538604203
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">math</span> <span class="kn">as</span> <span class="nn">mylib</span> <span class="c1">#import and &#39;rename&#39; the library inside your code.</span>
+<span class="n">mylib</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span></code></pre></div>
+<pre><code>0.479425538604203
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span><span class="n">cos</span> <span class="c1">#just import sin and cos</span>
+<span class="n">sin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span></code></pre></div>
+<pre><code>0.479425538604203
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1">#import all functions from the library into your &#39;namespace&#39;</span>
+<span class="n">sin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span></code></pre></div>
+<pre><code>0.479425538604203
+</code></pre>
+
+<p>Importing entire modules using <code>import *</code> can be covenient, but can also be dangerous. If two packages define
+the same function or variable the last package to be imported overwrites any earlier imports.</p>
+
+<h2 id="exercise-1">Exercise 1</h2>
+
+<p>What are the results of the following expressions? You should use the Python shell to get your answer.</p>
+
+<ol>
+<li>False and True</li>
+<li>True or False</li>
+<li>True and False or True</li>
+<li>2&gt;0</li>
+<li>not True</li>
+<li>not 1</li>
+<li>3*5+8</li>
+<li>3*(5+8)</li>
+<li>(3*5)+8</li>
+<li>What is $sin(90)$? and $sin(1.570596)$? (using the sine function from the math package)</li>
+<li>What is <sup>98</sup>&frasl;<sub>6</sub>?</li>
+<li>What is the remainder of <sup>98</sup>&frasl;<sub>6</sub>?</li>
+<li>What is $2^2$, $2^2+2$, $2^{2+2}$?</li>
+<li>Calculate the base 3 logarithm of the number 27. The math package provides the natural log function <em>log</em> and the base 10 function <em>log10</em>.</li>
+</ol>
+
+<h2 id="functions-and-objects">Functions and Objects</h2>
+
+<h3 id="defining-functions">Defining functions</h3>
+
+<p>Functions in Python can be created using the following syntax</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">function_empty</span><span class="p">():</span>
+        <span class="k">pass</span> <span class="c1">#literally do nothing</span>
+        
+    <span class="k">def</span> <span class="nf">function_taking_parameters</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">keyword</span><span class="o">=</span><span class="n">default_value</span><span class="p">):</span>
+        <span class="n">some</span> <span class="n">code</span>
+       
+    <span class="k">def</span> <span class="nf">function_returning_a_value</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">keyword</span><span class="o">=</span><span class="n">default_value</span><span class="p">):</span>
+        <span class="n">some</span> <span class="n">code</span>
+        <span class="k">return</span> <span class="n">value</span></code></pre></div>
+<p>The function name can be (almost) any string. There can be zero or more <em>parameters</em>, whose position is important, and zero or more <em>keywords</em>, whose position is not important. Keywords always have a default value associated with them. If you call the function without a keyword, it will be available inside the function with the default value.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">e</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+       
+<span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># prints 1,2,3,1,2,3</span>
+<span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">e</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="c1"># prints 1,2,3,4,5,6</span>
+<span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">e</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#prints 1,2,3,1,5,3</span>
+<span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">e</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># prints 1,2,3,4,5,3</span>
+<span class="c1"># func(1,2) # error, not enough positional parameters</span></code></pre></div>
+<pre><code>1 2 3 1 2 3
+1 2 3 4 5 6
+1 2 3 1 5 3
+1 2 3 4 5 3
+</code></pre>
+
+<p>Functions can return no value, a single value, or a group of values</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">func1</span><span class="p">():</span>
+        <span class="k">return</span>
+    <span class="k">def</span> <span class="nf">func2</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">def</span> <span class="nf">func3</span><span class="p">():</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span></code></pre></div>
+<h3 id="containers">Containers</h3>
+
+<p>Python provides a number of containers - objects designed to hold other variables.</p>
+
+<h3 id="lists">Lists</h3>
+
+<p>The <em>list</em> container stores an <em>ordered</em> group of variables whose ordering is determined by their position in the list.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="c1"># a list of integers</span>
+    <span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;e&#39;</span><span class="p">]</span> <span class="c1"># a list of strings</span>
+    <span class="n">list3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;f&#39;</span><span class="p">]</span> <span class="c1"># a list of strings and integers.</span></code></pre></div>
+<p>Each element, or entry, in the list can be accessed using square brackets, starting from element 0</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">list1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># 0</span>
+    <span class="n">list2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># &#39;a&#39;</span>
+    <span class="n">list3</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="c1"># &#39;f&#39;</span></code></pre></div>
+<p>Accessing negative elements is the same as counting from the end of the list, the last element in the list being <code>-1</code> (<strong>not</strong> <code>-0</code>).</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">list1</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># 4</span>
+    <span class="n">list1</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span> <span class="c1"># 1</span></code></pre></div>
+<p>You can create a list using square brackets <code>[]</code> or the <code>list</code> function.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">a</span><span class="o">=</span><span class="nb">list</span><span class="p">()</span> <span class="c1"># an empty list, this calls the &#39;list&#39; function</span>
+    <span class="n">b</span><span class="o">=</span><span class="p">[]</span> <span class="c1"># a second empty list</span></code></pre></div>
+<h3 id="dictionaries">Dictionaries</h3>
+
+<p>A dictionary stores a group of <code>keys</code> and <code>values</code> in a way that lets you look up the <code>key</code> quickly and get the <code>value</code> from the dictionary.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">dict1</span><span class="o">=</span><span class="p">{</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+    <span class="n">dict2</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span></code></pre></div>
+<p>The values stored in the dictionary are accessed using the square brackets</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">dict1</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="c1"># 1</span>
+    <span class="n">dict2</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="c1"># 2</span></code></pre></div>
+<p>and values can be updated (or new key,value pairs created) by assigning with the <code>=</code> sign</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">dict1</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;d&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># a new key &#39;d&#39; with value 4</span>
+    <span class="n">dict1</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># changes the value of the &#39;a&#39; key to 3</span></code></pre></div>
+<p>Python allows many strings and data types to be used as the key, and anything for value.</p>
+
+<h3 id="tuples">Tuples</h3>
+
+<p>Tuples are like lists, storing a group of values, but once created cannot be changed. They are said to be <strong><em>immutable</em></strong>. Changing the value in a tuple is not allowed.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">tuple1</span> <span class="o">=</span> <span class="p">(</span><span class="sa"></span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">tuple1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># an Error</span></code></pre></div>
+<p>Tuples can be &ldquo;unpacked&rdquo; into separate variables by assigning it to a comma separated list of variables</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">tuple1</span> <span class="c1">#the values are a=&#39;a&#39;, b=&#39;b&#39;, c=3</span></code></pre></div>
+<p>When &lsquo;unpacking&rsquo; the tuple in this way, the number of elements on the left side of the equality should be the same number as the length of the tuple.</p>
+
+<h3 id="sets">Sets</h3>
+
+<p>Sets are like lists, but only store a value once, and support &lsquo;Set logic&rsquo; operations like <em>intersections</em> and <em>unions</em>. You can define a set using</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span></code></pre></div>
+<p>The <em>union</em> of two sets is the set that contains <strong>all elements that exist in both sets</strong>. The <em>intersection</em> includes <strong>only elements that exist in both sets</strong>. The <em>difference</em> includes <strong>elements that exist in one set but not the other</strong>.</p>
+
+<h3 id="objects">Objects</h3>
+
+<p>Many variables in Python are treated as an <code>object</code>, with one or more <em>values</em> and <em>methods</em>. Values are like variables that are stored inside the object, <code>number</code> or <code>string</code>. Methods are functions that are allowed to access the values inside an object.</p>
+
+<p>Numbers and strings are also objects in Python, although most of the mechanics are hidden from the user.</p>
+
+<p>The container types listed above are all examples objects. The <em>values</em> they hold are the items in the container. The <em>methods</em> are functions that can perform operations on the data inside the container.</p>
+
+<p>In general, to call a <em>method</em> you use the syntax</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="nb">object</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="c1"># if the method needs data</span>
+    <span class="nb">object</span><span class="o">.</span><span class="n">method</span><span class="p">()</span> <span class="c1"># if no data is required.</span></code></pre></div>
+<p>For the containers above, the following <em>methods</em> are commonly used</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="c1">#l is a list object</span>
+    <span class="n">l</span><span class="o">=</span><span class="nb">list</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#add the value 5 to the end of the list</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#insert the value 5 into the list at position 3, starting from 0.</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="c1"># return the number of elements in the list</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#remove the value 5 from the list, but only once</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1">#remove the fourth element from the list.</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># extend the list l with the list [3,4]</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="c1">#d and d2 are dictionaries</span>
+    <span class="n">d</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">d2</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="c1">#return a list of all keys in the dictionary</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="c1">#return a list of all values in the dictionary</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1"># return the number of keys (or values) in the dictionary</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span> <span class="c1">#update the dictionary d with the dictionary d2</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="c1">#sa and sb are sets</span>
+    <span class="n">sa</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">sb</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+    
+    <span class="n">sa</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
+    <span class="n">sa</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
+    <span class="n">sa</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span></code></pre></div>
+<h2 id="exercise-2">Exercise 2</h2>
+
+<p>Define the following containers</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">la</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">lb</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+    <span class="n">lc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+    <span class="n">va</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="n">vb</span> <span class="o">=</span> <span class="mi">14</span>
+    <span class="n">vc</span> <span class="o">=</span> <span class="mi">15</span></code></pre></div>
+<p>What does the <em>la</em> list look like after the following operations (reset the variables after each stage)?</p>
+
+<ol>
+<li>extend <em>la</em> with <em>lb</em></li>
+<li>append <em>lb</em> onto <em>la</em></li>
+<li>append <em>va</em> onto <em>la</em></li>
+<li>insert <em>va</em> at index 3 of <em>la</em></li>
+<li>remove the element with value 3 from <em>la</em></li>
+<li>remove (pop) the element at index 3 from <em>la</em><br /></li>
+</ol>
+
+<h2 id="control-structures">Control Structures</h2>
+
+<h3 id="loops-for-and-while">Loops: for and while</h3>
+
+<p>Looping in Python happens using a <em>for</em> loop, or sometimes a <em>while</em> loop. <em>For</em> loops run the block of code for each element in a sequence (e.g. a list of numbers). A <em>while</em> loop runs the block of code for as long as a <em>condition</em> is True.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="n">body_of_code</span>
+        
+    <span class="k">while</span> <span class="n">condition</span><span class="p">:</span>
+        <span class="n">body_of_code</span></code></pre></div>
+<p>The simplest <em>for</em> loop is to run the code N times. You can use the <code>range(N)</code> function to generate a list of integers from zero to N:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">body_of_code</span>
+        
+    <span class="c1">#equivalently</span>
+    <span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">:</span>
+        <span class="n">body_of_code</span>
+        <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span></code></pre></div>
+<p><em>For</em> loops should be used when you have a list of items to iterate through (even if they are a list of numbers constructed just for the loop). <em>While</em> loops should be used when you don&rsquo;t know how many times the code will run</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#a better use for the while loop</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">randint</span> <span class="c1"># choose a random integer </span>
+<span class="n">sumdice</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">while</span> <span class="n">sumdice</span><span class="o">!=</span><span class="mi">12</span><span class="p">:</span>
+    <span class="c1">#roll a pair of dice until they&#39;re faces add to 12 (two sixes!)</span>
+    <span class="c1">#randint is quirky, and needs the maximum value to be 1 higher</span>
+    <span class="n">dice</span> <span class="o">=</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span>
+    <span class="n">sumdice</span><span class="o">=</span><span class="n">dice</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">dice</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span> <span class="c1">#should be 1/36th of the rolls, but it&#39;s random and can finish at any time</span></code></pre></div>
+<pre><code>19
+</code></pre>
+
+<h3 id="conditional-code-if-elif-and-else">Conditional code: if, elif and else.</h3>
+
+<p>Blocks of code can be made optional using the <em>if</em> statement. The code is executed <strong>only if</strong> the logical expression after the <em>if</em> statement evaluates to True.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="c1">#single block of code</span>
+    <span class="k">if</span> <span class="n">test1</span><span class="p">:</span>
+        <span class="n">block_of_code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="c1">#code with an alternate block</span>
+    <span class="k">if</span> <span class="n">test1</span><span class="p">:</span>
+        <span class="n">block_of_code</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">alternate_block_of_code</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="c1">#many alternate blocks. only 1 will run</span>
+    <span class="k">if</span> <span class="n">test1</span><span class="p">:</span>
+        <span class="n">block_of_code</span>
+    <span class="k">elif</span> <span class="n">test2</span><span class="p">:</span>
+        <span class="n">alternate_block_of_code</span>
+    <span class="k">elif</span> <span class="n">test3</span><span class="p">:</span>
+        <span class="n">second_alternate</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">final_alternate_block_of_code</span></code></pre></div>
+<p>The &lsquo;logical expressions&rsquo; above (e.g. test1) can be composed of any logical expression, combined with <em>or</em> and <em>and</em>, negated with <em>not</em>, may include function calls, or simply be equal to <em>False</em> (then the code will never run, of course).</p>
+
+<p>For loops and if statements can be nested. However, if the nesting becomes too deep, consider the readability of the code, and perhaps move the inner code to a new function.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="c1">#version 1</span>
+    <span class="k">for</span> <span class="n">loop1</span> <span class="ow">in</span> <span class="n">list1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">loop2</span> <span class="ow">in</span> <span class="nb">list</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">test1</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">code1</span>
+            <span class="k">elif</span> <span class="n">test2</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">loop3</span> <span class="ow">in</span> <span class="n">list3</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">code2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">loop3</span> <span class="ow">in</span> <span class="n">list4</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">code3</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="c1">#version 2</span>
+    <span class="k">for</span> <span class="n">loop1</span> <span class="ow">in</span> <span class="n">list1</span><span class="p">:</span>
+       <span class="k">for</span> <span class="n">loop2</span> <span class="ow">in</span> <span class="n">list2</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">function_call</span><span class="p">(</span><span class="n">loop1</span><span class="p">,</span> <span class="n">loop2</span><span class="p">)</span></code></pre></div>
+<p><em>For</em> loops can be used on a sequence of elements that aren&rsquo;t numbers, either by counting the number of elements and generating a list of numbers with <em>range</em>, or by using the list of elements directly. For example</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">fruit_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa"></span><span class="s1">&#39;apple&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;banana&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;carrot&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;durian&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;eggplant&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;fig&#39;</span><span class="p">]</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruit_list</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">fruit</span><span class="p">)</span></code></pre></div>
+<pre><code>#or
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">for</span> <span class="n">fruit_counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fruit_list</span><span class="p">)):</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">fruit_ist</span><span class="p">[</span><span class="n">fruit_counter</span><span class="p">])</span></code></pre></div>
+<p>You can combine the two loops with the <em>enumerate</em> that provides the index and value inside the loop</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fruit_list</span><span class="p">):</span>
+        <span class="k">print</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">fruit_list</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="c1">#the same string is printed.</span></code></pre></div>
+<h2 id="exercise-3">Exercise 3</h2>
+
+<p>The python function <code>range(N)</code> will generate and return a list of numbers from 0 to N (** not including N **)</p>
+
+<ol>
+<li>Write a for loop that loops from 0 to 19 and prints each number.</li>
+<li>Write a for loop that loops from 0 to 19, print each number &gt; 8</li>
+<li>Write a for loop that loops from 0 to 19, print each even number &gt; 8.</li>
+<li>Write a while loop that counts from 10 down to 1, printing each number.</li>
+<li>Write a for loop that loops from 6 to 100 and prints the number <em>only</em> if it doesn&rsquo;t divide by 2, 3, or 5  exactly. (that is, with no remainder after division). Your output should start with 7,11,13 and end with 91,97.</li>
+</ol>
+
+<h2 id="numpy-and-scipy">Numpy and Scipy</h2>
+
+<p>Python lists are inefficient for mathematical operations, both in writing code and running the code. For efficient calculations you should you a numerical Python library like <code>numpy</code>. <code>numpy</code> provides a special type of array that can be treated just like a number in calculations (something you can&rsquo;t do with <code>list</code>) and provides a large number of specialized functions for working with these arrays.</p>
+
+<p>A related library called <em>scipy</em> (an abbreviation of  Scientific Python) contains a large number of functions for common and not-so-common scientific equations and algorithms. For example, Fourier transforms (<em>scipy.fftpack</em>), numerical integration (<em>scipy.integrate</em>), and random number generators (<em>scipy.random</em>).</p>
+
+<p>One caveat with <em>numpy</em> is that it contains functions that are also available in the <em>math</em> module <strong>with the same name</strong>. The <em>numpy</em> functions usually accept normal numbers and return the right answer. The <em>math</em> library functions will not take the special <em>numpy</em> arrays.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sin</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span>
+    <span class="n">sin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span> <span class="c1">#This calls the math version, </span>
+             <span class="c1">#which does not take arrays or</span>
+             <span class="c1">#lists as a parameter/argument.</span></code></pre></div>
+<h3 id="arrays">Arrays</h3>
+
+<p>Numpy provides the <em>array</em> object, and many functions that work on the array as a whole (e.g. <em>sum, product, length, max, min</em>) or each element of the array in isolation (e.g. <em>sin,cos,power,exp</em>).</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#make an array of five zeros.</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># make an array of five numbers from 0 to 4</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#make an array of five ones with integer type</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># An array fives zeros with integer type</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span> <span class="c1"># A floating point array filled with zeros</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># make an array of 4 zeros, in two dimensions</span></code></pre></div>
+<p>The <em>arange</em> function, and its alternatives <em>linspace</em>, and <em>logspace</em> generate a series of numbers when given the correct arguments. <em>arange</em>  takes the arguments for the start of the array, end of the array, and step size of the array. <em>linspace</em> takes the start of the array, end of the array, and <em>number of elements</em> in the array. <em>logspace</em> does the same in logarithmic space.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># 0,1,2,3,4</span>
+    <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># 0,1,2,3,4</span>
+    <span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># 3,4</span>
+    <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 0,2,4</span>
+    <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="c1"># 0,1,2,3,4,5</span>
+    <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># 0,1.25,2.5,3.75,5.</span>
+    <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 0</span>
+    <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 0,5</span>
+    <span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># 0.01,0.1,1,10,100</span></code></pre></div>
+<p>Notice that the last value returned from <em>arange</em> is not the argument used in the function call. It&rsquo;s usually 1 less. On the other hand, <em>linspace</em> does include the upper value.</p>
+
+<p>The <em>range</em> function built into Python provides a similar function for lists to the <code>arange</code> function in <code>numpy</code>.</p>
+
+<p>Accessing the array elements is similar to accessing a list element</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">b</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1"># element 4 of array b</span>
+    <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># element in row 0, column 1</span>
+<span class="sb">````</span>
+<span class="n">You</span> <span class="n">can</span> <span class="n">also</span> <span class="n">access</span> <span class="n">sections</span> <span class="n">of</span> <span class="n">the</span> <span class="n">array</span> <span class="n">using</span> <span class="o">*</span><span class="n">slicing</span><span class="o">*</span> <span class="n">notation</span><span class="o">.</span> <span class="n">In</span> <span class="n">this</span> <span class="n">notation</span> <span class="n">you</span> <span class="n">can</span> <span class="n">specify</span> <span class="n">the</span> <span class="o">*</span><span class="n">start</span><span class="o">*</span> <span class="n">element</span><span class="p">,</span> <span class="n">the</span> <span class="o">*</span><span class="n">stop</span><span class="o">*</span> <span class="n">element</span><span class="p">,</span> <span class="ow">and</span> <span class="n">the</span> <span class="o">*</span><span class="n">stepping</span><span class="o">*.</span> <span class="o">**</span><span class="n">Remember</span> <span class="n">that</span> <span class="n">the</span> <span class="o">*</span><span class="n">stop</span><span class="o">*</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">included</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">slice</span><span class="o">**.</span>
+<span class="sb">``</span><span class="err">`</span><span class="n">python</span>
+    <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># element 1,2,3,4 from array b</span>
+    <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># 1,3</span>
+    <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>   <span class="c1"># 1,2,3,4</span>
+    <span class="n">b</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>    <span class="c1"># 0,1,2,3,4</span>
+    <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>    <span class="c1"># 1,2,3,4</span>
+    <span class="n">b</span><span class="p">[:</span><span class="mi">5</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># 0,2,4</span>
+    <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># 1,3</span>
+    <span class="n">b</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>   <span class="c1"># 0,2,4</span></code></pre></div>
+<p>The double colon (::) notation is shorthand for the <code>slice</code> function, which takes the argument <code>slice(start,stop,step)</code>, and works the same way as the <code>arange</code> function.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">b</span><span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span> <span class="c1"># 1,3</span></code></pre></div>
+<p>Arrays can be used as arguments to functions, like <em>sin</em>, and treated as variables in equations</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">b</span><span class="o">*</span><span class="mi">2</span>
+    <span class="n">b</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span></code></pre></div>
+<h3 id="modules-and-libraries">Modules and Libraries</h3>
+
+<p>In addition to using libraries written by others you can reuse your own code as a module/library by saving the code in a file and *import*ing that file. For example, if you wrote a function to calculate the first N Fibonacci numbers (the list of numbers defined as  $F_n=F_{n-1} + F_{n-2}$ ,starting with the numbers $F_0=1$ and $F_1=1$).</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">fibN</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">N</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">s</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">elif</span> <span class="n">N</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">s</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">N</span><span class="o">&gt;=</span><span class="mi">2</span><span class="p">:</span>
+            <span class="n">s</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">s</span></code></pre></div>
+<p>you could save this function in a file called &lsquo;fib.py&rsquo;. Then in a new program you can simply write</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">import</span> <span class="nn">fib</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">fib</span><span class="o">.</span><span class="n">fibN</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span></code></pre></div>
+<pre><code>    [1, 1, 2, 3, 5, 8, 13, 21]
+</code></pre>
+
+<p>This only works if Python knows where to find your code. By default Python will search its library, and the current directory. You can add a directory to the path stored in <em>sys.path</em>. You should change the path before you try to import the new package</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;the_full_path_to_my_directory&#39;</span><span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">fib</span></code></pre></div>
+<h2 id="exercise-4">Exercise 4</h2>
+
+<p>Use the Numpy package where you can. Save all the code you generate to a text file.</p>
+
+<ol>
+<li><p>Generate an array of 30 floating point values from 0 to 29 inclusive. Calculate the mean value.  (There may be a function to calculate the <code>mean</code> of the array, if not there is a function to calculate the <code>sum</code>  and <code>len</code> or <code>size</code> of the array).</p></li>
+
+<li><p>Take the array generated in question 1, subtract the mean value and square the result. Calculate the mean value of this new array.</p></li>
+
+<li><p>Using functions from the <em>numpy</em> package, calculate the <code>mean</code>,<code>min</code>,<code>max</code>,<code>std</code> (standard deviation), and <code>var</code> (variance) of the array in question 1. Which one corresponds to the your answer to question 2.</p></li>
+
+<li><p>Generate 12 values from 0 to 90 degrees using the <code>arange</code> function. Calculate the <code>sin</code> of each value and print the results. What angle units was the sine function expecting?</p></li>
+
+<li><p>Repeat question 4 with the <code>linspace</code> function from the numpy library.</p></li>
+
+<li><p>Write a function that takes an argument &lsquo;x&rsquo; and returns the value calculated from the quadratic equation &lsquo;y=2x^2 +3x +1&rsquo;.</p></li>
+
+<li><p>Call the function you wrote in question 6 with the value 2.0, and the <em>numpy</em> array generated in question 4 (i.e. 12 values from 0-90 degrees)</p></li>
+
+<li><p>Write a function that takes a single number and calculates its factorial. The factorial is sometimes written as &lsquo;!&rsquo; and N! is the product of integers from 1 to N inclusive, so 3! is 1*2*3. Make sure that the code produces the correct answer for N=0 (<code>0!=1</code>). Calculate the value of 9!</p></li>
+</ol>
+
+<h2 id="plotting-with-pylab">Plotting with Pylab</h2>
+
+<p>The most common way of generating line plots,maps, or contour plots from data is using a package called <em>matplotlib</em>. This package exposes a lot of control over the style and structure of the plots you can generate. Much of the control can be hidden using a simpler interface called <em>pylab</em> .</p>
+
+<p><em>pylab</em> includes packages from <em>matplotlib</em>, <em>numpy</em>, and <em>scipy</em> to provide a basic scientific toolkit. You can import pylab like any other library:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">import</span> <span class="nn">pylab</span></code></pre></div>
+<p>Then you can access the plotting functions it provides</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pylab</span>
+<span class="c1">#If don&#39;t specify the figure size,</span>
+<span class="c1">#Python will use its default values.</span>
+<span class="n">x</span><span class="o">=</span><span class="n">pylab</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="o">*</span><span class="n">pylab</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mf">0.05</span><span class="o">*</span><span class="n">pylab</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">pylab</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span> <span class="c1"># A Sine wave</span></code></pre></div>
+<p><img src="PythonReview_files/PythonReview_57_0.png" alt="png" /></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pylab</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="c1">#different figsize</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;green&#39;</span><span class="p">);</span> <span class="c1">#A green sine wave</span></code></pre></div>
+<p><img src="PythonReview_files/PythonReview_58_0.png" alt="png" /></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pylab</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="c1"># a thick line</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">pylab</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;sine&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> 
+<span class="c1"># a dashed line</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">pylab</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;cosine&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="c1">#print a figure legend using the line labels</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span> 
+<span class="c1"># add a label to the x axis</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;x axis label&#34;</span><span class="p">)</span> 
+<span class="n">pylab</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;y axis label&#39;</span><span class="p">)</span>
+<span class="c1">#extend the y axis limits to +- 3.14159</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="n">pylab</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">pylab</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> 
+<span class="n">pylab</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;Plot title&#34;</span><span class="p">);</span></code></pre></div>
+<p><img src="PythonReview_files/PythonReview_59_0.png" alt="png" /></p>
+
+<h3 id="reading-data-with-pylab">Reading data with Pylab</h3>
+
+<p>Pylab provides the function <em>loadtxt</em> to read data from a text file. and <em>savetxt</em> to save data to a text file. You can optionally specify a delimiter used to separate the data (e.g. commas, tabs, spaces, semi-colons) instead of the default method which considers any whitespace:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">loadtxt</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;data.txt&#34;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="c1">#look for commas to separate fields.</span></code></pre></div>
+<p>tell pylab to skip the file header with the <em>skiprows</em> keyword</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">loadtxt</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;data.txt&#34;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#ignore the first five rows</span></code></pre></div>
+<p>use only certain columns with <em>usecols</em></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">loadtxt</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;data.txt&#34;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="c1">#use only columns 0 and 3 </span></code></pre></div>
+<p>split a file with many columns into individual variables</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">loadtxt</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;data.txt&#34;</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></div>
+<p><em>loadtxt</em> does not provide a way of ignoring the <strong>last</strong> lines of a file.</p>
+
+<p>Saving files works in a similar way, using the <em>savetxt</em> function. <em>savetxt</em> takes the filename and the data array as parameters and optional keywords like &lsquo;delimiter&rsquo;.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">savetxt</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;data.txt&#34;</span><span class="p">,</span><span class="n">data</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span><span class="n">savetxt</span><span class="p">,</span><span class="n">loadtxt</span>
+<span class="c1">#Generate a single column of data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mf">10.</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="sa"></span><span class="s2">&#34;data={0}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="n">savetxt</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;output_files/mydata.txt&#34;</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="c1">#save the data</span>
+
+<span class="n">data_loaded</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;output_files/mydata.txt&#34;</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="c1">#load the data</span>
+<span class="k">print</span> <span class="p">(</span><span class="sa"></span><span class="s2">&#34;data_loaded={0}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_loaded</span><span class="p">))</span></code></pre></div>
+<pre><code>data=[ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9.]
+data_loaded=[ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9.]
+</code></pre>
+
+<h3 id="saving-figures-with-pylab">Saving figures with Pylab</h3>
+
+<p>Figures can saved from pylab with the <em>savefig</em> command. Figures can be saved different formats such as &lsquo;pdf&rsquo; (vector) files and &lsquo;png&rsquo; (image) files. Some pylab packages support other formats (like postscript &lsquo;eps&rsquo; for journal publication and &lsquo;svg&rsquo; for web-browser use). The first argument to savefig should be the file name, including the format</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">savefig</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;plot.pdf&#34;</span><span class="p">)</span> <span class="c1">#save a pdf image in plot.pdf</span></code></pre></div>
+<p>Some formats support extra options, such as resolution (&lsquo;dpi&rsquo;) for images, bounding boxes for postscript formats, and transparency to make using the figure on a different background color (or overlayed on another image) possible.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">savefig</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">savefig</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;plot.pdf&#34;</span><span class="p">)</span> <span class="c1">#save a pdf</span>
+    <span class="n">savefig</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;plot.png&#34;</span><span class="p">)</span> <span class="c1">#save a png </span>
+    <span class="n">savefig</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;plot300.png&#34;</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span><span class="n">transparent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># high resolution </span>
+                                                    <span class="c1"># transparent background</span></code></pre></div>
+<h2 id="exercise-5">Exercise 5</h2>
+
+<p>Save each figure in a different file.</p>
+
+<ol>
+<li>Plot the $sin^{-1}(x)$ function for $x$ values from -1 to +1.</li>
+<li>Plot the functions $sin(x)$ and $sin^2(x)$ from -5 to 5. Make sure the lines can be identified and are labelled.</li>
+<li>Plot the functions $\frac{e^x-e^{-x}}{2}$ and the &ldquo;hyperbolic sine function&rdquo; (sinh) from -5 to 5. Make sure both lines are visible.</li>
+<li>Write a function to calculate the sinc function (i.e. $\left(\frac{sin(x)}{x}\right)^2$ ) . Make sure you calculate the correct answer for x=0. Plot the sinc function from -10 to 10.</li>
+<li>Plot the cumulative sum (use <code>cumsum</code>) of the sinc function from -50 to 50. What is the sum?  How many points did you plot? The integral of the sinc function over this range is about 3.12169. What is the maximum value in your plot? Why is your sum different to the integral?</li>
+</ol>
+
+<h2 id="data-analysis-with-python">Data Analysis with Python</h2>
+
+<p>The goal of many lab experiments is to determine the relationship between two quantities. One quantity $x$ can be controlled and is called the <strong>independent variable</strong>, the second quantity $y$ is measured and is called the <strong>dependent variable</strong> ($y$ depends on $x$).</p>
+
+<p>The relationship between $x$ and $y$ can often be found by fitting a function $f$ that takes the independent variable as an argument $f=f(x)$. Then the value of $x$ can be changed throughout an experiment to provide <em>N</em> different values, and the result of calling the function $f(x)$ for each value of $x$ can be compared against the measured value $y$. If the function $f$ is a good model of the real experiment, the comparison will be good enough (we&rsquo;ll define &ldquo;good&rdquo; later).</p>
+
+<p>The procedure for fitting data in this way is common enough that Python provides the function <em>curve_fit</em> that takes the data collected and the function being tested and returns quantitative results about the goodness of the fit function. <em>curve_fit</em> is used in its simplest form as</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+    <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span><span class="n">p1</span><span class="o">..</span><span class="p">),</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">absolute_sigma</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></div>
+<p>where the input arguments are</p>
+
+<ul>
+<li>func = the function being tested as a fit function. The format is special and discussed next</li>
+<li>xdata = the independent variables in a list or numpy array</li>
+<li>ydata = the dependent variables in a list or numpy array</li>
+<li>p0 = The initial guess for the parameters you are trying to fit.</li>
+<li>sigma = the errors (1 standard deviation) in the independent variables</li>
+<li>absolute_sigma = (True) consider the sigma values to be absolute or (False, <strong>default</strong>) consider them to be relative . This option affects your error values and should normally be <em>True</em>.</li>
+</ul>
+
+<p>and the output is</p>
+
+<ul>
+<li>popt = a list of parameters that, when given to func, produce the fit to the data with smallest errors</li>
+<li>pcov = the variance of each parameter and the co-variance between each pair of parameters</li>
+</ul>
+
+<p>The function being tested can be any function written in Python providing it is in the form</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">):</span>
+       <span class="n">code_to_model_the_experiment</span>
+       <span class="k">return</span> <span class="n">value</span></code></pre></div>
+<p>where the p0,p1,p2 are the parameters being fit. For example, to fit a quadratic you might use:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span>
+        <span class="k">return</span> <span class="n">value</span></code></pre></div>
+<h3 id="the-linear-regression-method">The linear regression method.</h3>
+
+<p>With data collected in for $x$ and $y$, a linear regression uses a function $f(x)$ that is linear in the unknown parameters, for example
+$$f(x) = a+bx$$</p>
+
+<p>is linear in $a$ and $b$ (and $x$),</p>
+
+<p>$f(x) = a+bx+cx^2$</p>
+
+<p>is linear in $a$,$b$, and $c$ (but not $x$)</p>
+
+<p>Linear regression calculates the unknown parameters that creates the function $f$ that is closest to the measured value $y$ assuming that errors in the measured values have errors from measurement that obey <strong>Gauss&rsquo; distribution</strong>. For an observation with the true value $\mu$, an observation $y$ has the following probability of occurring:</p>
+
+<p>$$P(y) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(y-\mu)^2}{2\sigma^2}}$$</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#Plotting the Gaussian function in Python</span>
+<span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span><span class="n">sqrt</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">xticks</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span><span class="n">figure</span>
+<span class="n">y</span><span class="o">=</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">mu</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">p</span><span class="o">=</span><span class="mf">1.</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">mu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+<span class="n">s</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;$\sigma$&#34;</span>
+<span class="n">xticks</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="sa"></span><span class="s1">&#39;-3&#39;</span><span class="o">+</span><span class="n">s</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;-2&#39;</span><span class="o">+</span><span class="n">s</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;-1&#39;</span><span class="o">+</span><span class="n">s</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;0&#39;</span><span class="o">+</span><span class="n">s</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;1&#39;</span><span class="o">+</span><span class="n">s</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;2&#39;</span><span class="o">+</span><span class="n">s</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;3&#39;</span><span class="o">+</span><span class="n">s</span><span class="p">])</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;$(y-\mu)$&#34;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;P(y)&#34;</span><span class="p">);</span></code></pre></div>
+<p><img src="PythonReview_files/PythonReview_66_0.png" alt="png" /></p>
+
+<p>The linear regression method starts by calculating the probability of obtaining <strong>one</strong> dependent value $y_i$
+$$P_{a,b}(y_i) = \frac{1}{\sqrt{2\pi\sigma_y^2}}e^{-\frac{(y_i-f(x_i))^2}{2\sigma_y^2}}$$</p>
+
+<p>The combined probability of all of the measurements occuring if the fitting function $a+bx$ is a good approximation is then the product of each single probability $P_{a,b}(y_i)$</p>
+
+<p>$$P_{a,b}(y_1,y_2\ldots,y_N) = P_{a,b}(y_1)P_{a,b}(y_2)\ldots P_{a,b}(y_N)$$</p>
+
+<p>This value is proportial to the product of the exponent in each Gaussian term (and a normalizing constant that doesn&rsquo;t depend on the measured data). The <strong>product of the exponents</strong> of each probability is the same as the <strong>exponent of the sum of the exponent terms</strong>, i.e.</p>
+
+<p>$$ e^{v_1}e^{v_2}e^{v_3} = e^{v_1+v_2+v_3}$$</p>
+
+<p>For the Gaussian probabilities, the sum of the exponents is called $\chi^2$.</p>
+
+<p>$$\chi^2 = \sum\frac{(y_i - f(x_i))^2}{\sigma_y^2}$$</p>
+
+<p>This is the only part of the problem that depends on the data, and the highest value of Probability (i.e. the best function $f(x)$) is found by <em>minimizing</em> the value of $\chi^2$ (minimizing because of the minus sign).</p>
+
+<p>The function $f(x)$ that minimizes the value of $\chi^2$ is called the <em>least-squares fit</em> to the data, or <em>least-squared-error fit</em>, because the expression being minimized is $(y-f(x))^2$ is the square of the error between the measured value $y$ and the predicted value $f(x)$.</p>
+
+<p>The value of $\chi^2$ depends on the number of points N in the dataset. To make interpretation easier we can define a reduced $\chi_r^2$ as</p>
+
+<p>$$\chi_r^2 = \frac{\chi^2}{\mathrm{dof}}$$</p>
+
+<p>where $\mathrm{dof}$ is the number of degrees of freedom, calculated as the difference between the number of data points N and the number of parameters being fit $m$ ($f(x)=a+bx$ has two parameters, $m=2$).</p>
+
+<p>$$\mathrm{dof} = N - m$$</p>
+
+<p>A fitting function that is a good approximation of the data has a $\chi_r^2 \approx 1$. Much higher and the data is &lsquo;underfit&rsquo; (large errors still exist), much lower and the data is &lsquo;overfit&rsquo; (small residuals suggest that the noise is being fit).</p>
+
+<h3 id="non-linear-regression">Non-linear Regression</h3>
+
+<p>If our fitting function is non-linear, the derivation above starts becomes harder. However, if the non-linear function can be converted to a linear function (and our assumptions about Gaussian errors are valid for the linearly transform function) the linear regression method can still be used.</p>
+
+<p>For example, the function $y=ae^{bx}$ is non-linear in the parameters, but taking the logarithm creates $\ln y = \ln a + bx$. The linear regression method can be used to find the parameters $\ln a$ and $b$, using $x$ as the independent data <strong>but</strong> $\ln y$ as the dependent data.</p>
+
+<p>Using <em>curve_fit</em>, it&rsquo;s possible to fit a non-linear fit function using the same Python function. That means your function can be defined as $y=ae^{bx}$ and the data can be given to <em>curve_fit</em> unchanged.</p>
+
+<h3 id="variance-covariance-and-correlations">Variance, Covariance, and Correlations</h3>
+
+<p>Variance measures the dispersion of values in one variable $x$, written as $\sigma_x^2$ and defined as</p>
+
+<p>$$ \sigma_{x}^2 = \frac{1}{N}\sum_{i=1}^N(x_i-\bar{x})^2$$</p>
+
+<p>Covariance describes the variance of two variables, written as $\sigma_{xy}^2$</p>
+
+<p>$$ \sigma_{xy}^2 = \frac{1}{N}\sum_{i=1}^N(x_i-\bar{x})(y_i-\bar{y})$$</p>
+
+<p>The sample coefficient for linear correlation (usually labelled $r$) measures the extent to which the dataset $x,y$ have a linear relationaship. Defined as</p>
+
+<p>$$ r = \frac{\sigma_{xy}}{\sigma_x\sigma_y}$$</p>
+
+<p>A covariance matrix contains the covariance of each pair of variables. For two variables</p>
+
+<p>$$\begin{bmatrix}
+        \sigma^2_{xx} &amp; \sigma^2_{xy}\\\sigma^2_{yx} &amp; \sigma^2_{yy}
+        \end{bmatrix}$$</p>
+
+<p>where $\sigma^2_{xx}$ is the variance of $x$.</p>
+
+<p>Using <em>curve_fit</em>, the covariance matrix is returned as the second variable <em>pcov</em>, it is a 2D variable defined following the equation above. Variances are provided in the diagonal elements, covariances in the off-diagonal elements. The square-root of the diagonal elements are the standard deviations of the parameters. These numbers are usually used as the &lsquo;error&rsquo; in the parameter fit to show the possible range of values for the parameter. For example a parameter with mean 4 and variance 9 can be written as $4\pm3$, suggesting a large range of likely values. The same parameter with variance 1 would be written as $4\pm1$, suggesting a much smaller range of likely values.</p>
+
+<p>The off-diagonal elements describe how one variable changes as the other changes (accounting for different magnitudes if any), so a covariance of 0 means the two variables <em>change</em> independently, a positive indicates that a positive change in one variable coincides (or <em>correlates</em>) with a positive change in the other.</p>
+
+<p>We can generate examples of this covariance matrix using <em>numpy</em>. In the following example, the variance of $x$ and $y$ are kept constant (near 1.0) while the covariances are changed from -1 to +1.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">multivariate_normal</span><span class="p">,</span> <span class="n">normal</span>
+<span class="kn">import</span> <span class="nn">pylab</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">cov</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
+<span class="c1">#setup the figure</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">mean</span><span class="o">=</span><span class="n">pylab</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">covariance</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cov</span><span class="p">):</span>
+    <span class="c1">#make a subplot in the figure for each covariance value</span>
+    <span class="c1">#force the aspect ratio to 1 so that </span>
+    <span class="c1">#circles look like circles and 1:1 gradients are at 45 degrees</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">covmatrix</span> <span class="o">=</span> <span class="n">pylab</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+            <span class="p">[</span>  <span class="mf">1.1</span><span class="p">,</span> <span class="n">covariance</span><span class="p">,],</span>
+            <span class="p">[</span> <span class="n">covariance</span><span class="p">,</span>  <span class="mf">1.1</span><span class="p">,],</span>
+        <span class="p">])</span>
+    <span class="c1">#generate random data with a known mean and covariance matrix.</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span><span class="n">covmatrix</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+    <span class="c1">#plot each distribution, fix the x and y axis to the same size</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="sa"></span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">pylab</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mf">5.</span><span class="p">))</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;covariance={0}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">covariance</span><span class="p">))</span></code></pre></div>
+<p><img src="PythonReview_files/PythonReview_70_0.png" alt="png" /></p>
+
+<h3 id="worked-example-1-mauna-loa-co2">Worked example 1 - Mauna Loa CO2</h3>
+
+<p>Scientists have been measuring the amount of carbon dioxide in the atmosphere from a station on top of the Hawai&rsquo;ian mountain Mauna Loa since the 1950&rsquo;s. Using a dataset that includes the annual mean value of co2 fit a line to this data and calculate the growth rate in the amount atmospheric of carbon dioxide in the atmosphere.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">### Worked example 1 - Mauna Loa data</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="c1"># import pylab</span>
+<span class="n">source_file</span> <span class="o">=</span> <span class="sa"></span><span class="s2">&#34;input_data/co2_annmean_mlo.txt&#34;</span> <span class="c1">#the source file.</span>
+<span class="n">comment_char</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;#&#34;</span> <span class="c1">#The file includes a description of </span>
+                 <span class="c1">#the dataset at the top the file. </span>
+                 <span class="c1">#Each line is commented with a #</span>
+
+<span class="n">year</span><span class="p">,</span><span class="n">co2</span> <span class="o">=</span> <span class="n">pylab</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> 
+                        <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+                        <span class="n">unpack</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                        <span class="n">comments</span><span class="o">=</span><span class="n">comment_char</span><span class="p">)</span> 
+
+<span class="c1">#fit a straight line</span>
+<span class="k">def</span> <span class="nf">fitfunc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="o">*</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span>
+
+<span class="c1">#fit a quadratic polynomial</span>
+<span class="k">def</span> <span class="nf">fitquad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="n">p3</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1">#import the fitting routine</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+
+<span class="c1">#call the fitting routine, remember to give initial values for the parameters</span>
+<span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">fitfunc</span><span class="p">,</span><span class="n">year</span><span class="p">,</span><span class="n">co2</span><span class="p">,</span><span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">epsfcn</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">maxfev</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="c1">#setup the figure</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1">#plot the data</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="n">co2</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;CO2 data&#34;</span><span class="p">)</span>
+
+<span class="c1">#calculate the line fit by calling the fit function directly</span>
+<span class="n">fitted_data</span> <span class="o">=</span> <span class="n">fitfunc</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="o">*</span><span class="n">popt</span><span class="p">)</span>
+
+<span class="c1">#plot the fitting line</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="n">fitted_data</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;linear&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">popt</span><span class="p">))</span>
+
+<span class="c1">#decorate the plot</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;year&#34;</span><span class="p">)</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;CO2 (ppm)&#34;</span><span class="p">)</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;Mauna Loa fit&#34;</span><span class="p">)</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;lower right&#39;</span><span class="p">);</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;output_files/co2fit.pdf&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;f(year) = a + b*year&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">popt</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;a = {0:9.3f} +- {1:6.3f} ppm&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pcov</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])))</span>
+<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;b = {0:9.3f} +- {1:6.3f} ppm/year&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">popt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pcov</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])))</span>
+
+<span class="c1">#import scipy</span>
+<span class="c1">#help(scipy.optimize.leastsq)</span></code></pre></div>
+<pre><code>f(year) = a + b*year
+a = -2672.020 +- 48.829 ppm
+b =     1.522 +-  0.025 ppm/year
+</code></pre>
+
+<p><img src="PythonReview_files/PythonReview_72_1.png" alt="png" /></p>
+
+<h2 id="exercise-6">Exercise 6</h2>
+
+<ol>
+<li><p>Mauna Loa data (<a href="input_data/co2_annmean_mlo.txt">co2 data file</a>)</p>
+
+<p>a. The value of <em>a</em> in the calculation above is known as the intercept because it&rsquo;s the value of f(x) when x=0 (i.e. f(0)). It does not make sense for this value to be referenced to year 0 because negative CO2 concentration is impossible and the record starts in 1958. Change the independent variable or the fitting function so that the year 1960 is removed from the value of <em>year</em> before it&rsquo;s used in the fitting routine. This will change the meaning of <em>a</em> to be the value at f(1960) instead of f(0). What is the new values for the fitting parameters <code>a</code> and <code>b</code>? One way of doing this is to subtract 1960 from the data as soon as it&rsquo;s read into the program, but there may be a better way.</p>
+
+<p>b. For some reason, this code does not account for the errors given in the file. Read the sigma column from the file, use it in the fitting routine (with <code>absolute_sigma=True</code>) and check the errors from the fitting function. Did they increase or decrease?</p>
+
+<p>c. The straight line fit is not very good. Calculate the reduced $\chi^2$ value for this data (the variance of the data is $0.12^2$). Add a quadratic ($x^2$) term to the fit function and recalculate the fit. What is the new reduced $\chi^2$? Is the quadratic fit better than the straight line fit?</p>
+
+<p>d. Once you have made a model of a physical system, you usually want to use it to predict or calculate something. In this example, the slope of the line is the rate of change (or &lsquo;growth rate&rsquo;) of carbon dioxide in the atmosphere. What was the growth rate in 2015 using the straight line fit? and the quadratic fit from question c?</p></li>
+</ol></article>
+    <footer class="post-footer">
+      
+      <p class="post-copyright">
+        Copyright, University of Toronto. 2017
+      </p>
+    </footer>
+    
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 PHY224</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>
