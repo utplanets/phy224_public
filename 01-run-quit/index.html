@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-09-07 10:26:57 -0400">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/swc/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/swc/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/swc/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/swc/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/swc/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/swc/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/swc/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/swc/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="Software Carpentry - PHY224 Python Review"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/swc/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/swc/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/swc/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/swc/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/swc/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>PHY224 Python Review: Running and Quitting</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        
+	
+        <li><a href="../setup/">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../01-run-quit/index.html">Running and Quitting</a></li>
+            
+            <li><a href="../02-variables/index.html">Variables and Assignment</a></li>
+            
+            <li><a href="../03-types-conversion/index.html">Data Types and Type Conversion</a></li>
+            
+            <li><a href="../04-built-in/index.html">Built-in Functions and Help</a></li>
+            
+            <li><a href="../06-libraries/index.html">Libraries</a></li>
+            
+            <li><a href="../07-numpy/index.html">Numpy and Scipy</a></li>
+            
+            <li><a href="../08-reading-tabular/index.html">Reading Tabular Data into arrays</a></li>
+            
+            <li><a href="../09-plotting/index.html">Plotting</a></li>
+            
+            <li><a href="../11-lists/index.html">Lists</a></li>
+            
+            <li><a href="../12-for-loops/index.html">For Loops</a></li>
+            
+            <li><a href="../13-looping-data-sets/index.html">Looping Over Data Sets</a></li>
+            
+            <li><a href="../14-writing-functions/index.html">Writing Functions</a></li>
+            
+            <li><a href="../15-scope/index.html">Variable Scope</a></li>
+            
+            <li><a href="../17-conditionals/index.html">Conditionals</a></li>
+            
+            <li><a href="../18-style/index.html">Programming Style</a></li>
+            
+            <li><a href="../19-curvefit/index.html">Fitting data to models</a></li>
+            
+            <li><a href="../20-wrap/index.html">Wrap-Up</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+
+	
+        <li><a href="../LICENSE.html">License</a></li>
+	    </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span><span class="sr-only">lesson home</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">PHY224 Python Review</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../02-variables/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Running and Quitting</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 10 min
+      <br/>
+      <strong>Exercises:</strong> 0 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>How can I run Python programs?</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Launch the Jupyter Notebook, create new notebooks, and exit the Notebook.</p>
+</li>
+	
+	<li><p>Create Markdown cells in a notebook.</p>
+</li>
+	
+	<li><p>Create and run Python cells in a notebook.</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="python-programs-are-plain-text-files">Python programs are plain text files.</h2>
+
+<ul>
+  <li>They have the <code class="highlighter-rouge">.py</code> extension to let everyone (including the operating system) 
+know it is a Python program.
+    <ul>
+      <li>This is convention, not a requirement.</li>
+    </ul>
+  </li>
+  <li>It’s common to write them using a text editor but we are going to use
+the Jupyter Notebook to present the tutorials.</li>
+  <li>The bit of extra setup is well worth it because the Notebook provides code completion 
+and other helpful features.</li>
+  <li>Notebook files have the extension <code class="highlighter-rouge">.ipynb</code> to distinguish them from plain-text Python programs.
+    <ul>
+      <li>Can export as “pure Python” to run from the command line.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="use-the-jupyter-notebook-for-editing-and-running-python">Use the Jupyter Notebook for editing and running Python.</h2>
+
+<ul>
+  <li>The Anaconda package manager is an automated way to install the Jupyter notebook.
+    <ul>
+      <li>See <a href="../setup/">the setup instructions</a> for Anaconda installation instructions.</li>
+    </ul>
+  </li>
+  <li>It also installs all the extra libraries it needs to run.</li>
+  <li>
+    <p>Once you have installed Python and the Jupyter Notebook requirements, open a shell and type:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ jupyter notebook
+</code></pre></div>    </div>
+  </li>
+  <li>This will start a Jupyter Notebook server and open your default web browser.</li>
+  <li>The server runs locally on your machine only and does not use an internet connection.</li>
+  <li>The server sends messages to your browser.</li>
+  <li>The server does the work and the web browser renders the notebook.</li>
+  <li>You can type code into the browser and see the result when the web page talks to the server.</li>
+  <li>This has several advantages:
+    <ul>
+      <li>You can easily type, edit, and copy and paste blocks of code.</li>
+      <li>Tab complete allows you to easily access the names of things you are using
+and learn more about them.</li>
+      <li>It allows you to annotate your code with links, different sized text, bullets, etc.
+to make it more accessible to you and your collaborators.</li>
+      <li>It allows you to display figures next to the code that produces them
+to tell a complete story of the analysis.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="spyder">Spyder</h2>
+<p>You can also use a Python Integrated Development Environment
+<img src="../fig/spyder.png" alt="Example Spyder" /></p>
+
+<h2 id="pycharm">PyCharm</h2>
+<p>You can also use a Python Integrated Development Environment
+<img src="../fig/pycharm.png" alt="PyCharm" /></p>
+
+<h2 id="jupyter-notebook">Jupyter notebook</h2>
+<p><img src="../fig/jupyter.png" alt="Example Jupyter Notebook" /></p>
+
+<h2 id="math-with-numbers">Math with numbers</h2>
+<ul>
+  <li>Addition</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2+3
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
+</code></pre></div></div>
+
+<ul>
+  <li>Multiplication</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2*2
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4
+</code></pre></div></div>
+
+<ul>
+  <li>More complex</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>9.81*10.2**2/2
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>510.3162
+</code></pre></div></div>
+
+<ul>
+  <li>Power</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3 ** 2
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>9
+</code></pre></div></div>
+
+<h2 id="math-with-strings-">Math with strings (?)</h2>
+
+<ul>
+  <li>Concatenation</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"cat " + "dog"
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'cat dog'
+</code></pre></div></div>
+
+<ul>
+  <li>repetition</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"cat "*3 + "dog"
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'cat cat cat dog'
+</code></pre></div></div>
+
+<ul>
+  <li>subtraction</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"cat " - "dog"
+</code></pre></div></div>
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+TypeError: unsupported operand type(s) for -: 'str' and 'str'
+</code></pre></div></div>
+
+<h2 id="operators">Operators</h2>
+
+<ul>
+  <li>Addition</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6 + 7
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>13
+</code></pre></div></div>
+
+<ul>
+  <li>Multiplication</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6 * 7
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>42
+</code></pre></div></div>
+
+<ul>
+  <li>Division</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6 / 7 
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.8571428571428571
+</code></pre></div></div>
+
+<ul>
+  <li>Power</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6 ** 7 # power
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>279936
+</code></pre></div></div>
+
+<ul>
+  <li>Modulo</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>66 % 7  # Modulo (remainder)
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div></div>
+
+<h2 id="logic">Logic</h2>
+
+<ul>
+  <li>Less than</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6 &lt; 7
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<ul>
+  <li>less than or equal to</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6 &lt;= 7 
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<ul>
+  <li>equal to</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6 == 7 
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<ul>
+  <li>greater than or equal to</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6 &gt;= 7 
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<ul>
+  <li>greater than</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6 &gt; 7 
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<ul>
+  <li>logical <strong>and</strong></li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True and False 
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<ul>
+  <li>logical <strong>or</strong></li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True or False
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<ul>
+  <li>logical <strong>not</strong></li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>not False
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>Python programs are plain text files.</p>
+</li>
+    
+    <li><p>Use the Jupyter Notebook for editing and running Python.</p>
+</li>
+    
+    <li><p>The Notebook has Command and Edit modes.</p>
+</li>
+    
+    <li><p>Use the keyboard and mouse to select and edit cells.</p>
+</li>
+    
+    <li><p>The Notebook will turn Markdown into pretty-printed documentation.</p>
+</li>
+    
+    <li><p>Markdown does most of what HTML does.</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span><span class="sr-only">lesson home</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../02-variables/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-12 copyright" align="left">
+    	Portions Copyright 2018 Christopher Lee. <br/>
+    	Remainder copyright <a href="https://carpentries.org/">The Carpentries</a>/<a href="https://software-carpentry.org">Software Carpentry Foundation</a> 2016-2018. <br/>Based on Software Carpentry gapminder lessons.
+    </div>
+</div>
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

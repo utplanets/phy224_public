@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-09-07 10:26:57 -0400">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/swc/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/swc/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/swc/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/swc/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/swc/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/swc/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/swc/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/swc/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="Software Carpentry - PHY224 Python Review"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/swc/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/swc/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/swc/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/swc/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/swc/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>PHY224 Python Review: Programming Style</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        
+	
+        <li><a href="../setup/">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../01-run-quit/index.html">Running and Quitting</a></li>
+            
+            <li><a href="../02-variables/index.html">Variables and Assignment</a></li>
+            
+            <li><a href="../03-types-conversion/index.html">Data Types and Type Conversion</a></li>
+            
+            <li><a href="../04-built-in/index.html">Built-in Functions and Help</a></li>
+            
+            <li><a href="../06-libraries/index.html">Libraries</a></li>
+            
+            <li><a href="../07-numpy/index.html">Numpy and Scipy</a></li>
+            
+            <li><a href="../08-reading-tabular/index.html">Reading Tabular Data into arrays</a></li>
+            
+            <li><a href="../09-plotting/index.html">Plotting</a></li>
+            
+            <li><a href="../11-lists/index.html">Lists</a></li>
+            
+            <li><a href="../12-for-loops/index.html">For Loops</a></li>
+            
+            <li><a href="../13-looping-data-sets/index.html">Looping Over Data Sets</a></li>
+            
+            <li><a href="../14-writing-functions/index.html">Writing Functions</a></li>
+            
+            <li><a href="../15-scope/index.html">Variable Scope</a></li>
+            
+            <li><a href="../17-conditionals/index.html">Conditionals</a></li>
+            
+            <li><a href="../18-style/index.html">Programming Style</a></li>
+            
+            <li><a href="../19-curvefit/index.html">Fitting data to models</a></li>
+            
+            <li><a href="../20-wrap/index.html">Wrap-Up</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+
+	
+        <li><a href="../LICENSE.html">License</a></li>
+	    </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../17-conditionals/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">PHY224 Python Review</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../19-curvefit/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Programming Style</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 10 min
+      <br/>
+      <strong>Exercises:</strong> 5 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>How can I make my programs more readable?</p>
+</li>
+	
+	<li><p>How do most programmers format their code?</p>
+</li>
+	
+	<li><p>How can programs check their own operation?</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Provide sound justifications for basic rules of coding style.</p>
+</li>
+	
+	<li><p>Refactor one-page programs to make them more readable and justify the changes.</p>
+</li>
+	
+	<li><p>Use Python community coding standards (PEP-8).</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="coding-style">Coding style</h2>
+
+<p>Coding style helps us to understand the code better. It helps to maintain and change the code.
+Python relies strongly on coding style, as we may notice by the indentation we apply to lines to define different blocks of code.
+Python proposes a standard style through one of its first Python Enhancement Proposals (PEP), <a href="https://www.python.org/dev/peps/pep-0008">PEP8</a>, and highlight the importance of readability in the <a href="https://www.python.org/dev/peps/pep-0020">Zen of Python</a>.</p>
+
+<p>We may highlight some points:</p>
+<ul>
+  <li>document your code</li>
+  <li>use clear, meaningful variable names</li>
+  <li>use white-space, <em>not</em> tabs, to indent lines</li>
+</ul>
+
+<h2 id="follow-standard-python-style-in-your-code">Follow standard Python style in your code.</h2>
+
+<ul>
+  <li><a href="https://www.python.org/dev/peps/pep-0008">PEP8</a>:
+a style guide for Python that discusses topics such as how you should name variables,
+how you should use indentation in your code,
+how you should structure your <code class="highlighter-rouge">import</code> statements,
+etc.
+Adhering to PEP8 makes it easier for other Python developers to read and understand your code,
+and to understand what their contributions should look like.
+The <a href="https://pypi.python.org/pypi/pep8">PEP8 application and Python library</a>
+can check your code for compliance with PEP8.</li>
+  <li><a href="https://google.github.io/styleguide/pyguide.html">Google style guide on Python</a> 
+supports the use of PEP8 and extend the coding style to more specific structure of 
+a Python code, which may be interesting also to follow.</li>
+</ul>
+
+<h2 id="use-assertions-to-check-for-internal-errors">Use assertions to check for internal errors.</h2>
+
+<p>Assertions are a simple, but powerful method for making sure that the context in which your code is executing is as you expect.</p>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def calc_bulk_density(mass, volume):
+    '''Return dry bulk density = powder mass / powder volume.'''
+    assert volume &gt; 0
+    return mass / volume
+</code></pre></div></div>
+
+<p>If the assertion is <code class="highlighter-rouge">False</code>, the Python interpreter raises an <code class="highlighter-rouge">AssertionError</code> runtime exception. The source code for the expression that failed will be displayed as part of the error message. To ignore assertions in your code run the interpreter with the ‘-O’ (optimize) switch. Assertions should contain only simple checks and never change the state of the program. For example, an assertion should never contain an assignment.</p>
+
+<h2 id="use-docstrings-to-provide-online-help">Use docstrings to provide online help.</h2>
+
+<ul>
+  <li>If the first thing in a function is a character string
+that is not assigned to a variable,
+Python attaches it to the function as the online help.</li>
+  <li>Called a <em>docstring</em> (short for “documentation string”).</li>
+</ul>
+
+<div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def average(values):
+    "Return average of values, or None if no values are supplied."
+
+    if len(values) == 0:
+        return None
+    return sum(values) / average(values)
+
+help(average)
+</code></pre></div></div>
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Help on function average in module __main__:
+
+average(values)
+    Return average of values, or None if no values are supplied.
+</code></pre></div></div>
+
+<blockquote class="callout">
+  <h2 id="multiline-strings">Multiline Strings</h2>
+
+  <p>Often use <em>multiline strings</em> for documentation.
+These start and end with three quote characters (either single or double)
+and end with three matching characters.</p>
+
+  <div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"""This string spans
+multiple lines.
+
+Blank lines are allowed."""
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="challenge">
+  <h2 id="what-will-be-shown">What Will Be Shown?</h2>
+
+  <p>Highlight the lines in the code below that will be available as online help.
+Are there lines that should be made available, but won’t be?
+Will any lines produce a syntax error or a runtime error?</p>
+
+  <div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Find maximum edit distance between multiple sequences."
+# This finds the maximum distance between all sequences.
+
+def overall_max(sequences):
+    '''Determine overall maximum edit distance.'''
+
+    highest = 0
+    for left in sequences:
+        for right in sequences:
+            '''Avoid checking sequence against itself.'''
+            if left != right:
+                this = edit_distance(left, right)
+                highest = max(highest, this)
+
+    # Report.
+    return highest
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="challenge">
+  <h2 id="document-this">Document This</h2>
+
+  <p>Turn the comment on the following function into a docstring
+and check that <code class="highlighter-rouge">help</code> displays it properly.</p>
+
+  <div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def middle(a, b, c):
+    # Return the middle value of three.
+    # Assumes the values can actually be compared.
+    values = [a, b, c]
+    values.sort()
+    return values[1]
+</code></pre></div>  </div>
+  <blockquote class="solution">
+    <h2 id="solution">Solution</h2>
+
+    <div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def middle(a, b, c):
+    '''Return the middle value of three.
+    Assumes the values can actually be compared.'''
+    values = [a, b, c]
+    values.sort()
+    return values[1]
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="challenge">
+  <h2 id="clean-up-this-code">Clean Up This Code</h2>
+
+  <ol>
+    <li>Read this short program and try to predict what it does.</li>
+    <li>Run it: how accurate was your prediction?</li>
+    <li>Refactor the program to make it more readable.
+Remember to run it after each change to ensure its behavior hasn’t changed.</li>
+    <li>Compare your rewrite with your neighbor’s.
+What did you do the same?
+What did you do differently, and why?</li>
+  </ol>
+
+  <div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n = 10
+s = 'et cetera'
+print(s)
+i = 0
+while i &lt; n:
+    # print('at', j)
+    new = ''
+    for j in range(len(s)):
+        left = j-1
+        right = (j+1)%len(s)
+        if s[left]==s[right]: new += '-'
+        else: new += '*'
+    s=''.join(new)
+    print(s)
+    i += 1
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h2 id="solution-1">Solution</h2>
+
+    <p>Here’s one solution.</p>
+
+    <div class="python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def string_machine(input_string, iterations):
+    """
+    Takes input_string and generates a new string with -'s and *'s
+    corresponding to characters that have identical adjacent characters
+    or not, respectively.  Iterates through this procedure with the resultant
+    strings for the supplied number of iterations.
+    """
+    print(input_string)
+    old = input_string
+    for i in range(iterations):
+        new = ''
+        # iterate through characters in previous string
+        for j in range(len(input_string)):
+            left = j-1
+            right = (j+1)%len(input_string) # ensure right index wraps around
+            if old[left]==old[right]:
+                new += '-'
+            else:
+                new += '*'
+        print(new)
+        # store new string as old
+        old = new
+
+string_machine('et cetera', 10)
+</code></pre></div>    </div>
+
+    <div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>et cetera
+*****-***
+<span class="gd">----*-*--
+---*---*-
+--*-*-*-*
+</span>**-------
+***-----*
+<span class="gd">--**---**
+</span>*****-***
+<span class="gd">----*-*--
+---*---*-
+</span></code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>Follow standard Python style in your code.</p>
+</li>
+    
+    <li><p>Use docstrings to provide online help.</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../17-conditionals/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../19-curvefit/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-12 copyright" align="left">
+    	Portions Copyright 2018 Christopher Lee. <br/>
+    	Remainder copyright <a href="https://carpentries.org/">The Carpentries</a>/<a href="https://software-carpentry.org">Software Carpentry Foundation</a> 2016-2018. <br/>Based on Software Carpentry gapminder lessons.
+    </div>
+</div>
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

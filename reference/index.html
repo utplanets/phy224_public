@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-09-07 10:26:57 -0400">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/swc/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/swc/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/swc/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/swc/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/swc/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/swc/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/swc/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/swc/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/swc/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="Software Carpentry - PHY224 Python Review"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/swc/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/swc/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/swc/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/swc/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/swc/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>PHY224 Python Review</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        
+	
+        <li><a href="../setup/">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../01-run-quit/index.html">Running and Quitting</a></li>
+            
+            <li><a href="../02-variables/index.html">Variables and Assignment</a></li>
+            
+            <li><a href="../03-types-conversion/index.html">Data Types and Type Conversion</a></li>
+            
+            <li><a href="../04-built-in/index.html">Built-in Functions and Help</a></li>
+            
+            <li><a href="../06-libraries/index.html">Libraries</a></li>
+            
+            <li><a href="../07-numpy/index.html">Numpy and Scipy</a></li>
+            
+            <li><a href="../08-reading-tabular/index.html">Reading Tabular Data into arrays</a></li>
+            
+            <li><a href="../09-plotting/index.html">Plotting</a></li>
+            
+            <li><a href="../11-lists/index.html">Lists</a></li>
+            
+            <li><a href="../12-for-loops/index.html">For Loops</a></li>
+            
+            <li><a href="../13-looping-data-sets/index.html">Looping Over Data Sets</a></li>
+            
+            <li><a href="../14-writing-functions/index.html">Writing Functions</a></li>
+            
+            <li><a href="../15-scope/index.html">Variable Scope</a></li>
+            
+            <li><a href="../17-conditionals/index.html">Conditionals</a></li>
+            
+            <li><a href="../18-style/index.html">Programming Style</a></li>
+            
+            <li><a href="../19-curvefit/index.html">Fitting data to models</a></li>
+            
+            <li><a href="../20-wrap/index.html">Wrap-Up</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+
+	
+        <li><a href="../LICENSE.html">License</a></li>
+	    </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<h1 class="maintitle"><a href="../">PHY224 Python Review</a></h1>
+
+
+<h2>Key Points</h2>
+<table class="table table-striped">
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../01-run-quit/index.html">Running and Quitting</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Python programs are plain text files.</p>
+</li>
+        
+        <li><p>Use the Jupyter Notebook for editing and running Python.</p>
+</li>
+        
+        <li><p>The Notebook has Command and Edit modes.</p>
+</li>
+        
+        <li><p>Use the keyboard and mouse to select and edit cells.</p>
+</li>
+        
+        <li><p>The Notebook will turn Markdown into pretty-printed documentation.</p>
+</li>
+        
+        <li><p>Markdown does most of what HTML does.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../02-variables/index.html">Variables and Assignment</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Use variables to store values.</p>
+</li>
+        
+        <li><p>Use <code class="highlighter-rouge">print</code> to display values.</p>
+</li>
+        
+        <li><p>Variables persist between cells.</p>
+</li>
+        
+        <li><p>Variables must be created before they are used.</p>
+</li>
+        
+        <li><p>Variables can be used in calculations.</p>
+</li>
+        
+        <li><p>Use an index to get a single character from a string.</p>
+</li>
+        
+        <li><p>Use a slice to get a substring.</p>
+</li>
+        
+        <li><p>Use the built-in function <code class="highlighter-rouge">len</code> to find the length of a string.</p>
+</li>
+        
+        <li><p>Python is case-sensitive.</p>
+</li>
+        
+        <li><p>Use meaningful variable names.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../03-types-conversion/index.html">Data Types and Type Conversion</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Every value has a type.</p>
+</li>
+        
+        <li><p>Use the built-in function <code class="highlighter-rouge">type</code> to find the type of a value.</p>
+</li>
+        
+        <li><p>Types control what operations can be done on values.</p>
+</li>
+        
+        <li><p>Strings can be added and multiplied.</p>
+</li>
+        
+        <li><p>Strings have a length (but numbers don’t).</p>
+</li>
+        
+        <li><p>Must convert numbers to strings or vice versa when operating on them.</p>
+</li>
+        
+        <li><p>Can mix integers and floats freely in operations.</p>
+</li>
+        
+        <li><p>Variables only change value when something is assigned to them.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../04-built-in/index.html">Built-in Functions and Help</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Use comments to add documentation to programs.</p>
+</li>
+        
+        <li><p>A function may take zero or more arguments.</p>
+</li>
+        
+        <li><p>Commonly-used built-in functions include <code class="highlighter-rouge">max</code>, <code class="highlighter-rouge">min</code>, and <code class="highlighter-rouge">round</code>.</p>
+</li>
+        
+        <li><p>Functions may only work for certain (combinations of) arguments.</p>
+</li>
+        
+        <li><p>Functions may have default values for some arguments.</p>
+</li>
+        
+        <li><p>Use the built-in function <code class="highlighter-rouge">help</code> to get help for a function.</p>
+</li>
+        
+        <li><p>The Jupyter Notebook has two ways to get help.</p>
+</li>
+        
+        <li><p>Every function returns something.</p>
+</li>
+        
+        <li><p>Python reports a syntax error when it can’t understand the source of a program.</p>
+</li>
+        
+        <li><p>Python reports a runtime error when something goes wrong while a program is executing.</p>
+</li>
+        
+        <li><p>Fix syntax errors by reading the source code, and runtime errors by tracing the program’s execution.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../06-libraries/index.html">Libraries</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Most of the power of a programming language is in its libraries.</p>
+</li>
+        
+        <li><p>A program must import a library module in order to use it.</p>
+</li>
+        
+        <li><p>Use <code class="highlighter-rouge">help</code> to learn about the contents of a library module.</p>
+</li>
+        
+        <li><p>Import specific items from a library to shorten programs.</p>
+</li>
+        
+        <li><p>Create an alias for a library when importing it to shorten programs.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../07-numpy/index.html">Numpy and Scipy</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Use the numpy library to get basic statistics out of tabular data.</p>
+</li>
+        
+        <li><p>Print numpy arrays.</p>
+</li>
+        
+        <li><p>Use mean, sum, std to get summary statistics.</p>
+</li>
+        
+        <li><p>Add numpy arrays together.</p>
+</li>
+        
+        <li><p>Study the scipy website</p>
+</li>
+        
+        <li><p>Use scipy to integrate tabular data.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../08-reading-tabular/index.html">Reading Tabular Data into arrays</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Use numpy.loadtxt library to load tabular data.</p>
+</li>
+        
+        <li><p>Use numpy.savetxt library to save tabular data.</p>
+</li>
+        
+        <li><p>Use delimiters to make your text file cleaner.</p>
+</li>
+        
+        <li><p>Use comments in your file to describe the contents.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../09-plotting/index.html">Plotting</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p><a href="https://matplotlib.org/"><code class="highlighter-rouge">matplotlib</code></a> is the most widely used scientific plotting library in Python.</p>
+</li>
+        
+        <li><p>Plot data directly from a Pandas dataframe.</p>
+</li>
+        
+        <li><p>Select and transform data, then plot it.</p>
+</li>
+        
+        <li><p>Many styles of plot are available: see the <a href="https://python-graph-gallery.com/matplotlib/">Python Graph Gallery</a> for more options.</p>
+</li>
+        
+        <li><p>Can plot many sets of data together.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../11-lists/index.html">Lists</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>A list stores many values in a single structure.</p>
+</li>
+        
+        <li><p>Use an item’s index to fetch it from a list.</p>
+</li>
+        
+        <li><p>Lists’ values can be replaced by assigning to them.</p>
+</li>
+        
+        <li><p>Appending items to a list lengthens it.</p>
+</li>
+        
+        <li><p>Use <code class="highlighter-rouge">del</code> to remove items from a list entirely.</p>
+</li>
+        
+        <li><p>The empty list contains no values.</p>
+</li>
+        
+        <li><p>Lists may contain values of different types.</p>
+</li>
+        
+        <li><p>Character strings can be indexed like lists.</p>
+</li>
+        
+        <li><p>Character strings are immutable.</p>
+</li>
+        
+        <li><p>Indexing beyond the end of the collection is an error.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../12-for-loops/index.html">For Loops</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>A <em>for loop</em> executes commands once for each value in a collection.</p>
+</li>
+        
+        <li><p>The first line of the <code class="highlighter-rouge">for</code> loop must end with a colon, and the body must be indented.</p>
+</li>
+        
+        <li><p>Indentation is always meaningful in Python.</p>
+</li>
+        
+        <li><p>A <code class="highlighter-rouge">for</code> loop is made up of a collection, a loop variable, and a body.</p>
+</li>
+        
+        <li><p>Loop variables can be called anything (but it is strongly advised to have a meaningful name to the looping variable).</p>
+</li>
+        
+        <li><p>The body of a loop can contain many statements.</p>
+</li>
+        
+        <li><p>Use <code class="highlighter-rouge">range</code> to iterate over a sequence of numbers.</p>
+</li>
+        
+        <li><p>The Accumulator pattern turns many values into one.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../13-looping-data-sets/index.html">Looping Over Data Sets</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Use a <code class="highlighter-rouge">for</code> loop to process files given a list of their names.</p>
+</li>
+        
+        <li><p>Use <code class="highlighter-rouge">glob.glob</code> to find sets of files whose names match a pattern.</p>
+</li>
+        
+        <li><p>Use <code class="highlighter-rouge">glob</code> and <code class="highlighter-rouge">for</code> to process batches of files.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../14-writing-functions/index.html">Writing Functions</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Break programs down into functions to make them easier to understand.</p>
+</li>
+        
+        <li><p>Define a function using <code class="highlighter-rouge">def</code> with a name, parameters, and a block of code.</p>
+</li>
+        
+        <li><p>Defining a function does not run it.</p>
+</li>
+        
+        <li><p>Arguments in call are matched to parameters in definition.</p>
+</li>
+        
+        <li><p>Functions may return a result to their caller using <code class="highlighter-rouge">return</code>.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../15-scope/index.html">Variable Scope</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>The scope of a variable is the part of a program that can ‘see’ that variable.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../17-conditionals/index.html">Conditionals</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Use <code class="highlighter-rouge">if</code> statements to control whether or not a block of code is executed.</p>
+</li>
+        
+        <li><p>Conditionals are often used inside loops.</p>
+</li>
+        
+        <li><p>Use <code class="highlighter-rouge">else</code> to execute a block of code when an <code class="highlighter-rouge">if</code> condition is <em>not</em> true.</p>
+</li>
+        
+        <li><p>Use <code class="highlighter-rouge">elif</code> to specify additional tests.</p>
+</li>
+        
+        <li><p>Conditions are tested once, in order.</p>
+</li>
+        
+        <li><p>Create a table showing variables’ values to trace a program’s execution.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../18-style/index.html">Programming Style</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Follow standard Python style in your code.</p>
+</li>
+        
+        <li><p>Use docstrings to provide online help.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../19-curvefit/index.html">Fitting data to models</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p><code class="highlighter-rouge">scipy</code> provides tools and functions to fit models to data.</p>
+</li>
+        
+        <li><p>Use <code class="highlighter-rouge">curve_fit</code> to fit linear and non-linear models to experimental data</p>
+</li>
+        
+        <li><p>Use appropriate errors in the <code class="highlighter-rouge">sigma</code> keyword to get a better estimate of parameter errors.</p>
+</li>
+        
+        <li><p>Check the fit using a plot if possible</p>
+</li>
+        
+        <li><p>Check the χ<sup>2</sup> value to compare the fit against the errors in the measurements.</p>
+</li>
+        
+        <li><p>Non linear models can be fitted, but may need an initial esimate of the parameters.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+  
+    <tr>
+      <td class="col-md-3">
+        <a href="../20-wrap/index.html">Wrap-Up</a>
+      </td>
+      <td class="col-md-9">
+        <ul>
+        
+        <li><p>Python supports a large community within and outwith research.</p>
+</li>
+        
+        </ul>
+      </td>
+    </tr>
+  
+
+</table>
+
+<p>FIXME: more reference material.</p>
+
+<h2 id="glossary">Glossary</h2>
+
+<p>FIXME: glossary.</p>
+
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-12 copyright" align="left">
+    	Portions Copyright 2018 Christopher Lee. <br/>
+    	Remainder copyright <a href="https://carpentries.org/">The Carpentries</a>/<a href="https://software-carpentry.org">Software Carpentry Foundation</a> 2016-2018. <br/>Based on Software Carpentry gapminder lessons.
+    </div>
+</div>
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
