@@ -1,20 +1,3 @@
----
-title: "Plotting"
-teaching: 25
-exercises: 15
-questions:
-- "How can I plot my data?"
-- "How can I save my plot for publishing?"
-objectives:
-- "Create a time series plot showing a single data set."
-- "Create a scatter plot showing relationship between two data sets."
-keypoints:
-- "[`matplotlib`](https://matplotlib.org/) is the most widely used scientific plotting library in Python."
-- "Plot data directly from a Pandas dataframe."
-- "Select and transform data, then plot it."
-- "Many styles of plot are available: see the [Python Graph Gallery](https://python-graph-gallery.com/matplotlib/) for more options."
-- "Can plot many sets of data together."
----
 ## `matplotlib` is the most widely used scientific plotting library in Python
 
 * Usually using a sub-library called matplotlib.pyplot. imported using the alias `plt`
@@ -47,9 +30,9 @@ plt.ylabel("Position (km)")
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_4_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_4_1.png)
+    
 
 
 ## The color and format of lines and markers can be changed.
@@ -79,12 +62,12 @@ plt.ylabel("Position (km)")
 
 
 
+    
+![png](08_Plotting_files/08_Plotting_6_1.png)
+    
 
-![png](../fig/08_Plotting_files/08_Plotting_6_1.png)
 
-
-
-## More complex formatting can be achieved using the `plot` keywords
+## More complex formatting can be achieved using the `plot` keywords 
 * `linewidth` controls the thickness of the line
 * `linestyle` controls the type of line
 * `marker` controls the shape of the marker
@@ -104,14 +87,14 @@ plt.legend()
 
 
 
-    <matplotlib.legend.Legend at 0x7fe9b88472b0>
+    <matplotlib.legend.Legend at 0x7f8cf05c3340>
 
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_8_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_8_1.png)
+    
 
 
 ## Built in "styles" provide consistent plots
@@ -139,14 +122,14 @@ plt.legend()
 
 
 
-    <matplotlib.legend.Legend at 0x7fe9a8405bb0>
+    <matplotlib.legend.Legend at 0x7f8cd0b75f70>
 
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_11_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_11_1.png)
+    
 
 
 
@@ -163,14 +146,14 @@ plt.legend()
 
 
 
-    <matplotlib.legend.Legend at 0x7fe9a843aac0>
+    <matplotlib.legend.Legend at 0x7f8cf0624d30>
 
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_12_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_12_1.png)
+    
 
 
 
@@ -187,14 +170,14 @@ plt.legend()
 
 
 
-    <matplotlib.legend.Legend at 0x7fe9780b4070>
+    <matplotlib.legend.Legend at 0x7f8cf0637670>
 
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_13_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_13_1.png)
+    
 
 
 ## Plots can be scatter plots with points and no lines
@@ -220,16 +203,16 @@ plt.title("title")
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_15_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_15_1.png)
+    
 
 
 ## Plot data with associated uncertainties  using `errorbar`
  * Don't join the data with a line by setting the `linestyle` to an empty string.
  * Set a marker shape using `marker`.
  * Use the same color for marker and errorbars.
-
+ 
 
 
 ```python
@@ -241,27 +224,22 @@ y=x + numpy.random.randn(10)*0.5
 
 plt.errorbar( x, y, yerr=error,color='green',marker='o',ls='',lw=1,label="data")
 plt.xlabel("Labels still work")
-plt.title("errobar")
+plt.title("errorbar")
 plt.legend()
 ```
 
 
 
 
-    <matplotlib.legend.Legend at 0x7fe9b888f040>
+    <matplotlib.legend.Legend at 0x7f8ce0f1bee0>
 
 
 
 
+    
+![png](08_Plotting_files/08_Plotting_17_1.png)
+    
 
-![png](../fig/08_Plotting_files/08_Plotting_17_1.png)
-
-
-
-
-```python
-plt.errorbar?
-```
 
 ## `matplotlib` also makes bar charts and histograms
 * If you have data grouped into counts already, `bar` can make a chart
@@ -283,9 +261,9 @@ plt.title("Bar chart")
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_20_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_19_1.png)
+    
 
 
 * If you have raw data, `hist` can calculate **and** plot the histogram.
@@ -301,9 +279,9 @@ print("The counts are ", bin_count)
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_22_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_21_1.png)
+    
 
 
 
@@ -320,9 +298,9 @@ plt.title("cleaner histogram")
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_23_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_22_1.png)
+    
 
 
 
@@ -345,9 +323,9 @@ t=plt.title("Something more exotic")
 ```
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_24_0.png)
-
+    
+![png](08_Plotting_files/08_Plotting_23_0.png)
+    
 
 
 ## Define the figure size before plotting using the `figure` command
@@ -371,9 +349,9 @@ plt.title("narrow bar chart")
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_26_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_25_1.png)
+    
 
 
 ## Place multiple figures on one plot with `subplot`
@@ -403,9 +381,9 @@ plt.title("sometimes the formatting is awkward")
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_28_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_27_1.png)
+    
 
 
 
@@ -433,9 +411,9 @@ plt.title("less awkward")
 
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_29_1.png)
-
+    
+![png](08_Plotting_files/08_Plotting_28_1.png)
+    
 
 
 ## Figures can be saved with `savefig`
@@ -452,29 +430,18 @@ plt.savefig("data/fig1.png", dpi=150, transparent=True) #PNG format
 ```
 
 
-
-![png](../fig/08_Plotting_files/08_Plotting_31_0.png)
-
+    
+![png](08_Plotting_files/08_Plotting_30_0.png)
+    
 
 
 ![figure](data/fig1.png)
 
 
-
-
-> Note that functions in `plt` refer to a global figure variable
-> and after a figure has been displayed to the screen (e.g. with `plt.show`)
-> matplotlib will make this  variable refer to a new empty figure.
-> Therefore, make sure you call `plt.savefig` before the plot is displayed to
-> the screen, otherwise you may find a file with an empty plot.
->
-> It is also possible to save the figure to file by first getting a reference to the
-> figure with `plt.gcf`, then calling the `savefig` class method from that variable.
->
-> ~~~
-> fig = plt.gcf() # get current figure
-> data.plot(kind='bar')
-> fig.savefig('my_figure.png')
-> ~~~
-> {: .language-python}
-{: .callout}
+## Keypoints
+* `matplotlib` is the most widely used scientific plotting library in Python.
+* Plot data directly from a Pandas dataframe.
+* Select and transform data, then plot it.
+* Many styles of plot are available: see the Python Graph Gallery for more options.
+* Can plot many sets of data together.
+* Plots can be saved with `savefig`.
