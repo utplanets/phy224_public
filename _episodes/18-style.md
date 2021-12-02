@@ -1,7 +1,7 @@
 ---
 title: "Programming Style"
-teaching: 15
-exercises: 15
+teaching: 10
+exercises: 5
 questions:
 - "How can I make my programs more readable?"
 - "How do most programmers format their code?"
@@ -12,36 +12,39 @@ objectives:
 - "Use Python community coding standards (PEP-8)."
 keypoints:
 - "Follow standard Python style in your code."
-- "Use docstrings to provide builtin help."
+- "Use docstrings to provide online help."
 ---
 
 ## Coding style
 
-A consistent coding style helps others (including our future selves) read and understand code more easily. Code is read much more often than it is written, and as the [Zen of Python](https://www.python.org/dev/peps/pep-0020) states, "Readability counts".
-Python proposed a standard style through one of its first Python Enhancement Proposals (PEP), [PEP8](https://www.python.org/dev/peps/pep-0008).
+Coding style helps us to understand the code better. It helps to maintain and change the code.
+Python relies strongly on coding style, as we may notice by the indentation we apply to lines to define different blocks of code.
+Python proposes a standard style through one of its first Python Enhancement Proposals (PEP), [PEP8](https://www.language-python.org/dev/peps/pep-0008), and highlight the importance of readability in the [Zen of Python](https://www.language-python.org/dev/peps/pep-0020).
 
-Some points worth highlighting:
-*   document your code and ensure that assumptions, internal algorithms, expected inputs, expected outputs, etc., are clear
-*   use clear, semantically meaningful variable names
-*   use white-space, *not* tabs, to indent lines (tabs can cause problems across different text editors, operating systems, and version control systems)
+We may highlight some points:
+*   document your code
+*   use clear, meaningful variable names
+*   use white-space, *not* tabs, to indent lines
 
 
 ## Follow standard Python style in your code.
 
-*   [PEP8](https://www.python.org/dev/peps/pep-0008):
-    a style guide for Python that discusses topics such as how to name variables,
-    how to indent your code,
-    how to structure your `import` statements,
+*   [PEP8](https://www.language-python.org/dev/peps/pep-0008):
+    a style guide for Python that discusses topics such as how you should name variables,
+    how you should use indentation in your code,
+    how you should structure your `import` statements,
     etc.
-    Adhering to PEP8 makes it easier for other Python developers to read and understand your code, and to understand what their contributions should look like.
-*   To check your code for compliance with PEP8, you can use the [pycodestyle application](https://pypi.org/project/pycodestyle/) and tools like the [black code formatter](https://github.com/psf/black) can automatically format your code to conform to PEP8 and pycodestyle (a Jupyter notebook formatter also exists [nb_black](https://github.com/dnanhkhoa/nb_black)).
-*   Some groups and organizations follow different style guidelines besides PEP8. For example, the [Google style guide on Python](https://google.github.io/styleguide/pyguide.html) makes slightly different recommendations. Google wrote an application that can help you format your code in either their style or PEP8 called [yapf](https://github.com/google/yapf/).
-*   With respect to coding style, the key is *consistency*. Choose a style for your project be it PEP8, the Google style, or something else and do your best to ensure that you and anyone else you are collaborating with sticks to it. Consistency within a project is often more impactful than the particular style used. A consistent style will make your software easier to read and understand for others and for your future self.
-
+    Adhering to PEP8 makes it easier for other Python developers to read and understand your code,
+    and to understand what their contributions should look like.
+    The [PEP8 application and Python library](https://pypi.language-python.org/pypi/pep8)
+    can check your code for compliance with PEP8.
+*   [Google style guide on Python](https://google.github.io/styleguide/pyguide.html) 
+    supports the use of PEP8 and extend the coding style to more specific structure of 
+    a Python code, which may be interesting also to follow.
 
 ## Use assertions to check for internal errors.
 
-Assertions are a simple but powerful method for making sure that the context in which your code is executing is as you expect.
+Assertions are a simple, but powerful method for making sure that the context in which your code is executing is as you expect.
 
 ~~~
 def calc_bulk_density(mass, volume):
@@ -53,9 +56,12 @@ def calc_bulk_density(mass, volume):
 
 If the assertion is `False`, the Python interpreter raises an `AssertionError` runtime exception. The source code for the expression that failed will be displayed as part of the error message. To ignore assertions in your code run the interpreter with the '-O' (optimize) switch. Assertions should contain only simple checks and never change the state of the program. For example, an assertion should never contain an assignment.
 
-## Use docstrings to provide builtin help.
+## Use docstrings to provide online help.
 
-If the first thing in a function is a character string that is not assigned directly to a variable, Python attaches it to the function, accessible via the builtin help function. This string that provides documentation is also known as a *docstring*.
+*   If the first thing in a function is a character string
+    that is not assigned to a variable,
+    Python attaches it to the function as the online help.
+*   Called a *docstring* (short for "documentation string").
 
 ~~~
 def average(values):
@@ -63,7 +69,7 @@ def average(values):
 
     if len(values) == 0:
         return None
-    return sum(values) / len(values)
+    return sum(values) / average(values)
 
 help(average)
 ~~~
@@ -103,7 +109,7 @@ average(values)
 >
 > def overall_max(sequences):
 >     '''Determine overall maximum edit distance.'''
-> 
+>
 >     highest = 0
 >     for left in sequences:
 >         for right in sequences:
@@ -111,7 +117,7 @@ average(values)
 >             if left != right:
 >                 this = edit_distance(left, right)
 >                 highest = max(highest, this)
-> 
+>
 >     # Report.
 >     return highest
 > ~~~
@@ -120,7 +126,7 @@ average(values)
 
 > ## Document This
 >
-> Turn the comment in the following function into a docstring
+> Turn the comment on the following function into a docstring
 > and check that `help` displays it properly.
 >
 > ~~~
@@ -188,21 +194,20 @@ average(values)
 > >     strings for the supplied number of iterations.
 > >     """
 > >     print(input_string)
-> >     input_string_length = len(input_string)
 > >     old = input_string
 > >     for i in range(iterations):
 > >         new = ''
 > >         # iterate through characters in previous string
-> >         for j in range(input_string_length):
+> >         for j in range(len(input_string)):
 > >             left = j-1
-> >             right = (j+1) % input_string_length  # ensure right index wraps around
-> >             if old[left] == old[right]:
+> >             right = (j+1)%len(input_string) # ensure right index wraps around
+> >             if old[left]==old[right]:
 > >                 new += '-'
 > >             else:
 > >                 new += '*'
 > >         print(new)
 > >         # store new string as old
-> >         old = new     
+> >         old = new
 > >
 > > string_machine('et cetera', 10)
 > > ~~~

@@ -77,12 +77,13 @@ pressures is now: [0.265, 0.275, 0.277, 0.275, 0.276]
 primes = [2, 3, 5]
 print('primes is initially:', primes)
 primes.append(7)
+primes.append(9)
 print('primes has become:', primes)
 ~~~
 {: .language-python}
 ~~~
 primes is initially: [2, 3, 5]
-primes has become: [2, 3, 5, 7]
+primes has become: [2, 3, 5, 7, 9]
 ~~~
 {: .output}
 
@@ -105,19 +106,18 @@ print('primes has finally become:', primes)
 ~~~
 {: .language-python}
 ~~~
-primes is currently: [2, 3, 5, 7]
-primes has now become: [2, 3, 5, 7, 11, 13, 17, 19]
-primes has finally become: [2, 3, 5, 7, 11, 13, 17, 19, [37, 41, 43, 47]]
+primes is currently: [2, 3, 5, 7, 9]
+primes has now become: [2, 3, 5, 7, 9, 11, 13, 17, 19]
+primes has finally become: [2, 3, 5, 7, 9, 11, 13, 17, 19, [37, 41, 43, 47]]
 ~~~
 {: .output}
 
-Note that while `extend` maintains the "flat" structure of the list, appending a list to a list makes the result
-two-dimensional - the last element in `primes` is a list, not an integer.
+Note that while `extend` maintains the "flat" structure of the list, appending a list to a list makes the result two-dimensional.
 
 ## Use `del` to remove items from a list entirely.
 
-*   We use `del list_name[index]` to remove an element from a list (in the example, 9 is not a prime number) and thus shorten it.
-*   `del` is not a function or a method, but a statement in the language.
+*   `del list_name[index]` removes an item from a list and shortens the list.
+*   Not a function or a method, but a statement in the language.
 
 ~~~
 primes = [2, 3, 5, 7, 9]
@@ -137,7 +137,7 @@ primes after removing last item: [2, 3, 5, 7]
 *   Use `[]` on its own to represent a list that doesn't contain any values.
     *   "The zero of lists."
 *   Helpful as a starting point for collecting values
-        (which we will see in the [next episode]({{ page.root }}/12-for-loops/)).
+    (which we will see in the [next episode]({{page.root}}/09-for-loops/)).
 
 ## Lists may contain values of different types.
 
@@ -186,7 +186,7 @@ TypeError: 'str' object does not support item assignment
 ## Indexing beyond the end of the collection is an error.
 
 *   Python reports an `IndexError` if we attempt to access a value that doesn't exist.
-    *   This is a kind of [runtime error]({{ page.root }}/04-built-in/#runtime-error).
+    *   This is a kind of [runtime error]({{ page.root }}/05-error-messages/).
     *   Cannot be detected as the code is parsed
         because the index might be calculated based on data.
 
@@ -257,19 +257,17 @@ IndexError: string index out of range
 > ~~~
 > {: .language-python}
 > ~~~
-> string to list: ['t', 'i', 'n']
-> list to string: gold
+> ['t', 'i', 'n']
+> 'gold'
 > ~~~
 > {: .output}
 >
-> 1.  What does `list('some string')` do?
-> 2.  What does `'-'.join(['x', 'y', 'z'])` generate?
+> 1.  Explain in simple terms what `list('some string')` does.
+> 2.  What does `'-'.join(['x', 'y'])` generate?
 >
 > > ## Solution
-> > 1. [`list('some string')`](https://docs.python.org/3/library/stdtypes.html#list) converts a string into a list containing all of its characters.
-> > 2. [`join`](https://docs.python.org/3/library/stdtypes.html#str.join) returns a string that is the _concatenation_
-> >    of each string element in the list and adds the separator between each element in the list. This results in
-> >    `x-y-z`. The separator between the elements is the string that provides this method.
+> > 1. `list('some string')` "splits" a string into a list of its characters.
+> > 2. `x-y`
 > {: .solution}
 {: .challenge}
 
@@ -323,7 +321,7 @@ IndexError: string index out of range
 > > eniroulf
 > > ~~~
 > > {: .language-python}
-> > 1. `stride` is the step size of the slice.
+> > 1. `stride` is the step size of the slice
 > > 2. The slice `1::2` selects all even-numbered items from a collection: it starts
 > >    with element `1` (which is the second element, since indexing starts at `0`),
 > >    goes on until the end (since no `end` is given), and uses a step size of `2`
@@ -347,9 +345,7 @@ IndexError: string index out of range
 > > lithium
 > > 
 > > ~~~
-> > {: .output}
-> The first statement prints the whole string, since the slice goes beyond the total length of the string.
-> The second statement returns an empty string, because the slice goes "out of bounds" of the string.
+> > {: .language-python}
 > {: .solution}
 {: .challenge}
 
@@ -379,12 +375,12 @@ IndexError: string index out of range
 > > ~~~
 > > letters is ['g', 'o', 'l', 'd'] and result is ['d', 'g', 'l', 'o']
 > > ~~~
-> > {: .output}
+> > {: .language-python}
 > > Program B prints
 > > ~~~
 > > letters is ['d', 'g', 'l', 'o'] and result is None
 > > ~~~
-> > {: .output}
+> > {: .language-python}
 > > `sorted(letters)` returns a sorted copy of the list `letters` (the original
 > > list `letters` remains unchanged), while `letters.sort()` sorts the list
 > > `letters` in-place and does not return anything.
@@ -419,12 +415,11 @@ IndexError: string index out of range
 > > ~~~
 > > new is ['D', 'o', 'l', 'd'] and old is ['D', 'o', 'l', 'd']
 > > ~~~
-> > {: .output}
 > > Program B prints
 > > ~~~
 > > new is ['D', 'o', 'l', 'd'] and old is ['g', 'o', 'l', 'd']
 > > ~~~
-> > {: .output}
+> > {: .language-python}
 > > `new = old` makes `new` a reference to the list `old`; `new` and `old` point
 > > towards the same object.
 > > 

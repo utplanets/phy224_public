@@ -1,6 +1,6 @@
 ---
 title: "Plotting"
-teaching: 15
+teaching: 25
 exercises: 15
 questions:
 - "How can I plot my data?"
@@ -17,10 +17,11 @@ keypoints:
 ---
 ## [`matplotlib`](https://matplotlib.org/) is the most widely used scientific plotting library in Python.
 
-*   Commonly use a sub-library called [`matplotlib.pyplot`](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot).
-*   The Jupyter Notebook will render plots inline by default.
+*   Commonly use a sub-library called [`matplotlib.pyplot`](https://matplotlib.org/api/pyplot_api.html).
+*   The Jupyter Notebook will render plots inline if we ask it to using a "magic" command.
 
 ~~~
+%matplotlib inline
 import matplotlib.pyplot as plt
 ~~~
 {: .language-python}
@@ -28,300 +29,272 @@ import matplotlib.pyplot as plt
 *   Simple plots are then (fairly) simple to create.
 
 ~~~
-time = [0, 1, 2, 3]
-position = [0, 100, 200, 300]
+import numpy
+time = numpy.array([0,1,2,3])
+position = numpy.array([0,100,200,300])
 
 plt.plot(time, position)
-plt.xlabel('Time (hr)')
-plt.ylabel('Position (km)')
+plt.xlabel("Time (hr)")
+plt.ylabel("Position (km)")
 ~~~
 {: .language-python}
 
-![Simple Position-Time Plot](../fig/9_simple_position_time_plot.svg)
 
-> ## Display All Open Figures
-> 
-> In our Jupyter Notebook example, running the cell should generate the figure directly below the code. 
-> The figure is also included in the Notebook document for future viewing.
-> However, other Python environments like an interactive Python session started from a terminal 
-> or a Python script executed via the command line require an additional command to display the figure.
->
-> Instruct `matplotlib` to show a figure:
-> ~~~
-> plt.show()
-> ~~~
-> {: .language-python}
->
-> This command can also be used within a Notebook - for instance, to display multiple figures
-> if several are created by a single cell.
->
-{: .callout}
+![Simple Position-Time Plot](../fig/Plotting_files/Plotting_4_1.png)
 
-## Plot data directly from a [`Pandas dataframe`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html).
-
-*   We can also plot [Pandas dataframes](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html).
-*   This implicitly uses [`matplotlib.pyplot`](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot).
-*   Before plotting, we convert the column headings from a `string` to `integer` data type, since they represent numerical values
+## The color and format of lines and markers can be changed.
+* A shortcut for simple formatting is to use the third argument string.
+* 'b-' means blue line, 'ro' means red circles, 'g+-' means green + with a line
 
 ~~~
-import pandas as pd
+import numpy
+time = numpy.arange(10)
+p1 = time
+p2 = time*2
+p3 = time*4
 
-data = pd.read_csv('data/gapminder_gdp_oceania.csv', index_col='country')
-
-# Extract year from last 4 characters of each column name
-# The current column names are structured as 'gdpPercap_(year)', 
-# so we want to keep the (year) part only for clarity when plotting GDP vs. years
-# To do this we use strip(), which removes from the string the characters stated in the argument
-# This method works on strings, so we call str before strip()
-
-years = data.columns.str.strip('gdpPercap_')
-
-# Convert year values to integers, saving results back to dataframe
-
-data.columns = years.astype(int)
-
-data.loc['Australia'].plot()
+plt.plot(time, p1,'b-')
+plt.plot(time, p2,'ro')
+plt.plot(time, p3,'g+-')
+plt.xlabel("Time (hr)")
+plt.ylabel("Position (km)")
 ~~~
 {: .language-python}
 
-![GDP plot for Australia](../fig/9_gdp_australia.svg)
-## Select and transform data, then plot it.
+![Colored Position-Time Plot](../fig/Plotting_files/Plotting_6_1.png)
 
-*   By default, [`DataFrame.plot`](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.plot.html#pandas.DataFrame.plot) plots with the rows as the X axis.
-*   We can transpose the data in order to plot multiple series.
 
-~~~
-data.T.plot()
-plt.ylabel('GDP per capita')
-~~~
-{: .language-python}
+## More complex formatting can be achieved using the `plot` keywords 
+* `linewidth` controls the thickness of the line
+* `linestyle` controls the type of line
+* `marker` controls the shape of the marker
+* `color` controls the color of the line and marker
+* `label` controls the labelling of the line for use with `plt.legend`
 
-![GDP plot for Australia and New Zealand](../fig/9_gdp_australia_nz.svg)
-## Many styles of plot are available.
-
-*   For example, do a bar plot using a fancier style.
 
 ~~~
-plt.style.use('ggplot')
-data.T.plot(kind='bar')
-plt.ylabel('GDP per capita')
+plt.plot(time, p1,color='blue', linestyle='-', linewidth=5,label="blue line")
+plt.plot(time, p2,'ro', markersize=10, label="red dots")
+plt.plot(time, p3,'g-', marker='+')
+plt.xlabel("Time (hr)")
+plt.ylabel("Position (km)")
+plt.legend()
 ~~~
 {: .language-python}
 
-![GDP barplot for Australia](../fig/9_gdp_bar.svg)
+![Complex Position-Time Plot](../fig/Plotting_files/Plotting_8_1.png)
 
-## Data can also be plotted by calling the `matplotlib` `plot` function directly.
-*   The command is `plt.plot(x, y)`
-*   The color and format of markers can also be specified as an additional optional argument e.g., `b-` is a blue line, `g--` is a green dashed line.
-
-## Get Australia data from dataframe
-
+## Built in "styles" provide consistent plots
 ~~~
-years = data.columns
-gdp_australia = data.loc['Australia']
-
-plt.plot(years, gdp_australia, 'g--')
+print("available style names: ", plt.style.available)
 ~~~
 {: .language-python}
 
-![GDP formatted plot for Australia](../fig/9_gdp_australia_formatted.svg)
-
-## Can plot many sets of data together.
+~~~
+available style names:  ['_classic_test', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn-bright', 'seaborn-colorblind', 'seaborn-dark-palette', 'seaborn-dark', 'seaborn-darkgrid', 'seaborn-deep', 'seaborn-muted', 'seaborn-notebook', 'seaborn-paper', 'seaborn-pastel', 'seaborn-poster', 'seaborn-talk', 'seaborn-ticks', 'seaborn-white', 'seaborn-whitegrid', 'seaborn', 'Solarize_Light2', 'tableau-colorblind10']
+~~~
+{: .output}
 
 ~~~
-# Select two countries' worth of data.
-gdp_australia = data.loc['Australia']
-gdp_nz = data.loc['New Zealand']
-
-# Plot with differently-colored markers.
-plt.plot(years, gdp_australia, 'b-', label='Australia')
-plt.plot(years, gdp_nz, 'g-', label='New Zealand')
-
-# Create legend.
-plt.legend(loc='upper left')
-plt.xlabel('Year')
-plt.ylabel('GDP per capita ($)')
+plt.style.use("ggplot")
+plt.plot(time, p1,color='blue', linestyle='-', linewidth=5,label="blue line")
+plt.plot(time, p2,'ro', markersize=10, label="red dots")
+plt.plot(time, p3,'g-', marker='+')
+plt.xlabel("Time (hr)")
+plt.ylabel("Position (km)")
+plt.legend()
 ~~~
 {: .language-python}
 
-> ## Adding a Legend
-> 
-> Often when plotting multiple datasets on the same figure it is desirable to have 
-> a legend describing the data.
->
-> This can be done in `matplotlib` in two stages:
-> 
-> * Provide a label for each dataset in the figure:
->
-> ~~~
-> plt.plot(years, gdp_australia, label='Australia')
-> plt.plot(years, gdp_nz, label='New Zealand')
-> ~~~
-> {: .language-python}
->
-> * Instruct `matplotlib` to create the legend.
->
-> ~~~
-> plt.legend()
-> ~~~
-> {: .language-python}
->
-> By default matplotlib will attempt to place the legend in a suitable position. If you
-> would rather specify a position this can be done with the `loc=` argument, e.g to place
-> the legend in the upper left corner of the plot, specify `loc='upper left'`
->
-{: .callout}
-
-
-![GDP formatted plot for Australia and New Zealand](../fig/9_gdp_australia_nz_formatted.svg)
-*   Plot a scatter plot correlating the GDP of Australia and New Zealand
-*   Use either `plt.scatter` or `DataFrame.plot.scatter`
+![png](../fig/Plotting_files/Plotting_11_1.png)
 
 ~~~
-plt.scatter(gdp_australia, gdp_nz)
+plt.style.use("fivethirtyeight")
+plt.plot(time, p1,color='blue', linestyle='-', linewidth=5,label="blue line")
+plt.plot(time, p2,'ro', markersize=10, label="red dots")
+plt.plot(time, p3,'g-', marker='+')
+plt.xlabel("Time (hr)")
+plt.ylabel("Position (km)")
+plt.legend()
 ~~~
 {: .language-python}
 
-![GDP correlation using plt.scatter](../fig/9_gdp_correlation_plt.svg)
+![png](../fig/Plotting_files/Plotting_12_1.png)
+
 ~~~
-data.T.plot.scatter(x = 'Australia', y = 'New Zealand')
+plt.style.use("seaborn-whitegrid")
+plt.plot(time, p1,color='blue', linestyle='-', linewidth=5,label="blue line")
+plt.plot(time, p2,'ro', markersize=10, label="red dots")
+plt.plot(time, p3,'g-', marker='+') #where's the marker?
+plt.xlabel("Time (hr)")
+plt.ylabel("Position (km)")
+plt.legend()
 ~~~
 {: .language-python}
 
-![GDP correlation using data.T.plot.scatter](../fig/9_gdp_correlation_data.svg)
+![png](../fig/Plotting_files/Plotting_13_1.png)
 
-> ## Minima and Maxima
->
-> Fill in the blanks below to plot the minimum GDP per capita over time
-> for all the countries in Europe.
-> Modify it again to plot the maximum GDP per capita over time for Europe.
->
-> ~~~
-> data_europe = pd.read_csv('data/gapminder_gdp_europe.csv', index_col='country')
-> data_europe.____.plot(label='min')
-> data_europe.____
-> plt.legend(loc='best')
-> plt.xticks(rotation=90)
-> ~~~
-> {: .language-python}
->
-> > ## Solution
-> >
-> > ~~~
-> > data_europe = pd.read_csv('data/gapminder_gdp_europe.csv', index_col='country')
-> > data_europe.min().plot(label='min')
-> > data_europe.max().plot(label='max')
-> > plt.legend(loc='best')
-> > plt.xticks(rotation=90)
-> > ~~~
-> > {: .language-python}
-> > ![Minima Maxima Solution](../fig/9_minima_maxima_solution.png)
-> {: .solution}
-{: .challenge}
 
-> ## Correlations
->
-> Modify the example in the notes to create a scatter plot showing
-> the relationship between the minimum and maximum GDP per capita
-> among the countries in Asia for each year in the data set.
-> What relationship do you see (if any)?
->
->
-> > ## Solution
-> > ~~~
-> > data_asia = pd.read_csv('data/gapminder_gdp_asia.csv', index_col='country')
-> > data_asia.describe().T.plot(kind='scatter', x='min', y='max')
-> > ~~~
-> > {: .language-python}
-> >
-> > ![Correlations Solution 1](../fig/9_correlations_solution1.svg)
-> >
-> > No particular correlations can be seen between the minimum and maximum gdp values
-> > year on year. It seems the fortunes of asian countries do not rise and fall together.
-> {: .solution}
->
-> You might note that the variability in the maximum is much higher than
-> that of the minimum.  Take a look at the maximum and the max indexes:
->
-> ~~~
-> data_asia = pd.read_csv('data/gapminder_gdp_asia.csv', index_col='country')
-> data_asia.max().plot()
-> print(data_asia.idxmax())
-> print(data_asia.idxmin())
-> ~~~
-> {: .language-python}
-> > ## Solution
-> > ![Correlations Solution 2](../fig/9_correlations_solution2.png)
-> >
-> > Seems the variability in this value is due to a sharp drop after 1972.
-> > Some geopolitics at play perhaps? Given the dominance of oil producing countries,
-> > maybe the Brent crude index would make an interesting comparison?
-> > Whilst Myanmar consistently has the lowest gdp, the highest gdb nation has varied
-> > more notably.
-> {: .solution}
-{: .challenge}
 
-> ## More Correlations
->
-> This short program creates a plot showing
-> the correlation between GDP and life expectancy for 2007,
-> normalizing marker size by population:
->
-> ~~~
-> data_all = pd.read_csv('data/gapminder_all.csv', index_col='country')
-> data_all.plot(kind='scatter', x='gdpPercap_2007', y='lifeExp_2007',
->               s=data_all['pop_2007']/1e6)
-> ~~~
-> {: .language-python}
->
-> Using online help and other resources,
-> explain what each argument to `plot` does.
->
-> > ## Solution
-> > ![More Correlations Solution](../fig/9_more_correlations_solution.svg)
-> >
-> > A good place to look is the documentation for the plot function -
-> > help(data_all.plot).
-> >
-> > kind - As seen already this determines the kind of plot to be drawn.
-> >
-> > x and y - A column name or index that determines what data will be
-> > placed on the x and y axes of the plot
-> >
-> > s - Details for this can be found in the documentation of plt.scatter.
-> > A single number or one value for each data point. Determines the size
-> > of the plotted points.
-> {: .solution}
-{: .challenge}
 
-> ## Saving your plot to a file
-> 
-> If you are satisfied with the plot you see you may want to save it to a file,
-> perhaps to include it in a publication. There is a function in the
-> matplotlib.pyplot module that accomplishes this:
-> [savefig](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html).
-> Calling this function, e.g. with
-> ~~~
-> plt.savefig('my_figure.png')
-> ~~~
-> {: .language-python}
-> 
-> will save the current figure to the file `my_figure.png`. The file format
-> will automatically be deduced from the file name extension (other formats
-> are pdf, ps, eps and svg).
->
+
+
+## Plots can be scatter plots with points and no lines
+
+
+~~~
+numpy.random.seed(20)
+x,y = numpy.random.randint(0,100,100), numpy.random.randn(100)
+x=numpy.cumsum(x)
+y=numpy.cumsum(y)
+plt.scatter( x, y)
+plt.scatter( x, 10-y**2, color='green',marker='<')
+plt.xlabel("Labels still work")
+plt.title("title")
+~~~
+{: .language-python}
+
+
+![png](../fig/Plotting_files/Plotting_15_1.png)
+
+
+## `matplotlib` also makes bar charts and histograms
+* If you have data grouped into counts already, `bar` can make a chart
+* If you have raw data, `hist` can calculate **and** plot the histogram.
+
+
+~~~
+x = [0,1,2,3,4,5]
+y = [0,4,2,6,8,2]
+plt.bar(x,y)
+plt.title("Bar chart")
+~~~
+{: .language-python}
+
+
+![Bar chart](../fig/Plotting_files/Plotting_17_1.png)
+
+
+~~~
+x = numpy.random.randint(0,100,50)
+bin_count, bin_edges, boxes = plt.hist(x, bins=10, rwidth=0.9)
+print("The counts are ", bin_count)
+~~~
+{: .language-python}
+~~~
+The counts are  [4. 3. 7. 6. 6. 4. 4. 4. 7. 5.]
+~~~
+{: .output}
+![Histogram](../fig/Plotting_files/Plotting_18_1.png)
+
+~~~
+# Compute pie slices
+N = bin_count.size
+theta = 0.5*(bin_edges[1:] + bin_edges[:-1])
+theta = theta * 2*numpy.pi/theta.max()
+width = numpy.pi / 4 * numpy.random.rand(N)
+
+ax = plt.subplot(111, projection='polar')
+bars = ax.bar(theta, bin_count, width=width, bottom=0.0,alpha=0.5)
+
+# Use custom colors and opacity
+for r, bar in zip(bin_count, bars):
+    bar.set_facecolor(plt.cm.viridis(r / bin_count.max()))
+    bar.set_alpha(0.5)
+
+t=plt.title("Something more exotic")
+~~~
+{: .language-python}
+
+
+![Polar plot](../fig/Plotting_files/Plotting_19_0.png)
+
+
+## Define the figure size before plotting using the `figure` command
+* `plt.figure` pre-defines a figure for you
+* The keyword `figsize` takes two values to define the width and height
+
+
+~~~
+plt.figure(figsize=(8,2))
+x = [0,1,2,3,4,5]
+y = [0,4,2,6,8,2]
+plt.bar(x,y)
+plt.title("narrow bar chart")
+~~~
+{: .language-python}
+
+![Narrow bar chart](../fig/Plotting_files/Plotting_21_1.png)
+
+
+## Place multiple figures on one plot with `subplot`
+* `plt.subplot` takes three arguments : (number_of_rows, number_of_columns, location)
+
+
+~~~
+plt.figure(figsize=(8,2))
+x = [0,1,2,3,4,5]
+y = [0,4,2,6,8,2]
+plt.subplot(2,2,1)
+plt.bar(x,y)
+plt.title("top left")
+plt.subplot(2,2,2)
+plt.bar(y,x)
+plt.title("top right")
+plt.subplot(2,2,4)
+plt.bar(x,y)
+plt.title("sometimes the formatting is awkward")
+~~~
+{: .language-python}
+
+
+![Overly narrow plot](../fig/Plotting_files/Plotting_23_1.png)
+
+It's easy to put too much data into a figure and make it unreadable! Make sure there is enough space to see all of the elements in the plot.
+
+~~~
+plt.figure(figsize=(8,6))
+x = [0,1,2,3,4,5]
+y = [0,4,2,6,8,2]
+plt.subplot(2,2,1)
+plt.bar(x,y)
+plt.title("top left")
+plt.subplot(2,2,2)
+plt.bar(y,x)
+plt.title("top right")
+plt.subplot(2,2,4)
+plt.bar(x,y)
+plt.title("less awkward")
+~~~
+{: .language-python}
+
+
+![Fixed plot](../fig/Plotting_files/Plotting_24_1.png)
+
+
+## Saving your plot to a file
+* After plotting, use [`plt.savefig`](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.savefig.html) to save the figure to a file
+* The figure size you specified is (approximately) the size in inches.
+* For PNG/JPG images you can specify the resolution with `dpi`
+
+~~~
+plt.figure(figsize=(8,3))
+plt.plot(x,y)
+plt.savefig("data/fig1.pdf") #PDF format
+plt.savefig("data/fig1.png", dpi=150, transparent=True) #PNG format
+~~~
+{: .language-python}
+
+![resized multiplot](../fig/Plotting_files/Plotting_26_0.png)
+
 > Note that functions in `plt` refer to a global figure variable
 > and after a figure has been displayed to the screen (e.g. with `plt.show`) 
 > matplotlib will make this  variable refer to a new empty figure.
 > Therefore, make sure you call `plt.savefig` before the plot is displayed to
 > the screen, otherwise you may find a file with an empty plot.
 >
-> When using dataframes, data is often generated and plotted to screen in one line,
-> and `plt.savefig` seems not to be a possible approach.
-> One possibility to save the figure to file is then to
->
-> * save a reference to the current figure in a local variable (with `plt.gcf`) 
-> * call the `savefig` class method from that variable.
+> It is also possibile to save the figure to file by first getting a reference to the 
+> figure with `plt.gcf`, then calling the `savefig` class method from that variable.
 >
 > ~~~
 > fig = plt.gcf() # get current figure
@@ -331,10 +304,4 @@ data.T.plot.scatter(x = 'Australia', y = 'New Zealand')
 > {: .language-python}
 {: .callout}
 
-> ## Making your plots accessible
->
-> Whenever you are generating plots to go into a paper or a presentation, there are a few things you can do to make sure that everyone can understand your plots.
-> * Always make sure your text is large enough to read. Use the `fontsize` parameter in `xlabel`, `ylabel`, `title`, and `legend`, and [`tick_params` with `labelsize`](https://matplotlib.org/2.1.1/api/_as_gen/matplotlib.pyplot.tick_params.html) to increase the text size of the numbers on your axes.
-> * Similarly, you should make your graph elements easy to see. Use `s` to increase the size of your scatterplot markers and `linewidth` to increase the sizes of your plot lines.
-> * Using color (and nothing else) to distinguish between different plot elements will make your plots unreadable to anyone who is colorblind, or who happens to have a black-and-white office printer. For lines, the `linestyle` parameter lets you use different types of lines. For scatterplots, `marker` lets you change the shape of your points. If you're unsure about your colors, you can use [Coblis](https://www.color-blindness.com/coblis-color-blindness-simulator/) or [Color Oracle](https://colororacle.org/) to simulate what your plots would look like to those with colorblindness.
-{: .callout}
+

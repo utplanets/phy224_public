@@ -1,7 +1,7 @@
 ---
 title: "Data Types and Type Conversion"
-teaching: 10
-exercises: 10
+teaching: 5
+exercises: 5
 questions:
 - "What kinds of data do programs store?"
 - "How can I convert one type to another?"
@@ -136,7 +136,7 @@ TypeError: object of type 'int' has no len()
 ~~~
 {: .error}
 
-## <a name='convert-numbers-and-strings'></a> Must convert numbers to strings or vice versa when operating on them.
+## Must convert numbers to strings or vice versa when operating on them.
 
 *   Cannot add numbers and strings.
 
@@ -171,7 +171,7 @@ print(str(1) + '2')
 ## Can mix integers and floats freely in operations.
 
 *   Integers and floating-point numbers can be mixed in arithmetic.
-    *   Python 3 automatically converts integers to floats as needed.
+    *   Python 3 automatically converts integers to floats as needed. (Integer division in Python 2 will return an integer, the *floor* of the division.)
 
 ~~~
 print('half is', 1 / 2.0)
@@ -192,10 +192,10 @@ three squared is 9.0
 *   This does **not** happen in programming languages.
 
 ~~~
-variable_one = 1
-variable_two = 5 * variable_one
-variable_one = 2
-print('first is', variable_one, 'and second is', variable_two)
+first = 1
+second = 5 * first
+first = 2
+print('first is', first, 'and second is', second)
 ~~~
 {: .language-python}
 ~~~
@@ -215,7 +215,6 @@ first is 2 and second is 5
 > > ## Solution
 > >
 > > It is a floating-point number (often abbreviated "float").
-> > It is possible to find out by using the built-in function `type()`.
 > >
 > > ~~~
 > > print(type(3.4))
@@ -268,20 +267,22 @@ first is 2 and second is 5
 > > 2. Floating point, since fractional days are required
 > > 3. Character string if serial number contains letters and numbers, otherwise integer if the serial number consists only of numerals
 > > 4. This will vary! How do you define a specimen's age? whole days since collection (integer)? date and time (string)?
-> > 5. Choose floating point to represent population as large aggregates (eg millions), or integer to represent population in units of individuals.
+> > 5. Choose floating point to represent population as large aggreates (eg millions), or integer to represent population in units of individuals.
 > > 6. Floating point number, since an average is likely to have a fractional part.
+> >
+> > {: .output}
 > {: .solution}
 {: .challenge}
 
 > ## Division Types
 >
 > In Python 3, the `//` operator performs integer (whole-number) floor division, the `/` operator performs floating-point
-> division, and the `%` (or *modulo*) operator calculates and returns the remainder from integer division:
+> division, and the '%' (or *modulo*) operator calculates and returns the remainder from integer division:
 >
 > ~~~
-> print('5 // 3:', 5 // 3)
-> print('5 / 3:', 5 / 3)
-> print('5 % 3:', 5 % 3)
+> print('5 // 3:', 5//3)
+> print('5 / 3:', 5/3)
+> print('5 % 3:', 5%3)
 > ~~~
 > {: .language-python}
 >
@@ -292,6 +293,17 @@ first is 2 and second is 5
 > ~~~
 > {: .output}
 >
+> However in Python2 (and other languages), the `/` operator between two integer types perform a floor (`//`) division. To perform a float division, we have to convert one of the integers to float.
+>
+> ~~~
+> print('5 // 3:', 1)
+> print('5 / 3:', 1 )
+> print('5 / float(3):', 1.6666667 )
+> print('float(5) / 3:', 1.6666667 )
+> print('float(5 / 3):', 1.0 )
+> print('5 % 3:', 2)
+> ~~~
+>
 > If `num_subjects` is the number of subjects taking part in a study,
 > and `num_per_survey` is the number that can take part in a single survey,
 > write an expression that calculates the number of surveys needed
@@ -299,14 +311,12 @@ first is 2 and second is 5
 >
 > > ## Solution
 > > We want the minimum number of surveys that reaches everyone once, which is
-> > the rounded up value of `num_subjects/ num_per_survey`. This is 
-> > equivalent to performing a floor division with `//` and adding 1. Before
-> > the division we need to subtract 1 from the number of subjects to deal with 
-> > the case where `num_subjects` is evenly divisible by `num_per_survey`.
+> > the rounded up value of `num_subjects / num_per_survey`. This is 
+> > equivalent to performing an integer division with `//` and adding 1.
 > > ~~~
 > > num_subjects = 600
 > > num_per_survey = 42
-> > num_surveys = (num_subjects - 1) // num_per_survey + 1
+> > num_surveys = num_subjects // num_per_survey + 1
 > >
 > > print(num_subjects, 'subjects,', num_per_survey, 'per survey:', num_surveys)
 > > ~~~
@@ -335,7 +345,7 @@ first is 2 and second is 5
 > ~~~
 > {: .output}
 >
-> If the conversion doesn't make sense, however, an error message will occur.
+> If the conversion doesn't make sense, however, an error message will occur
 >
 > ~~~
 > print("string to float:", float("Hello world!"))
@@ -345,7 +355,7 @@ first is 2 and second is 5
 > ~~~
 > ---------------------------------------------------------------------------
 > ValueError                                Traceback (most recent call last)
-> <ipython-input-5-df3b790bf0a2> in <module>
+> <ipython-input-5-df3b790bf0a2> in <module>()
 > ----> 1 print("string to float:", float("Hello world!"))
 >
 > ValueError: could not convert string to float: 'Hello world!'
@@ -367,26 +377,22 @@ first is 2 and second is 5
 > > What do you expect this program to do? It would not be so unreasonable to expect the Python 3 `int` command to
 > > convert the string "3.4" to 3.4 and an additional type conversion to 3. After all, Python 3 performs a lot of other
 > > magic - isn't that part of its charm?
+> > 
+> > However, Python 3 throws an error. Why? To be consistent, possibly. If you ask Python to perform two consecutive
+> > typecasts, you must convert it explicitly in code.
 > >
 > > ~~~
 > > int("3.4")
-> > ~~~
-> > {: .language-python}
-> > ~~~
-> > ---------------------------------------------------------------------------
-> > ValueError                                Traceback (most recent call last)
-> > <ipython-input-2-ec6729dfccdc> in <module>
-> > ----> 1 int("3.4")
-> > ValueError: invalid literal for int() with base 10: '3.4'
-> > ~~~
-> > {: .output}
-> > However, Python 3 throws an error. Why? To be consistent, possibly. If you ask Python to perform two consecutive
-> > typecasts, you must convert it explicitly in code.
-> > ~~~
 > > int(float("3.4"))
 > > ~~~
 > > {: .language-python}
 > > ~~~
+> > In [2]: int("3.4")
+> > ---------------------------------------------------------------------------
+> > ValueError                                Traceback (most recent call last)
+> > <ipython-input-2-ec6729dfccdc> in <module>()
+> > ----> 1 int("3.4")
+> > ValueError: invalid literal for int() with base 10: '3.4'
 > > 3
 > > ~~~
 > > {: .output}
@@ -395,7 +401,7 @@ first is 2 and second is 5
 
 > ## Arithmetic with Different Types
 >
-> Which of the following will return the floating point number `2.0`?
+> Which of the following will print 2.0?
 > Note: there may be more than one right answer.
 >
 > ~~~
@@ -422,36 +428,21 @@ first is 2 and second is 5
 >
 > Python provides complex numbers,
 > which are written as `1.0+2.0j`.
-> If `val` is a complex number,
+> If `val` is an imaginary number,
 > its real and imaginary parts can be accessed using *dot notation*
 > as `val.real` and `val.imag`.
 >
-> ~~~
-> a_complex_number = 6 + 2j
-> print(a_complex_number.real)
-> print(a_complex_number.imag)
-> ~~~
-> {: .language-python}
->
-> ~~~
-> 6.0
-> 2.0
-> ~~~
-> {: .output}
->
->
 > 1.  Why do you think Python uses `j` instead of `i` for the imaginary part?
-> 2.  What do you expect `1 + 2j + 3` to produce?
-> 3.  What do you expect `4j` to be?  What about `4 j` or `4 + j`?
+> 2.  What do you expect `1+2j + 3` to produce?
+> 3.  What do you expect '4j' to be?  What about `4 j` or `4 + j'? > 
 > 
 > > ## Solution
 > >
 > > 1. Standard mathematics treatments typically use `i` to denote an imaginary number. However, from media reports it
 > > was an early convention established from electrical engineering that now presents a technically expensive area to
 > > change. [Stack Overflow provides additional explanation and
-> > discussion.](http://stackoverflow.com/questions/24812444/why-are-complex-numbers-in-python-denoted-with-j-instead-of-i)
-> > 2. `(4+2j)`
-> > 3. `4j` and `Syntax Error: invalid syntax`. In the latter cases, `j` is considered a variable and the statement
-> > depends on if `j` is defined and if so, its assigned value.
+> > discussion](http://stackoverflow.com/questions/24812444/why-are-complex-numbers-in-python-denoted-with-j-instead-of-i)
+> > 2. _4+2j_
+> > 3. _4j, syntax error, depends on the value of j_
 > {: .solution}
 {: .challenge}

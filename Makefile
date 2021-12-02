@@ -47,6 +47,8 @@ endif
 serve : lesson-md index.md
 	${JEKYLL} serve
 
+notebook-server :
+ 	jupyter notebook --notebook-dir=notebooks
 ## * site             : build website but do not run a server
 site : lesson-md index.md
 	${JEKYLL} build

@@ -3,12 +3,12 @@ title: "Setup"
 ---
 
 ## Getting the Data
-
-The data we will be using is taken from the [gapminder][gapminder] dataset.
+The data we will be using is generated for this class.
 To obtain it, download and unzip the file
-[python-novice-gapminder-data.zip]({{page.root}}/files/python-novice-gapminder-data.zip).
+[data.zip]({{page.root}}/files/data.zip).
 In order to follow the presented material, you should launch the JupyterLab
 server in the root directory (see [Starting JupyterLab]({{ page.root }}/01-run-quit/#starting-jupyterlab)).
+The jupyter notebooks for the class can be downloaded from [notebooks.zip]({{page.root}}/files/notebooks.zip).
 
 ## Installing Python Using Anaconda
 

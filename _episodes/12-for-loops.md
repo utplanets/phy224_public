@@ -10,9 +10,9 @@ objectives:
 - "Write for loops that use the Accumulator pattern to aggregate values."
 keypoints:
 - "A *for loop* executes commands once for each value in a collection."
-- "A `for` loop is made up of a collection, a loop variable, and a body."
 - "The first line of the `for` loop must end with a colon, and the body must be indented."
 - "Indentation is always meaningful in Python."
+- "A `for` loop is made up of a collection, a loop variable, and a body."
 - "Loop variables can be called anything (but it is strongly advised to have a meaningful name to the looping variable)."
 - "The body of a loop can contain many statements."
 - "Use `range` to iterate over a sequence of numbers."
@@ -51,19 +51,6 @@ print(5)
 ~~~
 {: .output}
 
-## A `for` loop is made up of a collection, a loop variable, and a body.
-
-~~~
-for number in [2, 3, 5]:
-    print(number)
-~~~
-{: .language-python}
-
-*   The collection, `[2, 3, 5]`, is what the loop is being run on.
-*   The body, `print(number)`, specifies what to do for each value in the collection.
-*   The loop variable, `number`, is what changes for each *iteration* of the loop.
-    *   The "current thing".
-
 ## The first line of the `for` loop must end with a colon, and the body must be indented.
 
 *   The colon at the end of the first line signals the start of a *block* of statements.
@@ -83,13 +70,13 @@ IndentationError: expected an indented block
 *   Indentation is always meaningful in Python.
 
 ~~~
-firstName = "Jon"
-  lastName = "Smith"
+firstName="Jon"
+  lastName="Smith"
 ~~~
 {: .language-python}
 ~~~
   File "<ipython-input-7-f65f2962bf9c>", line 2
-    lastName = "Smith"
+    lastName="Smith"
     ^
 IndentationError: unexpected indent
 ~~~
@@ -97,6 +84,19 @@ IndentationError: unexpected indent
 
 *   This error can be fixed by removing the extra spaces
     at the beginning of the second line.
+
+## A `for` loop is made up of a collection, a loop variable, and a body.
+
+~~~
+for number in [2, 3, 5]:
+    print(number)
+~~~
+{: .language-python}
+
+*   The collection, `[2, 3, 5]`, is what the loop is being run on.
+*   The body, `print(number)`, specifies what to do for each value in the collection.
+*   The loop variable, `number`, is what changes for each *iteration* of the loop.
+    *   The "current thing".
 
 ## Loop variables can be called anything.
 
@@ -132,7 +132,7 @@ for p in primes:
 
 ## Use `range` to iterate over a sequence of numbers.
 
-*   The built-in function [`range`](https://docs.python.org/3/library/stdtypes.html#range) produces a sequence of numbers.
+*   The built-in function `range` produces a sequence of numbers.
     *   *Not* a list: the numbers are produced on demand
         to make looping over large ranges more efficient.
 *   `range(N)` is the numbers 0..N-1
@@ -140,7 +140,7 @@ for p in primes:
 
 ~~~
 print('a range is not a list: range(0, 3)')
-for number in range(0, 3):
+for number in range(0,3):
     print(number)
 ~~~
 {: .language-python}
@@ -198,7 +198,7 @@ print(total)
 > ~~~
 > {: .language-python}
 > > ## Solution
-> >
+> > 
 > > | Line no | Variables            |
 > > |---------|----------------------|
 > > | 1       | total = 0            |
@@ -297,10 +297,11 @@ print(total)
 > > {: .language-python}
 > {: .solution}
 >
-> __Create an acronym:__ Starting from the list `["red", "green", "blue"]`, create the acronym `"RGB"` using
-> a for loop.
-> 
-> __Hint:__ You may need to use a string method to properly format the acronym.
+> ~~~
+> # Create acronym: ["red", "green", "blue"] => "RGB"
+> # write the whole thing
+> ~~~
+> {: .language-python}
 > > ## Solution
 > > ~~~
 > > acronym = ""
@@ -315,27 +316,27 @@ print(total)
 > ## Cumulative Sum
 >
 > Reorder and properly indent the lines of code below
-> so that they print a list with the cumulative sum of data.
+> so that they print an array with the cumulative sum of data.
 > The result should be `[1, 3, 5, 10]`.
 >
 > ~~~
-> cumulative.append(total)
+> cumulative += [sum]
 > for number in data:
 > cumulative = []
-> total += number
-> total = 0
+> sum += number
+> sum = 0
 > print(cumulative)
 > data = [1,2,2,5]
 > ~~~
 > {: .language-python}
 > > ## Solution
 > > ~~~
-> > total = 0
+> > sum = 0
 > > data = [1,2,2,5]
 > > cumulative = []
 > > for number in data:
-> >     total += number
-> >     cumulative.append(total)
+> >     sum += number
+> >     cumulative.append(sum)
 > > print(cumulative)
 > > ~~~
 > > {: .language-python}
@@ -348,7 +349,7 @@ print(total)
 >    *without* running it.
 > 2. Run the code and read the error message.
 >    What type of `NameError` do you think this is?
->    Is it a string with no quotes, a misspelled variable, or a
+>    Is it a string with no quotes, a misspelled variable, or a 
 >    variable that should have been defined but was not?
 > 3. Fix the error.
 > 4. Repeat steps 2 and 3, until you have fixed all the errors.
@@ -364,10 +365,6 @@ print(total)
 > ~~~
 > {: .language-python}
 > > ## Solution
-> > - Python variable names are case sensitive: `number` and `Number` refer to different variables.
-> > - The variable `message` needs to be initialized as an empty string.
-> > - We want to add the string `"a"` to `message`, not the undefined variable `a`.
-> >
 > > ~~~
 > > message = ""
 > > for number in range(10):
@@ -395,7 +392,6 @@ print(total)
 > ~~~
 > {: .language-python}
 > > ## Solution
-> > This list has 4 elements and the index to access the last element in the list is `3`.
 > > ~~~
 > > seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 > > print('My favorite season is ', seasons[3])

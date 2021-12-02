@@ -57,24 +57,6 @@ after
 ~~~
 {: .output}
 
-## Every function returns something.
-
-*   Every function call produces some result.
-*   If the function doesn't have a useful result to return,
-    it usually returns the special value `None`. `None` is a Python
-    object that stands in anytime there is no value.
-
-~~~
-result = print('example')
-print('result of print is', result)
-~~~
-{: .language-python}
-~~~
-example
-result of print is None
-~~~
-{: .output}
-
 ## Commonly-used built-in functions include `max`, `min`, and `round`.
 
 *   Use `max` to find the largest value of one or more values.
@@ -104,11 +86,7 @@ print(max(1, 'a'))
 ~~~
 {: .language-python}
 ~~~
-TypeError                                 Traceback (most recent call last)
-<ipython-input-52-3f049acf3762> in <module>
-----> 1 print(max(1, 'a'))
-
-TypeError: '>' not supported between instances of 'str' and 'int'
+TypeError: unorderable types: str() > int()
 ~~~
 {: .error}
 
@@ -137,48 +115,6 @@ round(3.712, 1)
 ~~~
 {: .output}
 
-## Functions attached to objects are called methods
-
-* Functions take another form that will be common in the pandas episodes.
-* Methods have parentheses like functions, but come after the variable.
-* Some methods are used for internal Python operations, and are marked with double underlines.
-
-~~~
-my_string = 'Hello world!'  # creation of a string object 
-
-print(len(my_string))       # the len function takes a string as an argument and returns the length of the string
-
-print(my_string.swapcase()) # calling the swapcase method on the my_string object
-
-print(my_string.__len__())  # calling the internal __len__ method on the my_string object, used by len(my_string)
-
-~~~
-{: .language-python}
-
-~~~
-12
-hELLO WORLD!
-12
-~~~
-{: .output}
-
-* You might even see them chained together.  They operate left to right.
-
-~~~
-print(my_string.isupper())          # Not all the letters are uppercase
-print(my_string.upper())            # This capitalizes all the letters
-
-print(my_string.upper().isupper())  # Now all the letters are uppercase
-~~~
-{: .language-python}
-
-~~~
-False
-HELLO WORLD
-True
-~~~
-{: .output}
-
 ## Use the built-in function `help` to get help for a function.
 
 *   Every built-in function has online documentation.
@@ -190,22 +126,14 @@ help(round)
 ~~~
 Help on built-in function round in module builtins:
 
-round(number, ndigits=None)
-    Round a number to a given precision in decimal digits.
-    
-    The return value is an integer if ndigits is omitted or None.  Otherwise
-    the return value has the same type as the number.  ndigits may be negative.
+round(...)
+    round(number[, ndigits]) -> number
+
+    Round a number to a given precision in decimal digits (default 0 digits).
+    This returns an int when called with one argument, otherwise the
+    same type as the number. ndigits may be negative.
 ~~~
 {: .output}
-
-## The Jupyter Notebook has two ways to get help.
-
-*   Option 1: Place the cursor near where the function is invoked in a cell
-    (i.e., the function name or its parameters),
-    * Hold down <kbd>Shift</kbd>, and press <kbd>Tab</kbd>.
-    * Do this several times to expand the information returned.
-*   Option 2: Type the function name in a cell with a question mark after it. Then run the cell.
-
 
 ## Python reports a syntax error when it can't understand the source of a program.
 
@@ -217,9 +145,6 @@ name = 'Feng
 ~~~
 {: .language-python}
 ~~~
-  File "<ipython-input-56-f42768451d55>", line 2
-    name = 'Feng
-                ^
 SyntaxError: EOL while scanning string literal
 ~~~
 {: .error}
@@ -230,9 +155,6 @@ age = = 52
 ~~~
 {: .language-python}
 ~~~
-  File "<ipython-input-57-ccc3df3cf902>", line 2
-    age = = 52
-          ^
 SyntaxError: invalid syntax
 ~~~
 {: .error}
@@ -260,7 +182,7 @@ SyntaxError: unexpected EOF while parsing
 *   Next is the problematic line of code,
     indicating the problem with a `^` pointer.
 
-## <a name='runtime-error'></a> Python reports a runtime error when something goes wrong while a program is executing.
+## Python reports a runtime error when something goes wrong while a program is executing.
 
 ~~~
 age = 53
@@ -268,16 +190,35 @@ remaining = 100 - aege # mis-spelled 'age'
 ~~~
 {: .language-python}
 ~~~
-NameError                                 Traceback (most recent call last)
-<ipython-input-59-1214fb6c55fc> in <module>
-      1 age = 53
-----> 2 remaining = 100 - aege # mis-spelled 'age'
-
 NameError: name 'aege' is not defined
 ~~~
 {: .error}
 
 *   Fix syntax errors by reading the source and runtime errors by tracing execution.
+
+## The Jupyter Notebook has two ways to get help.
+
+*   Place the cursor inside the parenthesis of the function,
+    hold down `shift`,
+    and press `tab`.
+*   Or type a function name with a question mark after it.
+
+## Every function returns something.
+
+*   Every function call produces some result.
+*   If the function doesn't have a useful result to return,
+    it usually returns the special value `None`.
+
+~~~
+result = print('example')
+print('result of print is', result)
+~~~
+{: .language-python}
+~~~
+example
+result of print is None
+~~~
+{: .output}
 
 > ## What Happens When
 >
@@ -292,10 +233,10 @@ NameError: name 'aege' is not defined
 > ~~~
 > {: .language-python}
 > > ## Solution
-> > 1. Order of operations:
+> > 1.
 > >    1. `1.1 * radiance = 1.1`
 > >    2. `1.1 - 0.5 = 0.6`
-> >    3. `min(radiance, 0.6) = 0.6`
+> >    3. `min(randiance, 0.6) = 0.6`
 > >    4. `2.0 + 0.6 = 2.6`
 > >    5. `max(2.1, 2.6) = 2.6`
 > > 2. At the end, `radiance = 2.6`
@@ -318,6 +259,7 @@ NameError: name 'aege' is not defined
 > ~~~
 > {: .language-python}
 > > ## Solution
+> > 1. 
 > > ~~~
 > > print(max(easy_string))
 > > ~~~
@@ -342,22 +284,15 @@ NameError: name 'aege' is not defined
 > > 4
 > > ~~~
 > > {: .output}
-> > `max(len(rich), poor)` throws a TypeError. This turns into `max(4, 'tin')` and 
-> > as we discussed earlier a string and integer cannot meaningfully be compared.
-> > ~~~
-> > TypeError                                 Traceback (most recent call last)
-> > <ipython-input-65-bc82ad05177a> in <module>
-> > ----> 1 max(len(rich), poor)
 > > 
-> > TypeError: '>' not supported between instances of 'str' and 'int'
-> > ~~~
-> > {: .error }
+> > 2. It throws a TypeError. The command is trying to run `max(4, 'tin')` and you can't compare
+> >    a string and an integer
 > {: .solution}
 {: .challenge}
 
 > ## Why Not?
 >
-> Why is it that `max` and `min` do not return `None` when they are called with no arguments?
+> Why don't `max` and `min` return `None` when they are given no arguments?
 >
 > > ## Solution
 > > `max` and `min` return TypeErrors in this case because the correct number of parameters
@@ -379,13 +314,3 @@ NameError: name 'aege' is not defined
 > > `name[len(name) - 1]`
 > {: .solution}
 {: .challenge}
-
-> ## Explore the Python docs!
->
-> The [official Python documentation](https://docs.python.org/3/) is arguably the most complete
-> source of information about the language. It is available in different languages and contains a lot of useful
-> resources. The [Built-in Functions page](https://docs.python.org/3/library/functions.html) contains a catalogue of
-> all of these functions, including the ones that we've covered in this lesson. Some of these are more advanced and 
-> unnecessary at the moment, but others are very simple and useful.
-> 
-{: .callout}

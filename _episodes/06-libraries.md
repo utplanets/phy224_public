@@ -7,8 +7,8 @@ questions:
 - "How can I find out what that software does?"
 objectives:
 - "Explain what software libraries are and why programmers create and use them."
-- "Write programs that import and use modules from Python's standard library."
-- "Find and read documentation for the standard library interactively (in the interpreter) and online."
+- "Write programs that import and use libraries from Python's standard library."
+- "Find and read documentation for standard libraries interactively (in the interpreter) and online."
 keypoints:
 - "Most of the power of a programming language is in its libraries."
 - "A program must import a library module in order to use it."
@@ -74,7 +74,7 @@ NAME
     math
 
 MODULE REFERENCE
-    http://docs.python.org/3/library/math
+    http://docs.language-python.org/3.5/library/math
 
     The following documentation is automatically generated from the Python
     source files.  It may be incomplete, incorrect or include features that
@@ -87,7 +87,9 @@ DESCRIPTION
     mathematical functions defined by the C standard.
 
 FUNCTIONS
-    acos(x, /)
+    acos(...)
+        acos(x)
+
         Return the arc cosine (measured in radians) of x.
 ⋮ ⋮ ⋮
 ~~~
@@ -126,7 +128,7 @@ cos(pi) is -1.0
 {: .output}
 
 *   Commonly used for libraries that are frequently used or have long names.
-    *   E.g., the `matplotlib` plotting library is often aliased as `mpl`.
+    *   E.g., `matplotlib` plotting library is often aliased as `mpl`.
 *   But can make programs harder to understand,
     since readers must learn your program's aliases.
 
@@ -146,6 +148,7 @@ cos(pi) is -1.0
 > >    Also, the design of Python's `math` library has its origin in the C standard,
 > >    which includes both `sqrt(x)` and `pow(x,y)`, so a little bit of the history
 > >    of programming is showing in Python's function names.
+> >
 > {: .solution}
 {: .challenge}
 
@@ -164,11 +167,11 @@ cos(pi) is -1.0
 >
 > > ## Solution
 > >
-> > The [random module][randommod] seems like it could help you.
+> > The [random module](randommod) seems like it could help you.
 > >
 > > The string has 11 characters, each having a positional index from 0 to 10.
-> > You could use either `random.randrange` or `random.randint` functions
-> > to get a random integer between 0 and
+> > You could use `random.randrange` function (or the alias `random.randint`
+> > if you find that easier to remember) to get a random integer between 0 and
 > > 10, and then pick out the character at that position:
 > >
 > > ~~~
@@ -199,7 +202,7 @@ cos(pi) is -1.0
 > > {: .language-python}
 > >
 > > Note that this function returns a list of values. We will learn about
-> > lists in [episode 11]({{ page.root }}/11-lists/).
+> > lists in episode 11.
 > >
 > > There's also other functions you could use, but with more convoluted
 > > code as a result.
@@ -210,8 +213,7 @@ cos(pi) is -1.0
 > ## Jigsaw Puzzle (Parson's Problem) Programming Example
 >
 > Rearrange the following statements so that a random
-> DNA base is printed and its index in the string. 
-> Not all statements may be needed.  Feel free to use/add
+> DNA base is printed and its index in the string.  Not all statements may be needed.  Feel free to use/add
 > intermediate variables.
 >
 > ~~~
@@ -235,6 +237,7 @@ cos(pi) is -1.0
 > > print("random base", bases[idx], "base index", idx)
 > > ~~~
 > > {: .language-python}
+> >
 > {: .solution}
 {: .challenge}
 
@@ -278,7 +281,7 @@ cos(pi) is -1.0
 > > ~~~
 > > {: .language-python}
 > >
-> > can be written as
+> > can bewritten as
 > >
 > > ~~~
 > > import math
@@ -301,13 +304,13 @@ cos(pi) is -1.0
 >
 > Print commands:
 >
-> 1. `print("sin(pi/2) =", sin(pi/2))`
-> 2. `print("sin(pi/2) =", m.sin(m.pi/2))`
-> 3. `print("sin(pi/2) =", math.sin(math.pi/2))`
+> 1. `print("sin(pi/2) =",sin(pi/2))`
+> 2. `print("sin(pi/2) =",m.sin(m.pi/2))`
+> 3. `print("sin(pi/2) =",math.sin(math.pi/2))`
 >
 > Library calls:
 >
-> 1. `from math import sin, pi`
+> 1. `from math import sin,pi`
 > 2. `import math`
 > 3. `import math as m`
 > 4. `from math import *`
@@ -324,13 +327,6 @@ cos(pi) is -1.0
 > >    the shortened name `m`.
 > > 3. Library call 2. Here `sin` and `pi` are referred to with the regular library
 > >    name `math`, so the regular `import ...` call suffices.
-> >
-> > __Note:__ although library call 4 works, importing all names from a module using a wildcard 
-> > import is [not recommended][pep8-imports] as it makes it unclear which names from the module
-> > are used in the code. In general it is best to make your imports as specific as possible and to 
-> > only import what your code uses. In library call 1, the `import` statement explicitly tells us
-> > that the `sin` function is imported from the `math` module, but library call 4 does not
-> > convey this information.
 > {: .solution}
 {: .challenge}
 
@@ -376,26 +372,15 @@ cos(pi) is -1.0
 > {: .language-python}
 >
 > > ## Solution
-> > ~~~
-> > ---------------------------------------------------------------------------
-> > ValueError                                Traceback (most recent call last)
-> > <ipython-input-1-d72e1d780bab> in <module>
-> >       1 from math import log
-> > ----> 2 log(0)
-> > 
-> > ValueError: math domain error
-> > ~~~
-> > {: .output}
 > >
 > > 1. The logarithm of `x` is only defined for `x > 0`, so 0 is outside the
 > >    domain of the function.
-> > 2. You get an error of type `ValueError`, indicating that the function
+> > 2. You get an error of type "ValueError", indicating that the function
 > >    received an inappropriate argument value. The additional message
 > >    "math domain error" makes it clearer what the problem is.
 > {: .solution}
 {: .challenge}
 
-[pypi]: https://pypi.python.org/pypi/
-[stdlib]: https://docs.python.org/3/library/
-[randommod]: https://docs.python.org/3/library/random.html
-[pep8-imports]: https://pep8.org/#imports
+[pypi]: https://pypi.language-python.org/pypi/
+[stdlib]: https://docs.language-python.org/3/library/
+[randommod]: https://docs.language-python.org/3/library/random.html
