@@ -17,13 +17,13 @@ In experimental physics, we constrain these models by designing an experiment wi
 
 A simple example of measuring the path of moving object. We could guess that the model is moving at a constant speed and design an experiment to find that speed using the model:
 
-$$ s = ut $$ 
+$$ s = ut $$
 
 ## Scipy provides functions that can fit model functions to data.
 
-`Scipy` provides a number of functions that, given a suitable model function, can return the *best estimate* of the unknown parameters in the model. 
+`Scipy` provides a number of functions that, given a suitable model function, can return the *best estimate* of the unknown parameters in the model.
 
-Consider the experiment where the time of flight of an object moving at constant speed is measured. If the experiment is correctly setup. The unknown variable we are trying to determine is the speed $u$. The remaining variables are time $t$ and height $s$. We can design two different experiments, one where we control *time* (measuring at a fixed interval) and measure *distance*, or one where we control *distance* and measure *time*. 
+Consider the experiment where the time of flight of an object moving at constant speed is measured. If the experiment is correctly setup. The unknown variable we are trying to determine is the speed $u$. The remaining variables are time $t$ and height $s$. We can design two different experiments, one where we control *time* (measuring at a fixed interval) and measure *distance*, or one where we control *distance* and measure *time*.
 
 In Python the model function might be written as:
 
@@ -274,11 +274,11 @@ Text(0, 0.5, 'Distance (m)')
 In this example you can see that the linear model (`simple average` or `s=ut`) deviates from the data in a way that depends on the `independent variable` (time). If the model fit is good we expect to see differences betwee model and data that are random in magnitude and location (as in the quadratic fit).
 
 ## `curve_fit` find the *best estimate* of the parameters using by minimizing **chi squared**.
-* Curve fit works by finding the combination of parameters that gives the lowest value of a parameter $\chi^2$, defined as 
+* Curve fit works by finding the combination of parameters that gives the lowest value of a parameter $\chi^2$, defined as
 
 $$\chi^2 = \sum\frac{(y_i - f(x_i))^2}{\sigma_{y_i}^2}$$
 
-* The lower the value of $\chi^2$, the closer the model is **on average** to each measured data point. 
+* The lower the value of $\chi^2$, the closer the model is **on average** to each measured data point.
 * This metric penalizes outliers disproportionally because of the square factor
 * The metric weights the penalty of each point by the inverse of the standard deviation, penalizing (genuinely) noisier outliers less than less noisy outliers.
 
@@ -306,12 +306,12 @@ def chi2reduced(y_measure, y_predict, errors, number_of_parameters):
 
 
 ~~~
-print("Constant velocity model chi2r=",chi2reduced(measured_distances, 
+print("Constant velocity model chi2r=",chi2reduced(measured_distances,
                                         distance(measured_times,popt[0]),
                                         distance_errors,
                                         1))
 
-print("Constant acceleration model chi2r=",chi2reduced(measured_distances, 
+print("Constant acceleration model chi2r=",chi2reduced(measured_distances,
                                         distance_with_acceleration(measured_times,popt2[0],popt2[1]),
                                         distance_errors,
                                         2))
@@ -325,12 +325,12 @@ print("Constant acceleration model chi2r=",chi2reduced(measured_distances,
 
 
 ~~~
-print("Constant velocity model chi2r=",round(chi2reduced(measured_distances, 
+print("Constant velocity model chi2r=",round(chi2reduced(measured_distances,
                                         distance(measured_times,popt[0]),
                                         distance_errors,
                                         1),-1))
 
-print("Constant acceleration model chi2r=",round(chi2reduced(measured_distances, 
+print("Constant acceleration model chi2r=",round(chi2reduced(measured_distances,
                                         distance_with_acceleration(measured_times,popt2[0],popt2[1]),
                                         distance_errors,
                                         2),1))
@@ -348,7 +348,7 @@ Put a print statement inside the model function `distance_with_acceleration` to 
 def distance_with_acceleration_print(time, speed, acceleration):
     """Calculate the distance travelled with at a constant speed for a known time
     and constant acceleration."""
-    
+
     print ("speed=",speed, "acceleration=",acceleration)
     return speed * time + 0.5 * acceleration * time**2
 
@@ -369,7 +369,7 @@ popt2, pcov2 = curve_fit(distance_with_acceleration_print, measured_times, measu
     speed= 10.257717023531002 acceleration= 0.09589438501373611
 
 ## Non-linear regression
-* Mathematically, `curve_fit` is using *least squared error regression* to find the best parameter estimate. 
+* Mathematically, `curve_fit` is using *least squared error regression* to find the best parameter estimate.
 * `curve_fit` works with non linear model (e.g. $y=at^{(b-1)}+c$) and the error estimates are usually correct.
 
 ## When fitting non-linear functions, use the `p0` keyword to start `curve_fit` with a good estimate
@@ -649,7 +649,7 @@ It's always important to **check the fit**
 
 ~~~
 plt.figure(figsize=(8,6))
-plt.errorbar(t, 
+plt.errorbar(t,
              y,
              yerr=sigmaNL, marker='o',ls='none',label="Data")
 
