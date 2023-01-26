@@ -49,7 +49,6 @@ serve : lesson-md index.md
 
 notebook-server :
 	jupyter notebook --notebook-dir=notebooks
-
 ## * site             : build website but do not run a server
 site : lesson-md index.md
 	${JEKYLL} build
@@ -112,10 +111,6 @@ workshop-check : python
 RMD_SRC = $(wildcard _episodes_rmd/*.Rmd)
 RMD_DST = $(patsubst _episodes_rmd/%.Rmd,_episodes/%.md,$(RMD_SRC))
 
-#Jupyter
-IPYNB_SRC = $(wildcard notebooks/*.ipynb)
-IPYNB_DST = $(patsubst notebooks/%.ipynb,_episodes/%.md,$(IPYNB_SRC))
-
 # Lesson source files in the order they appear in the navigation menu.
 MARKDOWN_SRC = \
   index.md \
@@ -136,22 +131,17 @@ HTML_DST = \
   $(patsubst _extras/%.md,${DST}/%/index.html,$(sort $(wildcard _extras/*.md))) \
   ${DST}/license/index.html
 
-test:
-	echo ${IPYNB_SRC}
 ## * install-rmd-deps : Install R packages dependencies to build the RMarkdown lesson
 install-rmd-deps:
 	@${SHELL} bin/install_r_deps.sh
 
 ## * lesson-md        : convert Rmarkdown files to markdown
-lesson-md : ${RMD_DST} ${IPYNB_DST}
+lesson-md : ${RMD_DST}
 
 _episodes/%.md: _episodes_rmd/%.Rmd install-rmd-deps
 	@mkdir -p _episodes
 	@$(SHELL) bin/knit_lessons.sh $< $@
 
-_episodes/%.md : notebooks/%.ipynb
-	@mkdir -p _episodes
-	jupyter jekyllnb --to jekyll --template ./jekyll_format.tpl --image-dir=./fig --page-dir=./_episodes --site-dir=./ $<
 ## * lesson-check     : validate lesson Markdown
 lesson-check : python lesson-fixme
 	@${PYTHON} bin/lesson_check.py -s . -p ${PARSER} -r _includes/links.md
