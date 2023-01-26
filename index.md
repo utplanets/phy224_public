@@ -9,7 +9,7 @@ This lesson references the Jupyter Notebook, but can be taught using a regular P
 > ## Prerequisites
 >
 > 1.  Students should have Python installed before the class starts. The easiest method for most people is using the Anaconda Python distribution.
->    Please see [the setup instructions]({{ page.root }}/setup/)
+>    Please see [the setup instructions]({{ page.root }}/setup)
 >    for details.
 >     
 > 2. Students should read the Python materials on Quercas.
