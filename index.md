@@ -3,7 +3,7 @@ layout: lesson
 root: .
 ---
 
-This website covers the material in the Python Review section of the PHY224 course at the University of Toronto
+This website covers the material in the Python Review section of the PHY224 course at the University of Toronto.
 This lesson references the Jupyter Notebook, but can be taught using a regular Python interpreter or Spyder as well.
 
 > ## Prerequisites
