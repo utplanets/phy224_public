@@ -24,9 +24,9 @@ jupyter: python3
 
 NumPy's `loadtxt` function reads a plain-text file of numbers and returns them as a two-dimensional array. By default it expects whitespace-separated values and skips lines that start with `#`:
 
-```{python}
+```python
 import numpy
-data = numpy.loadtxt('data/galileo_flat.empty')
+data = numpy.loadtxt('data/galileo_flat.txt')
 print(data)
 ```
 
