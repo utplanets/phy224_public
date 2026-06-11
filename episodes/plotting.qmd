@@ -1,5 +1,7 @@
 ---
 title: "Plotting"
+jupyter: python3
+
 ---
 
 ::: {.callout-note title="Questions"}
@@ -35,24 +37,32 @@ import matplotlib.pyplot as plt
 
 `plt.plot(x, y)` draws a line connecting the data points. Always label your axes:
 
-```python
+```{python}
+#| label: fig-plotting-basic-line
+#| fig-cap : "Line plot of position in km versus time in hours, showing a linear increase from 0 to 300 km over 3 hours"
 import numpy
+import matplotlib.pyplot as plt
+
 time = numpy.array([0, 1, 2, 3])
 position = numpy.array([0, 100, 200, 300])
 
 plt.plot(time, position)
 plt.xlabel("Time (hr)")
 plt.ylabel("Position (km)")
+plt.show()
 ```
-
-![Line plot of position in km versus time in hours, showing a linear increase from 0 to 300 km over 3 hours](fig/08_Plotting_files/08_Plotting_4_1.png){alt="Line plot of position in km versus time in hours, showing a linear increase from 0 to 300 km over 3 hours"}
 
 
 ## Controlling line and marker style
 
 A compact format string as the third argument to `plt.plot` sets the colour and style together: `'b-'` means a blue line, `'ro'` means red circles, `'g+-'` means green plus-markers connected by a line:
 
-```python
+```{python}
+#| label: fig-plotting-format-strings
+#| fig-cap : "Three position versus time plots using different formatting: a blue line (p1), red circles (p2), and a green line with plus markers (p3)"
+
+import numpy
+import matplotlib.pyplot as plt
 time = numpy.arange(10)
 p1 = time
 p2 = time * 2
@@ -63,22 +73,23 @@ plt.plot(time, p2, 'ro')
 plt.plot(time, p3, 'g+-')
 plt.xlabel("Time (hr)")
 plt.ylabel("Position (km)")
+plt.show()
 ```
 
-![Three position-versus-time series using different format strings: a blue line (p1), red circles (p2), and a green line with plus markers (p3)](fig/08_Plotting_files/08_Plotting_6_1.png){alt="Three position-versus-time series using different format strings: a blue line (p1), red circles (p2), and a green line with plus markers (p3)"}
 
 For finer control, use keyword arguments instead. The `label` keyword feeds into `plt.legend()`:
 
-```python
+```{python}
+#| label: fig-plotting-keyword-style
+#| fig-cap : "Three position-versus-time series with a legend: a thick blue line, large red dots, and a green line with plus markers"
 plt.plot(time, p1, color='blue', linestyle='-', linewidth=5, label="blue line")
 plt.plot(time, p2, 'ro', markersize=10, label="red dots")
 plt.plot(time, p3, 'g-', marker='+')
 plt.xlabel("Time (hr)")
 plt.ylabel("Position (km)")
 plt.legend()
+plt.show()
 ```
-
-![Three position-versus-time series with a legend: a thick blue line, large red dots, and a green line with plus markers](fig/08_Plotting_files/08_Plotting_8_1.png){alt="Three position-versus-time series with a legend: a thick blue line, large red dots, and a green line with plus markers, demonstrating plot keyword arguments such as linewidth and markersize"}
 
 
 ## Built-in styles
@@ -92,23 +103,26 @@ print("available style names: ", plt.style.available)
 available style names:  ['Solarize_Light2', '_classic_test_patch', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn-v0_8', ...]
 ```
 
-```python
+```{python}
+#| label: fig-plotting-seaborn-style
+#| fig-cap : "The same three position-versus-time series rendered in the seaborn-v0_8-whitegrid style"
 plt.style.use("seaborn-v0_8-whitegrid")
 plt.plot(time, p1, linestyle='-', linewidth=5, label="blue line")
 plt.plot(time, p2, 'o', markersize=10, label="dots")
 plt.xlabel("Time (hr)")
 plt.ylabel("Position (km)")
 plt.legend()
+plt.show()
 ```
-
-![The same three position-versus-time series rendered in the seaborn-v0_8-whitegrid style](fig/08_Plotting_files/08_Plotting_13_1.png){alt="The same three position-versus-time series rendered in the seaborn-v0_8-whitegrid style, showing a white background with light grey horizontal gridlines"}
 
 
 ## Scatter plots
 
 When your data points should not be connected by a line, use `plt.scatter`. It accepts the same colour and marker keywords as `plt.plot`:
 
-```python
+```{python}
+#| label: fig-plotting-scatter
+#| fig-cap : "Scatter plot with two series: blue dots and green left-pointing triangles"
 numpy.random.seed(20)
 x = numpy.cumsum(numpy.random.randint(0, 100, 100))
 y = numpy.cumsum(numpy.random.randn(100))
@@ -117,70 +131,78 @@ plt.scatter(x, y)
 plt.scatter(x, 10 - y**2, color='green', marker='<')
 plt.xlabel("x")
 plt.title("Scatter plot example")
+plt.show()
 ```
-
-![Scatter plot with two series: blue dots and green left-pointing triangles](fig/08_Plotting_files/08_Plotting_15_1.png){alt="Scatter plot with two series: blue dots and green left-pointing triangles, plotting cumulative sums of random data"}
 
 
 ## Error bars
 
 In experimental physics you should always show measurement uncertainties. Use `plt.errorbar` with the `yerr` (and/or `xerr`) keyword. Set `ls=''` to suppress the connecting line and choose a marker explicitly:
 
-```python
+```{python}
+#| label: fig-plotting-errorbar
+#| fig-cap : "Error bar plot of ten data points with green circle markers and vertical error bars"
 numpy.random.seed(42)
 x = numpy.cumsum(numpy.random.rand(10) * 10)
-error = numpy.random.randn(10) * 4
+error = numpy.abs(numpy.random.randn(10) * 4)
 y = x + numpy.random.randn(10) * 0.5
 
 plt.errorbar(x, y, yerr=error, color='green', marker='o', ls='', lw=1, label="data")
 plt.xlabel("x")
 plt.title("Error bar example")
 plt.legend()
+plt.show()
 ```
-
-![Error bar plot of ten data points with green circle markers and vertical error bars](fig/08_Plotting_files/08_Plotting_17_1.png){alt="Error bar plot of ten data points with green circle markers and vertical error bars, showing scattered y values near the x=y line with varying uncertainty"}
 
 
 ## Bar charts and histograms
 
 `plt.bar` draws a bar chart from pre-counted data. `plt.hist` bins raw data and draws the resulting histogram in one step — it also returns the counts and bin edges if you need them:
 
-```python
+```{python}
+#| label: fig-plotting-bar
+#| fig-cap : "Vertical bar chart with six bars (one of them is zero height)"
 x = [0, 1, 2, 3, 4, 5]
 y = [0, 4, 2, 6, 8, 2]
 plt.bar(x, y)
 plt.title("Bar chart")
+plt.show()
 ```
 
-![Vertical bar chart with six bars (one of them is zero height)](fig/08_Plotting_files/08_Plotting_20_1.png){alt="Vertical bar chart with six bars of heights 0, 4, 2, 6, 8, and 2, titled Bar chart"}
-
-```python
+```{python}
+#| label: fig-plotting-hist
+#| fig-cap : "Histogram of 50 random integers"
 x = numpy.random.randint(0, 100, 50)
 bin_count, bin_edges, boxes = plt.hist(x, bins=10, rwidth=0.9)
 plt.title("Histogram")
+plt.show()
 ```
-
-![Histogram of 50 random integers](fig/08_Plotting_files/08_Plotting_23_1.png){alt="The same histogram of 50 random integers with gaps between bars (rwidth=0.9), titled Histogram"}
 
 
 ## Controlling figure size
 
 Call `plt.figure(figsize=(width, height))` before plotting to set the output size in inches:
 
-```python
+```{python}
+#| label: fig-plotting-figsize
+#| fig-cap : "Narrow bar chart (8x2 inches)"
 plt.figure(figsize=(8, 2))
+x = [0, 1, 2, 3, 4, 5]
+y = [0, 4, 2, 6, 8, 2]
+
 plt.bar(x, y)
 plt.title("Narrow bar chart")
+plt.show()
 ```
-
-![Narrow bar chart (8×2 inches)](fig/08_Plotting_files/08_Plotting_26_1.png){alt="Narrow bar chart 8 by 2 inches with six bars, demonstrating figsize to control figure dimensions"}
 
 
 ## Multiple panels with `subplot`
 
 `plt.subplot(rows, cols, index)` selects one panel in a grid of panels. Subsequent `plt.plot` calls draw into the currently active panel:
 
-```python
+```{python}
+#| label: fig-plotting-subplot
+#| fig-cap : "Three bar charts arranged side by side in a 1x3 subplot row"
 plt.figure(figsize=(8, 3))
 x = [0, 1, 2, 3, 4, 5]
 y = [0, 4, 2, 6, 8, 2]
@@ -193,31 +215,34 @@ plt.title("centre")
 plt.subplot(1, 3, 3)
 plt.bar(x, y)
 plt.title("right")
+plt.show()
 ```
-
-![Three bar charts arranged side by side in a 1×3 subplot row](fig/08_Plotting_files/08_Plotting_29_1.png){alt="Three bar charts arranged side by side in a 1 by 3 subplot row"}
 
 
 ## Saving figures
 
 Call `plt.savefig` *before* the figure is displayed — once Matplotlib shows a figure it moves on to a new empty figure, and saving afterwards captures only a blank canvas. Supported formats include PDF, PNG, and SVG. For raster formats lke PNG use the `dpi` keyword to control resolution:
 
-```python
+```{python}
+#| label: fig-plotting-savefig
+#| fig-cap : "Line plot produced for the savefig example"
 plt.figure(figsize=(8, 3))
 plt.plot(x, y)
 plt.savefig("data/fig1.pdf")
 plt.savefig("data/fig1.png", dpi=150, transparent=True)
+plt.show()
 ```
-
-![Line plot produced for the savefig example](fig/08_Plotting_files/08_Plotting_31_0.png){alt="Line plot of y values 0 4 2 6 8 2 against x values 0 through 5, produced for the savefig example"}
 
 ::: {.callout-note}
 If you need to save after displaying, first capture a reference to the figure with `plt.gcf()` (get current figure), then call `savefig` on it:
 
-```python
+```{python}
+#| label: fig-plotting-savefig-gcf
+#| fig-cap : "Example of saving via a captured current figure reference after plotting"
 fig = plt.gcf()
 plt.plot(x, y)
 fig.savefig('my_figure.png')
+plt.show()
 ```
 :::
 
