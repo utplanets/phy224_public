@@ -69,7 +69,7 @@ def calc_bulk_density(mass, volume):
     return mass / volume
 ```
 
-Assertions should contain only simple checks and must never have side effects (no assignments, no function calls that change state). They are not a substitute for input validation at system boundaries — they are safety nets for internal logic.
+Assertions should contain only simple checks and must never have side effects (no assignments, no function calls that change state).
 
 
 ::: {.callout-caution title="Challenge"}

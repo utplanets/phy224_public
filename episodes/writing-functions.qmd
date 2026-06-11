@@ -22,7 +22,11 @@ jupyter: python3
 
 ## Functions make programs manageable
 
-Human working memory can only hold a few things at once. When a program grows beyond a few dozen lines, keeping track of every detail becomes impractical. Functions address this by letting you bundle a piece of logic under a single name, so the rest of the program can treat it as one "thing" without worrying about its internals. A well-named function also makes code dramatically easier to read, and it enables re-use — write the logic once, call it anywhere.
+When a program grows beyond a few dozen lines, keeping track of every detail becomes impractical. 
+Just as variables make it easier to reuse values throughout your code, Functions make it easier to reuse
+`methods' throughout your code. Functions let you bundle a piece of logic/code with a name, then use that name
+throughout your code when you want to use that bundle of. A well-named function also makes code dramatically 
+easier to read, and it enables re-use.
 
 
 ## Defining a function
@@ -34,7 +38,7 @@ def print_greeting():
     print('Hello!')
 ```
 
-Defining a function does not run it. Think of `def` as storing the recipe, not cooking the meal. The function executes only when you call it:
+Defining a function does not run it. Think of `def` as storing the bundle for later. The function executes only when you call it:
 
 ```{python}
 print_greeting()

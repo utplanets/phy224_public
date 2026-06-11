@@ -56,7 +56,8 @@ for filename in sorted(glob.glob('data/random/*.csv')):
     print(filename, distance.mean(), height.std())
 ```
 
-This pattern — glob a set of files, sort for reproducibility, loop and analyse — is one of the most useful idioms in data-analysis scripts. Name and store your data files systematically so that simple glob patterns can find exactly the right set.
+This pattern — glob a set of files, sort, loop and analyse — is one of the most useful idioms in data-analysis scripts. Name your data files systematically so that simple glob patterns can find the right set.
+The sort function *always* sorts alphabetically, so "A before "Z", but also "10" before "2" but after "02". Try to pad numbers so they always sort correctly.
 
 
 ::: {.callout-caution title="Challenge"}

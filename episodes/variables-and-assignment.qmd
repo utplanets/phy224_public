@@ -187,6 +187,6 @@ Answer the following without running the code first, then verify:
 - A slice `[start:stop]` extracts characters from `start` up to but not including `stop`.
 - `len(s)` returns the number of characters in string `s`.
 - Python is case-sensitive: `Name` and `name` are different variables.
-- Choose descriptive variable names — your future self will thank you.
+- Choose descriptive variable names - it makes it much easier to read and debug code.
 
 :::

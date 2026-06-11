@@ -41,9 +41,6 @@ print('adjusted:', adjust(0.9))
 print('temperature after call:', temperature)
 ```
 
-This is intentional. The author of a function can use any variable names they like without risking interference with names in the calling code, and callers do not need to know about the internal names a function uses.
-
-
 ## Reading tracebacks {#reading-error-messages}
 
 When Python encounters an error it prints a *traceback* — a record of the chain of function calls that led to the problem. Reading it from the bottom up is the fastest way to understand what went wrong:

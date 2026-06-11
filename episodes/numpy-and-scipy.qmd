@@ -25,7 +25,7 @@ jupyter: python3
 
 ## NumPy is Python's foundation for numerical computing
 
-NumPy introduces a new data type, the `array`, which is a multi-dimensional collection of values all sharing the same underlying type (integer, float, etc.). Arrays support element-wise arithmetic and a rich library of mathematical functions, making them far more efficient than Python lists for numerical work.
+NumPy introduces a new data type, the `array`, which is a multi-dimensional collection of values all sharing the same underlying type (integer, float, etc.). Arrays support element-wise arithmetic and a library of fast mathematical functions, making them far more efficient than Python lists for numerical work.
 
 NumPy is not part of the standard library but is almost always available in scientific Python environments. The universal convention is to import it with the alias `np`:
 

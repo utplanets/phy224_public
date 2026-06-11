@@ -19,11 +19,11 @@ website:
         text: Instructor Notes
   sidebar:
     style: docked
-    title: "Episodes"
+    title: "Core Lessons"
     contents:
       - href: index.qmd
         text: "Home"
-      - section: "Episodes"
+      - section: "Core Lessons"
         contents:
           - href: episodes/running-and-quitting.qmd
             text: "Running and Quitting"
@@ -63,6 +63,18 @@ website:
             text: "Fitting Data to Models"
           - href: episodes/wrap-up.qmd
             text: "Wrap-Up"
+      - section: "Optional Lessons"
+        contents:
+          - href: episodes/optional-fsolve.qmd
+            text: "Solving Equations with fsolve"
+          - href: episodes/optional-pandas.qmd
+            text: "Reading Data with Pandas"
+          - href: episodes/optional-pathlib.qmd
+            text: "Iterating Over Files with pathlib"
+          - href: episodes/optional-newton.qmd
+            text: "Root Finding: Newton-Raphson"
+          - href: episodes/optional-sigfigs.qmd
+            text: "Reporting Values to the Right Number of Digits"
       - section: "Learners"
         contents:
           - href: learners/setup.qmd

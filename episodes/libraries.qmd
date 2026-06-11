@@ -66,7 +66,7 @@ import math as m
 print('cos(pi) is', m.cos(m.pi))
 ```
 
-This is a very common convention in scientific Python. You will see `import numpy as np` and `import matplotlib.pyplot as plt` throughout these lessons. The trade-off is that readers unfamiliar with your aliases have to learn them — so stick to widely recognised conventions rather than inventing your own.
+This is a common convention in scientific Python. You will see `import numpy as np` and `import matplotlib.pyplot as plt` throughout these lessons.
 
 
 ::: {.callout-caution title="Challenge"}
@@ -79,7 +79,7 @@ This is a very common convention in scientific Python. You will see `import nump
 ## Solution
 
 1. `math.pow(x, 0.5)` raises `x` to the power 0.5, which is the square root.
-2. `math.sqrt(x)` is more readable when implementing formulas — the intent is immediately clear. Readability is a core Python value. The function also has its roots in the C standard library, which Python's `math` module mirrors.
+2. `math.sqrt(x)` is more readable when implementing formulas — the intent is immediately clear. The function also has its roots in the C standard library, which Python's `math` module mirrors.
 :::
 :::
 

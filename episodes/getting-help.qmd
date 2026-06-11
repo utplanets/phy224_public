@@ -73,7 +73,7 @@ Documentation examples and Stack Overflow answers are written for a generic audi
 
 1. **Run the example as-is first.** Confirm you understand what it does before modifying it.
 2. **Change one thing at a time.** Swap in your variable name, run, check, then make the next change.
-3. **Read any keyword arguments you do not recognise.** A line like `numpy.loadtxt(f, delimiter=',', usecols=(0,2))` has three arguments: look up `usecols` if you have not seen it before. Copying code without understanding its arguments leads to silent bugs.
+3. **Find documentation for any keyword arguments you do not recognise.** A line like `numpy.loadtxt(f, delimiter=',', usecols=(0,2))` has three arguments: look up `usecols` if you have not seen it before.
 4. **Check the output shape and type.** Many errors come from mismatches between what a function returns and what the next line expects. `print(type(result), result.shape)` is a quick sanity check.
 
 

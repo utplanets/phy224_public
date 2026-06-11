@@ -25,7 +25,7 @@ jupyter: python3
 
 ## Matplotlib is Python's standard scientific plotting library
 
-The most widely used scientific plotting library in Python is `matplotlib`. In practice you almost always work with the `pyplot` sub-module, imported with the alias `plt`. In a Jupyter Notebook, the `%matplotlib inline` magic ensures figures appear directly in the notebook output:
+The most widely used scientific plotting library in Python is `matplotlib`.
 
 ```{python}
 import matplotlib.pyplot as plt
@@ -245,7 +245,7 @@ plt.show()
 
 ::: {.callout-tip title="Key Points"}
 
-- Import `matplotlib.pyplot as plt`; use `%matplotlib inline` in Jupyter.
+- Import `matplotlib.pyplot as plt` 
 - `plt.plot` draws lines; `plt.scatter` draws unconnected points; `plt.errorbar` adds uncertainty bars.
 - Format strings (`'b-'`, `'ro'`) or keyword arguments control colour, linestyle, and markers.
 - Add `plt.xlabel`, `plt.ylabel`, `plt.title`, and `plt.legend` for readable figures.

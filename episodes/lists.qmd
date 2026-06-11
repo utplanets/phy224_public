@@ -30,7 +30,7 @@ print('pressures:', pressures)
 print('length:', len(pressures))
 ```
 
-Lists may contain values of any type, and different types can be mixed in the same list — though in practice a list of the same type is more common and easier to reason about.
+Lists may contain values of any type, and different types can be mixed in the same list — though in practice a list of the same type is more common and easier to think about.
 
 
 ## Indexing and slicing lists
@@ -53,6 +53,7 @@ print(pressures[2:])    # from index 2 to the end
 Going out of bounds in a slice never raises an error — Python just returns as many elements as are available. Going out of bounds with a direct index raises an `IndexError`:
 
 ```{python}
+#| error: true
 print('99th element of element is:', pressures[99])
 ```
 
@@ -125,7 +126,7 @@ If you need a modified string, create a new one — for example, `'C' + element[
 
 Fill in the blanks so that the program produces the output shown.
 
-```{python}
+```python
 values = ____
 values.____(1)
 values.____(3)

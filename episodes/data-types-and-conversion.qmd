@@ -31,9 +31,7 @@ print(type(3.14))     # <class 'float'>
 print(type('hello'))  # <class 'str'>
 ```
 
-The *variable* is just a label — it is the *value* that carries the type. This lesson focuses on what each type allows you to do, and how to convert between them.
-
-A value's type determines which operations make sense. Arithmetic subtraction works on numbers but not on strings:
+The *variable* is just a label — it is the *value* that carries the type. A value's type determines which operations make sense. For example, arithmetic subtraction works on numbers but not on strings:
 
 ```{python}
 print(5 - 3)

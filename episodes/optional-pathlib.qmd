@@ -1,0 +1,124 @@
+---
+title: "Iterating Over Many Files with pathlib"
+jupyter: python3
+---
+
+::: {.callout-note title="Questions"}
+
+- How do I find all data files in a directory without hard-coding their names?
+- How do I loop over those files and run the same analysis on each one?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Use `pathlib.Path` to build file paths that work on any operating system.
+- Use `Path.glob` to find files matching a pattern.
+- Loop over the results to apply an analysis function to each file.
+
+:::
+
+
+## Why pathlib?
+Some experiments produce many output files that each need to be read into python, 
+analyzed in the same way, aggregated in some way, and saved. `pathlib` provides functions to make
+finding files easier and more portable from Windows to Max to Linux. The `glob` package has similar features
+but `pathlib` knows more about how filenames and directories should be written in Python. `pathlib` provides
+`Path.glob`, which matches files by pattern (e.g. `"*.csv"`) and returns them as
+`Path` objects. You can write loops to iterate over files from `Path.glob`, read each file, and calculate
+results automatically.
+
+`pathlib.Path` also makes path construction safe across operating systems: it uses the
+right separator (`/` on Linux/Mac, `\` on Windows) and provides methods like
+`.stem` (filename without extension) and `.suffix` (the extension alone) to make it easier to make figure labels or create output files.
+
+
+## Example problem: batch processing gapminder data
+
+The `data/` folder contains one GDP CSV file per world region:
+`gapminder_gdp_africa.csv`, `gapminder_gdp_asia.csv`, and so on. For each file,
+compute the mean GDP per capita in 2007 and collect the results in a dictionary.
+
+
+## Worked solution
+
+```{python}
+from pathlib import Path
+import pandas as pd
+
+data_dir = Path("data")
+
+# Find every file whose name matches the pattern
+gdp_files = sorted(data_dir.glob("gapminder_gdp_*.csv"))
+
+for f in gdp_files:
+    print(f.name)
+```
+
+`glob` returns a generator; `sorted` converts it to a sorted list of `Path` objects.
+Each `Path` carries its full location, so you can pass it directly to `pd.read_csv`:
+
+```{python}
+results = {}
+
+for path in gdp_files:
+    df = pd.read_csv(path, index_col="country")
+    # Column names are like "gdpPercap_2007" — pick the last year
+    col_2007 = "gdpPercap_2007"
+    if col_2007 in df.columns:
+        region = path.stem.replace("gapminder_gdp_", "")
+        results[region] = df[col_2007].mean()
+
+for region, mean_gdp in sorted(results.items()):
+    print(f"{region:12s}  mean GDP 2007: ${mean_gdp:,.0f}")
+```
+
+`path.stem` strips the directory and the `.csv` extension, leaving just the base name.
+String `.replace` then extracts the region label.
+
+
+## Filtering by a second pattern
+
+To restrict to files matching a more specific pattern — only files whose name contains
+`"americas"` or `"europe"` — filter after globbing:
+
+```{python}
+target_regions = {"americas", "europe"}
+
+for path in gdp_files:
+    region = path.stem.replace("gapminder_gdp_", "")
+    if region in target_regions:
+        df = pd.read_csv(path, index_col="country")
+        print(f"{region}: {len(df)} countries")
+```
+
+Alternatively, pass a more specific glob pattern: `"gapminder_gdp_[ae]*.csv"` matches
+only files beginning with `a` or `e` after the prefix.
+
+
+## Building output paths alongside input paths
+
+A common pattern is writing a processed file next to each source file. Use the
+`Path` methods to construct the output path from the input path:
+
+```{python}
+for path in gdp_files:
+    output_path = path.parent / (path.stem + "_summary.txt")
+    print(f"  {path.name}  ->  {output_path.name}")
+```
+
+`path.parent` is the directory, `/` is Path's concatenation operator, and
+`path.stem + "_summary.txt"` builds the new filename.
+
+
+::: {.callout-tip title="Key Points"}
+
+- `Path("dir").glob("*.csv")` finds all matching files; wrap in `sorted()` for a
+  reproducible order.
+- Pass a `Path` object directly to `pd.read_csv` or `open()` — no conversion needed.
+- `path.stem` gives the filename without extension; `path.suffix` gives the extension;
+  `path.parent / "name"` builds a sibling path.
+- Collecting results in a dictionary keyed by a label extracted from the filename is a
+  clean pattern for batch analysis.
+
+:::

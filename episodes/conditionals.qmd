@@ -32,7 +32,7 @@ if mass > 3.0:
     print(mass, 'is large')
 ```
 
-On its own, an `if` with a fixed value is not very interesting. Conditionals become powerful inside loops, where the condition is evaluated for each item in the collection:
+On its own, an `if` with a fixed value is not very interesting. Conditionals become useful inside loops, where the condition is evaluated for each item in the collection:
 
 ```{python}
 masses = [3.54, 2.07, 9.22, 1.86, 1.71]

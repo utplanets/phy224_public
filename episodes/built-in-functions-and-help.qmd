@@ -103,7 +103,7 @@ age = 53
 remaining = 100 - aege  # mis-spelled 'age'
 ```
 
-The general strategy: fix syntax errors by reading the source code carefully around the `^` marker; fix runtime errors by tracing what value each variable holds when the error line is reached.
+Fix syntax errors by reading the source code carefully around the `^` marker; fix runtime errors by tracing what value each variable holds when the error line is reached.
 
 For detailed guidance on finding answers when you are stuck, see the [Getting Help](getting-help.qmd) lesson.
 
