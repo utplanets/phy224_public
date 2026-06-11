@@ -245,7 +245,7 @@ This form is often the most readable for short scripts. The main reason not to u
 1. Read the code below and try to identify the error without running it.
 2. Run it and read the error message. What type of error is it?
 
-```{python}
+```python
 from math import log
 log(0)
 ```

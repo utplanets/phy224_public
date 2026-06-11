@@ -31,7 +31,7 @@ print(type(3.14))     # <class 'float'>
 print(type('hello'))  # <class 'str'>
 ```
 
-The *variable* is just a label — it is the *value* that carries the type. A value's type determines which operations make sense. For example, arithmetic subtraction works on numbers but not on strings:
+The *variable* is just a label — it is the *value* that carries the type. A value's type determines which operations make sense. For exmaple, arithmetic subtraction works on numbers but not on strings:
 
 ```{python}
 print(5 - 3)
@@ -77,7 +77,7 @@ print(str(1) + '2')
 
 `float()` will convert a numeric string like `"3.4"` to a float. `int()` will truncate a float to its integer part, discarding the decimal. Conversions that do not make sense raise a `ValueError`:
 
-```{python}
+```python
 #| error: true
 print(float("3.4"))   # 3.4
 print(int(3.4))       # 3  — truncates, does not round
@@ -223,7 +223,7 @@ print("float to int:", int(3.4))
 
 What do you expect the following to do? What does it actually do, and why?
 
-```{python}
+```python
 print("fractional string to int:", int("3.4"))
 ```
 
