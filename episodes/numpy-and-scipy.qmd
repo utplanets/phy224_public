@@ -18,7 +18,7 @@ jupyter: python3
 - Perform element-wise arithmetic and understand shape requirements.
 - Use aggregation functions (`sum`, `mean`, `std`) on whole arrays and along axes.
 - Index and slice one- and two-dimensional arrays.
-- Use `scipy.integrate.trapz` to integrate tabular data.
+- Use `scipy.integrate.trapezoid` to integrate tabular data.
 
 :::
 
@@ -212,14 +212,14 @@ print(numpy.min(numpy.abs(a), axis=1))
 
 SciPy builds on NumPy with higher-level scientific routines — Fourier transforms, optimisation, statistics, and integration among others. The [SciPy documentation](https://docs.scipy.org/doc/scipy/reference/) covers the full library.
 
-`scipy.integrate.trapz` approximates a definite integral using the trapezoidal rule. Its first argument is the array of $y$ values; passing the corresponding $x$ values as the second argument is essential whenever the spacing is not uniform or you want the physically correct scale:
+`scipy.integrate.trapezoid` approximates a definite integral using the trapezoidal rule. Its first argument is the array of $y$ values; passing the corresponding $x$ values as the second argument is essential whenever the spacing is not uniform or you want the physically correct scale:
 
 ```{python}
 import scipy.integrate
 
 x = numpy.arange(11)
 y = x ** 2
-print("integral of x² from 0 to 10 (coarse grid):", scipy.integrate.trapz(y))
+print("integral of x² from 0 to 10 (coarse grid):", scipy.integrate.trapezoid(y))
 ```
 
 The analytical result is $10^3 / 3 \approx 333.33$. A coarser grid introduces more error. Increasing the number of points and passing the $x$ values improves the result:
@@ -227,7 +227,7 @@ The analytical result is $10^3 / 3 \approx 333.33$. A coarser grid introduces mo
 ```{python}
 x = numpy.linspace(0, 10, 1000)
 y = x ** 2
-print("integral with fine grid and x values:", scipy.integrate.trapz(y, x))
+print("integral with fine grid and x values:", scipy.integrate.trapezoid(y, x))
 ```
 
 We will return to `scipy.optimize` in the [fitting data to models](fitting-data-to-models.qmd) lesson.
@@ -240,6 +240,6 @@ We will return to `scipy.optimize` in the [fitting data to models](fitting-data-
 - Arithmetic between arrays is element-by-element; shapes must be compatible.
 - `sum`, `mean`, `std` and related methods aggregate an array; use the `axis` keyword for partial aggregation.
 - Index arrays with integers and slice with `[start:stop:step]` notation.
-- Use `scipy.integrate.trapz(y, x)` to integrate tabular data numerically.
+- Use `scipy.integrate.trapezoid(y, x)` to integrate tabular data numerically.
 
 :::
