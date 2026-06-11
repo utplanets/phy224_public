@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Conditionals – PHY224 Python Review</title>
+<title>Reporting Values to the Right Number of Digits – PHY224 Python Review</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -106,6 +106,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -154,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../episodes/running-and-quitting.html">Core Lessons</a></li><li class="breadcrumb-item"><a href="../episodes/conditionals.html">Conditionals</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../episodes/optional-fsolve.html">Optional Lessons</a></li><li class="breadcrumb-item"><a href="../episodes/optional-sigfigs.html">Reporting Values to the Right Number of Digits</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -273,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../episodes/conditionals.html" class="sidebar-item-text sidebar-link active">
+  <a href="../episodes/conditionals.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditionals</span></a>
   </div>
 </li>
@@ -332,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../episodes/optional-sigfigs.html" class="sidebar-item-text sidebar-link">
+  <a href="../episodes/optional-sigfigs.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Reporting Values to the Right Number of Digits</span></a>
   </div>
 </li>
@@ -388,19 +417,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#if-statements-control-whether-a-block-runs" id="toc-if-statements-control-whether-a-block-runs" class="nav-link active" data-scroll-target="#if-statements-control-whether-a-block-runs"><code>if</code> statements control whether a block runs</a></li>
-  <li><a href="#else-and-elif-handle-the-remaining-cases" id="toc-else-and-elif-handle-the-remaining-cases" class="nav-link" data-scroll-target="#else-and-elif-handle-the-remaining-cases"><code>else</code> and <code>elif</code> handle the remaining cases</a></li>
-  <li><a href="#conditions-are-evaluated-once-not-re-evaluated" id="toc-conditions-are-evaluated-once-not-re-evaluated" class="nav-link" data-scroll-target="#conditions-are-evaluated-once-not-re-evaluated">Conditions are evaluated once, not re-evaluated</a></li>
-  <li><a href="#combining-conditions" id="toc-combining-conditions" class="nav-link" data-scroll-target="#combining-conditions">Combining conditions</a></li>
+  <li><a href="#the-problem-python-gives-too-many-digits" id="toc-the-problem-python-gives-too-many-digits" class="nav-link active" data-scroll-target="#the-problem-python-gives-too-many-digits">The problem: Python gives too many digits</a></li>
+  <li><a href="#the-reporting-rule" id="toc-the-reporting-rule" class="nav-link" data-scroll-target="#the-reporting-rule">The reporting rule</a></li>
+  <li><a href="#computing-the-number-of-decimal-places" id="toc-computing-the-number-of-decimal-places" class="nav-link" data-scroll-target="#computing-the-number-of-decimal-places">Computing the number of decimal places</a></li>
+  <li><a href="#formatting-with-f-strings" id="toc-formatting-with-f-strings" class="nav-link" data-scroll-target="#formatting-with-f-strings">Formatting with f-strings</a></li>
+  <li><a href="#warning-round-drops-trailing-zeros" id="toc-warning-round-drops-trailing-zeros" class="nav-link" data-scroll-target="#warning-round-drops-trailing-zeros">Warning: <code>round()</code> drops trailing zeros</a></li>
+  <li><a href="#note-why-1-significant-figure-is-enough" id="toc-note-why-1-significant-figure-is-enough" class="nav-link" data-scroll-target="#note-why-1-significant-figure-is-enough">Note: why 1 significant figure is enough</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../episodes/running-and-quitting.html">Core Lessons</a></li><li class="breadcrumb-item"><a href="../episodes/conditionals.html">Conditionals</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../episodes/optional-fsolve.html">Optional Lessons</a></li><li class="breadcrumb-item"><a href="../episodes/optional-sigfigs.html">Reporting Values to the Right Number of Digits</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Conditionals</h1>
+<h1 class="title">Reporting Values to the Right Number of Digits</h1>
 </div>
 
 
@@ -428,7 +459,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>How does a program choose between different actions?</li>
+<li>How do I decide how many decimal places to report for a measured value?</li>
+<li>How do I print a value and its uncertainty rounded consistently in Python?</li>
 </ul>
 </div>
 </div>
@@ -443,306 +475,199 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Write <code>if</code>, <code>elif</code>, and <code>else</code> statements to branch program execution.</li>
-<li>Combine comparisons with <code>and</code>, <code>or</code>, and <code>not</code>.</li>
-<li>Trace the execution of a conditional inside a loop.</li>
+<li>Apply the rule: round the uncertainty to 1 significant figure, then round the value to the same decimal place.</li>
+<li>Compute the required number of decimal places automatically from the uncertainty.</li>
+<li>Use f-string formatting to display the rounded result, including trailing zeros.</li>
+<li>Explain why <code>round()</code> alone is not sufficient for formatted output.</li>
 </ul>
 </div>
 </div>
-<section id="if-statements-control-whether-a-block-runs" class="level2">
-<h2 class="anchored" data-anchor-id="if-statements-control-whether-a-block-runs"><code>if</code> statements control whether a block runs</h2>
-<p>An <code>if</code> statement evaluates a condition and executes its indented body only if that condition is <code>True</code>. The structure mirrors a <code>for</code> loop: the header ends with a colon and the body is indented:</p>
-<div id="3b17cdab" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mass <span class="op">=</span> <span class="fl">3.54</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mass <span class="op">&gt;</span> <span class="fl">3.0</span>:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(mass, <span class="st">'is large'</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mass <span class="op">=</span> <span class="fl">2.07</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mass <span class="op">&gt;</span> <span class="fl">3.0</span>:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(mass, <span class="st">'is large'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="the-problem-python-gives-too-many-digits" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-python-gives-too-many-digits">The problem: Python gives too many digits</h2>
+<p><code>curve_fit</code> returns parameter values and a covariance matrix, and the numbers come out with fifteen or sixteen decimal digits — far more than any experiment justifies. Reporting all of them misleads the reader about the precision of the result.</p>
+<div id="1a3453d5" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">2.5</span> <span class="op">*</span> x <span class="op">+</span> <span class="fl">1.3</span> <span class="op">+</span> rng.normal(<span class="dv">0</span>, <span class="fl">0.8</span>, size<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> linear(x, m, c):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m <span class="op">*</span> x <span class="op">+</span> c</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>popt, pcov <span class="op">=</span> curve_fit(linear, x, y)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>perr <span class="op">=</span> np.sqrt(np.diag(pcov))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>slope, intercept <span class="op">=</span> popt</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>slope_err, intercept_err <span class="op">=</span> perr</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"slope     = </span><span class="sc">{</span>slope<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"slope_err = </span><span class="sc">{</span>slope_err<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>3.54 is large</code></pre>
+<pre><code>slope     = 2.538584392123583
+slope_err = 0.05190574911517593</code></pre>
 </div>
 </div>
-<p>On its own, an <code>if</code> with a fixed value is not very interesting. Conditionals become useful inside loops, where the condition is evaluated for each item in the collection:</p>
-<div id="adfae03e" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>masses <span class="op">=</span> [<span class="fl">3.54</span>, <span class="fl">2.07</span>, <span class="fl">9.22</span>, <span class="fl">1.86</span>, <span class="fl">1.71</span>]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> masses:</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> m <span class="op">&gt;</span> <span class="fl">3.0</span>:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(m, <span class="st">'is large'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>3.54 is large
-9.22 is large</code></pre>
-</div>
-</div>
+<p>Sixteen digits imply that the slope is known to one part in 10¹⁵ — which no physics experiment ever achieves.</p>
 </section>
-<section id="else-and-elif-handle-the-remaining-cases" class="level2">
-<h2 class="anchored" data-anchor-id="else-and-elif-handle-the-remaining-cases"><code>else</code> and <code>elif</code> handle the remaining cases</h2>
-<p><code>else</code> specifies what to do when the <code>if</code> condition is not met. <code>elif</code> (short for “else if”) inserts an additional condition between <code>if</code> and <code>else</code>. Python tests each condition in order and executes the first branch whose condition is <code>True</code>, then skips the rest:</p>
-<div id="5f25dac7" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>masses <span class="op">=</span> [<span class="fl">3.54</span>, <span class="fl">2.07</span>, <span class="fl">9.22</span>, <span class="fl">1.86</span>, <span class="fl">1.71</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> masses:</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> m <span class="op">&gt;</span> <span class="fl">9.0</span>:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(m, <span class="st">'is HUGE'</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> m <span class="op">&gt;</span> <span class="fl">3.0</span>:</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(m, <span class="st">'is large'</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(m, <span class="st">'is small'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>3.54 is large
-2.07 is small
-9.22 is HUGE
-1.86 is small
-1.71 is small</code></pre>
-</div>
-</div>
-<p>The order of branches matters. Python stops at the first true condition, so putting a less-restrictive condition first swallows values that should have matched a later, more-restrictive one:</p>
-<div id="08b33935" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>grade <span class="op">=</span> <span class="dv">85</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> grade <span class="op">&gt;=</span> <span class="dv">70</span>:</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'grade is C'</span>)    <span class="co"># fires here — Python stops</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> grade <span class="op">&gt;=</span> <span class="dv">80</span>:</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'grade is B'</span>)    <span class="co"># never reached</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> grade <span class="op">&gt;=</span> <span class="dv">90</span>:</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'grade is A'</span>)    <span class="co"># never reached</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>grade is C</code></pre>
-</div>
-</div>
-<p>Arrange conditions from most to least restrictive to avoid this mistake.</p>
+<section id="the-reporting-rule" class="level2">
+<h2 class="anchored" data-anchor-id="the-reporting-rule">The reporting rule</h2>
+<p>In this course we use two conventions that are standard in experimental physics:</p>
+<ol type="1">
+<li><strong>Round the uncertainty to 1 significant figure.</strong></li>
+<li><strong>Round the value to the same decimal place as the rounded uncertainty.</strong></li>
+</ol>
+<p>For <code>slope_err = 0.0519...</code> the leading non-zero digit is in the hundredths place (10⁻²), so we round to 2 decimal places and report <code>0.05</code>. The slope is then also rounded to 2 decimal places: <code>2.54</code>.</p>
+<p>The result is reported as:</p>
+<p><span class="math display">\[m = 2.54 \pm 0.05\]</span></p>
 </section>
-<section id="conditions-are-evaluated-once-not-re-evaluated" class="level2">
-<h2 class="anchored" data-anchor-id="conditions-are-evaluated-once-not-re-evaluated">Conditions are evaluated once, not re-evaluated</h2>
-<p>Python tests each condition once when execution reaches it and does not re-evaluate after variables change. This is different from how a spreadsheet works:</p>
-<div id="1e6d3ff3" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>velocity <span class="op">=</span> <span class="fl">10.0</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> velocity <span class="op">&gt;</span> <span class="fl">20.0</span>:</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'moving too fast'</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'adjusting velocity'</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    velocity <span class="op">=</span> <span class="fl">50.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="computing-the-number-of-decimal-places" class="level2">
+<h2 class="anchored" data-anchor-id="computing-the-number-of-decimal-places">Computing the number of decimal places</h2>
+<p>The key step is finding which decimal place holds the leading digit of the uncertainty. <code>numpy.floor(numpy.log10(sigma))</code> gives the exponent of that digit, and negating it gives the number of decimal places needed:</p>
+<div id="761d36d3" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> slope_err</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>exponent  <span class="op">=</span> <span class="bu">int</span>(np.floor(np.log10(<span class="bu">abs</span>(sigma))))  <span class="co"># e.g. -2 for sigma ~ 0.05</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ndigits   <span class="op">=</span> <span class="op">-</span>exponent                             <span class="co"># e.g.  2 decimal places</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"sigma    = </span><span class="sc">{</span>sigma<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"exponent = </span><span class="sc">{</span>exponent<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"ndigits  = </span><span class="sc">{</span>ndigits<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>adjusting velocity</code></pre>
+<pre><code>sigma    = 0.05190574911517593
+exponent = -2
+ndigits  = 2</code></pre>
 </div>
 </div>
-<p>Even though <code>velocity</code> is now 50.0, the <code>if</code> branch is not re-visited. Conditionals inside loops can, however, produce evolving behaviour by re-testing the condition on each iteration:</p>
-<div id="66b3eb34" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>velocity <span class="op">=</span> <span class="fl">10.0</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i, <span class="st">':'</span>, velocity)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> velocity <span class="op">&gt;</span> <span class="fl">20.0</span>:</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        velocity <span class="op">=</span> velocity <span class="op">-</span> <span class="fl">5.0</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        velocity <span class="op">=</span> velocity <span class="op">+</span> <span class="fl">10.0</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'final velocity:'</span>, velocity)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>0 : 10.0
-1 : 20.0
-2 : 30.0
-3 : 25.0
-4 : 20.0
-final velocity: 30.0</code></pre>
-</div>
-</div>
-<p>A variable-trace table is a useful tool for following this kind of loop:</p>
+<p>A few examples to build intuition:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>i</th>
-<th>velocity (start of iteration)</th>
-<th>velocity (end of iteration)</th>
+<th>sigma</th>
+<th>exponent</th>
+<th>ndigits</th>
+<th>rounded sigma</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>0</td>
-<td>10.0</td>
-<td>20.0</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>20.0</td>
-<td>30.0</td>
-</tr>
-<tr class="odd">
+<td>0.052</td>
+<td>−2</td>
 <td>2</td>
-<td>30.0</td>
-<td>25.0</td>
+<td>0.05</td>
 </tr>
 <tr class="even">
-<td>3</td>
-<td>25.0</td>
-<td>20.0</td>
+<td>0.31</td>
+<td>−1</td>
+<td>1</td>
+<td>0.3</td>
 </tr>
 <tr class="odd">
-<td>4</td>
-<td>20.0</td>
-<td>30.0</td>
+<td>4.7</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>43</td>
+<td>1</td>
+<td>−1</td>
+<td>40</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="combining-conditions" class="level2">
-<h2 class="anchored" data-anchor-id="combining-conditions">Combining conditions</h2>
-<p>Use <code>and</code>, <code>or</code>, and <code>not</code> to build compound conditions. When mixing <code>and</code> and <code>or</code> in the same expression, always add parentheses — the precedence rules are easy to misread:</p>
-<div id="8e548bbf" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear intent with parentheses</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (mass <span class="op">&gt;</span> <span class="dv">5</span> <span class="kw">and</span> velocity <span class="op">&gt;</span> <span class="dv">20</span>):</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Fast heavy object. Duck!"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> (mass <span class="op">&gt;</span> <span class="dv">2</span> <span class="kw">and</span> mass <span class="op">&lt;=</span> <span class="dv">5</span> <span class="kw">and</span> velocity <span class="op">&lt;=</span> <span class="dv">20</span>):</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Normal traffic"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Without parentheses, <code>a or b and c</code> means <code>a or (b and c)</code>, which may not be what you intended.</p>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span>Challenge
-</div>
-</div>
-<section id="tracing-execution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="tracing-execution">Tracing Execution</h2>
-<p>What does this program print?</p>
-<div id="2e007e88" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pressure <span class="op">=</span> <span class="fl">71.9</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> pressure <span class="op">&gt;</span> <span class="fl">50.0</span>:</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    pressure <span class="op">=</span> <span class="fl">25.0</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> pressure <span class="op">&lt;=</span> <span class="fl">50.0</span>:</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    pressure <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pressure)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="formatting-with-f-strings" class="level2">
+<h2 class="anchored" data-anchor-id="formatting-with-f-strings">Formatting with f-strings</h2>
+<p>Pass <code>ndigits</code> directly into an f-string format specifier to control the number of decimal places:</p>
+<div id="d1e2124a" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"slope     = </span><span class="sc">{</span>slope<span class="sc">:.</span>{ndigits}f<span class="sc">}</span><span class="ss"> ± </span><span class="sc">{</span>sigma<span class="sc">:.</span>{ndigits}f<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>25.0</code></pre>
+<pre><code>slope     = 2.54 ± 0.05</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<section id="solution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
-<pre class="output"><code>25.0</code></pre>
-<p>The first condition (<code>pressure &gt; 50.0</code>) is true when <code>pressure</code> is <code>71.9</code>, so that branch executes and <code>elif</code> is skipped.</p>
-</section>
-</div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span>Challenge
-</div>
-</div>
-<section id="trimming-values" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="trimming-values">Trimming Values</h2>
-<p>Fill in the blanks so that this program replaces negative values with <code>0</code> and positive values (including zero) with <code>1</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>original <span class="op">=</span> [<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.0</span>, <span class="op">-</span><span class="fl">1.3</span>, <span class="fl">0.4</span>]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> ____</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> original:</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ____:</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        result.append(<span class="dv">0</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        ____</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre class="output"><code>[0, 1, 1, 1, 0, 1]</code></pre>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<section id="solution-1" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-1">Solution</h2>
-<div id="cd88b31d" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>original <span class="op">=</span> [<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.0</span>, <span class="op">-</span><span class="fl">1.3</span>, <span class="fl">0.4</span>]</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> []</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> original:</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> value <span class="op">&lt;</span> <span class="fl">0.0</span>:</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        result.append(<span class="dv">0</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        result.append(<span class="dv">1</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Apply the same pattern to the intercept, computing its own <code>ndigits</code>:</p>
+<div id="75dd8532" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>int_exponent <span class="op">=</span> <span class="bu">int</span>(np.floor(np.log10(<span class="bu">abs</span>(intercept_err))))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>int_ndigits  <span class="op">=</span> <span class="op">-</span>int_exponent</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"intercept = </span><span class="sc">{</span>intercept<span class="sc">:.</span>{int_ndigits}f<span class="sc">}</span><span class="ss"> ± </span><span class="sc">{</span>intercept_err<span class="sc">:.</span>{int_ndigits}f<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[0, 1, 1, 1, 0, 1]</code></pre>
+<pre><code>intercept = 1.1 ± 0.3</code></pre>
 </div>
 </div>
-</section>
-</div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span>Challenge
-</div>
-</div>
-<section id="initializing" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="initializing">Initializing</h2>
-<p>Modify this program so that it finds the largest and smallest values in the list regardless of the range of values:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [...some test data...]</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>smallest, largest <span class="op">=</span> <span class="va">None</span>, <span class="va">None</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v <span class="kw">in</span> values:</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ____:</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        smallest, largest <span class="op">=</span> v, v</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    ____:</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        smallest <span class="op">=</span> <span class="bu">min</span>(____, v)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        largest <span class="op">=</span> <span class="bu">max</span>(____, v)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(smallest, largest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>What are the advantages and disadvantages of using <code>None</code> as the initial sentinel value?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<section id="solution-2" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-2">Solution</h2>
-<div id="5896eaba" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">65</span>, <span class="dv">78</span>, <span class="op">-</span><span class="dv">54</span>, <span class="op">-</span><span class="dv">24</span>, <span class="dv">100</span>]</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>smallest, largest <span class="op">=</span> <span class="va">None</span>, <span class="va">None</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v <span class="kw">in</span> values:</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> smallest <span class="kw">is</span> <span class="va">None</span> <span class="kw">and</span> largest <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        smallest, largest <span class="op">=</span> v, v</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        smallest <span class="op">=</span> <span class="bu">min</span>(smallest, v)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        largest <span class="op">=</span> <span class="bu">max</span>(largest, v)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(smallest, largest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For convenience, wrap this in a small helper:</p>
+<div id="5405f150" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_result(value, uncertainty):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return 'value ± uncertainty' rounded to 1 sig fig on the uncertainty."""</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    ndigits <span class="op">=</span> <span class="op">-</span><span class="bu">int</span>(np.floor(np.log10(<span class="bu">abs</span>(uncertainty))))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ndigits <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>value<span class="sc">:.</span>{ndigits}f<span class="sc">}</span><span class="ss"> ± </span><span class="sc">{</span>uncertainty<span class="sc">:.</span>{ndigits}f<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># uncertainty &gt;= 10: round to the nearest 10, 100, …</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> <span class="bu">round</span>(value,       ndigits)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        u <span class="op">=</span> <span class="bu">round</span>(uncertainty, ndigits)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.0f}</span><span class="ss"> ± </span><span class="sc">{</span>u<span class="sc">:.0f}</span><span class="ss">"</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"slope    "</span>, format_result(slope,     slope_err))</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"intercept"</span>, format_result(intercept, intercept_err))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>-54 100</code></pre>
-</div>
-</div>
-<p>Using <code>None</code> as a sentinel means the code works correctly regardless of the range of values — you do not need to guess a safe initial minimum or maximum. The disadvantage is that you need the special-case first-iteration check; forgetting it causes a <code>TypeError</code> when <code>min(None, v)</code> is called.</p>
-</section>
+<pre><code>slope     2.54 ± 0.05
+intercept 1.1 ± 0.3</code></pre>
 </div>
 </div>
 </section>
+<section id="warning-round-drops-trailing-zeros" class="level2">
+<h2 class="anchored" data-anchor-id="warning-round-drops-trailing-zeros">Warning: <code>round()</code> drops trailing zeros</h2>
+<p>A common mistake is to round a value with <code>round()</code> and then print it, expecting to see the correct number of decimal places. Python floats carry no information about trailing zeros — <code>2.50</code> and <code>2.5</code> are identical objects — so whenever the rounded value ends in zero, Python prints the shorter form:</p>
+<div id="cf6477b5" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># concrete example: a value that rounds to X.X0</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>demo_value <span class="op">=</span> <span class="fl">3.5049</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>demo_ndigits <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>rounded <span class="op">=</span> <span class="bu">round</span>(demo_value, demo_ndigits)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"round() stored as float: </span><span class="sc">{</span>rounded<span class="sc">}</span><span class="ss">"</span>)        <span class="co"># prints 3.5, not 3.50</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"formatted at print:      </span><span class="sc">{</span>demo_value<span class="sc">:.</span>{demo_ndigits}f<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># prints 3.50</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>round() stored as float: 3.5
+formatted at print:      3.50</code></pre>
 </div>
+</div>
+<p>The same problem appears with the fit parameters: if <code>slope</code> happened to round to <code>2.50</code>, storing it first would silently drop the trailing zero:</p>
+<div id="24aa35b4" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># wrong approach: round first, then print</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>x_stored <span class="op">=</span> <span class="bu">round</span>(slope, ndigits)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"stored then printed: </span><span class="sc">{</span>x_stored<span class="sc">}</span><span class="ss">"</span>)    <span class="co"># trailing zero may vanish</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># correct: apply the format at the point of printing</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"formatted at print:  </span><span class="sc">{</span>slope<span class="sc">:.</span>{ndigits}f<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>stored then printed: 2.54
+formatted at print:  2.54</code></pre>
+</div>
+</div>
+<p>The same issue affects conversion to a string: <code>str(round(slope, 2))</code> may return <code>'2.5'</code> even when the correctly rounded value is <code>2.50</code>. Always format with <code>f"{value:.{ndigits}f}"</code> or <code>format(value, f'.{ndigits}f')</code>.</p>
+<hr>
+</section>
+<section id="note-why-1-significant-figure-is-enough" class="level2">
+<h2 class="anchored" data-anchor-id="note-why-1-significant-figure-is-enough">Note: why 1 significant figure is enough</h2>
+<p>Reporting more than 1 sig fig on an uncertainty implies a precision in the uncertainty itself that the data usually cannot support.</p>
+<p>The standard deviation <span class="math inline">\(\sigma\)</span> estimated from <span class="math inline">\(N\)</span> measurements has its own statistical uncertainty of approximately <span class="math inline">\(\sigma / \sqrt{2(N-1)}\)</span>. For typical lab datasets:</p>
+<div id="3c13bcdc" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> N <span class="kw">in</span> [<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">100</span>]:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    rel_unc <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> (N <span class="op">-</span> <span class="dv">1</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"N = </span><span class="sc">{</span>N<span class="sc">:2d}</span><span class="ss">  -&gt;  uncertainty on σ ≈ </span><span class="sc">{</span>rel_unc<span class="op">*</span><span class="dv">100</span><span class="sc">:.0f}</span><span class="ss">%"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>N =  5  -&gt;  uncertainty on σ ≈ 35%
+N = 10  -&gt;  uncertainty on σ ≈ 24%
+N = 20  -&gt;  uncertainty on σ ≈ 16%
+N = 50  -&gt;  uncertainty on σ ≈ 10%
+N = 100  -&gt;  uncertainty on σ ≈ 7%</code></pre>
+</div>
+</div>
+<p>With 10 measurements the standard deviation is itself only known to about 24%. Reporting <code>σ = 0.052</code> instead of <code>σ = 0.05</code> implies you know the uncertainty to better than 4% — a level of precision that requires hundreds of measurements to achieve. The second digit is not meaningful.</p>
+<p>This is why the convention “1 sig fig on the uncertainty” is so widely used. Unless you make 5,000 measurements you can’t be certain of the value of the second significant figure.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -754,11 +679,11 @@ final velocity: 30.0</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>An <code>if</code> statement executes its body only when the condition is <code>True</code>.</li>
-<li><code>elif</code> adds additional conditions; <code>else</code> handles everything not caught above.</li>
-<li>Conditions are tested in order; execution stops at the first true branch.</li>
-<li>Conditions are evaluated once per encounter — Python does not re-test automatically.</li>
-<li>Use <code>and</code>, <code>or</code>, and <code>not</code> to combine conditions; parentheses clarify intent.</li>
+<li>Round the uncertainty to 1 significant figure; round the value to the same decimal place.</li>
+<li>Compute decimal places with <code>ndigits = -int(numpy.floor(numpy.log10(abs(sigma))))</code>.</li>
+<li>Format output with <code>f"{value:.{ndigits}f} ± {sigma:.{ndigits}f}"</code>.</li>
+<li>Do <strong>not</strong> rely on <code>round()</code> followed by <code>print()</code> — trailing zeros are silently dropped. Apply formatting at the point of printing.</li>
+<li>1 sig fig is statistically honest: with fewer than ~100 measurements the uncertainty on <span class="math inline">\(\sigma\)</span> itself exceeds 10%.</li>
 </ul>
 </div>
 </div>

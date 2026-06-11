@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Conditionals – PHY224 Python Review</title>
+<title>Root Finding by Iteration: Newton-Raphson – PHY224 Python Review</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -106,6 +106,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -154,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../episodes/running-and-quitting.html">Core Lessons</a></li><li class="breadcrumb-item"><a href="../episodes/conditionals.html">Conditionals</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../episodes/optional-fsolve.html">Optional Lessons</a></li><li class="breadcrumb-item"><a href="../episodes/optional-newton.html">Root Finding: Newton-Raphson</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -273,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../episodes/conditionals.html" class="sidebar-item-text sidebar-link active">
+  <a href="../episodes/conditionals.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditionals</span></a>
   </div>
 </li>
@@ -326,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../episodes/optional-newton.html" class="sidebar-item-text sidebar-link">
+  <a href="../episodes/optional-newton.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Root Finding: Newton-Raphson</span></a>
   </div>
 </li>
@@ -388,19 +417,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#if-statements-control-whether-a-block-runs" id="toc-if-statements-control-whether-a-block-runs" class="nav-link active" data-scroll-target="#if-statements-control-whether-a-block-runs"><code>if</code> statements control whether a block runs</a></li>
-  <li><a href="#else-and-elif-handle-the-remaining-cases" id="toc-else-and-elif-handle-the-remaining-cases" class="nav-link" data-scroll-target="#else-and-elif-handle-the-remaining-cases"><code>else</code> and <code>elif</code> handle the remaining cases</a></li>
-  <li><a href="#conditions-are-evaluated-once-not-re-evaluated" id="toc-conditions-are-evaluated-once-not-re-evaluated" class="nav-link" data-scroll-target="#conditions-are-evaluated-once-not-re-evaluated">Conditions are evaluated once, not re-evaluated</a></li>
-  <li><a href="#combining-conditions" id="toc-combining-conditions" class="nav-link" data-scroll-target="#combining-conditions">Combining conditions</a></li>
+  <li><a href="#why-iterate" id="toc-why-iterate" class="nav-link active" data-scroll-target="#why-iterate">Why iterate?</a></li>
+  <li><a href="#example-problem-peak-wavelength-of-the-sun" id="toc-example-problem-peak-wavelength-of-the-sun" class="nav-link" data-scroll-target="#example-problem-peak-wavelength-of-the-sun">Example problem: peak wavelength of the Sun</a></li>
+  <li><a href="#worked-solution" id="toc-worked-solution" class="nav-link" data-scroll-target="#worked-solution">Worked solution</a></li>
+  <li><a href="#when-newton-raphson-fails" id="toc-when-newton-raphson-fails" class="nav-link" data-scroll-target="#when-newton-raphson-fails">When Newton-Raphson fails</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../episodes/running-and-quitting.html">Core Lessons</a></li><li class="breadcrumb-item"><a href="../episodes/conditionals.html">Conditionals</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../episodes/optional-fsolve.html">Optional Lessons</a></li><li class="breadcrumb-item"><a href="../episodes/optional-newton.html">Root Finding: Newton-Raphson</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Conditionals</h1>
+<h1 class="title">Root Finding by Iteration: Newton-Raphson</h1>
 </div>
 
 
@@ -428,7 +457,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>How does a program choose between different actions?</li>
+<li>How does Newton-Raphson find the zero of a function by iteration?</li>
+<li>How do I implement the iteration and detect when it has converged?</li>
+<li>When does the method fail, and what do I do about it?</li>
 </ul>
 </div>
 </div>
@@ -443,306 +474,150 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Write <code>if</code>, <code>elif</code>, and <code>else</code> statements to branch program execution.</li>
-<li>Combine comparisons with <code>and</code>, <code>or</code>, and <code>not</code>.</li>
-<li>Trace the execution of a conditional inside a loop.</li>
+<li>Implement a Newton-Raphson loop in Python.</li>
+<li>Apply it to find the zero of a transcendental equation from physics.</li>
+<li>Visualise the iterative steps converging to the root.</li>
+<li>Recognise convergence failure and use <code>scipy.optimize</code> as a robust alternative.</li>
 </ul>
 </div>
 </div>
-<section id="if-statements-control-whether-a-block-runs" class="level2">
-<h2 class="anchored" data-anchor-id="if-statements-control-whether-a-block-runs"><code>if</code> statements control whether a block runs</h2>
-<p>An <code>if</code> statement evaluates a condition and executes its indented body only if that condition is <code>True</code>. The structure mirrors a <code>for</code> loop: the header ends with a colon and the body is indented:</p>
-<div id="3b17cdab" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mass <span class="op">=</span> <span class="fl">3.54</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mass <span class="op">&gt;</span> <span class="fl">3.0</span>:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(mass, <span class="st">'is large'</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mass <span class="op">=</span> <span class="fl">2.07</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mass <span class="op">&gt;</span> <span class="fl">3.0</span>:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(mass, <span class="st">'is large'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>3.54 is large</code></pre>
+<section id="why-iterate" class="level2">
+<h2 class="anchored" data-anchor-id="why-iterate">Why iterate?</h2>
+<p>Many physical equations have no closed-form solution. Setting the derivative of Planck’s spectral radiance to zero to find the peak wavelength leads to the transcendental equation:</p>
+<p><span class="math display">\[5\left(1 - e^{-x}\right) = x \qquad x = \frac{hc}{\lambda_{\max} k T}\]</span></p>
+<p>No algebraic manipulation will isolate x, but it can be solved by guessing a value of <span class="math inline">\(x\)</span> (the left hand side), calculating a new value (the right hand side), and repeating.</p>
+<p>Newton-Raphson is the standard choice when the function is smooth: starting from a guess <span class="math inline">\(x_0\)</span>, each step moves toward the root using the function value and its derivative:</p>
+<p><span class="math display">\[x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\]</span></p>
+<p>The method converges quadratically — the number of correct decimal places roughly doubles with each iteration.</p>
+</section>
+<section id="example-problem-peak-wavelength-of-the-sun" class="level2">
+<h2 class="anchored" data-anchor-id="example-problem-peak-wavelength-of-the-sun">Example problem: peak wavelength of the Sun</h2>
+<p>The Sun’s photosphere has an effective temperature of about 5778 K. At what wavelength does it emit most strongly? Wien’s displacement law gives <span class="math inline">\(\lambda_{\max} = b / T\)</span>, but the constant <span class="math inline">\(b\)</span> must itself be found by solving the transcendental equation above.</p>
+</section>
+<section id="worked-solution" class="level2">
+<h2 class="anchored" data-anchor-id="worked-solution">Worked solution</h2>
+<p>Rewrite the equation as <span class="math inline">\(f(x) = 0\)</span> and compute its derivative:</p>
+<p><span class="math display">\[f(x) = 5\left(1 - e^{-x}\right) - x \qquad f'(x) = 5e^{-x} - 1\]</span></p>
+<div id="4f9ea244" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">5</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> np.exp(<span class="op">-</span>x)) <span class="op">-</span> x</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_prime(x):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">5</span> <span class="op">*</span> np.exp(<span class="op">-</span>x) <span class="op">-</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Plot f(x) to confirm there is one physical root (the trivial root x = 0 is unphysical) and choose a starting guess:</p>
+<div id="cell-fig-newton-fplot" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x_vals <span class="op">=</span> np.linspace(<span class="fl">0.1</span>, <span class="dv">8</span>, <span class="dv">400</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x_vals, f(x_vals))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"f(x)"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-newton-fplot" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-newton-fplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="optional-newton_files/figure-html/fig-newton-fplot-output-1.png" width="587" height="429" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newton-fplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: f(x) = 5(1 − e^{−x}) − x has a trivial root at x = 0 and the physical root near x ≈ 4.97
+</figcaption>
+</figure>
 </div>
 </div>
-<p>On its own, an <code>if</code> with a fixed value is not very interesting. Conditionals become useful inside loops, where the condition is evaluated for each item in the collection:</p>
-<div id="adfae03e" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>masses <span class="op">=</span> [<span class="fl">3.54</span>, <span class="fl">2.07</span>, <span class="fl">9.22</span>, <span class="fl">1.86</span>, <span class="fl">1.71</span>]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> masses:</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> m <span class="op">&gt;</span> <span class="fl">3.0</span>:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(m, <span class="st">'is large'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Run the Newton-Raphson iteration, recording each estimate so we can plot convergence:</p>
+<div id="0e28138a" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">5.0</span>          <span class="co"># starting guess, away from the trivial root at 0</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tolerance <span class="op">=</span> <span class="fl">1e-12</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>max_iter <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> [x]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    step <span class="op">=</span> f(x) <span class="op">/</span> f_prime(x)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x <span class="op">-</span> step</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    history.append(x)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">abs</span>(step) <span class="op">&lt;</span> tolerance:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Converged in </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss"> iterations"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>x_root <span class="op">=</span> x</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x root  = </span><span class="sc">{</span>x_root<span class="sc">:.10f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>3.54 is large
-9.22 is large</code></pre>
+<pre><code>Converged in 4 iterations
+x root  = 4.9651142317</code></pre>
+</div>
+</div>
+<p>Convert the dimensionless root back to Wien’s displacement constant <span class="math inline">\(b = hc / (x k)\)</span> and the peak wavelength of the Sun:</p>
+<div id="785febe9" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="fl">6.626e-34</span>   <span class="co"># J·s</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="fl">3.0e8</span>       <span class="co"># m/s</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>k_B <span class="op">=</span> <span class="fl">1.381e-23</span> <span class="co"># J/K</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>T_sun <span class="op">=</span> <span class="dv">5778</span>    <span class="co"># K</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>wien_b <span class="op">=</span> h <span class="op">*</span> c <span class="op">/</span> (x_root <span class="op">*</span> k_B)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>lambda_max <span class="op">=</span> wien_b <span class="op">/</span> T_sun</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Wien constant b  = </span><span class="sc">{</span>wien_b<span class="op">*</span><span class="fl">1e6</span><span class="sc">:.4f}</span><span class="ss"> μm·K  (accepted: 2897.8 μm·K)"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Peak wavelength  = </span><span class="sc">{</span>lambda_max<span class="op">*</span><span class="fl">1e9</span><span class="sc">:.1f}</span><span class="ss"> nm  (visible green-yellow)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wien constant b  = 2899.0103 μm·K  (accepted: 2897.8 μm·K)
+Peak wavelength  = 501.7 nm  (visible green-yellow)</code></pre>
+</div>
+</div>
+<div id="cell-fig-newton-convergence" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x_plot <span class="op">=</span> np.linspace(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">300</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x_plot, f(x_plot), label<span class="op">=</span><span class="st">"f(x)"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n, xn <span class="kw">in</span> <span class="bu">enumerate</span>(history[:<span class="op">-</span><span class="dv">1</span>]):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    plt.plot(xn, f(xn), <span class="st">'o'</span>, color<span class="op">=</span><span class="ss">f'C</span><span class="sc">{</span>n<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>, markersize<span class="op">=</span><span class="dv">6</span>, label<span class="op">=</span><span class="ss">f"$x_</span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">$=</span><span class="sc">{</span>xn<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.axvline(x_root, color<span class="op">=</span><span class="st">'r'</span>, linewidth<span class="op">=</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">':'</span>, label<span class="op">=</span><span class="ss">f"root x = </span><span class="sc">{</span>x_root<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"f(x)"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-newton-convergence" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-newton-convergence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="optional-newton_files/figure-html/fig-newton-convergence-output-1.png" width="600" height="429" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newton-convergence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Each Newton-Raphson iterate plotted on f(x); the steps reach the root in just a few iterations
+</figcaption>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="else-and-elif-handle-the-remaining-cases" class="level2">
-<h2 class="anchored" data-anchor-id="else-and-elif-handle-the-remaining-cases"><code>else</code> and <code>elif</code> handle the remaining cases</h2>
-<p><code>else</code> specifies what to do when the <code>if</code> condition is not met. <code>elif</code> (short for “else if”) inserts an additional condition between <code>if</code> and <code>else</code>. Python tests each condition in order and executes the first branch whose condition is <code>True</code>, then skips the rest:</p>
-<div id="5f25dac7" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>masses <span class="op">=</span> [<span class="fl">3.54</span>, <span class="fl">2.07</span>, <span class="fl">9.22</span>, <span class="fl">1.86</span>, <span class="fl">1.71</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> masses:</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> m <span class="op">&gt;</span> <span class="fl">9.0</span>:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(m, <span class="st">'is HUGE'</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> m <span class="op">&gt;</span> <span class="fl">3.0</span>:</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(m, <span class="st">'is large'</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(m, <span class="st">'is small'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="when-newton-raphson-fails" class="level2">
+<h2 class="anchored" data-anchor-id="when-newton-raphson-fails">When Newton-Raphson fails</h2>
+<p>The method has two common failure modes:</p>
+<ul>
+<li><strong>Starting near the trivial root</strong> at x = 0: a guess below ~1 converges to 0 rather than to the physical root.</li>
+<li><strong>Derivative near zero</strong>: f′(x) = 5e^{−x} − 1 = 0 at x = ln 5 ≈ 1.61, directly between the two roots. Starting there causes a very large step.</li>
+</ul>
+<p>For a guaranteed result, <code>scipy.optimize.brentq</code> only needs a bracket where f changes sign — no derivative required:</p>
+<div id="250d14b1" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> brentq</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># f(3) &gt; 0 and f(6) &lt; 0, confirmed by the plot above</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>x_brentq <span class="op">=</span> brentq(f, <span class="fl">3.0</span>, <span class="fl">6.0</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"brentq:          x = </span><span class="sc">{</span>x_brentq<span class="sc">:.10f}</span><span class="ss">"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Newton-Raphson:  x = </span><span class="sc">{</span>x_root<span class="sc">:.10f}</span><span class="ss">"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Difference: </span><span class="sc">{</span><span class="bu">abs</span>(x_brentq <span class="op">-</span> x_root)<span class="sc">:.2e}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>3.54 is large
-2.07 is small
-9.22 is HUGE
-1.86 is small
-1.71 is small</code></pre>
+<pre><code>brentq:          x = 4.9651142317
+Newton-Raphson:  x = 4.9651142317
+Difference: 0.00e+00</code></pre>
 </div>
 </div>
-<p>The order of branches matters. Python stops at the first true condition, so putting a less-restrictive condition first swallows values that should have matched a later, more-restrictive one:</p>
-<div id="08b33935" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>grade <span class="op">=</span> <span class="dv">85</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> grade <span class="op">&gt;=</span> <span class="dv">70</span>:</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'grade is C'</span>)    <span class="co"># fires here — Python stops</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> grade <span class="op">&gt;=</span> <span class="dv">80</span>:</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'grade is B'</span>)    <span class="co"># never reached</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> grade <span class="op">&gt;=</span> <span class="dv">90</span>:</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'grade is A'</span>)    <span class="co"># never reached</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>grade is C</code></pre>
-</div>
-</div>
-<p>Arrange conditions from most to least restrictive to avoid this mistake.</p>
-</section>
-<section id="conditions-are-evaluated-once-not-re-evaluated" class="level2">
-<h2 class="anchored" data-anchor-id="conditions-are-evaluated-once-not-re-evaluated">Conditions are evaluated once, not re-evaluated</h2>
-<p>Python tests each condition once when execution reaches it and does not re-evaluate after variables change. This is different from how a spreadsheet works:</p>
-<div id="1e6d3ff3" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>velocity <span class="op">=</span> <span class="fl">10.0</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> velocity <span class="op">&gt;</span> <span class="fl">20.0</span>:</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'moving too fast'</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'adjusting velocity'</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    velocity <span class="op">=</span> <span class="fl">50.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>adjusting velocity</code></pre>
-</div>
-</div>
-<p>Even though <code>velocity</code> is now 50.0, the <code>if</code> branch is not re-visited. Conditionals inside loops can, however, produce evolving behaviour by re-testing the condition on each iteration:</p>
-<div id="66b3eb34" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>velocity <span class="op">=</span> <span class="fl">10.0</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i, <span class="st">':'</span>, velocity)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> velocity <span class="op">&gt;</span> <span class="fl">20.0</span>:</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        velocity <span class="op">=</span> velocity <span class="op">-</span> <span class="fl">5.0</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        velocity <span class="op">=</span> velocity <span class="op">+</span> <span class="fl">10.0</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'final velocity:'</span>, velocity)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>0 : 10.0
-1 : 20.0
-2 : 30.0
-3 : 25.0
-4 : 20.0
-final velocity: 30.0</code></pre>
-</div>
-</div>
-<p>A variable-trace table is a useful tool for following this kind of loop:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>i</th>
-<th>velocity (start of iteration)</th>
-<th>velocity (end of iteration)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0</td>
-<td>10.0</td>
-<td>20.0</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>20.0</td>
-<td>30.0</td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td>30.0</td>
-<td>25.0</td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td>25.0</td>
-<td>20.0</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>20.0</td>
-<td>30.0</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="combining-conditions" class="level2">
-<h2 class="anchored" data-anchor-id="combining-conditions">Combining conditions</h2>
-<p>Use <code>and</code>, <code>or</code>, and <code>not</code> to build compound conditions. When mixing <code>and</code> and <code>or</code> in the same expression, always add parentheses — the precedence rules are easy to misread:</p>
-<div id="8e548bbf" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear intent with parentheses</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (mass <span class="op">&gt;</span> <span class="dv">5</span> <span class="kw">and</span> velocity <span class="op">&gt;</span> <span class="dv">20</span>):</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Fast heavy object. Duck!"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> (mass <span class="op">&gt;</span> <span class="dv">2</span> <span class="kw">and</span> mass <span class="op">&lt;=</span> <span class="dv">5</span> <span class="kw">and</span> velocity <span class="op">&lt;=</span> <span class="dv">20</span>):</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Normal traffic"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Without parentheses, <code>a or b and c</code> means <code>a or (b and c)</code>, which may not be what you intended.</p>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span>Challenge
-</div>
-</div>
-<section id="tracing-execution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="tracing-execution">Tracing Execution</h2>
-<p>What does this program print?</p>
-<div id="2e007e88" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pressure <span class="op">=</span> <span class="fl">71.9</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> pressure <span class="op">&gt;</span> <span class="fl">50.0</span>:</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    pressure <span class="op">=</span> <span class="fl">25.0</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> pressure <span class="op">&lt;=</span> <span class="fl">50.0</span>:</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    pressure <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pressure)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>25.0</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<section id="solution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
-<pre class="output"><code>25.0</code></pre>
-<p>The first condition (<code>pressure &gt; 50.0</code>) is true when <code>pressure</code> is <code>71.9</code>, so that branch executes and <code>elif</code> is skipped.</p>
-</section>
-</div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span>Challenge
-</div>
-</div>
-<section id="trimming-values" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="trimming-values">Trimming Values</h2>
-<p>Fill in the blanks so that this program replaces negative values with <code>0</code> and positive values (including zero) with <code>1</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>original <span class="op">=</span> [<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.0</span>, <span class="op">-</span><span class="fl">1.3</span>, <span class="fl">0.4</span>]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> ____</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> original:</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ____:</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        result.append(<span class="dv">0</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        ____</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre class="output"><code>[0, 1, 1, 1, 0, 1]</code></pre>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<section id="solution-1" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-1">Solution</h2>
-<div id="cd88b31d" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>original <span class="op">=</span> [<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.0</span>, <span class="op">-</span><span class="fl">1.3</span>, <span class="fl">0.4</span>]</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> []</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> original:</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> value <span class="op">&lt;</span> <span class="fl">0.0</span>:</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        result.append(<span class="dv">0</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        result.append(<span class="dv">1</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[0, 1, 1, 1, 0, 1]</code></pre>
-</div>
-</div>
-</section>
-</div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span>Challenge
-</div>
-</div>
-<section id="initializing" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="initializing">Initializing</h2>
-<p>Modify this program so that it finds the largest and smallest values in the list regardless of the range of values:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [...some test data...]</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>smallest, largest <span class="op">=</span> <span class="va">None</span>, <span class="va">None</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v <span class="kw">in</span> values:</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ____:</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        smallest, largest <span class="op">=</span> v, v</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    ____:</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        smallest <span class="op">=</span> <span class="bu">min</span>(____, v)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        largest <span class="op">=</span> <span class="bu">max</span>(____, v)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(smallest, largest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>What are the advantages and disadvantages of using <code>None</code> as the initial sentinel value?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<section id="solution-2" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-2">Solution</h2>
-<div id="5896eaba" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">65</span>, <span class="dv">78</span>, <span class="op">-</span><span class="dv">54</span>, <span class="op">-</span><span class="dv">24</span>, <span class="dv">100</span>]</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>smallest, largest <span class="op">=</span> <span class="va">None</span>, <span class="va">None</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v <span class="kw">in</span> values:</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> smallest <span class="kw">is</span> <span class="va">None</span> <span class="kw">and</span> largest <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        smallest, largest <span class="op">=</span> v, v</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        smallest <span class="op">=</span> <span class="bu">min</span>(smallest, v)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        largest <span class="op">=</span> <span class="bu">max</span>(largest, v)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(smallest, largest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-54 100</code></pre>
-</div>
-</div>
-<p>Using <code>None</code> as a sentinel means the code works correctly regardless of the range of values — you do not need to guess a safe initial minimum or maximum. The disadvantage is that you need the special-case first-iteration check; forgetting it causes a <code>TypeError</code> when <code>min(None, v)</code> is called.</p>
-</section>
-</div>
-</div>
-</section>
-</div>
+<p>Both methods agree to full floating-point precision. <code>brentq</code> is easier to use if you can’t calculate a gradient for your function, and it’s <code>safer</code> if there are multiple roots or the starting location is not obvious. Newton-Raphson is useful when you want to inspect each iteration or when an analytic derivative is available and fast convergence matters.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -754,11 +629,10 @@ final velocity: 30.0</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>An <code>if</code> statement executes its body only when the condition is <code>True</code>.</li>
-<li><code>elif</code> adds additional conditions; <code>else</code> handles everything not caught above.</li>
-<li>Conditions are tested in order; execution stops at the first true branch.</li>
-<li>Conditions are evaluated once per encounter — Python does not re-test automatically.</li>
-<li>Use <code>and</code>, <code>or</code>, and <code>not</code> to combine conditions; parentheses clarify intent.</li>
+<li>Rewrite the physical condition as <span class="math inline">\(f(x) = 0\)</span> and compute <span class="math inline">\(f'(x)\)</span> analytically.</li>
+<li>Always plot <span class="math inline">\(f(x)\)</span> first to count the roots and choose a starting guess away from trivial or spurious roots.</li>
+<li>Newton-Raphson iterates <span class="math inline">\(x \leftarrow x - f(x)/f'(x)\)</span> and converges quadratically — typically 5–10 iterations to machine precision.</li>
+<li><code>scipy.optimize.brentq(f, a, b)</code> is a robust fallback when a sign-changing bracket <span class="math inline">\([a, b]\)</span> is available.</li>
 </ul>
 </div>
 </div>
