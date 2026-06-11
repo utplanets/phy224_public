@@ -1,0 +1,18 @@
+---
+title: "PHY224 Python Review"
+---
+
+This website covers the material in the Python Review section of the PHY224 course at
+the University of Toronto. The lesson references the Jupyter Notebook, but can be worked
+through using a regular Python interpreter or Spyder as well.
+
+::: {.callout-important title="Prerequisites"}
+
+1. You should have Python installed before you start. The easiest option for most people
+   is the [Anaconda Python distribution](https://www.anaconda.com/download). See the
+   [setup instructions](learners/setup.qmd) for details.
+2. Read the Python materials on Quercus.
+3. Download the data files and notebooks if you want to follow along or work
+   independently.
+
+:::

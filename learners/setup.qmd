@@ -1,0 +1,41 @@
+---
+title: Setup
+---
+
+## Getting the data
+
+The data used in this lesson is generated for the course. Download and unzip
+[data.zip](../episodes/files/data.zip). To follow along, launch JupyterLab in the
+folder where you unzipped the data (see *Running and Quitting*). The notebooks for the
+class can be downloaded from [notebooks.zip](../episodes/files/notebooks.zip).
+
+## Installing Python with Anaconda
+
+[Python](https://python.org) is a popular language for scientific computing. Installing
+all the research packages individually can be difficult, so we recommend
+[Anaconda](https://www.anaconda.com/download), a bundled distribution that includes
+Python, the Jupyter Notebook/JupyterLab, and the scientific packages used here
+(NumPy, SciPy, and Matplotlib).
+
+::: {.panel-tabset}
+
+### Windows
+
+1. Download the [Anaconda installer for Windows](https://www.anaconda.com/download).
+2. Run the installer and accept the defaults. When asked, you may keep "Register
+   Anaconda as my default Python".
+3. Launch *Anaconda Navigator* and start *JupyterLab*.
+
+### macOS
+
+1. Download the [Anaconda installer for macOS](https://www.anaconda.com/download).
+2. Run the installer and accept the defaults.
+3. Launch *Anaconda Navigator* and start *JupyterLab*.
+
+### Linux
+
+1. Download the [Anaconda installer for Linux](https://www.anaconda.com/download).
+2. In a terminal, run `bash Anaconda3-*-Linux-x86_64.sh` and accept the defaults.
+3. Start JupyterLab with `jupyter lab`.
+
+:::

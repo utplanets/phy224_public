@@ -1,0 +1,50 @@
+---
+title: "Wrap-Up"
+---
+
+::: {.callout-note title="Questions"}
+
+- Where do I go next?
+- How do I find help when I'm stuck?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Identify key Python community resources for documentation, packages, and help.
+
+:::
+
+
+## Python has a large and active scientific community
+
+The tools covered in this course — NumPy, SciPy, Matplotlib — are just the beginning. Python's scientific ecosystem is vast, well-documented, and actively maintained. The resources below are the most useful places to look when you want to go further or get unstuck.
+
+**Language and standard library**
+
+The [Python 3 documentation](https://docs.python.org/3/) is the authoritative reference for the language itself and the modules that ship with it. The tutorial section is readable even for beginners.
+
+**Scientific Python**
+
+[SciPy](https://scipy.org) is both a library (numerical methods, optimisation, statistics, signal processing) and the name of an annual conference series. The [NumPy](https://numpy.org/doc/) and [SciPy](https://docs.scipy.org/doc/scipy/) documentation sites are well-written and include worked examples for most functions.
+
+[Matplotlib](https://matplotlib.org) has an extensive gallery of example plots with source code — searching the gallery is often faster than reading the API documentation when you want to know how to make a specific type of figure.
+
+**Community and packages**
+
+[PyPI](https://pypi.org) (the Python Package Index) is where you search for third-party packages and install them with `pip install package_name`. The [Jupyter](https://jupyter.org) project is the home of the Notebook environment used throughout this course.
+
+[PyCon](https://pycon.org) is the largest annual Python conference, and many talks are recorded and posted online — a useful resource for learning best practices beyond what tutorials cover.
+
+**Getting help**
+
+[Stack Overflow](https://stackoverflow.com/questions/tagged/python) has answers to an enormous range of Python questions. Search for your specific error message or problem — the answer is usually already there. The [NumPy](https://stackoverflow.com/questions/tagged/numpy), [SciPy](https://stackoverflow.com/questions/tagged/scipy), and [Matplotlib](https://stackoverflow.com/questions/tagged/matplotlib) tags have dedicated question threads.
+
+
+::: {.callout-tip title="Key Points"}
+
+- The official Python documentation, NumPy/SciPy docs, and Stack Overflow cover almost every question that comes up in scientific Python.
+- The Matplotlib gallery is the fastest way to find example code for a specific plot type.
+- PyPI is where to look for additional packages; install them with `pip`.
+
+:::

@@ -1,0 +1,116 @@
+---
+title: "Basics"
+---
+
+::: {.callout-note title="Questions"}
+
+- What are the standard features available in all python programs?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Understand the basics of the Python language.
+- Learn the difference between numbers, strings, functions, and more complex objects.
+:::
+
+## Types of values
+
+Every value in Python has a *type* that determines what you can do with it. The most common types you will encounter are numbers, strings, and collections.
+
+**Numbers** come in two flavours. Integers (`int`) are whole numbers — `3`, `-7`, `42` — while floating-point numbers (`float`) have a decimal component — `3.14`, `-0.5`, `9.81`. Python chooses the type automatically based on how you write the literal: `3` is an `int`, `3.0` is a `float`. Most arithmetic works the same way on both, but division always produces a `float` even when the result is whole.
+
+**Strings** (`str`) are sequences of text, written inside single or double quotes: `"hello"`, `'PHY224'`. A string can contain any characters, including digits, but the value `"3"` is text, not a number — you cannot do arithmetic with it directly.
+
+**Collections** group multiple values together. The two you will use most often are:
+
+- A **list** is an ordered, mutable sequence written with square brackets: `[1, 2, 3]` or `["a", "b", "c"]`. You can mix types in a list, change its contents, and access individual elements by position.
+- A **dictionary** (`dict`) maps *keys* to *values* using curly braces: `{"name": "Alice", "year": 2024}`. Dictionaries are useful whenever you want to look something up by a meaningful label rather than a position number.
+
+Both lists and dictionaries are *objects* — they carry not just data but also built-in methods for manipulating that data. You will explore lists in depth in the [lists](lists.qmd) lesson and encounter dictionaries throughout the course.
+
+You can always check the type of a value with the built-in `type()` function:
+
+```python
+print(type(42))        # <class 'int'>
+print(type(3.14))      # <class 'float'>
+print(type("hello"))   # <class 'str'>
+print(type([1, 2, 3])) # <class 'list'>
+```
+
+## Math operators
+
+Python supports the standard arithmetic operators, plus a few that are especially useful in scientific computing:
+
+| Operator | Meaning | Example | Result |
+|----------|---------|---------|--------|
+| `+` | addition | `3 + 2` | `5` |
+| `-` | subtraction | `3 - 2` | `1` |
+| `*` | multiplication | `3 * 2` | `6` |
+| `/` | division (always float) | `7 / 2` | `3.5` |
+| `//` | floor division (integer result) | `7 // 2` | `3` |
+| `%` | modulo (remainder) | `7 % 2` | `1` |
+| `**` | exponentiation | `3 ** 2` | `9` |
+
+Operator precedence follows the usual mathematical convention — exponentiation first, then multiplication and division, then addition and subtraction. Use parentheses to make the order explicit:
+
+```python
+print(9.81 * 10.2**2 / 2)   # kinetic energy formula: 510.3162
+print((9.81 * 10.2)**2 / 2)  # different grouping: 50318.6...
+```
+
+### Operators with strings
+
+Some arithmetic operators also work on strings, but with different meanings. `+` concatenates two strings, and `*` repeats a string a given number of times:
+
+```python
+print("cat" + "dog")    # catdog
+print("cat" * 3)        # catcatcat
+```
+
+Operators that have no meaningful string interpretation — subtraction, division, exponentiation — raise a `TypeError` if you try to use them on strings:
+
+```python
+"cat" - "dog"   # TypeError: unsupported operand type(s) for -: 'str' and 'str'
+```
+
+## Logic and comparisons
+
+Python provides six comparison operators that compare two values and return a boolean — either `True` or `False`:
+
+| Operator | Meaning |
+|----------|---------|
+| `<` | less than |
+| `<=` | less than or equal to |
+| `==` | equal to |
+| `!=` | not equal to |
+| `>=` | greater than or equal to |
+| `>` | greater than |
+
+Note the distinction between `=` (assignment — gives a variable a value) and `==` (comparison — asks whether two values are the same).
+
+```python
+print(3 < 5)    # True
+print(3 == 5)   # False
+print(3 != 5)   # True
+```
+
+Comparisons can be combined with the logical operators `and`, `or`, and `not`:
+
+```python
+print(3 < 5 and 5 < 10)   # True  — both conditions must hold
+print(3 < 5 or  5 > 10)   # True  — at least one condition must hold
+print(not 3 == 5)          # True  — inverts the result
+```
+
+Comparisons are most useful when combined with conditionals, which let your program take different actions depending on whether a condition is true. You will use them extensively in the [conditionals](conditionals.qmd) lesson.
+
+::: {.callout-tip title="Key Points"}
+
+- Python values have types: `int`, `float`, `str`, `list`, `dict`, and others.
+- Arithmetic operators follow standard mathematical precedence; use parentheses to be explicit.
+- `+` and `*` work on strings (concatenation and repetition) but other arithmetic operators do not.
+- Comparison operators return `True` or `False` and can be combined with `and`, `or`, and `not`.
+- Use `=` to assign a value and `==` to compare two values.
+
+:::

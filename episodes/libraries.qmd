@@ -1,0 +1,283 @@
+---
+title: "Libraries"
+---
+
+::: {.callout-note title="Questions"}
+
+- How do I use code that other people have written?
+- How do I find out what a library provides?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Explain what libraries and modules are and why they exist.
+- Import a library module and use `module.name` notation to access its contents.
+- Use `help()` to explore a module's contents.
+- Import specific items from a module, and create an alias for a module on import.
+
+:::
+
+
+## Libraries extend what Python can do
+
+Python's built-in functions cover the basics, but almost everything interesting in scientific computing requires additional tools. A *library* is a collection of files called *modules* that contain functions, constants, and other objects written by someone else and packaged for reuse. The Python [standard library][stdlib] ships with Python itself and covers an enormous range of tasks. Many more libraries — including NumPy, SciPy, and Matplotlib — are available from [PyPI][pypi] (the Python Package Index) and are installed separately.
+
+The terms *library* and *module* are often used interchangeably. Technically a library is a collection of modules, but many libraries consist of a single module, so the distinction rarely matters in practice.
+
+
+## Importing a module
+
+A module must be imported before you can use anything it contains. The `import` statement loads the module into memory and makes its contents accessible under the module's name, using dot notation (`module_name.thing_name`):
+
+```python
+import math
+
+print('pi is', math.pi)
+print('cos(pi) is', math.cos(math.pi))
+```
+```output
+pi is 3.141592653589793
+cos(pi) is -1.0
+```
+
+The dot notation is intentional: it makes it clear which module a name comes from, and avoids collisions if two modules define something with the same name. Note that `math.cos(pi)` would fail — the bare name `pi` is not in scope unless you import it directly; you must write `math.pi`.
+
+Use `help(math)` to see the full contents of any imported module, including a description of every function and constant it provides.
+
+
+## Importing specific items
+
+If you only need a few things from a module, you can import them directly using `from ... import ...`. This lets you use their names without the module prefix:
+
+```python
+from math import cos, pi
+
+print('cos(pi) is', cos(pi))
+```
+```output
+cos(pi) is -1.0
+```
+
+The risk is name collisions: if you later define your own variable called `pi`, or import another `pi` from a different module, you will silently overwrite the first one. For short scripts where you know exactly what you are importing, this form is fine. For larger programs, `import math` and explicit `math.pi` is safer.
+
+
+## Creating an alias on import
+
+For modules with long names that you use frequently, `import ... as ...` lets you give the module a shorter alias:
+
+```python
+import math as m
+
+print('cos(pi) is', m.cos(m.pi))
+```
+```output
+cos(pi) is -1.0
+```
+
+This is a very common convention in scientific Python. You will see `import numpy as np` and `import matplotlib.pyplot as plt` throughout these lessons. The trade-off is that readers unfamiliar with your aliases have to learn them — so stick to widely recognised conventions rather than inventing your own.
+
+
+::: {.callout-caution title="Challenge"}
+## Exploring the Math Module
+
+1. What function in `math` can you use to calculate a square root *without* using `sqrt`?
+2. If that alternative exists, why does `sqrt` also exist?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+1. `math.pow(x, 0.5)` raises `x` to the power 0.5, which is the square root.
+2. `math.sqrt(x)` is more readable when implementing formulas — the intent is immediately clear. Readability is a core Python value. The function also has its roots in the C standard library, which Python's `math` module mirrors.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Locating the Right Module
+
+You want to select a random character from the string:
+
+```python
+bases = 'ACTTGCTTGAC'
+```
+
+1. Which module in the [standard library][stdlib] could help?
+2. Which function from that module would you use? Are there alternatives?
+3. Write a short program that uses the function.
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+The `random` module is the right choice. The string has 11 characters (indices 0–10), so you can generate a random index and use it to select a character:
+
+```python
+from random import randrange
+
+random_index = randrange(len(bases))
+print(bases[random_index])
+```
+
+`random.sample` is a more compact alternative that returns a list, so you need to extract the first element:
+
+```python
+from random import sample
+print(sample(bases, 1)[0])
+```
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## When Is Help Available?
+
+A colleague types `help(math)` and gets:
+
+```error
+NameError: name 'math' is not defined
+```
+
+What did they forget to do?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+They forgot to import the module first. `help(math)` requires that `math` is already loaded into memory:
+
+```python
+import math
+help(math)
+```
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Importing With Aliases
+
+1. Fill in the blanks so that the program prints `90.0`.
+2. Rewrite it using `import` without `as`.
+3. Which form do you find easier to read?
+
+```python
+import math as m
+angle = ____.degrees(____.pi / 2)
+print(____)
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+```python
+import math as m
+angle = m.degrees(m.pi / 2)
+print(angle)
+```
+
+Without the alias:
+
+```python
+import math
+angle = math.degrees(math.pi / 2)
+print(angle)
+```
+
+When you wrote the code yourself, the short alias feels natural. Months later, or when reading someone else's code, the spelled-out `math.degrees` is clearer — especially when there are many modules involved.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Many Ways to Import
+
+Match each `print` statement to the library call that makes it work.
+
+Print statements:
+
+1. `print("sin(pi/2) =", sin(pi/2))`
+2. `print("sin(pi/2) =", m.sin(m.pi/2))`
+3. `print("sin(pi/2) =", math.sin(math.pi/2))`
+
+Library calls:
+
+1. `from math import sin, pi`
+2. `import math`
+3. `import math as m`
+4. `from math import *`
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+1. → library calls 1 or 4 (both make `sin` and `pi` available as bare names)
+2. → library call 3 (uses the alias `m`)
+3. → library call 2 (uses the full module name `math`)
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Importing Specific Items
+
+1. Fill in the blanks so that the program prints `90.0`.
+2. Is this version easier to read than the previous ones?
+3. Why wouldn't programmers always use this form?
+
+```python
+____ math import ____, ____
+angle = degrees(pi / 2)
+print(angle)
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+```python
+from math import degrees, pi
+angle = degrees(pi / 2)
+print(angle)
+```
+
+This form is often the most readable for short scripts. The main reason not to use it everywhere is name collisions: if you also define a variable called `degrees`, or import `degrees` from another library, the later import silently replaces the earlier one, which can cause subtle bugs.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Reading Error Messages
+
+1. Read the code below and try to identify the error without running it.
+2. Run it and read the error message. What type of error is it?
+
+```python
+from math import log
+log(0)
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+1. The logarithm is only defined for positive numbers, so `log(0)` is mathematically undefined.
+2. Python raises a `ValueError: math domain error`. The error type tells you the function received a value outside its valid domain.
+:::
+:::
+
+
+[pypi]: https://pypi.org/
+[stdlib]: https://docs.python.org/3/library/
+
+
+::: {.callout-tip title="Key Points"}
+
+- A library is a collection of modules containing reusable functions, constants, and other objects.
+- Use `import module_name` to load a module; access its contents with `module_name.thing_name`.
+- Use `help(module_name)` to see what a module provides.
+- Use `from module import item` to import specific items and use them without the module prefix.
+- Use `import module as alias` to create a short alias; stick to widely recognised conventions.
+
+:::

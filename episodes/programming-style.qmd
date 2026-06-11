@@ -1,0 +1,204 @@
+---
+title: "Programming Style"
+---
+
+::: {.callout-note title="Questions"}
+
+- How do I write code that others (including future me) can read?
+- How do I document what a function does?
+- How do I check assumptions in my code?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Apply PEP 8 conventions for naming, indentation, and spacing.
+- Write docstrings that appear in `help()` output.
+- Use `assert` statements to check internal invariants.
+
+:::
+
+
+## Code style matters
+
+Python relies more heavily on consistent style than most languages — indentation is part of the syntax, not merely convention. Beyond indentation, following a shared style guide means that anyone familiar with Python can read your code without having to decode personal formatting choices.
+
+The Python community's official style guide is [PEP 8](https://peps.python.org/pep-0008/). The three most important habits it promotes are: document your code, use clear and meaningful variable names, and indent with spaces (four per level), never tabs. The [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html) extends PEP 8 with additional conventions useful for larger projects.
+
+
+## Docstrings make functions self-documenting
+
+If the first statement in a function body is a string literal not assigned to any variable, Python attaches it to the function as its *docstring* — the text that appears when you call `help()` on it:
+
+```python
+def average(values):
+    "Return average of values, or None if no values are supplied."
+
+    if len(values) == 0:
+        return None
+    return sum(values) / len(values)
+
+help(average)
+```
+```output
+Help on function average in module __main__:
+
+average(values)
+    Return average of values, or None if no values are supplied.
+```
+
+For longer descriptions, use triple-quoted strings to span multiple lines:
+
+```python
+def calc_bulk_density(mass, volume):
+    """Return dry bulk density = powder mass / powder volume.
+
+    mass   -- dry powder mass in grams
+    volume -- powder volume in cm³; must be positive
+    """
+    assert volume > 0
+    return mass / volume
+```
+
+A good docstring describes *what* the function does and what its arguments mean — not *how* it does it.
+
+
+## Assertions check your assumptions
+
+An `assert` statement evaluates an expression and raises an `AssertionError` immediately if it is `False`. Use assertions to check conditions that *must* be true for your code to be correct — they act as executable documentation and catch bugs close to their source:
+
+```python
+def calc_bulk_density(mass, volume):
+    """Return dry bulk density = powder mass / powder volume."""
+    assert volume > 0
+    return mass / volume
+```
+
+Assertions should contain only simple checks and must never have side effects (no assignments, no function calls that change state). They are not a substitute for input validation at system boundaries — they are safety nets for internal logic.
+
+
+::: {.callout-caution title="Challenge"}
+## What Will Be Shown?
+
+Which lines in the code below will appear as online help? Are there lines that *should* provide help but won't? Will any lines cause an error?
+
+```python
+"Find maximum edit distance between multiple sequences."
+# This finds the maximum distance between all sequences.
+
+def overall_max(sequences):
+    '''Determine overall maximum edit distance.'''
+
+    highest = 0
+    for left in sequences:
+        for right in sequences:
+            '''Avoid checking sequence against itself.'''
+            if left != right:
+                this = edit_distance(left, right)
+                highest = max(highest, this)
+
+    return highest
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+The module-level string `"Find maximum edit distance between multiple sequences."` is a module docstring — visible via `help(module)` but not via `help(overall_max)`. The function docstring `'''Determine overall maximum edit distance.'''` is what `help(overall_max)` will display. The string `'''Avoid checking sequence against itself.'''` inside the loop is *not* a docstring — it is just a string expression that is evaluated and immediately discarded. It produces no help and no error, but it is confusing and should be a `#` comment instead.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Document This
+
+Convert the comment below into a proper docstring and verify that `help` displays it correctly.
+
+```python
+def middle(a, b, c):
+    # Return the middle value of three.
+    # Assumes the values can actually be compared.
+    values = [a, b, c]
+    values.sort()
+    return values[1]
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+```python
+def middle(a, b, c):
+    """Return the middle value of three.
+
+    Assumes the values can be compared with < and >.
+    """
+    values = [a, b, c]
+    values.sort()
+    return values[1]
+```
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Clean Up This Code
+
+1. Read the program and try to predict what it does.
+2. Run it to check your prediction.
+3. Refactor it to be more readable without changing its behaviour. Run it after each change.
+4. Compare your refactored version with a neighbour's. What choices did you make differently?
+
+```python
+n = 10
+s = 'et cetera'
+print(s)
+i = 0
+while i < n:
+    new = ''
+    for j in range(len(s)):
+        left = j-1
+        right = (j+1)%len(s)
+        if s[left]==s[right]: new += '-'
+        else: new += '*'
+    s=''.join(new)
+    print(s)
+    i += 1
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+```python
+def string_machine(input_string, iterations):
+    """Generate a new string by replacing each character with '-' if its
+    neighbours match, or '*' if they differ. Repeat for the given number
+    of iterations and print each result.
+    """
+    print(input_string)
+    old = input_string
+    for i in range(iterations):
+        new = ''
+        for j in range(len(old)):
+            left = j - 1
+            right = (j + 1) % len(old)
+            if old[left] == old[right]:
+                new += '-'
+            else:
+                new += '*'
+        print(new)
+        old = new
+
+string_machine('et cetera', 10)
+```
+:::
+:::
+
+
+::: {.callout-tip title="Key Points"}
+
+- Follow PEP 8: use spaces (not tabs), meaningful names, and consistent spacing.
+- A docstring is the first string literal in a function body; `help()` displays it.
+- Use `assert condition` to check internal invariants — violations raise `AssertionError` immediately.
+
+:::

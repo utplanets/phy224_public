@@ -1,0 +1,150 @@
+---
+title: "Reading Tabular Data into Arrays"
+---
+
+::: {.callout-note title="Questions"}
+
+- How do I load numerical data from a text file into Python?
+- How do I save an array back to a file?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Use `numpy.loadtxt` to read a delimited text file into a NumPy array.
+- Control how headers, comments, and delimiters are handled.
+- Split a multi-column array into separate variables.
+- Use `numpy.savetxt` to write an array to a file with formatting options.
+
+:::
+
+
+## Loading data with `numpy.loadtxt`
+
+NumPy's `loadtxt` function reads a plain-text file of numbers and returns them as a two-dimensional array. By default it expects whitespace-separated values and skips lines that start with `#`:
+
+```python
+import numpy
+data = numpy.loadtxt('data/galileo_flat.empty')
+print(data)
+```
+```output
+[[1500. 1000.]
+ [1340.  828.]
+ [1328.  800.]
+ [1172.  600.]
+ [ 800.  300.]]
+```
+
+Real data files often include delimiters, comment lines, and column headers. The `delimiter` keyword specifies the separator character, `comments` sets the comment character to ignore, and `skiprows` skips a fixed number of lines at the top:
+
+```python
+data = numpy.loadtxt('data/galileo_flat.csv', comments="#", skiprows=2, delimiter=',')
+print(data)
+```
+```output
+[[1500. 1000.]
+ [1340.  828.]
+ [1328.  800.]
+ [1172.  600.]
+ [ 800.  300.]]
+```
+
+
+## Data shape: rows first, then columns
+
+The loaded array is shaped with rows first. A file with 5 data rows and 2 columns produces a `(5, 2)` array. You can inspect the shape with the `.shape` attribute:
+
+```python
+print("data shape is ", data.shape)
+```
+```output
+data shape is  (5, 2)
+```
+
+
+## Splitting columns into separate variables
+
+It is often convenient to work with each data column as its own array. Pass `unpack=True` to `loadtxt` and assign the result to multiple variables in a single statement — NumPy will assign one column per variable:
+
+```python
+D, H = numpy.loadtxt('data/galileo_flat.csv', comments="#", skiprows=2,
+                     delimiter=',', unpack=True)
+print(D, H)
+print("D shape is ", D.shape)
+print("H shape is ", H.shape)
+```
+```output
+[1500. 1340. 1328. 1172.  800.] [1000.  828.  800.  600.  300.]
+D shape is  (5,)
+H shape is  (5,)
+```
+
+Alternatively, load the data first and then transpose to unpack columns:
+
+```python
+data = numpy.loadtxt('data/galileo_flat.csv', comments="#", skiprows=2, delimiter=',')
+D, H = data.T
+```
+
+
+## Saving data with `numpy.savetxt`
+
+`numpy.savetxt` mirrors `loadtxt` and writes an array to a text file. The default format is floating-point with 16 significant digits:
+
+```python
+numpy.savetxt("data/mydata.txt", data, delimiter=',')
+```
+
+    1.500000000000000000e+03,1.000000000000000000e+03
+    ...
+
+The `fmt` keyword controls the number format. Use a C-style format string to write more compact values:
+
+```python
+numpy.savetxt("data/mydata2.txt", data, delimiter=',', fmt='%.6g')
+```
+
+    1500,1000
+    1340,828
+    ...
+
+Add a descriptive header with the `header` keyword. NumPy automatically prepends `#` to header lines so they are ignored when you re-read the file with `loadtxt`:
+
+```python
+header = "Distance (D), Height (H)"
+newdata = numpy.vstack([D, H]).T
+numpy.savetxt("data/mydata3.txt", newdata, delimiter=', ', header=header, fmt='%.6g')
+```
+
+    # Distance (D), Height (H)
+    1500, 1000
+    1340, 828
+    ...
+
+
+## Named columns with `dtype`
+
+For more complex files you can use the `dtype` keyword to name the columns and control their types individually. The resulting array behaves like a structured record that you can index by column name:
+
+```python
+data = numpy.loadtxt('data/galileo_flat.csv', comments="#", skiprows=2, delimiter=',',
+                     dtype={'names': ("Distance", "Height"), 'formats': ('f4', 'f4')})
+print("data shape is ", data.shape)
+print("Distance data is ", data["Distance"])
+```
+```output
+data shape is  (5,)
+Distance data is  [1500. 1340. 1328. 1172.  800.]
+```
+
+
+::: {.callout-tip title="Key Points"}
+
+- `numpy.loadtxt` reads whitespace- or delimiter-separated numerical data into a 2D array.
+- Use `delimiter`, `comments`, and `skiprows` to handle formatted CSV files.
+- Loaded arrays have shape `(rows, columns)`; use `.shape` to inspect.
+- Pass `unpack=True` or use `.T` to split columns into separate one-dimensional arrays.
+- `numpy.savetxt` writes an array to a text file; use `fmt` and `header` to control formatting.
+
+:::

@@ -1,0 +1,350 @@
+---
+title: "Data Types and Type Conversion"
+---
+
+::: {.callout-note title="Questions"}
+
+- How does a value's type affect what I can do with it?
+- How do I convert between types?
+- What happens when integers and floats are mixed in an expression?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Use `type()` to identify the type of a value or variable.
+- Explain which operations are valid for numbers versus strings.
+- Convert between types using `int()`, `float()`, and `str()`.
+- Predict the result type when integers and floats are mixed.
+
+:::
+
+
+## Types control what operations are allowed
+
+The [Basics](basics.qmd) lesson introduced the three fundamental types — integers (`int`), floats (`float`), and strings (`str`). Use the built-in `type()` function at any time to check what type a value or variable has:
+
+```python
+print(type(52))       # <class 'int'>
+print(type(3.14))     # <class 'float'>
+print(type('hello'))  # <class 'str'>
+```
+
+The *variable* is just a label — it is the *value* that carries the type. This lesson focuses on what each type allows you to do, and how to convert between them.
+
+A value's type determines which operations make sense. Arithmetic subtraction works on numbers but not on strings:
+
+```python
+print(5 - 3)
+```
+```output
+2
+```
+
+```python
+print('hello' - 'h')
+```
+```error
+TypeError: unsupported operand type(s) for -: 'str' and 'str'
+```
+
+However, `+` and `*` do work on strings — they just mean something different. Adding two strings concatenates them, and multiplying a string by an integer repeats it:
+
+```python
+full_name = 'Ahmed' + ' ' + 'Walsh'
+print(full_name)
+```
+```output
+Ahmed Walsh
+```
+
+```python
+separator = '=' * 10
+print(separator)
+```
+```output
+==========
+```
+
+Strings have a length, countable with `len()`. Numbers do not — calling `len()` on an integer raises a `TypeError`:
+
+```python
+print(len(full_name))
+```
+```output
+11
+```
+
+```python
+print(len(52))
+```
+```error
+TypeError: object of type 'int' has no len()
+```
+
+
+## Converting between types
+
+You cannot mix numbers and strings in arithmetic directly. Python refuses `1 + '2'` because the intent is ambiguous — should the result be the number `3` or the string `'12'`? Use `int()`, `float()`, or `str()` to convert explicitly first:
+
+```python
+print(1 + int('2'))
+print(str(1) + '2')
+```
+```output
+3
+12
+```
+
+`float()` will convert a numeric string like `"3.4"` to a float. `int()` will truncate a float to its integer part, discarding the decimal. Conversions that do not make sense raise a `ValueError`:
+
+```python
+print(float("3.4"))   # 3.4
+print(int(3.4))       # 3  — truncates, does not round
+print(float("Hello")) # ValueError
+```
+
+Note that `int("3.4")` also raises a `ValueError` — Python does not chain conversions automatically. You must convert in steps: `int(float("3.4"))`.
+
+
+## Mixing integers and floats
+
+When an expression contains both integers and floats, Python automatically promotes the integer to a float so no precision is lost. The `/` operator always returns a float in Python 3, even when both operands are integers:
+
+```python
+print('half is', 1 / 2.0)
+print('three squared is', 3.0 ** 2)
+print('integer division:', 7 / 2)
+```
+```output
+half is 0.5
+three squared is 9.0
+integer division: 3.5
+```
+
+To get a whole-number result from division, use `//` (floor division). The `%` operator gives the remainder:
+
+```python
+print('5 // 3:', 5 // 3)
+print('5 % 3:', 5 % 3)
+```
+```output
+5 // 3: 1
+5 % 3: 2
+```
+
+
+## Variables only change when assigned
+
+Unlike a spreadsheet cell, a Python variable does not update automatically when the values it depended on change. Assignment copies the *current* value — the connection to any previous expression is severed immediately:
+
+```python
+first = 1
+second = 5 * first
+first = 2
+print('first is', first, 'and second is', second)
+```
+```output
+first is 2 and second is 5
+```
+
+When Python evaluated `5 * first`, it computed `5`, stored that number in `second`, and moved on. Changing `first` later has no effect on `second`.
+
+
+::: {.callout-caution title="Challenge"}
+## Fractions
+
+What type of value is `3.4`? How can you find out?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+It is a float. You can verify with `type()`:
+
+```python
+print(type(3.4))
+```
+```output
+<class 'float'>
+```
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Automatic Type Conversion
+
+What type of value is `3.25 + 4`?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+It is a float. When an integer and a float appear together in an expression, Python converts the integer to a float automatically:
+
+```python
+result = 3.25 + 4
+print(result, 'is', type(result))
+```
+```output
+7.25 is <class 'float'>
+```
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Choose a Type
+
+What type of value (integer, float, or string) would you use to represent each of the following? Try to think of more than one defensible answer for each.
+
+1. Number of days since the start of the year.
+2. Time elapsed from the start of the year until now, in days.
+3. Serial number of a piece of lab equipment.
+4. A lab specimen's age.
+5. Current population of a city.
+6. Average population of a city over time.
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+1. Integer — the count lies between 1 and 365 and is always whole.
+2. Float — fractional days (hours, minutes) are meaningful.
+3. String if the serial number contains letters; integer if it is purely numeric.
+4. Depends on definition: whole days since collection (integer), or date and time of collection (string).
+5. Integer for a count of individuals; float if expressing in millions.
+6. Float — an average is rarely a whole number.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Division Types
+
+Given the three division operators in Python 3:
+
+```python
+print('5 // 3:', 5 // 3)
+print('5 / 3:', 5 / 3)
+print('5 % 3:', 5 % 3)
+```
+```output
+5 // 3: 1
+5 / 3: 1.6666666666666667
+5 % 3: 2
+```
+
+If `num_subjects` is the number of subjects in a study and `num_per_survey` is the number who can participate in one survey, write an expression that calculates the minimum number of surveys needed to reach everyone at least once.
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+Floor division gives the number of complete surveys; adding 1 handles the remainder group:
+
+```python
+num_subjects = 600
+num_per_survey = 42
+num_surveys = num_subjects // num_per_survey + 1
+print(num_subjects, 'subjects,', num_per_survey, 'per survey:', num_surveys)
+```
+```output
+600 subjects, 42 per survey: 15
+```
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Strings to Numbers
+
+`float()` converts a numeric string to a float, and `int()` truncates a float to an integer:
+
+```python
+print("string to float:", float("3.4"))
+print("float to int:", int(3.4))
+```
+```output
+string to float: 3.4
+float to int: 3
+```
+
+What do you expect the following to do? What does it actually do, and why?
+
+```python
+print("fractional string to int:", int("3.4"))
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+It raises a `ValueError`. Although it might seem reasonable for Python to convert `"3.4"` to `3.4` and then to `3`, Python requires explicit, step-by-step conversion. If you want the integer, you must do it yourself:
+
+```python
+int(float("3.4"))   # 3
+```
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Arithmetic with Different Types
+
+Which of the following expressions produce `2.0`? There may be more than one correct answer.
+
+```python
+first = 1.0
+second = "1"
+third = "1.1"
+```
+
+1. `first + float(second)`
+2. `float(second) + float(third)`
+3. `first + int(third)`
+4. `first + int(float(third))`
+5. `int(first) + int(float(third))`
+6. `2.0 * second`
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+Answers 1 and 4 produce `2.0`.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Complex Numbers
+
+Python supports complex numbers written as `1.0+2.0j`. The real and imaginary parts are accessible as `.real` and `.imag`.
+
+1. Why does Python use `j` rather than `i` for the imaginary unit?
+2. What does `1+2j + 3` produce?
+3. What is `4j`? What about `4 j` or `4 + j`?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+1. The convention comes from electrical engineering, where `i` is already used for current. Python adopted the engineering notation early on and it has never changed — see the [Stack Overflow discussion](https://stackoverflow.com/questions/24812444/why-are-complex-numbers-in-python-denoted-with-j-instead-of-i) for more history.
+2. `4+2j` — the integer `3` is promoted to complex.
+3. `4j` is the imaginary number $4i$. `4 j` is a syntax error (space not allowed). `4 + j` is a `NameError` unless `j` is a defined variable.
+:::
+:::
+
+
+::: {.callout-tip title="Key Points"}
+
+- Every value has a type: `int`, `float`, or `str` are the most common.
+- Use `type()` to find out what type a value has.
+- Types control which operations are allowed.
+- `+` concatenates strings; `*` repeats them. Other arithmetic operators do not work on strings.
+- Strings have a length; numbers do not.
+- Convert between types with `int()`, `float()`, and `str()` — conversions must be explicit.
+- When integers and floats are mixed, Python promotes to float. `/` always returns a float.
+- Variables only change value when something is explicitly assigned to them.
+
+:::

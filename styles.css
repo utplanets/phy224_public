@@ -1,0 +1,42 @@
+/* PHY224 Python Review — Quarto site styles */
+
+/* Make Questions callouts visually distinct (blue-teal) */
+.callout-note.callout[data-callout-title="Questions"],
+.callout-note[title="Questions"] {
+  border-left-color: #0077b6;
+}
+
+/* Objectives — use default note styling */
+
+/* Key Points — standout green via tip */
+.callout-tip {
+  border-left-color: #2d6a4f;
+}
+
+/* Challenge — orange-amber via caution */
+.callout-caution {
+  border-left-color: #e07b00;
+}
+
+/* Code output blocks — subtle background */
+pre.sourceCode.output,
+code.sourceCode.output {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+/* Episode header timing info */
+.teaching-info {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+  padding: 0.4rem 0.8rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Sidebar episode list spacing */
+.sidebar-navigation .sidebar-item {
+  line-height: 1.4;
+}

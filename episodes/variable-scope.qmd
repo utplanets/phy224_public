@@ -1,0 +1,128 @@
+---
+title: "Variable Scope"
+---
+
+::: {.callout-note title="Questions"}
+
+- Why can't I see variables that were defined inside a function?
+- How do I read a Python traceback?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Distinguish between local and global variables.
+- Explain why function parameters are local variables.
+- Read a traceback to identify the file, function, line number, error type, and message.
+
+:::
+
+
+## Variable scope controls visibility
+
+There are only so many sensible names for variables, and code written by two different people will inevitably reuse the same names. Scope is the mechanism Python uses to keep those names from colliding: a variable is only *visible* in the part of the program where it is defined.
+
+A variable defined at the top level of a script — outside any function — is a *global* variable and can be read from anywhere. Variables defined *inside* a function, including its parameters, are *local* variables and exist only for the duration of that function call. They are invisible to the rest of the program:
+
+```python
+pressure = 103.9
+
+def adjust(t):
+    temperature = t * 1.43 / pressure
+    return temperature
+```
+
+Here `pressure` is global and is visible inside `adjust`. The parameter `t` and the variable `temperature` are both local to `adjust` — they cease to exist when `adjust` returns. Trying to access `temperature` from outside the function raises a `NameError`:
+
+```python
+print('adjusted:', adjust(0.9))
+print('temperature after call:', temperature)
+```
+```output
+adjusted: 0.01238691049085659
+```
+```error
+NameError: name 'temperature' is not defined
+```
+
+This is intentional. The author of a function can use any variable names they like without risking interference with names in the calling code, and callers do not need to know about the internal names a function uses.
+
+
+## Reading tracebacks {#reading-error-messages}
+
+When Python encounters an error it prints a *traceback* — a record of the chain of function calls that led to the problem. Reading it from the bottom up is the fastest way to understand what went wrong:
+
+```error
+KeyError                                  Traceback (most recent call last)
+<ipython-input-2-e4c4cbafeeb5> in <module>()
+      1 import errors_02
+----> 2 errors_02.print_friday_message()
+
+/Users/ghopper/thesis/code/errors_02.py in print_friday_message()
+     13
+     14 def print_friday_message():
+---> 15     print_message("Friday")
+
+/Users/ghopper/thesis/code/errors_02.py in print_message(day)
+      9         "sunday": "Aw, the weekend is almost over."
+     10     }
+---> 11     print(messages[day])
+
+KeyError: 'Friday'
+```
+
+Working from the bottom: the error is a `KeyError` with the message `'Friday'` — the key `"Friday"` was not found in a dictionary. The arrow `-->` on line 11 of `errors_02.py`, inside the function `print_message`, is where the error actually occurred. The traceback above that shows how execution arrived there: the top-level script called `print_friday_message` (line 2), which called `print_message("Friday")` (line 15).
+
+
+::: {.callout-caution title="Challenge"}
+## Local and Global Variable Use
+
+Trace the values of all variables in this program as it executes. Use `---` for variables that do not yet exist or have gone out of scope.
+
+```python
+limit = 100
+
+def clip(value):
+    return min(max(0.0, value), limit)
+
+value = -22.5
+print(clip(value))
+```
+
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Reading Error Messages
+
+Read the traceback shown in this lesson and answer:
+
+1. How many levels does the traceback have?
+2. In which file did the error occur?
+3. In which function did it occur?
+4. On which line number?
+5. What type of error is it?
+6. What is the error message?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+1. Three levels: the top-level script, `print_friday_message`, and `print_message`.
+2. `/Users/ghopper/thesis/code/errors_02.py`
+3. `print_message`
+4. Line 11
+5. `KeyError`
+6. `'Friday'` — the key was not present in the dictionary.
+:::
+:::
+
+
+::: {.callout-tip title="Key Points"}
+
+- A *global* variable is defined outside any function and is visible everywhere.
+- A *local* variable is defined inside a function (including its parameters) and is only visible within that function.
+- Scope prevents name collisions between function internals and calling code.
+- Read a traceback from the bottom up: the last arrow shows where the error occurred; the levels above show how execution arrived there.
+
+:::

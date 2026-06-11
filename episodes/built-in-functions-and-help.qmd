@@ -1,0 +1,229 @@
+---
+title: "Built-in Functions"
+---
+
+::: {.callout-note title="Questions"}
+
+- What built-in functions does Python provide?
+- How do I call a function and use its result?
+- What kinds of errors can occur in programs?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Call built-in Python functions with the correct number and type of arguments.
+- Nest function calls and predict the order of evaluation.
+- Distinguish between syntax errors and runtime errors.
+
+:::
+
+
+## Comments document your code
+
+A `#` character tells Python to ignore the rest of the line. Use comments to explain *why* your code does something when the reason is not obvious from reading it:
+
+```python
+# This sentence isn't executed by Python.
+adjustment = 0.5   # Neither is this - anything after '#' is ignored.
+```
+
+
+## Functions take arguments and return results
+
+A function is a named piece of reusable code that you invoke by writing its name followed by parentheses. Values passed inside the parentheses are called *arguments*. You must always include the parentheses — even when calling a function with no arguments — so Python knows you are making a call rather than referencing the function object itself.
+
+`print` takes zero or more arguments and displays them on a single line, separated by spaces. With no arguments it prints a blank line:
+
+```python
+print('before')
+print()
+print('after')
+```
+```output
+before
+
+after
+```
+
+`len` takes exactly one argument and returns the number of items in it. `int`, `str`, and `float` each take one argument and return a converted value.
+
+
+## Commonly-used built-in functions
+
+`max` and `min` return the largest and smallest values from a set of arguments. They work on both numbers and strings (strings are compared character by character using Unicode order):
+
+```python
+print(max(1, 2, 3))
+print(min('a', 'A', '0'))
+```
+```output
+3
+0
+```
+
+`round` rounds a floating-point number. By default it rounds to zero decimal places; pass a second argument to specify the precision:
+
+```python
+print(round(3.712))
+print(round(3.712, 1))
+```
+```output
+4
+3.7
+```
+
+Functions enforce their requirements. `max` and `min` need at least one argument, and the arguments must be mutually comparable — mixing incompatible types raises a `TypeError`:
+
+```python
+print(max(1, 'a'))
+```
+```error
+TypeError: unorderable types: str() > int()
+```
+
+
+## Every function returns something
+
+Every function call produces a result. If a function has no meaningful value to return it returns the special value `None`. `print` is a common example — its job is the side effect of writing to the screen, not producing a value:
+
+```python
+result = print('example')
+print('result of print is', result)
+```
+```output
+example
+result of print is None
+```
+
+When you call functions inside other expressions, nested calls are evaluated from the inside out, just as in mathematics: `max(len('tin'), len('copper'))` first computes the two lengths, then finds the maximum.
+
+
+## Syntax errors versus runtime errors
+
+Python checks your code for *syntax errors* — structural problems that make the program impossible to parse — before running a single line. A forgotten closing quote, a misplaced `=`, or an unclosed parenthesis will produce a `SyntaxError` with a `^` pointing at approximately where the problem is:
+
+```python
+name = 'Feng
+```
+```error
+SyntaxError: EOL while scanning string literal
+```
+
+```python
+print("hello world"
+```
+```error
+SyntaxError: unexpected EOF while parsing
+```
+
+*Runtime errors* only appear when the problematic line actually executes. A misspelled variable name raises a `NameError`:
+
+```python
+age = 53
+remaining = 100 - aege  # mis-spelled 'age'
+```
+```error
+NameError: name 'aege' is not defined
+```
+
+The general strategy: fix syntax errors by reading the source code carefully around the `^` marker; fix runtime errors by tracing what value each variable holds when the error line is reached.
+
+For detailed guidance on finding answers when you are stuck, see the [Getting Help](getting-help.qmd) lesson.
+
+
+::: {.callout-caution title="Challenge"}
+## What Happens When
+
+1. Explain the order of operations in the program below.
+2. What is the final value of `radiance`?
+
+```python
+radiance = 1.0
+radiance = max(2.1, 2.0 + min(radiance, 1.1 * radiance - 0.5))
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+1. Inside out:
+   1. `1.1 * radiance` → `1.1`
+   2. `1.1 - 0.5` → `0.6`
+   3. `min(1.0, 0.6)` → `0.6`
+   4. `2.0 + 0.6` → `2.6`
+   5. `max(2.1, 2.6)` → `2.6`
+2. `radiance = 2.6`
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Spot the Difference
+
+1. Predict what each `print` statement below will output.
+2. Does `max(len(rich), poor)` run or raise an error? If it runs, does the result make sense?
+
+```python
+easy_string = "abc"
+print(max(easy_string))
+rich = "gold"
+poor = "tin"
+print(max(rich, poor))
+print(max(len(rich), len(poor)))
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+1.
+```output
+c
+tin
+4
+```
+2. `max(len(rich), poor)` raises a `TypeError` — it tries to compare the integer `4` with the string `'tin'`, which Python cannot order.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Why Not?
+
+Why don't `max` and `min` return `None` when given no arguments?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+Returning `None` silently would hide a programming mistake — the caller would store `None`, use it later, and get a confusing error far from the actual problem. Raising a `TypeError` immediately points you directly to the bug.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Last Character of a String
+
+If Python indexes from zero and `len` returns the number of characters, what index expression retrieves the last character of `name`?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+`name[len(name) - 1]`
+
+(A simpler form using negative indexing — `name[-1]` — is covered in the Variables and Assignment lesson.)
+:::
+:::
+
+
+::: {.callout-tip title="Key Points"}
+
+- Use comments (`#`) to document the *why* behind non-obvious code.
+- Call a function by writing its name followed by arguments in parentheses; parentheses are always required.
+- `max`, `min`, and `round` are commonly-used built-in functions.
+- Nested function calls are evaluated from the inside out.
+- Every function call returns a value; functions with no useful result return `None`.
+- Python reports a `SyntaxError` before running the program; a runtime error only appears when the bad line executes.
+
+:::

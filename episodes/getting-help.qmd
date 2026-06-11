@@ -1,0 +1,135 @@
+---
+title: "Getting Help"
+---
+
+::: {.callout-note title="Questions"}
+
+- How do I find out what a function does?
+- How do I search for answers when I am stuck?
+- How do I read package documentation?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Use `help()` and Jupyter's inline help to read function documentation.
+- Find the official documentation for NumPy, SciPy, and Matplotlib.
+- Form effective search queries for Python errors and tasks.
+- Adapt code examples found online to your own problem.
+
+:::
+
+
+## `help()` and Jupyter inline help
+
+Every built-in function and most library functions include built-in documentation. Call `help()` and pass the function name *without* parentheses to display it in the terminal or notebook output:
+
+```python
+help(round)
+```
+```output
+Help on built-in function round in module builtins:
+
+round(...)
+    round(number[, ndigits]) -> number
+
+    Round a number to a given precision in decimal digits (default 0 digits).
+    This returns an int when called with one argument, otherwise the
+    same type as the number. ndigits may be negative.
+```
+
+In the Jupyter Notebook there are two faster shortcuts:
+
+- Place the cursor inside a function's parentheses and press **Shift+Tab** for a compact pop-up summary.
+- Type the function name followed by `?` and run the cell for the full docstring.
+
+These shortcuts work for any imported function, including NumPy and SciPy functions:
+
+```python
+import numpy
+numpy.linspace?
+```
+
+
+## Official package documentation
+
+For anything beyond a quick signature check, the official documentation sites are far richer than `help()` output. They include conceptual guides, worked examples, and cross-references between related functions.
+
+- **Python standard library**: [docs.python.org/3/library](https://docs.python.org/3/library/)
+- **NumPy**: [numpy.org/doc/stable/reference](https://numpy.org/doc/stable/reference/)
+- **SciPy**: [docs.scipy.org/doc/scipy/reference](https://docs.scipy.org/doc/scipy/reference/)
+- **Matplotlib**: [matplotlib.org/stable/api](https://matplotlib.org/stable/api/) — and especially the [**gallery**](https://matplotlib.org/stable/gallery/), which shows hundreds of plot types with complete source code
+
+When you know the function name, search the reference page directly. When you know what you want to *do* but not which function does it, start with the gallery (for plots) or the module overview pages.
+
+
+## Searching online effectively
+
+A well-formed search query usually gets a useful answer within the first few results. A few habits help:
+
+**Include the library name.** `"numpy sort 2d array by column"` returns far more relevant results than `"sort array by column"`.
+
+**Paste the error type, not the full traceback.** The key text is usually the last line — `ValueError: operands could not be broadcast together` — combined with the function you were calling. Search for `"numpy ValueError operands could not be broadcast"` rather than copying hundreds of lines of traceback.
+
+**Use exact Python syntax in quotes.** Searching for `python "numpy.loadtxt" skiprows` narrows results to pages that literally discuss that argument.
+
+**Stack Overflow** ([stackoverflow.com](https://stackoverflow.com/questions/tagged/python)) is the most reliably useful community resource. Most common problems have already been asked and answered — check the accepted answer (green tick) and the highest-voted answers, which sometimes improve on it. The tags `[numpy]`, `[scipy]`, and `[matplotlib]` narrow searches within Python questions.
+
+
+## Adapting examples to your problem
+
+Documentation examples and Stack Overflow answers are written for a generic audience — they rarely match your specific data or variable names exactly. When adapting code you find:
+
+1. **Run the example as-is first.** Confirm you understand what it does before modifying it.
+2. **Change one thing at a time.** Swap in your variable name, run, check, then make the next change.
+3. **Read any keyword arguments you do not recognise.** A line like `numpy.loadtxt(f, delimiter=',', usecols=(0,2))` has three arguments: look up `usecols` if you have not seen it before. Copying code without understanding its arguments leads to silent bugs.
+4. **Check the output shape and type.** Many errors come from mismatches between what a function returns and what the next line expects. `print(type(result), result.shape)` is a quick sanity check.
+
+
+::: {.callout-caution title="Challenge"}
+## Reading Documentation
+
+Use `help(sorted)` or the Python documentation to answer:
+
+1. What arguments does `sorted` accept besides the iterable?
+2. How would you sort a list of strings in reverse alphabetical order?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+`sorted` accepts `key` (a function applied to each element before comparison) and `reverse` (a boolean, default `False`):
+
+```python
+words = ['banana', 'apple', 'cherry']
+print(sorted(words, reverse=True))
+```
+```output
+['cherry', 'banana', 'apple']
+```
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Searching for a Function
+
+You want to calculate the median of a NumPy array but you do not know the function name. Describe the search query you would use and identify the correct function.
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+A query like `"numpy median array"` or browsing the NumPy statistics reference page ([numpy.org/doc/stable/reference/routines.statistics.html](https://numpy.org/doc/stable/reference/routines.statistics.html)) will quickly surface `numpy.median`. You can then confirm its signature with `help(numpy.median)` or `numpy.median?`.
+:::
+:::
+
+
+::: {.callout-tip title="Key Points"}
+
+- Use `help(function)` or Jupyter's `Shift+Tab` / `?` shortcuts to read documentation without leaving the notebook.
+- The official NumPy, SciPy, and Matplotlib documentation sites have examples and cross-references that `help()` does not.
+- Effective searches include the library name, the error type (not the full traceback), and exact function names in quotes.
+- Stack Overflow is reliable for common problems; check the accepted answer and the most-voted answers.
+- When adapting example code, run it as-is first, then change one thing at a time and check the output.
+
+:::

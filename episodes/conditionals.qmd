@@ -1,0 +1,266 @@
+---
+title: "Conditionals"
+---
+
+::: {.callout-note title="Questions"}
+
+- How does a program choose between different actions?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Write `if`, `elif`, and `else` statements to branch program execution.
+- Combine comparisons with `and`, `or`, and `not`.
+- Trace the execution of a conditional inside a loop.
+
+:::
+
+
+## `if` statements control whether a block runs
+
+An `if` statement evaluates a condition and executes its indented body only if that condition is `True`. The structure mirrors a `for` loop: the header ends with a colon and the body is indented:
+
+```python
+mass = 3.54
+if mass > 3.0:
+    print(mass, 'is large')
+
+mass = 2.07
+if mass > 3.0:
+    print(mass, 'is large')
+```
+```output
+3.54 is large
+```
+
+On its own, an `if` with a fixed value is not very interesting. Conditionals become powerful inside loops, where the condition is evaluated for each item in the collection:
+
+```python
+masses = [3.54, 2.07, 9.22, 1.86, 1.71]
+for m in masses:
+    if m > 3.0:
+        print(m, 'is large')
+```
+```output
+3.54 is large
+9.22 is large
+```
+
+
+## `else` and `elif` handle the remaining cases
+
+`else` specifies what to do when the `if` condition is not met. `elif` (short for "else if") inserts an additional condition between `if` and `else`. Python tests each condition in order and executes the first branch whose condition is `True`, then skips the rest:
+
+```python
+masses = [3.54, 2.07, 9.22, 1.86, 1.71]
+for m in masses:
+    if m > 9.0:
+        print(m, 'is HUGE')
+    elif m > 3.0:
+        print(m, 'is large')
+    else:
+        print(m, 'is small')
+```
+```output
+3.54 is large
+2.07 is small
+9.22 is HUGE
+1.86 is small
+1.71 is small
+```
+
+The order of branches matters. Python stops at the first true condition, so putting a less-restrictive condition first swallows values that should have matched a later, more-restrictive one:
+
+```python
+grade = 85
+if grade >= 70:
+    print('grade is C')    # fires here — Python stops
+elif grade >= 80:
+    print('grade is B')    # never reached
+elif grade >= 90:
+    print('grade is A')    # never reached
+```
+```output
+grade is C
+```
+
+Arrange conditions from most to least restrictive to avoid this mistake.
+
+
+## Conditions are evaluated once, not re-evaluated
+
+Python tests each condition once when execution reaches it and does not re-evaluate after variables change. This is different from how a spreadsheet works:
+
+```python
+velocity = 10.0
+if velocity > 20.0:
+    print('moving too fast')
+else:
+    print('adjusting velocity')
+    velocity = 50.0
+```
+```output
+adjusting velocity
+```
+
+Even though `velocity` is now 50.0, the `if` branch is not re-visited. Conditionals inside loops can, however, produce evolving behaviour by re-testing the condition on each iteration:
+
+```python
+velocity = 10.0
+for i in range(5):
+    print(i, ':', velocity)
+    if velocity > 20.0:
+        velocity = velocity - 5.0
+    else:
+        velocity = velocity + 10.0
+print('final velocity:', velocity)
+```
+```output
+0 : 10.0
+1 : 20.0
+2 : 30.0
+3 : 25.0
+4 : 20.0
+final velocity: 30.0
+```
+
+A variable-trace table is a useful tool for following this kind of loop:
+
+| i | velocity (start of iteration) | velocity (end of iteration) |
+|---|------------------------------|-----------------------------|
+| 0 | 10.0 | 20.0 |
+| 1 | 20.0 | 30.0 |
+| 2 | 30.0 | 25.0 |
+| 3 | 25.0 | 20.0 |
+| 4 | 20.0 | 30.0 |
+
+
+## Combining conditions
+
+Use `and`, `or`, and `not` to build compound conditions. When mixing `and` and `or` in the same expression, always add parentheses — the precedence rules are easy to misread:
+
+```python
+# Clear intent with parentheses
+if (mass > 5 and velocity > 20):
+    print("Fast heavy object. Duck!")
+elif (mass > 2 and mass <= 5 and velocity <= 20):
+    print("Normal traffic")
+```
+
+Without parentheses, `a or b and c` means `a or (b and c)`, which may not be what you intended.
+
+
+::: {.callout-caution title="Challenge"}
+## Tracing Execution
+
+What does this program print?
+
+```python
+pressure = 71.9
+if pressure > 50.0:
+    pressure = 25.0
+elif pressure <= 50.0:
+    pressure = 0.0
+print(pressure)
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+```output
+25.0
+```
+
+The first condition (`pressure > 50.0`) is true when `pressure` is `71.9`, so that branch executes and `elif` is skipped.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Trimming Values
+
+Fill in the blanks so that this program replaces negative values with `0` and positive values (including zero) with `1`:
+
+```python
+original = [-1.5, 0.2, 0.4, 0.0, -1.3, 0.4]
+result = ____
+for value in original:
+    if ____:
+        result.append(0)
+    else:
+        ____
+print(result)
+```
+
+```output
+[0, 1, 1, 1, 0, 1]
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+```python
+original = [-1.5, 0.2, 0.4, 0.0, -1.3, 0.4]
+result = []
+for value in original:
+    if value < 0.0:
+        result.append(0)
+    else:
+        result.append(1)
+print(result)
+```
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Initializing
+
+Modify this program so that it finds the largest and smallest values in the list regardless of the range of values:
+
+```python
+values = [...some test data...]
+smallest, largest = None, None
+for v in values:
+    if ____:
+        smallest, largest = v, v
+    ____:
+        smallest = min(____, v)
+        largest = max(____, v)
+print(smallest, largest)
+```
+
+What are the advantages and disadvantages of using `None` as the initial sentinel value?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+```python
+values = [-2, 1, 65, 78, -54, -24, 100]
+smallest, largest = None, None
+for v in values:
+    if smallest is None and largest is None:
+        smallest, largest = v, v
+    else:
+        smallest = min(smallest, v)
+        largest = max(largest, v)
+print(smallest, largest)
+```
+
+Using `None` as a sentinel means the code works correctly regardless of the range of values — you do not need to guess a safe initial minimum or maximum. The disadvantage is that you need the special-case first-iteration check; forgetting it causes a `TypeError` when `min(None, v)` is called.
+:::
+:::
+
+
+::: {.callout-tip title="Key Points"}
+
+- An `if` statement executes its body only when the condition is `True`.
+- `elif` adds additional conditions; `else` handles everything not caught above.
+- Conditions are tested in order; execution stops at the first true branch.
+- Conditions are evaluated once per encounter — Python does not re-test automatically.
+- Use `and`, `or`, and `not` to combine conditions; parentheses clarify intent.
+
+:::

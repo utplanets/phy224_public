@@ -1,0 +1,372 @@
+---
+title: "Lists"
+---
+
+::: {.callout-note title="Questions"}
+
+- How do I store and work with a collection of values?
+- How are lists different from strings?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Create lists and access individual elements by index.
+- Slice a list to extract a sub-sequence.
+- Modify a list by assignment, `append`, `extend`, and `del`.
+- Explain the difference between mutable lists and immutable strings.
+
+:::
+
+
+## Lists store many values in a single structure
+
+When you need to work with a collection of related values — pressures from a sensor, times in an experiment, filenames to process — storing them in separate variables like `pressure_001`, `pressure_002` quickly becomes unmanageable. A *list* groups any number of values into a single object. Lists are written with square brackets, with values separated by commas:
+
+```python
+pressures = [0.273, 0.275, 0.277, 0.275, 0.276]
+print('pressures:', pressures)
+print('length:', len(pressures))
+```
+```output
+pressures: [0.273, 0.275, 0.277, 0.275, 0.276]
+length: 5
+```
+
+Lists may contain values of any type, and different types can be mixed in the same list — though in practice a list of the same type is more common and easier to reason about.
+
+
+## Indexing and slicing lists
+
+List elements are accessed by position using square brackets, exactly like string characters. Indexing starts at zero, and negative indices count from the end:
+
+```python
+print('zeroth item of pressures:', pressures[0])
+print('fourth item of pressures:', pressures[4])
+```
+```output
+zeroth item of pressures: 0.273
+fourth item of pressures: 0.276
+```
+
+Slices extract a portion of the list using `[start:stop]` notation, returning a new list. The `start` index is included; `stop` is excluded:
+
+```python
+print(pressures[1:4])   # items at indices 1, 2, 3
+print(pressures[:3])    # first three items
+print(pressures[2:])    # from index 2 to the end
+```
+
+Going out of bounds in a slice never raises an error — Python just returns as many elements as are available. Going out of bounds with a direct index raises an `IndexError`:
+
+```python
+print('99th element of element is:', pressures[99])
+```
+```output
+IndexError: list index out of range
+```
+
+
+## Lists are mutable
+
+Unlike strings, lists are *mutable* — you can change their contents after creation. Assign directly to an indexed position to replace a value:
+
+```python
+pressures[0] = 0.265
+print('pressures is now:', pressures)
+```
+```output
+pressures is now: [0.265, 0.275, 0.277, 0.275, 0.276]
+```
+
+`del` removes an element by index and shortens the list:
+
+```python
+primes = [2, 3, 5, 7, 9]
+del primes[4]
+print('primes after removing last item:', primes)
+```
+```output
+primes after removing last item: [2, 3, 5, 7]
+```
+
+
+## Adding elements
+
+`append` is a list *method* — a function attached to the list object — that adds a single item to the end:
+
+```python
+primes = [2, 3, 5]
+primes.append(7)
+primes.append(9)
+print('primes has become:', primes)
+```
+```output
+primes has become: [2, 3, 5, 7, 9]
+```
+
+`extend` merges another list into the end of the existing list, keeping the result flat. If you `append` a list instead, the result is a nested list — a list inside a list:
+
+```python
+teen_primes = [11, 13, 17, 19]
+middle_aged_primes = [37, 41, 43, 47]
+primes.extend(teen_primes)
+print('after extend:', primes)
+primes.append(middle_aged_primes)
+print('after append of a list:', primes)
+```
+```output
+after extend: [2, 3, 5, 7, 9, 11, 13, 17, 19]
+after append of a list: [2, 3, 5, 7, 9, 11, 13, 17, 19, [37, 41, 43, 47]]
+```
+
+The empty list `[]` is a useful starting point for collecting values inside a loop.
+
+Use `help(list)` to see the full set of available methods.
+
+
+## Strings are immutable sequences
+
+Strings behave like lists in many ways — they support indexing and slicing, and `len` measures their length — but they are *immutable*: you cannot change individual characters after creation:
+
+```python
+element = 'carbon'
+print('zeroth character:', element[0])
+print('third character:', element[3])
+```
+```output
+zeroth character: c
+third character: b
+```
+
+```python
+element[0] = 'C'
+```
+```error
+TypeError: 'str' object does not support item assignment
+```
+
+If you need a modified string, create a new one — for example, `'C' + element[1:]` produces `'Carbon'`.
+
+
+::: {.callout-caution title="Challenge"}
+## Fill in the Blanks
+
+Fill in the blanks so that the program produces the output shown.
+
+```python
+values = ____
+values.____(1)
+values.____(3)
+values.____(5)
+print('first time:', values)
+values = values[____]
+print('second time:', values)
+```
+
+```output
+first time: [1, 3, 5]
+second time: [3, 5]
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+```python
+values = []
+values.append(1)
+values.append(3)
+values.append(5)
+print('first time:', values)
+values = values[1:]
+print('second time:', values)
+```
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## How Large is a Slice?
+
+If `low` and `high` are both non-negative integers, how many elements does `values[low:high]` contain?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+`high - low` elements. For example, `values[1:4]` contains the 3 elements at indices 1, 2, and 3.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## From Strings to Lists and Back
+
+```python
+print('string to list:', list('tin'))
+print('list to string:', ''.join(['g', 'o', 'l', 'd']))
+```
+```output
+['t', 'i', 'n']
+gold
+```
+
+1. What does `list('some string')` do?
+2. What does `'-'.join(['x', 'y'])` produce?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+1. It splits the string into a list of its individual characters.
+2. `'x-y'` — `join` concatenates the list elements, inserting the separator string between each pair.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Working With the End
+
+What does the following program print?
+
+```python
+element = 'helium'
+print(element[-1])
+```
+
+1. How does Python interpret a negative index?
+2. If a list or string has N elements, what is the most negative index that can safely be used, and what position does it represent?
+3. If `values` is a list, what does `del values[-1]` do?
+4. How can you display all elements but the last without changing `values`?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+The program prints `m`.
+
+1. Negative indices count backwards from the end: `-1` is the last element, `-2` is second to last, and so on.
+2. The most negative safe index is `-N`, which refers to the first element.
+3. It removes the last element from the list.
+4. `values[:-1]` — slice from the start up to but not including the last element.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Stepping Through a List
+
+What does the following program print?
+
+```python
+element = 'fluorine'
+print(element[::2])
+print(element[::-1])
+```
+
+1. What does the third value in `[low:high:stride]` do?
+2. What expression selects all even-indexed items from a collection?
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+```output
+furn
+eniroulf
+```
+
+1. `stride` is the step size between selected elements.
+2. `collection[::2]` starts at index 0 and takes every second element (0, 2, 4, …).
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Sort and Sorted
+
+What do these two programs print? Explain the difference between `sorted(letters)` and `letters.sort()`.
+
+```python
+# Program A
+letters = list('gold')
+result = sorted(letters)
+print('letters is', letters, 'and result is', result)
+```
+
+```python
+# Program B
+letters = list('gold')
+result = letters.sort()
+print('letters is', letters, 'and result is', result)
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+Program A:
+```output
+letters is ['g', 'o', 'l', 'd'] and result is ['d', 'g', 'l', 'o']
+```
+
+Program B:
+```output
+letters is ['d', 'g', 'l', 'o'] and result is None
+```
+
+`sorted(letters)` returns a new sorted list and leaves the original unchanged. `letters.sort()` sorts the list in-place and returns `None`. Choose `sorted` when you need to keep the original; choose `.sort()` when you do not.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Copying (or Not)
+
+What do these two programs print? Explain the difference between `new = old` and `new = old[:]`.
+
+```python
+# Program A
+old = list('gold')
+new = old
+new[0] = 'D'
+print('new is', new, 'and old is', old)
+```
+
+```python
+# Program B
+old = list('gold')
+new = old[:]
+new[0] = 'D'
+print('new is', new, 'and old is', old)
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+Program A:
+```output
+new is ['D', 'o', 'l', 'd'] and old is ['D', 'o', 'l', 'd']
+```
+
+Program B:
+```output
+new is ['D', 'o', 'l', 'd'] and old is ['g', 'o', 'l', 'd']
+```
+
+`new = old` makes `new` an alias for the *same* list object, so modifying one modifies both. `new = old[:]` creates an independent copy, so changes to `new` do not affect `old`.
+:::
+:::
+
+
+::: {.callout-tip title="Key Points"}
+
+- A list stores an ordered, mutable collection of values in a single variable.
+- Access elements with `list[index]` (zero-based) and extract sub-sequences with slices.
+- Lists can be modified: assign to an index, use `append` or `extend` to add, and `del` to remove.
+- `extend` flattens a list into another; `append` adds it as a single (possibly nested) element.
+- Strings support indexing and slicing but are immutable — they cannot be changed in place.
+- Out-of-bounds indexing raises `IndexError`; out-of-bounds slicing returns an empty list.
+
+:::

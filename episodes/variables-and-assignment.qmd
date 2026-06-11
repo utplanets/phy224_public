@@ -1,0 +1,214 @@
+---
+title: "Variables and Assignment"
+---
+
+::: {.callout-note title="Questions"}
+
+- How do I store and reuse values in a Python program?
+- How do I read and extract parts of a string?
+- Why do variable names matter?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Assign values to variables and use those variables in calculations.
+- Predict how a variable's value changes as a program runs.
+- Index and slice a string to extract individual characters or substrings.
+- Choose meaningful variable names that make code readable.
+
+:::
+
+
+## Variables store values
+
+A variable is a name that refers to a value stored in memory. You create a variable by writing its name on the left of `=` and the value you want to store on the right. Python creates the variable the moment you assign something to it — there is no separate declaration step.
+
+```python
+age = 42
+first_name = 'Ahmed'
+```
+
+Variable names can contain letters, digits, and underscores, but must not start with a digit. Names beginning with underscores have special conventional meanings in Python, so it is best to avoid them until you understand those conventions. Python is also case-sensitive: `Age`, `age`, and `AGE` are three entirely distinct variables.
+
+Good variable names are worth the extra typing. Python will run code with names like `flabadab` and `ewr_422_yY` without complaint, but a name like `temperature_celsius` tells every future reader — including you, six months from now — exactly what the value represents. Prefer names that read like plain English words or short phrases joined by underscores.
+
+
+## Displaying values with `print`
+
+The built-in `print` function writes values to the screen as text. You pass it one or more arguments inside parentheses, separated by commas, and it prints them on a single line with a space between each item:
+
+```python
+print(first_name, 'is', age, 'years old')
+```
+```output
+Ahmed is 42 years old
+```
+
+`print` automatically adds a newline at the end, so each call starts on a fresh line. You will use it constantly while exploring and debugging code.
+
+
+## Variables must exist before they are used
+
+Python evaluates each line in order. If you reference a variable that has not yet been assigned — or that you have accidentally mis-spelled — Python raises a `NameError` rather than silently guessing a default value:
+
+```python
+print(last_name)
+```
+```error
+NameError: name 'last_name' is not defined
+```
+
+When you see an error like this, the last line of the message is usually the most useful: it names the variable Python could not find. A full discussion of reading error messages appears [later](variable-scope.qmd#reading-error-messages).
+
+
+## Using variables in calculations
+
+Once a variable exists you can use it anywhere you would use a literal value, including on the right-hand side of its own assignment. Python evaluates the right-hand side first, then stores the result back into the variable:
+
+```python
+age = age + 3
+print('Age in three years:', age)
+```
+```output
+Age in three years: 45
+```
+
+This is a common pattern for updating a running total or counter. Note that the old value of `age` (42) is used to compute the new value (45), which then replaces it.
+
+
+## Indexing strings
+
+A string is an ordered sequence of characters, and Python numbers each position starting from zero. You retrieve a single character by writing its index in square brackets immediately after the variable name:
+
+```python
+atom_name = 'helium'
+print(atom_name[0])   # first character
+print(atom_name[3])   # fourth character
+```
+```output
+h
+i
+```
+
+Negative indices count backwards from the end, so `atom_name[-1]` gives the last character, `atom_name[-2]` the second-to-last, and so on:
+
+```python
+print(atom_name[-1])
+```
+```output
+m
+```
+
+Trying to index an integer raises a `TypeError`, because integers are not stored as sequences of digits:
+
+```python
+a = 123
+print(a[1])   # TypeError: 'int' object is not subscriptable
+```
+
+
+## Slicing strings
+
+A *slice* extracts a contiguous portion of a string using the notation `[start:stop]`, where `start` is the index of the first character you want and `stop` is one past the last character you want. The length of the slice is always `stop - start`:
+
+```python
+atom_name = 'sodium'
+print(atom_name[0:3])   # characters at indices 0, 1, 2
+```
+```output
+sod
+```
+
+Either bound can be omitted. `atom_name[:3]` means "from the beginning up to index 3", and `atom_name[3:]` means "from index 3to the end". `atom_name[:]` is a copy of the whole string. Slicing never modifies the original — it always returns a new string.
+
+The built-in function `len` returns the number of characters in a string, which is useful when you need to slice relative to the end:
+
+```python
+print(len('helium'))
+```
+```output
+6
+```
+
+
+::: {.callout-caution title="Challenge"}
+## Predicting Values
+
+What is the final value of `position` in the program below?
+Try to predict the value without running the program, then check your prediction.
+
+```python
+initial = 'left'
+position = initial
+initial = 'right'
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+```output
+'left'
+```
+
+Assignment copies the *value* at the time of the statement, not a link to the other variable. When `position = initial` runs, `initial` holds `'left'`, so `position` receives `'left'`. The subsequent reassignment of `initial` to `'right'` has no effect on `position`.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Choosing a Name
+
+Which is a better variable name, `m`, `min`, or `minutes`? Why?
+Hint: think about which code you would rather inherit from someone who is leaving the lab:
+
+1. `ts = m * 60 + s`
+2. `tot_sec = min * 60 + sec`
+3. `total_seconds = minutes * 60 + seconds`
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+`minutes` is the clearest choice. `m` is too cryptic to mean anything on its own, and `min` is easily confused with Python's built-in `min()` function, which returns the smallest item in a sequence. `total_seconds = minutes * 60 + seconds` reads almost like plain English and leaves no ambiguity about what each variable holds.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Slicing
+
+The program below prints a slice of a string:
+
+```python
+atom_name = 'carbon'
+print('atom_name[1:3] is:', atom_name[1:3])
+```
+```output
+atom_name[1:3] is: ar
+```
+
+Answer the following without running the code first, then verify:
+
+1. What does `thing[low:high]` return in general?
+2. What does `thing[low:]` (no value after the colon) return?
+3. What does `thing[:high]` (no value before the colon) return?
+4. What does `thing[:]` (just a colon) return?
+5. What does `thing[0:negative-number]` return?
+6. What happens when `high` is larger than the string length — try `atom_name[0:15]`?
+:::
+
+
+::: {.callout-tip title="Key Points"}
+
+- A variable is created by assigning a value to a name with `=`; it must be assigned before it can be used.
+- `print` displays one or more values, separated by spaces, followed by a newline.
+- Variables can appear in expressions; the right-hand side is evaluated before the assignment is made.
+- String characters are indexed from zero; negative indices count from the end.
+- A slice `[start:stop]` extracts characters from `start` up to but not including `stop`.
+- `len(s)` returns the number of characters in string `s`.
+- Python is case-sensitive: `Name` and `name` are different variables.
+- Choose descriptive variable names — your future self will thank you.
+
+:::

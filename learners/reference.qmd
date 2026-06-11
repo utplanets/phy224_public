@@ -1,0 +1,50 @@
+---
+title: Reference
+---
+
+## Glossary
+
+Arguments
+:   Values passed to functions.
+
+Array
+:   A NumPy container holding elements of the same type.
+
+Boolean
+:   An object composed of `True` and `False`.
+
+Element
+:   An item in a list or an array. For a string, these are the individual characters.
+
+Function
+:   A block of code that can be called and re-used elsewhere.
+
+Global variable
+:   A variable defined outside of a function that can be used anywhere.
+
+Index
+:   The position of a given element.
+
+Jupyter Notebook
+:   Interactive coding environment allowing a combination of code and Markdown.
+
+Library
+:   A collection of files containing functions used by other programs.
+
+Local variable
+:   A variable defined inside a function that can only be used inside that function.
+
+Method
+:   An action tied to a particular object. Called using `object.method`.
+
+Module
+:   A file within a library containing functions used by other programs.
+
+Parameters
+:   Variables used when defining a function.
+
+Substring
+:   A part of a string.
+
+Variable
+:   A name for a value.

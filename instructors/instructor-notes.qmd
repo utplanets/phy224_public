@@ -1,0 +1,10 @@
+---
+title: Instructor Notes
+---
+
+This is the PHY224 Python Review, adapted from the Software Carpentry
+"Plotting and Programming in Python" lesson and customised for experimental physics
+(NumPy-first data handling and a dedicated curve-fitting episode).
+
+The schedule is flexible; the *Fitting data to models* episode is the core
+physics-specific content and a natural place for graded checkpoints.

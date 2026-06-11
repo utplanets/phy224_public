@@ -1,0 +1,311 @@
+---
+title: "Numpy and Scipy"
+---
+
+::: {.callout-note title="Questions"}
+
+- How do I work with arrays of numerical data in Python?
+- How do I perform element-wise calculations and aggregations?
+- How do I integrate tabular data numerically?
+
+:::
+
+::: {.callout-note title="Objectives"}
+
+- Import NumPy and use the standard `np` alias.
+- Create arrays with `zeros`, `ones`, `arange`, and `linspace`.
+- Perform element-wise arithmetic and understand shape requirements.
+- Use aggregation functions (`sum`, `mean`, `std`) on whole arrays and along axes.
+- Index and slice one- and two-dimensional arrays.
+- Use `scipy.integrate.trapz` to integrate tabular data.
+
+:::
+
+
+## NumPy is Python's foundation for numerical computing
+
+NumPy introduces a new data type, the `array`, which is a multi-dimensional collection of values all sharing the same underlying type (integer, float, etc.). Arrays support element-wise arithmetic and a rich library of mathematical functions, making them far more efficient than Python lists for numerical work.
+
+NumPy is not part of the standard library but is almost always available in scientific Python environments. The universal convention is to import it with the alias `np`:
+
+```python
+import numpy as np
+```
+
+You can also import functions directly if you prefer bare names:
+
+```python
+from numpy import cos
+```
+
+All three forms below refer to the same function:
+
+```python
+import numpy as np
+import numpy
+from numpy import cos
+
+print(numpy.cos, np.cos, cos)
+```
+```output
+<ufunc 'cos'> <ufunc 'cos'> <ufunc 'cos'>
+```
+
+
+## Creating arrays
+
+`numpy.zeros` creates an array filled with zeros. By default the values are floats; pass `dtype=int` for an integer array:
+
+```python
+f10 = numpy.zeros(10)
+i10 = numpy.zeros(10, dtype=int)
+print("default array of zeros: ", f10)
+print("integer array of zeros: ", i10)
+```
+```output
+default array of zeros:  [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+integer array of zeros:  [0 0 0 0 0 0 0 0 0 0]
+```
+
+`numpy.ones` creates an array of ones — equivalent to `numpy.zeros(N) + 1`:
+
+```python
+print("Using numpy.ones    : ", numpy.ones(10))
+print("is the same thing as: ", numpy.zeros(10) + 1)
+```
+```output
+Using numpy.ones    :  [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+is the same thing as:  [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+```
+
+`numpy.arange` generates evenly spaced values in a half-open interval, similar to Python's built-in `range` but returning an array. It accepts one, two, or three arguments (start, stop, step):
+
+```python
+print(numpy.arange(10))        # 0 to 9
+print(numpy.arange(1, 10))     # 1 to 9
+print(numpy.arange(1, 10, 2))  # odd numbers 1 to 9
+print(numpy.arange(10, 1, -2)) # descending: 10, 8, 6, 4, 2
+```
+```output
+[0 1 2 3 4 5 6 7 8 9]
+[1 2 3 4 5 6 7 8 9]
+[1 3 5 7 9]
+[10  8  6  4  2]
+```
+
+Note that a negative step requires `start > stop`; reversing them without adjusting the step produces an empty array.
+
+
+## Array shape and reshaping
+
+Every NumPy array has a `shape` attribute — a tuple describing its size along each dimension. A one-dimensional array of 10 elements has shape `(10,)`; reshaping it into a 5×2 grid gives shape `(5, 2)`:
+
+```python
+a = numpy.arange(10)
+print("a's shape is ", a.shape)
+
+b = a.reshape(5, 2)
+print("b's shape is ", b.shape)
+```
+```output
+a's shape is  (10,)
+b's shape is  (5, 2)
+```
+
+
+## Element-wise arithmetic
+
+Arithmetic on NumPy arrays is element-by-element. Arrays must have compatible shapes; operations between arrays of different shapes raise a `ValueError`:
+
+```python
+a = numpy.arange(5)
+b = numpy.arange(5)
+print("a =", a)
+print("b =", b)
+print("a * b =", a * b)
+print("a + b =", a + b)
+```
+```output
+a = [0 1 2 3 4]
+b = [0 1 2 3 4]
+a * b = [ 0  1  4  9 16]
+a + b = [0 2 4 6 8]
+```
+
+A scalar is automatically broadcast across the array:
+
+```python
+c = numpy.ones((5, 2))
+d = numpy.ones((5, 2)) + 100
+print(c + d)
+```
+```output
+array([[102., 102.],
+       [102., 102.],
+       [102., 102.],
+       [102., 102.],
+       [102., 102.]])
+```
+
+Mismatched shapes fail with a clear error:
+
+```python
+e = c.reshape(2, 5)
+c + e   # shapes (5,2) and (2,5) are incompatible
+```
+```error
+ValueError: operands could not be broadcast together with shapes (5,2) (2,5)
+```
+
+
+## Aggregation functions
+
+NumPy provides aggregation methods — `sum`, `mean`, `std`, `min`, `max` — that reduce an array to a single value, or reduce along one dimension when you pass the `axis` keyword:
+
+```python
+a = numpy.arange(5)
+print("a = ", a)
+print("sum(a) = ", a.sum())
+print("mean(a) = ", a.mean())
+print("std(a) = ", a.std())
+print("np.sin(a) = ", np.sin(a))
+```
+```output
+a =  [0 1 2 3 4]
+sum(a) =  10
+mean(a) =  2.0
+std(a) =  1.4142135623730951
+np.sin(a) =  [ 0.          0.84147098  0.90929743  0.14112001 -0.7568025 ]
+```
+
+For a two-dimensional array, `axis=0` aggregates down each column and `axis=1` aggregates across each row:
+
+```python
+a = numpy.arange(10).reshape(5, 2)
+print("a =", a)
+print("mean(a) =", numpy.mean(a))
+print("mean across columns =", numpy.mean(a, axis=0))
+print("mean across rows =", numpy.mean(a, axis=1))
+```
+```output
+a = [[0 1]
+     [2 3]
+     [4 5]
+     [6 7]
+     [8 9]]
+mean(a) = 4.5
+mean across columns = [4. 5.]
+mean across rows = [0.5 2.5 4.5 6.5 8.5]
+```
+
+The full list of array functions is at the [NumPy reference](https://numpy.org/doc/stable/reference/routines.html).
+
+
+## Indexing and slicing arrays
+
+Array elements are accessed with square brackets. The same slice notation used for Python lists works for NumPy arrays, with an optional third argument for the step:
+
+```python
+a = numpy.arange(10)
+print(a[5])          # single element
+print(a[5:10])       # elements 5 through 9
+print(a[5:])         # 5 to end
+print(a[:5])         # start to 4
+print(a[5:10:2])     # every 2nd element from 5 to 9
+print(a[10:5:-2])    # descending: 9, 7
+```
+```output
+5
+[5 6 7 8 9]
+[5 6 7 8 9]
+[0 1 2 3 4]
+[5 7 9]
+[9 7]
+```
+
+
+::: {.callout-caution title="Challenge"}
+## `arange` vs `linspace`
+
+There is also a `linspace` function that takes similar arguments to `arange`. Explain the difference. What does the following code print?
+
+```python
+print(numpy.arange(1., 9, 3))
+print(numpy.linspace(1., 9, 3))
+```
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+`arange(start, stop, step)` generates values from `start` up to but not including `stop`, advancing by `step`. `linspace(start, stop, num)` generates exactly `num` values evenly spaced from `start` to `stop` *inclusive*.
+
+```output
+[1. 4. 7.]
+[1. 5. 9.]
+```
+
+Use `arange` when you care about the step size; use `linspace` when you care about the number of points.
+:::
+:::
+
+
+
+::: {.callout-caution title="Challenge"}
+## Row Minimums
+
+Generate a 10×3 array of random numbers using `numpy.random.rand`. From each row, find the minimum absolute value. The result should be a one-dimensional array of length 10.
+
+::: {.callout-note collapse="true" title="Solution"}
+## Solution
+
+Pass `axis=1` to aggregate across each row:
+
+```python
+a = numpy.random.rand(10, 3)
+print(numpy.min(numpy.abs(a), axis=1))
+```
+:::
+:::
+
+
+## Numerical integration with SciPy
+
+SciPy builds on NumPy with higher-level scientific routines — Fourier transforms, optimisation, statistics, and integration among others. The [SciPy documentation](https://docs.scipy.org/doc/scipy/reference/) covers the full library.
+
+`scipy.integrate.trapz` approximates a definite integral using the trapezoidal rule. Its first argument is the array of $y$ values; passing the corresponding $x$ values as the second argument is essential whenever the spacing is not uniform or you want the physically correct scale:
+
+```python
+import scipy.integrate
+
+x = numpy.arange(11)
+y = x ** 2
+print("integral of x² from 0 to 10 (coarse grid):", scipy.integrate.trapz(y))
+```
+```output
+integral of x² from 0 to 10 (coarse grid): 335.0
+```
+
+The analytical result is $10^3 / 3 \approx 333.33$. A coarser grid introduces more error. Increasing the number of points and passing the $x$ values improves the result:
+
+```python
+x = numpy.linspace(0, 10, 1000)
+y = x ** 2
+print("integral with fine grid and x values:", scipy.integrate.trapz(y, x))
+```
+```output
+integral with fine grid and x values: 333.333500333834
+```
+
+We will return to `scipy.optimize` in the [fitting data to models](fitting-data-to-models.qmd) lesson.
+
+
+::: {.callout-tip title="Key Points"}
+
+- NumPy arrays are typed, multi-dimensional collections that support element-wise arithmetic.
+- Create arrays with `zeros`, `ones`, `arange`, and `linspace`; reshape with `.reshape()`.
+- Arithmetic between arrays is element-by-element; shapes must be compatible.
+- `sum`, `mean`, `std` and related methods aggregate an array; use the `axis` keyword for partial aggregation.
+- Index arrays with integers and slice with `[start:stop:step]` notation.
+- Use `scipy.integrate.trapz(y, x)` to integrate tabular data numerically.
+
+:::

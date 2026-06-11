@@ -1,0 +1,85 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "PHY224 Python Review"
+  site-url: "https://phy224.ca"
+  favicon: ""
+  navbar:
+    background: primary
+    left:
+      - href: index.qmd
+        text: Home
+      - href: learners/setup.qmd
+        text: Setup
+      - href: learners/reference.qmd
+        text: Reference
+      - href: instructors/instructor-notes.qmd
+        text: Instructor Notes
+  sidebar:
+    style: docked
+    title: "Episodes"
+    contents:
+      - href: index.qmd
+        text: "Home"
+      - section: "Episodes"
+        contents:
+          - href: episodes/running-and-quitting.qmd
+            text: "Running and Quitting"
+          - href: episodes/basics.qmd
+            text: "Python Basics"
+          - href: episodes/variables-and-assignment.qmd
+            text: "Variables and Assignment"
+          - href: episodes/data-types-and-conversion.qmd
+            text: "Data Types and Conversion"
+          - href: episodes/built-in-functions-and-help.qmd
+            text: "Built-in Functions and Help"
+          - href: episodes/getting-help.qmd
+            text: "Getting Help"
+          - href: episodes/libraries.qmd
+            text: "Libraries"
+          - href: episodes/numpy-and-scipy.qmd
+            text: "NumPy and SciPy"
+          - href: episodes/reading-tabular-data.qmd
+            text: "Reading Tabular Data"
+          - href: episodes/plotting.qmd
+            text: "Plotting"
+          - href: episodes/lists.qmd
+            text: "Lists"
+          - href: episodes/for-loops.qmd
+            text: "For Loops"
+          - href: episodes/looping-over-data-sets.qmd
+            text: "Looping Over Data Sets"
+          - href: episodes/writing-functions.qmd
+            text: "Writing Functions"
+          - href: episodes/variable-scope.qmd
+            text: "Variable Scope"
+          - href: episodes/conditionals.qmd
+            text: "Conditionals"
+          - href: episodes/programming-style.qmd
+            text: "Programming Style"
+          - href: episodes/fitting-data-to-models.qmd
+            text: "Fitting Data to Models"
+          - href: episodes/wrap-up.qmd
+            text: "Wrap-Up"
+      - section: "Learners"
+        contents:
+          - href: learners/setup.qmd
+            text: "Setup"
+          - href: learners/reference.qmd
+            text: "Reference"
+      - section: "Instructors"
+        contents:
+          - href: instructors/instructor-notes.qmd
+            text: "Instructor Notes"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    css: styles.css
+    link-external-icon: true
+    link-external-newwindow: true
