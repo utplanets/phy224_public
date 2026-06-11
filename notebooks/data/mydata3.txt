@@ -1,7 +1,0 @@
-# Distance (D), Header(H)
-# header lines are automatically commented out
-1500,1000
-1340,828
-1328,800
-1172,600
-800,300

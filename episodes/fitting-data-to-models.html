@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Fitting data to models – PHY224 Python Review</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-366cb8ec674e47143b072bc2c76f74d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">PHY224 Python Review</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../learners/setup.html"> 
+<span class="menu-text">Setup</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../learners/reference.html"> 
+<span class="menu-text">Reference</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../instructors/instructor-notes.html"> 
+<span class="menu-text">Instructor Notes</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../episodes/running-and-quitting.html">Episodes</a></li><li class="breadcrumb-item"><a href="../episodes/fitting-data-to-models.html">Fitting Data to Models</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Episodes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/running-and-quitting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Running and Quitting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/variables-and-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables and Assignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/data-types-and-conversion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Types and Conversion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/built-in-functions-and-help.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Built-in Functions and Help</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/getting-help.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Help</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/libraries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Libraries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/numpy-and-scipy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NumPy and SciPy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/reading-tabular-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reading Tabular Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/plotting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plotting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/lists.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lists</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/for-loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">For Loops</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/looping-over-data-sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Looping Over Data Sets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/writing-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/variable-scope.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variable Scope</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/conditionals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conditionals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/programming-style.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programming Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/fitting-data-to-models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Fitting Data to Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../episodes/wrap-up.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wrap-Up</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Learners</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../learners/setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../learners/reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Instructors</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../instructors/instructor-notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructor Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-analysis-with-python" id="toc-data-analysis-with-python" class="nav-link active" data-scroll-target="#data-analysis-with-python">Data analysis with Python</a></li>
+  <li><a href="#scipy.optimize.curve_fit-fits-a-model-function-to-data" id="toc-scipy.optimize.curve_fit-fits-a-model-function-to-data" class="nav-link" data-scroll-target="#scipy.optimize.curve_fit-fits-a-model-function-to-data"><code>scipy.optimize.curve_fit</code> fits a model function to data</a></li>
+  <li><a href="#popt-and-pcov-what-curve_fit-returns" id="toc-popt-and-pcov-what-curve_fit-returns" class="nav-link" data-scroll-target="#popt-and-pcov-what-curve_fit-returns"><code>popt</code> and <code>pcov</code>: what <code>curve_fit</code> returns</a></li>
+  <li><a href="#sigma-and-absolute_sigma-getting-uncertainties-right" id="toc-sigma-and-absolute_sigma-getting-uncertainties-right" class="nav-link" data-scroll-target="#sigma-and-absolute_sigma-getting-uncertainties-right"><code>sigma</code> and <code>absolute_sigma</code>: getting uncertainties right</a></li>
+  <li><a href="#curve_fit-works-with-multiple-parameters" id="toc-curve_fit-works-with-multiple-parameters" class="nav-link" data-scroll-target="#curve_fit-works-with-multiple-parameters"><code>curve_fit</code> works with multiple parameters</a></li>
+  <li><a href="#always-plot-your-data-and-model-fits" id="toc-always-plot-your-data-and-model-fits" class="nav-link" data-scroll-target="#always-plot-your-data-and-model-fits">Always plot your data and model fits</a></li>
+  <li><a href="#residual-plots-diagnose-model-quality" id="toc-residual-plots-diagnose-model-quality" class="nav-link" data-scroll-target="#residual-plots-diagnose-model-quality">Residual plots diagnose model quality</a></li>
+  <li><a href="#chi2-quantifying-how-well-a-model-fits" id="toc-chi2-quantifying-how-well-a-model-fits" class="nav-link" data-scroll-target="#chi2-quantifying-how-well-a-model-fits"><span class="math inline">\(\chi^2\)</span>: quantifying how well a model fits</a>
+  <ul class="collapse">
+  <li><a href="#what-chi2-measures" id="toc-what-chi2-measures" class="nav-link" data-scroll-target="#what-chi2-measures">What <span class="math inline">\(\chi^2\)</span> measures</a></li>
+  <li><a href="#reduced-chi-squared-chi_r2" id="toc-reduced-chi-squared-chi_r2" class="nav-link" data-scroll-target="#reduced-chi-squared-chi_r2">Reduced chi-squared <span class="math inline">\(\chi_r^2\)</span></a></li>
+  <li><a href="#chi_r2-and-the-connection-back-to-absolute_sigma" id="toc-chi_r2-and-the-connection-back-to-absolute_sigma" class="nav-link" data-scroll-target="#chi_r2-and-the-connection-back-to-absolute_sigma"><span class="math inline">\(\chi_r^2\)</span> and the connection back to <code>absolute_sigma</code></a></li>
+  </ul></li>
+  <li><a href="#non-linear-models-and-the-p0-keyword" id="toc-non-linear-models-and-the-p0-keyword" class="nav-link" data-scroll-target="#non-linear-models-and-the-p0-keyword">Non-linear models and the <code>p0</code> keyword</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../episodes/running-and-quitting.html">Episodes</a></li><li class="breadcrumb-item"><a href="../episodes/fitting-data-to-models.html">Fitting Data to Models</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Fitting data to models</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Questions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>How do I find the best-fit parameters for a physical model?</li>
+<li>How do I report the uncertainty in those parameters correctly?</li>
+<li>How do I know whether a model is a good fit to my data?</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Use <code>scipy.optimize.curve_fit</code> to fit a model function to experimental data.</li>
+<li>Interpret <code>popt</code> and <code>pcov</code> to report parameter values and uncertainties.</li>
+<li>Explain the difference between <code>sigma</code> with and without <code>absolute_sigma=True</code>.</li>
+<li>Calculate and interpret reduced chi-squared <span class="math inline">\(\chi_r^2\)</span>.</li>
+<li>Read a residual plot to diagnose whether a model is appropriate.</li>
+<li>Provide initial parameter guesses with <code>p0</code> when fitting non-linear models.</li>
+</ul>
+</div>
+</div>
+<section id="data-analysis-with-python" class="level2">
+<h2 class="anchored" data-anchor-id="data-analysis-with-python">Data analysis with Python</h2>
+<p>Many physical systems can be modeled as an equation, which in Python would be represented by a function <span class="math inline">\(f\)</span>. If an appropriate function <span class="math inline">\(f\)</span> can be found for an experiment we can use the equation to determine physical parameters related to the experiment, and we can use this new model to <em>predict</em> new things about the world. Galileo used this method to calculate the trajectory of cannonballs by rolling them down inclined ramps.</p>
+<p>In experimental physics, we constrain these models by designing an experiment with two quantities. The first quantity, that we can control, is the <strong>independent variable</strong>. The second quantity, that we can measure, is the <strong>dependent variable</strong>. The relationship between these two quantities can then be used to determine some physical parameters.</p>
+<p>A simple example is measuring the path of a moving object. We could guess that the model is moving at a constant speed and design an experiment to find that speed using the model:</p>
+<p><span class="math display">\[ s = ut \]</span></p>
+</section>
+<section id="scipy.optimize.curve_fit-fits-a-model-function-to-data" class="level2">
+<h2 class="anchored" data-anchor-id="scipy.optimize.curve_fit-fits-a-model-function-to-data"><code>scipy.optimize.curve_fit</code> fits a model function to data</h2>
+<p><code>scipy</code> provides <code>curve_fit</code>, which takes a model function and a set of measurements and returns the <em>best-fit</em> values of the unknown parameters. Consider measuring the distance travelled by an object moving at constant speed, with time as the controlled variable:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distance(time, speed):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate distance travelled at constant speed."""</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> speed <span class="op">*</span> time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>derr <span class="op">=</span> <span class="dv">5</span>  <span class="co"># estimated distance measurement error, metres</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>measured_times <span class="op">=</span> numpy.arange(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">10</span>)          <span class="co"># seconds</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>measured_distances <span class="op">=</span> numpy.array([<span class="fl">108.2</span>, <span class="fl">220.4</span>, <span class="fl">360.2</span>, <span class="fl">482.8</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="fl">630.6</span>, <span class="fl">793.9</span>, <span class="fl">947.5</span>, <span class="fl">1125.0</span>, <span class="fl">1314.9</span>])       <span class="co"># metres</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>distance_errors <span class="op">=</span> numpy.ones_like(measured_distances) <span class="op">*</span> derr</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>popt, pcov <span class="op">=</span> curve_fit(distance, measured_times, measured_distances,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                       sigma<span class="op">=</span>distance_errors, absolute_sigma<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Speed is </span><span class="sc">{:.4g}</span><span class="st"> m/s"</span>.<span class="bu">format</span>(popt[<span class="dv">0</span>]))</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>pvar <span class="op">=</span> numpy.diag(pcov)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Uncertainty in speed is </span><span class="sc">{:.3g}</span><span class="st"> m/s"</span>.<span class="bu">format</span>(numpy.sqrt(pvar[<span class="dv">0</span>])))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="output"><code>Speed is 13.66 m/s
+Uncertainty in speed is 0.0296 m/s</code></pre>
+<p>The model function must follow a fixed convention: its first argument must be the array of independent data; any additional arguments are the free parameters that <code>curve_fit</code> will determine; and it must return the predicted dependent values:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> good_model_function(xdata, parameter_1, parameter_2, parameter_3):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute and return the model prediction</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> prediction</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="popt-and-pcov-what-curve_fit-returns" class="level2">
+<h2 class="anchored" data-anchor-id="popt-and-pcov-what-curve_fit-returns"><code>popt</code> and <code>pcov</code>: what <code>curve_fit</code> returns</h2>
+<p><code>curve_fit</code> always returns exactly two arrays.</p>
+<p><code>popt</code> is a 1D array of the best-fit parameter values, in the same order as the parameters appear in the model function definition. For the single-parameter <code>distance</code> function, <code>popt[0]</code> is the fitted speed.</p>
+<p><code>pcov</code> is the <strong>covariance matrix</strong> — a square matrix whose size equals the number of parameters. Its diagonal elements are the <em>variances</em> of the fitted parameters:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pvar <span class="op">=</span> numpy.diag(pcov)          <span class="co"># extract the diagonal</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>uncertainties <span class="op">=</span> numpy.sqrt(pvar) <span class="co"># standard errors</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The off-diagonal elements describe how the parameters co-vary: a large off-diagonal value means that if one parameter is nudged upward, another must shift to compensate. For independent parameters the off-diagonals are close to zero.</p>
+<p>For a two-parameter fit you can access the covariance matrix elements directly using row and column indices — <code>pcov[0,0]</code> is the variance of the first parameter, <code>pcov[1,1]</code> the variance of the second, and <code>pcov[0,1]</code> their covariance.</p>
+</section>
+<section id="sigma-and-absolute_sigma-getting-uncertainties-right" class="level2">
+<h2 class="anchored" data-anchor-id="sigma-and-absolute_sigma-getting-uncertainties-right"><code>sigma</code> and <code>absolute_sigma</code>: getting uncertainties right</h2>
+<p>The <code>sigma</code> keyword passes your per-point measurement uncertainties to <code>curve_fit</code>. The <code>absolute_sigma</code> keyword controls how those values are <em>interpreted</em>, and the difference matters enormously for the reported parameter uncertainties.</p>
+<p><strong>Without <code>absolute_sigma=True</code></strong> (the default), <code>curve_fit</code> treats <code>sigma</code> as <em>relative</em> weights only. After finding the best-fit parameters it rescales the covariance matrix so that the reduced chi-squared (see below) is exactly 1. The reported uncertainties are then self-consistent — they reflect the scatter of the data around the model — but they are <strong>not</strong> in the physical units of your measurement errors. If your ruler really is accurate to ±5 m, the default mode ignores that.</p>
+<p><strong>With <code>absolute_sigma=True</code></strong>, the sigma values are taken at face value as physically meaningful standard deviations. The covariance matrix is <strong>not</strong> rescaled, so the reported uncertainties are in the same units as your measurement errors and can be directly compared to your experimental precision.</p>
+<p>In experimental physics you almost always want <code>absolute_sigma=True</code>. The difference in practice:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without absolute_sigma — sigma used only as weights, uncertainties rescaled</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>popt_rel, pcov_rel <span class="op">=</span> curve_fit(distance, measured_times, measured_distances,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                               sigma<span class="op">=</span>distance_errors)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Uncertainty (relative sigma):  </span><span class="sc">{:.3g}</span><span class="st"> m/s"</span>.<span class="bu">format</span>(numpy.sqrt(pcov_rel[<span class="dv">0</span>,<span class="dv">0</span>])))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># With absolute_sigma — uncertainties are in physical units</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>popt_abs, pcov_abs <span class="op">=</span> curve_fit(distance, measured_times, measured_distances,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                               sigma<span class="op">=</span>distance_errors, absolute_sigma<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Uncertainty (absolute sigma):  </span><span class="sc">{:.3g}</span><span class="st"> m/s"</span>.<span class="bu">format</span>(numpy.sqrt(pcov_abs[<span class="dv">0</span>,<span class="dv">0</span>])))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="output"><code>Uncertainty (relative sigma):  0.31 m/s
+Uncertainty (absolute sigma):  0.0296 m/s</code></pre>
+<p>The two fits find the same best-fit speed, but the reported uncertainties differ because the default mode assumed the model was perfect and used the residuals to estimate errors, while <code>absolute_sigma=True</code> used the ruler precision you provided. The correct choice depends on which you trust more — but for physics experiments where you have a calibrated measurement process, always use <code>absolute_sigma=True</code>.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Challenge
+</div>
+</div>
+<section id="predicting-with-the-model" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="predicting-with-the-model">Predicting with the model</h2>
+<p>Use the fitted model to predict the distance travelled after 10 s and after 100 s.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Always call the model function to make predictions — never rewrite the equation or hard-code the fitted value. If you later improve the fit, all predictions update automatically:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d10  <span class="op">=</span> distance(<span class="dv">10</span>,  popt[<span class="dv">0</span>])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>d100 <span class="op">=</span> distance(<span class="dv">100</span>, popt[<span class="dv">0</span>])</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After  10 s: </span><span class="sc">{:.4g}</span><span class="st"> m"</span>.<span class="bu">format</span>(d10))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After 100 s: </span><span class="sc">{:.4g}</span><span class="st"> m"</span>.<span class="bu">format</span>(d100))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="output"><code>After  10 s: 136.6 m
+After 100 s: 1366 m</code></pre>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+<section id="curve_fit-works-with-multiple-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="curve_fit-works-with-multiple-parameters"><code>curve_fit</code> works with multiple parameters</h2>
+<p>What if the object was actually accelerating? The model becomes</p>
+<p><span class="math display">\[ s = ut + \frac{1}{2} a t^2 \]</span></p>
+<p>Add <code>acceleration</code> as a second parameter, re-run the fit, and <code>curve_fit</code> finds both simultaneously:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distance_with_acceleration(time, speed, acceleration):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Distance under constant acceleration from rest."""</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> speed <span class="op">*</span> time <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> acceleration <span class="op">*</span> time<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>popt2, pcov2 <span class="op">=</span> curve_fit(distance_with_acceleration,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                         measured_times, measured_distances,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                         sigma<span class="op">=</span>distance_errors, absolute_sigma<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Initial speed:  </span><span class="sc">{:.4g}</span><span class="st"> ± </span><span class="sc">{:.3g}</span><span class="st"> m/s"</span>.<span class="bu">format</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>      popt2[<span class="dv">0</span>], numpy.sqrt(pcov2[<span class="dv">0</span>, <span class="dv">0</span>])))</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Acceleration:   </span><span class="sc">{:.4g}</span><span class="st"> ± </span><span class="sc">{:.3g}</span><span class="st"> m/s²"</span>.<span class="bu">format</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      popt2[<span class="dv">1</span>], numpy.sqrt(pcov2[<span class="dv">1</span>, <span class="dv">1</span>])))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="output"><code>Initial speed:  10.26 ± 0.119 m/s
+Acceleration:   0.09589 ± 0.00325 m/s²</code></pre>
+<p>The data are synthetic, generated with initial speed 10.86 m/s and acceleration 0.1 m/s². The constant-speed model fitted earlier returned speed ≈ 13.7 m/s — it inflated the speed estimate to compensate for the missing acceleration term.</p>
+</section>
+<section id="always-plot-your-data-and-model-fits" class="level2">
+<h2 class="anchored" data-anchor-id="always-plot-your-data-and-model-fits">Always plot your data and model fits</h2>
+<p>Before trusting any numerical result, plot the data with error bars and overlay the model. A visual check catches problems — wrong model shape, outliers, data entry errors — that numbers alone miss:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"seaborn-v0_8-whitegrid"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plt.errorbar(measured_times, measured_distances, yerr<span class="op">=</span>distance_errors,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>             marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'none'</span>, label<span class="op">=</span><span class="st">"measured data"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plt.plot(measured_times, distance(measured_times, popt[<span class="dv">0</span>]),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="st">'$s=ut$'</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.plot(measured_times,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>         distance_with_acceleration(measured_times, popt2[<span class="dv">0</span>], popt2[<span class="dv">1</span>]),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r'</span><span class="dv">$</span><span class="vs">s=ut</span><span class="op">+</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}{2}</span><span class="vs">at</span><span class="dv">^</span><span class="vs">2</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time (s)"</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Distance (m)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/16_Curve_fit_24_1.png" class="img-fluid figure-img"></p>
+<figcaption>Distance versus time showing the measured data with error bars and two model fits: a constant-velocity model and a constant-acceleration model. The linear model curves away from the data while the quadratic model passes through the points.</figcaption>
+</figure>
+</div>
+</section>
+<section id="residual-plots-diagnose-model-quality" class="level2">
+<h2 class="anchored" data-anchor-id="residual-plots-diagnose-model-quality">Residual plots diagnose model quality</h2>
+<p>A residual is the difference between a model prediction and the measured value:</p>
+<p><span class="math display">\[\text{residual}_i = f(x_i) - y_i\]</span></p>
+<p>Plotting residuals against the independent variable amplifies any systematic deviation that is hard to see on the data plot. A good model produces residuals that:</p>
+<ul>
+<li><strong>scatter randomly around zero</strong> with no visible trend,</li>
+<li>have a spread comparable to the measurement uncertainties.</li>
+</ul>
+<p>A trend in the residuals — values that drift positive then negative as the independent variable increases, or form a curve — means the model is missing something. It is not capturing the shape of the data.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>, lw<span class="op">=</span><span class="fl">0.8</span>, ls<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.plot(measured_times,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>         distance(measured_times, popt[<span class="dv">0</span>]) <span class="op">-</span> measured_distances,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="st">'$s=ut$'</span>, marker<span class="op">=</span><span class="st">'s'</span>, ls<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>plt.plot(measured_times,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>         distance_with_acceleration(measured_times, popt2[<span class="dv">0</span>], popt2[<span class="dv">1</span>]) <span class="op">-</span> measured_distances,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r'</span><span class="dv">$</span><span class="vs">s=ut</span><span class="op">+</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}{2}</span><span class="vs">at</span><span class="dv">^</span><span class="vs">2</span><span class="dv">$</span><span class="vs">'</span>, marker<span class="op">=</span><span class="st">'&lt;'</span>, ls<span class="op">=</span><span class="st">''</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time (s)"</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Residual (m)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/16_Curve_fit_27_1.png" class="img-fluid figure-img"></p>
+<figcaption>Residual plot of model minus data for the two fits. The linear model shows a systematic arch — negative at the ends, positive in the middle — while the quadratic model’s residuals scatter randomly around zero.</figcaption>
+</figure>
+</div>
+<p>The constant-speed residuals form a clear arch — negative at short and long times, positive in the middle — which is the signature of a missing quadratic term. The constant-acceleration residuals scatter with no pattern, which is what a correct model should look like.</p>
+</section>
+<section id="chi2-quantifying-how-well-a-model-fits" class="level2">
+<h2 class="anchored" data-anchor-id="chi2-quantifying-how-well-a-model-fits"><span class="math inline">\(\chi^2\)</span>: quantifying how well a model fits</h2>
+<section id="what-chi2-measures" class="level3">
+<h3 class="anchored" data-anchor-id="what-chi2-measures">What <span class="math inline">\(\chi^2\)</span> measures</h3>
+<p><code>curve_fit</code> finds the best parameters by minimising the quantity</p>
+<p><span class="math display">\[\chi^2 = \sum_{i=1}^{N} \frac{(y_i - f(x_i))^2}{\sigma_i^2}\]</span></p>
+<p>Each term compares the squared residual <span class="math inline">\((y_i - f(x_i))^2\)</span> to the squared measurement uncertainty <span class="math inline">\(\sigma_i^2\)</span>. If a residual is about the same size as the expected error, that term contributes roughly 1 to the sum. If a residual is much larger than the error, the term contributes much more, pulling <span class="math inline">\(\chi^2\)</span> up. A lower <span class="math inline">\(\chi^2\)</span> means the model is closer, on average, to each data point.</p>
+<p>Note that <span class="math inline">\(\chi^2\)</span> only has physical meaning when you used <code>absolute_sigma=True</code>. Without it, the sigma values were treated as relative weights and the covariance was rescaled — the <span class="math inline">\(\chi^2\)</span> you calculate will not reflect your actual measurement precision.</p>
+</section>
+<section id="reduced-chi-squared-chi_r2" class="level3">
+<h3 class="anchored" data-anchor-id="reduced-chi-squared-chi_r2">Reduced chi-squared <span class="math inline">\(\chi_r^2\)</span></h3>
+<p>The raw <span class="math inline">\(\chi^2\)</span> value grows with the number of data points, making it hard to compare fits across datasets. Dividing by the <strong>degrees of freedom</strong> (dof) produces the <em>reduced chi-squared</em>, whose ideal value is 1.0 regardless of the dataset size:</p>
+<p><span class="math display">\[\chi_r^2 = \frac{\chi^2}{\text{dof}}, \qquad \text{dof} = N - m\]</span></p>
+<p>where <span class="math inline">\(N\)</span> is the number of data points and <span class="math inline">\(m\)</span> is the number of fitted parameters. Each free parameter “uses up” one degree of freedom because the optimiser adjusts it to reduce <span class="math inline">\(\chi^2\)</span>.</p>
+<p>Interpreting <span class="math inline">\(\chi_r^2\)</span>:</p>
+<ul>
+<li><strong><span class="math inline">\(\chi_r^2 \approx 1\)</span></strong> — the residuals are about the same size as the measurement errors. This is exactly what you would expect from a correct model with correctly estimated errors.</li>
+<li><strong><span class="math inline">\(\chi_r^2 \gg 1\)</span></strong> — the residuals are much larger than the measurement errors. Either the model is wrong (missing physics), the error estimates are too small, or there are outliers or systematic effects.</li>
+<li><strong><span class="math inline">\(\chi_r^2 \ll 1\)</span></strong> — the residuals are much smaller than the measurement errors. Either the error estimates are too large (the experiment is more precise than you thought), or the model has too many parameters and is over-fitting the data.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> chi2(y_measure, y_predict, errors):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Chi-squared: sum of squared normalised residuals."""</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> numpy.<span class="bu">sum</span>((y_measure <span class="op">-</span> y_predict)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> errors<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> chi2reduced(y_measure, y_predict, errors, number_of_parameters):</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Reduced chi-squared."""</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    dof <span class="op">=</span> y_measure.size <span class="op">-</span> number_of_parameters</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> chi2(y_measure, y_predict, errors) <span class="op">/</span> dof</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>chi2r_linear <span class="op">=</span> chi2reduced(measured_distances,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                            distance(measured_times, popt[<span class="dv">0</span>]),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                            distance_errors, <span class="dv">1</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>chi2r_accel  <span class="op">=</span> chi2reduced(measured_distances,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                            distance_with_acceleration(measured_times, popt2[<span class="dv">0</span>], popt2[<span class="dv">1</span>]),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                            distance_errors, <span class="dv">2</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Constant velocity model  χ²_r = </span><span class="sc">{:.3g}</span><span class="st">"</span>.<span class="bu">format</span>(chi2r_linear))</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Constant acceleration model χ²_r = </span><span class="sc">{:.3g}</span><span class="st">"</span>.<span class="bu">format</span>(chi2r_accel))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="output"><code>Constant velocity model  χ²_r = 110.
+Constant acceleration model χ²_r = 1.18</code></pre>
+<p>The constant-velocity model returns <span class="math inline">\(\chi_r^2 \approx 110\)</span> — the residuals are about <span class="math inline">\(\sqrt{110} \approx 10\)</span> times larger than the measurement errors. The constant-acceleration model returns <span class="math inline">\(\chi_r^2 \approx 1.2\)</span>, consistent with a good fit.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Reporting <span class="math inline">\(\chi_r^2\)</span> values
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Report <span class="math inline">\(\chi_r^2\)</span> to 2–3 significant figures at most. Values of 110 and 1.18 should be rounded to 110 and 1.2 respectively:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"χ²_r (linear)      ="</span>, <span class="bu">round</span>(chi2r_linear, <span class="op">-</span><span class="dv">1</span>))   <span class="co"># 110.0</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"χ²_r (acceleration)="</span>, <span class="bu">round</span>(chi2r_accel,   <span class="dv">1</span>))   <span class="co"># 1.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="chi_r2-and-the-connection-back-to-absolute_sigma" class="level3">
+<h3 class="anchored"><span class="math inline">\(\chi_r^2\)</span> and the connection back to <code>absolute_sigma</code></h3>
+<p>The <span class="math inline">\(\chi_r^2\)</span> calculation and <code>absolute_sigma=True</code> are two sides of the same coin. When you use <code>absolute_sigma=True</code>, the uncertainties from <code>pcov</code> are physically meaningful, and the <span class="math inline">\(\chi_r^2\)</span> you calculate has a clear interpretation: it tells you whether your measurement errors are consistent with your model. If you omit <code>absolute_sigma=True</code>, the default behaviour forces <span class="math inline">\(\chi_r^2 = 1\)</span> internally by rescaling <code>pcov</code>, so calculating <span class="math inline">\(\chi_r^2\)</span> afterwards with your original sigma values will give a meaningless number.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Challenge
+</div>
+</div>
+<section id="watching-the-parameters-change" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="watching-the-parameters-change">Watching the parameters change</h2>
+<p>Put a <code>print</code> statement inside <code>distance_with_acceleration</code> to trace the parameter values during the fit. What is <code>curve_fit</code> doing?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distance_with_acceleration_print(time, speed, acceleration):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"speed="</span>, speed, <span class="st">"acceleration="</span>, acceleration)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> speed <span class="op">*</span> time <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> acceleration <span class="op">*</span> time<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>popt2, pcov2 <span class="op">=</span> curve_fit(distance_with_acceleration_print,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                         measured_times, measured_distances,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                         absolute_sigma<span class="op">=</span><span class="va">True</span>, sigma<span class="op">=</span>distance_errors)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="output"><code>speed= 1.0 acceleration= 1.0
+...
+speed= 1.0000000149011612 acceleration= 1.0
+speed= 1.0 acceleration= 1.0000000149011612
+speed= 10.257717023193093 acceleration= 0.0958943850247661
+...</code></pre>
+<p><code>curve_fit</code> starts at the default guess (1, 1), then nudges each parameter slightly in turn to estimate the gradient of <span class="math inline">\(\chi^2\)</span>, then takes a step toward the minimum. The first three lines are the initial gradient estimate; the sudden jump to ≈ (10.3, 0.096) is the first large step; the remaining lines are fine adjustments converging on the minimum.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="non-linear-models-and-the-p0-keyword" class="level2">
+<h2 class="anchored" data-anchor-id="non-linear-models-and-the-p0-keyword">Non-linear models and the <code>p0</code> keyword</h2>
+<p><code>curve_fit</code> works with any differentiable model — including non-linear ones such as <span class="math inline">\(y = a \, t^{\,b-1} + c\)</span>. The same <code>chi2reduced</code> and residual-plot checks apply.</p>
+<p>For non-linear models the minimiser can get stuck in a local minimum if it starts too far from the true answer. The <code>p0</code> keyword provides an initial guess:</p>
+<ul>
+<li>No <code>p0</code> defaults to all parameters equal to 1.0.</li>
+<li>A rough physical estimate — order-of-magnitude, correct sign — is usually enough.</li>
+<li>Being too precise is not necessary; the optimiser does the fine-tuning.</li>
+<li>Being badly wrong (wrong sign, wrong order of magnitude) can cause the fit to diverge or converge to the wrong solution.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>iteration <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> nonlinear_function(t, a, b, c, verbose<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> iteration</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> verbose:</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(iteration, <span class="st">"a="</span>, a, <span class="st">"b="</span>, b, <span class="st">"c="</span>, c)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    iteration <span class="op">=</span> iteration <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> t<span class="op">**</span>(b <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> c</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> numpy.arange(<span class="dv">10</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> numpy.array([<span class="op">-</span><span class="fl">0.173</span>, <span class="fl">2.12</span>, <span class="fl">9.42</span>, <span class="fl">19.69</span>, <span class="fl">37.16</span>, <span class="fl">59.40</span>, <span class="fl">96.59</span>, <span class="fl">119.448</span>, <span class="fl">158.0</span>, <span class="fl">201.9</span>])</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>sigmaNL <span class="op">=</span> numpy.ones(<span class="dv">10</span>) <span class="op">*</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>With a good guess the fit converges in ~14 iterations; with a bad guess the optimiser may diverge or converge to a wrong minimum entirely:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Good guess: I think it's roughly 2.5*t^2 with no offset</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>iteration <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>poptNL2, pcovNL2 <span class="op">=</span> curve_fit(nonlinear_function, t, y,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                              absolute_sigma<span class="op">=</span><span class="va">True</span>, sigma<span class="op">=</span>sigmaNL, p0<span class="op">=</span>(<span class="fl">2.5</span>, <span class="dv">3</span>, <span class="dv">0</span>))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad guess: wrong sign on b</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>iteration <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>poptNL3, pcovNL3 <span class="op">=</span> curve_fit(nonlinear_function, t, y,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>                              absolute_sigma<span class="op">=</span><span class="va">True</span>, sigma<span class="op">=</span>sigmaNL, p0<span class="op">=</span>(<span class="dv">3</span>, <span class="op">-</span><span class="dv">2</span>, <span class="fl">0.1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Always verify the result visually and with <span class="math inline">\(\chi_r^2\)</span>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plt.errorbar(t, y, yerr<span class="op">=</span>sigmaNL, marker<span class="op">=</span><span class="st">'o'</span>, ls<span class="op">=</span><span class="st">'none'</span>, label<span class="op">=</span><span class="st">"Data"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_and_print(popt, ls, label):</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    plt.plot(t, nonlinear_function(t, popt[<span class="dv">0</span>], popt[<span class="dv">1</span>], popt[<span class="dv">2</span>],</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>             verbose<span class="op">=</span><span class="va">False</span>), label<span class="op">=</span>label, ls<span class="op">=</span>ls, lw<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>plot_and_print(poptNL2, <span class="st">"--"</span>, <span class="st">"Good guess"</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>plot_and_print(poptNL3, <span class="st">":"</span>,  <span class="st">"Bad guess"</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Value"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/16_Curve_fit_46_3.png" class="img-fluid figure-img"></p>
+<figcaption>Two non-linear model fits overlaid on the data: a good initial guess that converges correctly and a bad initial guess that does not.</figcaption>
+</figure>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>, lw<span class="op">=</span><span class="fl">0.8</span>, ls<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_residual(data, popt, marker, label):</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    plt.plot(t, nonlinear_function(t, popt[<span class="dv">0</span>], popt[<span class="dv">1</span>], popt[<span class="dv">2</span>],</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>             verbose<span class="op">=</span><span class="va">False</span>) <span class="op">-</span> data,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>             label<span class="op">=</span>label, marker<span class="op">=</span>marker, ls<span class="op">=</span><span class="st">''</span>, lw<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>plot_residual(y, poptNL2, <span class="st">"s"</span>, <span class="st">"Good guess"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>plot_residual(y, poptNL3, <span class="st">"&lt;"</span>, <span class="st">"Bad guess"</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time (s)"</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Residual"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/16_Curve_fit_46_4.png" class="img-fluid figure-img"></p>
+<figcaption>Residuals of the two non-linear fits. The good-guess fit shows small random residuals; the bad-guess fit shows large systematic residuals.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Key Points
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>curve_fit(model, x, y, sigma=errors, absolute_sigma=True)</code> returns <code>popt</code> (best-fit parameters) and <code>pcov</code> (covariance matrix); use <code>numpy.sqrt(numpy.diag(pcov))</code> for uncertainties.</li>
+<li>Always use <code>absolute_sigma=True</code> when your <code>sigma</code> values represent real measurement errors in physical units.</li>
+<li>Without <code>absolute_sigma=True</code>, <code>curve_fit</code> rescales uncertainties so that <span class="math inline">\(\chi_r^2 = 1\)</span>, which hides whether your model is actually a good fit.</li>
+<li>Reduced chi-squared <span class="math inline">\(\chi_r^2 \approx 1\)</span> indicates a good fit; <span class="math inline">\(\gg 1\)</span> means the model or errors are wrong; <span class="math inline">\(\ll 1\)</span> means errors are overestimated or the model is over-fit.</li>
+<li>Residual plots reveal systematic trends invisible on the data plot; good residuals scatter randomly around zero with a spread matching the measurement errors.</li>
+<li>For non-linear models, supply an initial guess with <code>p0</code>; always verify with a plot and <span class="math inline">\(\chi_r^2\)</span>.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/phy224\.ca");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
