@@ -1,76 +1,70 @@
-name: Website
 on:
   push:
     branches:
-      - gh-pages
       - main
-  pull_request: []
+
+name: Render and Publish
+
+# you need these permissions to publish to GitHub pages
+permissions: 
+    contents: write
+    pages: write
+
 jobs:
-  build-website:
-    if: ${{ !endsWith(github.repository, '/styles') }}
-    runs-on: ubuntu-20.04
-    env:
-      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-    defaults:
-      run:
-        shell: bash
+  build-deploy:
+    runs-on: ubuntu-latest
+    
     steps:
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Check out repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          ruby-version: '2.7'
-          bundler-cache: true
+          # To install LaTeX to build PDF book 
+          tinytex: true 
+          # uncomment below and fill to pin a version
+          # version: SPECIFIC-QUARTO-VERSION-HERE
+      
+      # add software dependencies here and any libraries
+      
+      # From https://github.com/actions/setup-python
+      # - name: Setup Python
+      #   uses: actions/setup-python@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      # From https://github.com/r-lib/actions/tree/v2-branch/setup-r
+      # - name: Setup R
+      #   uses: r-lib/actions/setup-r@v2
+
+      # From https://github.com/julia-actions/setup-julia
+      # - name: Setup Julia
+      #   uses: julia-actions/setup-julia@v1
+
+      # See more at https://github.com/quarto-dev/quarto-actions/blob/main/examples/example-03-dependencies.md
+
+      # To publish to Netlify, RStudio Connect, or GitHub Pages, uncomment
+      # the appropriate block below
+      
+      # - name: Publish to Netlify (and render)
+      #   uses: quarto-dev/quarto-actions/publish@v2
+      #   with:
+      #     target: netlify
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        
+      # - name: Publish to RStudio Connect (and render)
+      #   uses: quarto-dev/quarto-actions/publish@v2
+      #   with:
+      #     target: connect
+      #     CONNECT_SERVER: enter-the-server-url-here
+      #     CONNECT_API_KEY: ${{ secrets.CONNECT_API_KEY }} 
+
+      # NOTE: If Publishing to GitHub Pages, set the permissions correctly (see top of this yaml)
+      - name: Publish to GitHub Pages (and render) 
+        uses: quarto-dev/quarto-actions/publish@v2
         with:
-          python-version: '3.x'
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
 
-      - name: Install GitHub Pages, Bundler, and kramdown gems
-        run: |
-          gem install github-pages bundler kramdown kramdown-parser-gfm
-
-      - name: Install Python modules
-        run: |
-          python3 -m pip install --upgrade pip setuptools wheel pyyaml==5.3.1 requests
-
-      - name: Checkout the lesson
-        uses: actions/checkout@master
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Render the markdown and confirm that the site can be built
-        run: make site
-
-      - name: Checkout github pages
-        if: ${{ github.event_name == 'push'  && github.ref != 'refs/heads/gh-pages'}}
-        uses: actions/checkout@master
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Commit and Push
-        if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/gh-pages'}}
-        run: |
-          # clean up gh-pages
-          cd gh-pages
-          git rm -rf .           # remove all previous files
-          git restore --staged . # remove things from the stage
-          cd ..
-          # copy everything into gh-pages site
-          cp -r `ls -A | grep -v 'gh-pages' | grep -v '.git' | grep -v '.bundle/' | grep -v '_site'` gh-pages
-          # move into gh-pages, add, commit, and push
-          cd gh-pages
-          # setup git
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git add -A .
-          git commit --allow-empty -m "[Github Actions] render website (via ${{ github.sha }})"
-          git push origin gh-pages
-          # return
-          cd ..
-
-      - run: make lesson-check-all
-        if: always()
