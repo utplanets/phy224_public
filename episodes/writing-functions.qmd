@@ -189,7 +189,7 @@ The second block fails because Python reads the file from top to bottom. When it
 
 Fill in the blanks to create a function that loads a CSV file and returns its minimum value:
 
-```{python}
+```python
 import numpy
 
 def min_in_data(____):
@@ -217,7 +217,7 @@ def min_in_data(filename):
 
 Fill in the blanks to create a function that returns the first negative value in a list. What does your function return if the list is empty?
 
-```{python}
+```python
 def first_negative(values):
     for v in ____:
         if ____:

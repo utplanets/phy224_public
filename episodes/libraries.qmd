@@ -153,7 +153,7 @@ help(math)
 2. Rewrite it using `import` without `as`.
 3. Which form do you find easier to read?
 
-```{python}
+```python
 import math as m
 angle = ____.degrees(____.pi / 2)
 print(____)
@@ -218,7 +218,7 @@ Library calls:
 2. Is this version easier to read than the previous ones?
 3. Why wouldn't programmers always use this form?
 
-```{python}
+```python
 ____ math import ____, ____
 angle = degrees(pi / 2)
 print(angle)

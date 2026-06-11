@@ -138,7 +138,7 @@ for char in "tin":
 
 Fill in the blanks so that the program prints `"nit"` (the reverse of `"tin"`):
 
-```{python}
+```python
 original = "tin"
 result = ____
 for char in original:
@@ -167,7 +167,7 @@ Each iteration prepends the current character, so the last character ends up fir
 
 Fill in the blanks in each program to produce the indicated result.
 
-```{python}
+```python
 # Total length of the strings: ["red", "green", "blue"] => 12
 total = 0
 for word in ["red", "green", "blue"]:
@@ -187,7 +187,7 @@ print(total)
 
 :::
 
-```{python}
+```python
 # List of word lengths: ["red", "green", "blue"] => [3, 5, 4]
 lengths = ____
 for word in ["red", "green", "blue"]:
@@ -206,7 +206,7 @@ print(lengths)
 :::
 
 
-```{python}
+```python
 # Concatenate all words: ["red", "green", "blue"] => "redgreenblue"
 words = ["red", "green", "blue"]
 result = ____
