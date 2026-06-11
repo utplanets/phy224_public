@@ -24,7 +24,7 @@ jupyter: python3
 
 NumPy's `loadtxt` function reads a plain-text file of numbers and returns them as a two-dimensional array. By default it expects whitespace-separated values and skips lines that start with `#`:
 
-```python
+```{python}
 import numpy
 data = numpy.loadtxt('data/galileo_flat.txt')
 print(data)
@@ -33,6 +33,7 @@ print(data)
 Real data files often include delimiters, comment lines, and column headers. The `delimiter` keyword specifies the separator character, `comments` sets the comment character to ignore, and `skiprows` skips a fixed number of lines at the top:
 
 ```{python}
+import numpy
 data = numpy.loadtxt('data/galileo_flat.csv', comments="#", skiprows=2, delimiter=',')
 print(data)
 ```
