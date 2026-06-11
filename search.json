@@ -1682,7 +1682,7 @@
     "href": "episodes/plotting.html#basic-line-plots",
     "title": "Plotting",
     "section": "Basic line plots",
-    "text": "Basic line plots\nplt.plot(x, y) draws a line connecting the data points. Always label your axes:\nimport numpy\ntime = numpy.array([0, 1, 2, 3])\nposition = numpy.array([0, 100, 200, 300])\n\nplt.plot(time, position)\nplt.xlabel(\"Time (hr)\")\nplt.ylabel(\"Position (km)\")\n\n\n\nLine plot of position in km versus time in hours, showing a linear increase from 0 to 300 km over 3 hours",
+    "text": "Basic line plots\nplt.plot(x, y) draws a line connecting the data points. Always label your axes:\n\nimport numpy\nimport matplotlib.pyplot as plt\n\ntime = numpy.array([0, 1, 2, 3])\nposition = numpy.array([0, 100, 200, 300])\n\nplt.plot(time, position)\nplt.xlabel(\"Time (hr)\")\nplt.ylabel(\"Position (km)\")\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Line plot of position in km versus time in hours, showing a linear increase from 0 to 300 km over 3 hours",
     "crumbs": [
       "Home",
       "Episodes",
@@ -1694,7 +1694,7 @@
     "href": "episodes/plotting.html#controlling-line-and-marker-style",
     "title": "Plotting",
     "section": "Controlling line and marker style",
-    "text": "Controlling line and marker style\nA compact format string as the third argument to plt.plot sets the colour and style together: 'b-' means a blue line, 'ro' means red circles, 'g+-' means green plus-markers connected by a line:\ntime = numpy.arange(10)\np1 = time\np2 = time * 2\np3 = time * 4\n\nplt.plot(time, p1, 'b-')\nplt.plot(time, p2, 'ro')\nplt.plot(time, p3, 'g+-')\nplt.xlabel(\"Time (hr)\")\nplt.ylabel(\"Position (km)\")\n\n\n\nThree position-versus-time series using different format strings: a blue line (p1), red circles (p2), and a green line with plus markers (p3)\n\n\nFor finer control, use keyword arguments instead. The label keyword feeds into plt.legend():\nplt.plot(time, p1, color='blue', linestyle='-', linewidth=5, label=\"blue line\")\nplt.plot(time, p2, 'ro', markersize=10, label=\"red dots\")\nplt.plot(time, p3, 'g-', marker='+')\nplt.xlabel(\"Time (hr)\")\nplt.ylabel(\"Position (km)\")\nplt.legend()\n\n\n\nThree position-versus-time series with a legend: a thick blue line, large red dots, and a green line with plus markers",
+    "text": "Controlling line and marker style\nA compact format string as the third argument to plt.plot sets the colour and style together: 'b-' means a blue line, 'ro' means red circles, 'g+-' means green plus-markers connected by a line:\n\nimport numpy\nimport matplotlib.pyplot as plt\ntime = numpy.arange(10)\np1 = time\np2 = time * 2\np3 = time * 4\n\nplt.plot(time, p1, 'b-')\nplt.plot(time, p2, 'ro')\nplt.plot(time, p3, 'g+-')\nplt.xlabel(\"Time (hr)\")\nplt.ylabel(\"Position (km)\")\nplt.show()\n\n\n\n\n\n\n\nFigure 2: Three position versus time plots using different formatting: a blue line (p1), red circles (p2), and a green line with plus markers (p3)\n\n\n\n\n\nFor finer control, use keyword arguments instead. The label keyword feeds into plt.legend():\n\nplt.plot(time, p1, color='blue', linestyle='-', linewidth=5, label=\"blue line\")\nplt.plot(time, p2, 'ro', markersize=10, label=\"red dots\")\nplt.plot(time, p3, 'g-', marker='+')\nplt.xlabel(\"Time (hr)\")\nplt.ylabel(\"Position (km)\")\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\nFigure 3: Three position-versus-time series with a legend: a thick blue line, large red dots, and a green line with plus markers",
     "crumbs": [
       "Home",
       "Episodes",
@@ -1706,7 +1706,7 @@
     "href": "episodes/plotting.html#built-in-styles",
     "title": "Plotting",
     "section": "Built-in styles",
-    "text": "Built-in styles\nMatplotlib ships with a set of named styles that control colours, fonts, and backgrounds consistently. List available styles with plt.style.available and apply one with plt.style.use:\nprint(\"available style names: \", plt.style.available)\navailable style names:  ['Solarize_Light2', '_classic_test_patch', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn-v0_8', ...]\nplt.style.use(\"seaborn-v0_8-whitegrid\")\nplt.plot(time, p1, linestyle='-', linewidth=5, label=\"blue line\")\nplt.plot(time, p2, 'o', markersize=10, label=\"dots\")\nplt.xlabel(\"Time (hr)\")\nplt.ylabel(\"Position (km)\")\nplt.legend()\n\n\n\nThe same three position-versus-time series rendered in the seaborn-v0_8-whitegrid style",
+    "text": "Built-in styles\nMatplotlib ships with a set of named styles that control colours, fonts, and backgrounds consistently. List available styles with plt.style.available and apply one with plt.style.use:\nprint(\"available style names: \", plt.style.available)\navailable style names:  ['Solarize_Light2', '_classic_test_patch', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn-v0_8', ...]\n\nplt.style.use(\"seaborn-v0_8-whitegrid\")\nplt.plot(time, p1, linestyle='-', linewidth=5, label=\"blue line\")\nplt.plot(time, p2, 'o', markersize=10, label=\"dots\")\nplt.xlabel(\"Time (hr)\")\nplt.ylabel(\"Position (km)\")\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\nFigure 4: The same three position-versus-time series rendered in the seaborn-v0_8-whitegrid style",
     "crumbs": [
       "Home",
       "Episodes",
@@ -1718,7 +1718,7 @@
     "href": "episodes/plotting.html#scatter-plots",
     "title": "Plotting",
     "section": "Scatter plots",
-    "text": "Scatter plots\nWhen your data points should not be connected by a line, use plt.scatter. It accepts the same colour and marker keywords as plt.plot:\nnumpy.random.seed(20)\nx = numpy.cumsum(numpy.random.randint(0, 100, 100))\ny = numpy.cumsum(numpy.random.randn(100))\n\nplt.scatter(x, y)\nplt.scatter(x, 10 - y**2, color='green', marker='&lt;')\nplt.xlabel(\"x\")\nplt.title(\"Scatter plot example\")\n\n\n\nScatter plot with two series: blue dots and green left-pointing triangles",
+    "text": "Scatter plots\nWhen your data points should not be connected by a line, use plt.scatter. It accepts the same colour and marker keywords as plt.plot:\n\nnumpy.random.seed(20)\nx = numpy.cumsum(numpy.random.randint(0, 100, 100))\ny = numpy.cumsum(numpy.random.randn(100))\n\nplt.scatter(x, y)\nplt.scatter(x, 10 - y**2, color='green', marker='&lt;')\nplt.xlabel(\"x\")\nplt.title(\"Scatter plot example\")\nplt.show()\n\n\n\n\n\n\n\nFigure 5: Scatter plot with two series: blue dots and green left-pointing triangles",
     "crumbs": [
       "Home",
       "Episodes",
@@ -1730,7 +1730,7 @@
     "href": "episodes/plotting.html#error-bars",
     "title": "Plotting",
     "section": "Error bars",
-    "text": "Error bars\nIn experimental physics you should always show measurement uncertainties. Use plt.errorbar with the yerr (and/or xerr) keyword. Set ls='' to suppress the connecting line and choose a marker explicitly:\nnumpy.random.seed(42)\nx = numpy.cumsum(numpy.random.rand(10) * 10)\nerror = numpy.random.randn(10) * 4\ny = x + numpy.random.randn(10) * 0.5\n\nplt.errorbar(x, y, yerr=error, color='green', marker='o', ls='', lw=1, label=\"data\")\nplt.xlabel(\"x\")\nplt.title(\"Error bar example\")\nplt.legend()\n\n\n\nError bar plot of ten data points with green circle markers and vertical error bars",
+    "text": "Error bars\nIn experimental physics you should always show measurement uncertainties. Use plt.errorbar with the yerr (and/or xerr) keyword. Set ls='' to suppress the connecting line and choose a marker explicitly:\n\nnumpy.random.seed(42)\nx = numpy.cumsum(numpy.random.rand(10) * 10)\nerror = numpy.abs(numpy.random.randn(10) * 4)\ny = x + numpy.random.randn(10) * 0.5\n\nplt.errorbar(x, y, yerr=error, color='green', marker='o', ls='', lw=1, label=\"data\")\nplt.xlabel(\"x\")\nplt.title(\"Error bar example\")\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\nFigure 6: Error bar plot of ten data points with green circle markers and vertical error bars",
     "crumbs": [
       "Home",
       "Episodes",
@@ -1742,7 +1742,7 @@
     "href": "episodes/plotting.html#bar-charts-and-histograms",
     "title": "Plotting",
     "section": "Bar charts and histograms",
-    "text": "Bar charts and histograms\nplt.bar draws a bar chart from pre-counted data. plt.hist bins raw data and draws the resulting histogram in one step — it also returns the counts and bin edges if you need them:\nx = [0, 1, 2, 3, 4, 5]\ny = [0, 4, 2, 6, 8, 2]\nplt.bar(x, y)\nplt.title(\"Bar chart\")\n\n\n\nVertical bar chart with six bars (one of them is zero height)\n\n\nx = numpy.random.randint(0, 100, 50)\nbin_count, bin_edges, boxes = plt.hist(x, bins=10, rwidth=0.9)\nplt.title(\"Histogram\")\n\n\n\nHistogram of 50 random integers",
+    "text": "Bar charts and histograms\nplt.bar draws a bar chart from pre-counted data. plt.hist bins raw data and draws the resulting histogram in one step — it also returns the counts and bin edges if you need them:\n\nx = [0, 1, 2, 3, 4, 5]\ny = [0, 4, 2, 6, 8, 2]\nplt.bar(x, y)\nplt.title(\"Bar chart\")\nplt.show()\n\n\n\n\n\n\n\nFigure 7: Vertical bar chart with six bars (one of them is zero height)\n\n\n\n\n\n\nx = numpy.random.randint(0, 100, 50)\nbin_count, bin_edges, boxes = plt.hist(x, bins=10, rwidth=0.9)\nplt.title(\"Histogram\")\nplt.show()\n\n\n\n\n\n\n\nFigure 8: Histogram of 50 random integers",
     "crumbs": [
       "Home",
       "Episodes",
@@ -1754,7 +1754,7 @@
     "href": "episodes/plotting.html#controlling-figure-size",
     "title": "Plotting",
     "section": "Controlling figure size",
-    "text": "Controlling figure size\nCall plt.figure(figsize=(width, height)) before plotting to set the output size in inches:\nplt.figure(figsize=(8, 2))\nplt.bar(x, y)\nplt.title(\"Narrow bar chart\")\n\n\n\nNarrow bar chart (8×2 inches)",
+    "text": "Controlling figure size\nCall plt.figure(figsize=(width, height)) before plotting to set the output size in inches:\n\nplt.figure(figsize=(8, 2))\nx = [0, 1, 2, 3, 4, 5]\ny = [0, 4, 2, 6, 8, 2]\n\nplt.bar(x, y)\nplt.title(\"Narrow bar chart\")\nplt.show()\n\n\n\n\n\n\n\nFigure 9: Narrow bar chart (8x2 inches)",
     "crumbs": [
       "Home",
       "Episodes",
@@ -1766,7 +1766,7 @@
     "href": "episodes/plotting.html#multiple-panels-with-subplot",
     "title": "Plotting",
     "section": "Multiple panels with subplot",
-    "text": "Multiple panels with subplot\nplt.subplot(rows, cols, index) selects one panel in a grid of panels. Subsequent plt.plot calls draw into the currently active panel:\nplt.figure(figsize=(8, 3))\nx = [0, 1, 2, 3, 4, 5]\ny = [0, 4, 2, 6, 8, 2]\nplt.subplot(1, 3, 1)\nplt.bar(x, y)\nplt.title(\"left\")\nplt.subplot(1, 3, 2)\nplt.bar(y, x)\nplt.title(\"centre\")\nplt.subplot(1, 3, 3)\nplt.bar(x, y)\nplt.title(\"right\")\n\n\n\nThree bar charts arranged side by side in a 1×3 subplot row",
+    "text": "Multiple panels with subplot\nplt.subplot(rows, cols, index) selects one panel in a grid of panels. Subsequent plt.plot calls draw into the currently active panel:\n\nplt.figure(figsize=(8, 3))\nx = [0, 1, 2, 3, 4, 5]\ny = [0, 4, 2, 6, 8, 2]\nplt.subplot(1, 3, 1)\nplt.bar(x, y)\nplt.title(\"left\")\nplt.subplot(1, 3, 2)\nplt.bar(y, x)\nplt.title(\"centre\")\nplt.subplot(1, 3, 3)\nplt.bar(x, y)\nplt.title(\"right\")\nplt.show()\n\n\n\n\n\n\n\nFigure 10: Three bar charts arranged side by side in a 1x3 subplot row",
     "crumbs": [
       "Home",
       "Episodes",
@@ -1778,7 +1778,7 @@
     "href": "episodes/plotting.html#saving-figures",
     "title": "Plotting",
     "section": "Saving figures",
-    "text": "Saving figures\nCall plt.savefig before the figure is displayed — once Matplotlib shows a figure it moves on to a new empty figure, and saving afterwards captures only a blank canvas. Supported formats include PDF, PNG, and SVG. For raster formats lke PNG use the dpi keyword to control resolution:\nplt.figure(figsize=(8, 3))\nplt.plot(x, y)\nplt.savefig(\"data/fig1.pdf\")\nplt.savefig(\"data/fig1.png\", dpi=150, transparent=True)\n\n\n\nLine plot produced for the savefig example\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf you need to save after displaying, first capture a reference to the figure with plt.gcf() (get current figure), then call savefig on it:\nfig = plt.gcf()\nplt.plot(x, y)\nfig.savefig('my_figure.png')\n\n\n\n\n\n\n\n\nTipKey Points\n\n\n\n\nImport matplotlib.pyplot as plt; use %matplotlib inline in Jupyter.\nplt.plot draws lines; plt.scatter draws unconnected points; plt.errorbar adds uncertainty bars.\nFormat strings ('b-', 'ro') or keyword arguments control colour, linestyle, and markers.\nAdd plt.xlabel, plt.ylabel, plt.title, and plt.legend for readable figures.\nplt.style.use applies a consistent visual style.\nplt.figure(figsize=...) sets figure dimensions; plt.subplot creates multi-panel layouts.\nCall plt.savefig before the figure is displayed to avoid saving a blank canvas.",
+    "text": "Saving figures\nCall plt.savefig before the figure is displayed — once Matplotlib shows a figure it moves on to a new empty figure, and saving afterwards captures only a blank canvas. Supported formats include PDF, PNG, and SVG. For raster formats lke PNG use the dpi keyword to control resolution:\n\nplt.figure(figsize=(8, 3))\nplt.plot(x, y)\nplt.savefig(\"data/fig1.pdf\")\nplt.savefig(\"data/fig1.png\", dpi=150, transparent=True)\nplt.show()\n\n\n\n\n\n\n\nFigure 11: Line plot produced for the savefig example\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf you need to save after displaying, first capture a reference to the figure with plt.gcf() (get current figure), then call savefig on it:\n\nfig = plt.gcf()\nplt.plot(x, y)\nfig.savefig('my_figure.png')\nplt.show()\n\n\n\n\n\n\n\nFigure 12: Example of saving via a captured current figure reference after plotting\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipKey Points\n\n\n\n\nImport matplotlib.pyplot as plt; use %matplotlib inline in Jupyter.\nplt.plot draws lines; plt.scatter draws unconnected points; plt.errorbar adds uncertainty bars.\nFormat strings ('b-', 'ro') or keyword arguments control colour, linestyle, and markers.\nAdd plt.xlabel, plt.ylabel, plt.title, and plt.legend for readable figures.\nplt.style.use applies a consistent visual style.\nplt.figure(figsize=...) sets figure dimensions; plt.subplot creates multi-panel layouts.\nCall plt.savefig before the figure is displayed to avoid saving a blank canvas.",
     "crumbs": [
       "Home",
       "Episodes",
