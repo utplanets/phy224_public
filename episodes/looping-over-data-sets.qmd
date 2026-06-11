@@ -1,5 +1,6 @@
 ---
 title: "Looping Over Data Sets"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -20,16 +21,12 @@ title: "Looping Over Data Sets"
 
 A filename is just a string, and strings can be stored in lists. That means you can loop over a list of filenames exactly as you would loop over a list of numbers, applying the same analysis to each file automatically:
 
-```python
+```{python}
 import numpy
 for filename in ["data/galileo_flat.csv", "data/galileo_ramp.csv"]:
     distance, height = numpy.loadtxt(filename, skiprows=2,
                                      comments="#", delimiter=',', unpack=True)
     print(filename, distance.min(), height.max())
-```
-```output
-data/galileo_flat.csv 800.0 1000.0
-data/galileo_ramp.csv 253.0 1000.0
 ```
 
 
@@ -37,21 +34,15 @@ data/galileo_ramp.csv 253.0 1000.0
 
 Writing out filenames by hand works for two files, but not for two hundred. The `glob` library provides a function, also called `glob`, that returns a list of all filenames matching a given pattern. The two most useful wildcards are `*` (zero or more characters) and `?` (exactly one character):
 
-```python
+```{python}
 import glob
 print("all csv files in data/random:", glob.glob("data/random/*.csv"))
-```
-```output
-all csv files in data/random: ['data/random/data.029.csv', 'data/random/data.015.csv', ...]
 ```
 
 If no files match the pattern, `glob` returns an empty list rather than an error:
 
-```python
+```{python}
 print("all txt files in data/random:", glob.glob("data/random/*.txt"))
-```
-```output
-all txt files in data/random: []
 ```
 
 
@@ -59,16 +50,10 @@ all txt files in data/random: []
 
 Wrapping `glob.glob` in `sorted` gives you consistent, predictable ordering. Then it is straightforward to apply the same analysis to every matching file:
 
-```python
+```{python}
 for filename in sorted(glob.glob('data/random/*.csv')):
     distance, height = numpy.loadtxt(filename, delimiter=',', unpack=True)
     print(filename, distance.mean(), height.std())
-```
-```output
-data/random/data.000.csv 0.973455156 14.253108991004671
-data/random/data.001.csv -4.4384872 18.271604877007015
-...
-data/random/data.099.csv -3.772237556 14.155571992376832
 ```
 
 This pattern — glob a set of files, sort for reproducibility, loop and analyse — is one of the most useful idioms in data-analysis scripts. Name and store your data files systematically so that simple glob patterns can find exactly the right set.
@@ -100,7 +85,7 @@ Write a program that calculates the average `distance` value across *all* files 
 ::: {.callout-note collapse="true" title="Solution"}
 ## Solution
 
-```python
+```{python}
 import glob
 import numpy as np
 

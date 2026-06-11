@@ -1,5 +1,6 @@
 ---
 title: "Built-in Functions"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -23,7 +24,7 @@ title: "Built-in Functions"
 
 A `#` character tells Python to ignore the rest of the line. Use comments to explain *why* your code does something when the reason is not obvious from reading it:
 
-```python
+```{python}
 # This sentence isn't executed by Python.
 adjustment = 0.5   # Neither is this - anything after '#' is ignored.
 ```
@@ -35,15 +36,10 @@ A function is a named piece of reusable code that you invoke by writing its name
 
 `print` takes zero or more arguments and displays them on a single line, separated by spaces. With no arguments it prints a blank line:
 
-```python
+```{python}
 print('before')
 print()
 print('after')
-```
-```output
-before
-
-after
 ```
 
 `len` takes exactly one argument and returns the number of items in it. `int`, `str`, and `float` each take one argument and return a converted value.
@@ -53,33 +49,23 @@ after
 
 `max` and `min` return the largest and smallest values from a set of arguments. They work on both numbers and strings (strings are compared character by character using Unicode order):
 
-```python
+```{python}
 print(max(1, 2, 3))
 print(min('a', 'A', '0'))
-```
-```output
-3
-0
 ```
 
 `round` rounds a floating-point number. By default it rounds to zero decimal places; pass a second argument to specify the precision:
 
-```python
+```{python}
 print(round(3.712))
 print(round(3.712, 1))
-```
-```output
-4
-3.7
 ```
 
 Functions enforce their requirements. `max` and `min` need at least one argument, and the arguments must be mutually comparable — mixing incompatible types raises a `TypeError`:
 
-```python
+```{python}
+#| error: true
 print(max(1, 'a'))
-```
-```error
-TypeError: unorderable types: str() > int()
 ```
 
 
@@ -87,13 +73,9 @@ TypeError: unorderable types: str() > int()
 
 Every function call produces a result. If a function has no meaningful value to return it returns the special value `None`. `print` is a common example — its job is the side effect of writing to the screen, not producing a value:
 
-```python
+```{python}
 result = print('example')
 print('result of print is', result)
-```
-```output
-example
-result of print is None
 ```
 
 When you call functions inside other expressions, nested calls are evaluated from the inside out, just as in mathematics: `max(len('tin'), len('copper'))` first computes the two lengths, then finds the maximum.
@@ -103,28 +85,22 @@ When you call functions inside other expressions, nested calls are evaluated fro
 
 Python checks your code for *syntax errors* — structural problems that make the program impossible to parse — before running a single line. A forgotten closing quote, a misplaced `=`, or an unclosed parenthesis will produce a `SyntaxError` with a `^` pointing at approximately where the problem is:
 
-```python
+```{python}
+#| error: true
 name = 'Feng
 ```
-```error
-SyntaxError: EOL while scanning string literal
-```
 
-```python
+```{python}
+#| error: true
 print("hello world"
-```
-```error
-SyntaxError: unexpected EOF while parsing
 ```
 
 *Runtime errors* only appear when the problematic line actually executes. A misspelled variable name raises a `NameError`:
 
-```python
+```{python}
+#| error: true
 age = 53
 remaining = 100 - aege  # mis-spelled 'age'
-```
-```error
-NameError: name 'aege' is not defined
 ```
 
 The general strategy: fix syntax errors by reading the source code carefully around the `^` marker; fix runtime errors by tracing what value each variable holds when the error line is reached.
@@ -138,7 +114,7 @@ For detailed guidance on finding answers when you are stuck, see the [Getting He
 1. Explain the order of operations in the program below.
 2. What is the final value of `radiance`?
 
-```python
+```{python}
 radiance = 1.0
 radiance = max(2.1, 2.0 + min(radiance, 1.1 * radiance - 0.5))
 ```
@@ -164,7 +140,7 @@ radiance = max(2.1, 2.0 + min(radiance, 1.1 * radiance - 0.5))
 1. Predict what each `print` statement below will output.
 2. Does `max(len(rich), poor)` run or raise an error? If it runs, does the result make sense?
 
-```python
+```{python}
 easy_string = "abc"
 print(max(easy_string))
 rich = "gold"

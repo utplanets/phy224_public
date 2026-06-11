@@ -27,8 +27,7 @@ jupyter: python3
 
 The most widely used scientific plotting library in Python is `matplotlib`. In practice you almost always work with the `pyplot` sub-module, imported with the alias `plt`. In a Jupyter Notebook, the `%matplotlib inline` magic ensures figures appear directly in the notebook output:
 
-```python
-%matplotlib inline
+```{python}
 import matplotlib.pyplot as plt
 ```
 
@@ -96,11 +95,8 @@ plt.show()
 
 Matplotlib ships with a set of named styles that control colours, fonts, and backgrounds consistently. List available styles with `plt.style.available` and apply one with `plt.style.use`:
 
-```python
+```{python}
 print("available style names: ", plt.style.available)
-```
-```output
-available style names:  ['Solarize_Light2', '_classic_test_patch', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn-v0_8', ...]
 ```
 
 ```{python}

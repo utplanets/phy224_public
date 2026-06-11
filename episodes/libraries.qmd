@@ -1,5 +1,6 @@
 ---
 title: "Libraries"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -30,15 +31,11 @@ The terms *library* and *module* are often used interchangeably. Technically a l
 
 A module must be imported before you can use anything it contains. The `import` statement loads the module into memory and makes its contents accessible under the module's name, using dot notation (`module_name.thing_name`):
 
-```python
+```{python}
 import math
 
 print('pi is', math.pi)
 print('cos(pi) is', math.cos(math.pi))
-```
-```output
-pi is 3.141592653589793
-cos(pi) is -1.0
 ```
 
 The dot notation is intentional: it makes it clear which module a name comes from, and avoids collisions if two modules define something with the same name. Note that `math.cos(pi)` would fail — the bare name `pi` is not in scope unless you import it directly; you must write `math.pi`.
@@ -50,13 +47,10 @@ Use `help(math)` to see the full contents of any imported module, including a de
 
 If you only need a few things from a module, you can import them directly using `from ... import ...`. This lets you use their names without the module prefix:
 
-```python
+```{python}
 from math import cos, pi
 
 print('cos(pi) is', cos(pi))
-```
-```output
-cos(pi) is -1.0
 ```
 
 The risk is name collisions: if you later define your own variable called `pi`, or import another `pi` from a different module, you will silently overwrite the first one. For short scripts where you know exactly what you are importing, this form is fine. For larger programs, `import math` and explicit `math.pi` is safer.
@@ -66,13 +60,10 @@ The risk is name collisions: if you later define your own variable called `pi`, 
 
 For modules with long names that you use frequently, `import ... as ...` lets you give the module a shorter alias:
 
-```python
+```{python}
 import math as m
 
 print('cos(pi) is', m.cos(m.pi))
-```
-```output
-cos(pi) is -1.0
 ```
 
 This is a very common convention in scientific Python. You will see `import numpy as np` and `import matplotlib.pyplot as plt` throughout these lessons. The trade-off is that readers unfamiliar with your aliases have to learn them — so stick to widely recognised conventions rather than inventing your own.
@@ -99,7 +90,7 @@ This is a very common convention in scientific Python. You will see `import nump
 
 You want to select a random character from the string:
 
-```python
+```{python}
 bases = 'ACTTGCTTGAC'
 ```
 
@@ -112,7 +103,7 @@ bases = 'ACTTGCTTGAC'
 
 The `random` module is the right choice. The string has 11 characters (indices 0–10), so you can generate a random index and use it to select a character:
 
-```python
+```{python}
 from random import randrange
 
 random_index = randrange(len(bases))
@@ -121,7 +112,7 @@ print(bases[random_index])
 
 `random.sample` is a more compact alternative that returns a list, so you need to extract the first element:
 
-```python
+```{python}
 from random import sample
 print(sample(bases, 1)[0])
 ```
@@ -146,7 +137,7 @@ What did they forget to do?
 
 They forgot to import the module first. `help(math)` requires that `math` is already loaded into memory:
 
-```python
+```{python}
 import math
 help(math)
 ```
@@ -162,7 +153,7 @@ help(math)
 2. Rewrite it using `import` without `as`.
 3. Which form do you find easier to read?
 
-```python
+```{python}
 import math as m
 angle = ____.degrees(____.pi / 2)
 print(____)
@@ -171,7 +162,7 @@ print(____)
 ::: {.callout-note collapse="true" title="Solution"}
 ## Solution
 
-```python
+```{python}
 import math as m
 angle = m.degrees(m.pi / 2)
 print(angle)
@@ -179,7 +170,7 @@ print(angle)
 
 Without the alias:
 
-```python
+```{python}
 import math
 angle = math.degrees(math.pi / 2)
 print(angle)
@@ -227,7 +218,7 @@ Library calls:
 2. Is this version easier to read than the previous ones?
 3. Why wouldn't programmers always use this form?
 
-```python
+```{python}
 ____ math import ____, ____
 angle = degrees(pi / 2)
 print(angle)
@@ -236,7 +227,7 @@ print(angle)
 ::: {.callout-note collapse="true" title="Solution"}
 ## Solution
 
-```python
+```{python}
 from math import degrees, pi
 angle = degrees(pi / 2)
 print(angle)
@@ -254,7 +245,7 @@ This form is often the most readable for short scripts. The main reason not to u
 1. Read the code below and try to identify the error without running it.
 2. Run it and read the error message. What type of error is it?
 
-```python
+```{python}
 from math import log
 log(0)
 ```

@@ -1,5 +1,6 @@
 ---
 title: "Basics"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -31,7 +32,7 @@ Both lists and dictionaries are *objects* — they carry not just data but also 
 
 You can always check the type of a value with the built-in `type()` function:
 
-```python
+```{python}
 print(type(42))        # <class 'int'>
 print(type(3.14))      # <class 'float'>
 print(type("hello"))   # <class 'str'>
@@ -54,7 +55,7 @@ Python supports the standard arithmetic operators, plus a few that are especiall
 
 Operator precedence follows the usual mathematical convention — exponentiation first, then multiplication and division, then addition and subtraction. Use parentheses to make the order explicit:
 
-```python
+```{python}
 print(9.81 * 10.2**2 / 2)   # kinetic energy formula: 510.3162
 print((9.81 * 10.2)**2 / 2)  # different grouping: 50318.6...
 ```
@@ -63,14 +64,15 @@ print((9.81 * 10.2)**2 / 2)  # different grouping: 50318.6...
 
 Some arithmetic operators also work on strings, but with different meanings. `+` concatenates two strings, and `*` repeats a string a given number of times:
 
-```python
+```{python}
 print("cat" + "dog")    # catdog
 print("cat" * 3)        # catcatcat
 ```
 
 Operators that have no meaningful string interpretation — subtraction, division, exponentiation — raise a `TypeError` if you try to use them on strings:
 
-```python
+```{python}
+#| error: true
 "cat" - "dog"   # TypeError: unsupported operand type(s) for -: 'str' and 'str'
 ```
 
@@ -89,7 +91,7 @@ Python provides six comparison operators that compare two values and return a bo
 
 Note the distinction between `=` (assignment — gives a variable a value) and `==` (comparison — asks whether two values are the same).
 
-```python
+```{python}
 print(3 < 5)    # True
 print(3 == 5)   # False
 print(3 != 5)   # True
@@ -97,7 +99,7 @@ print(3 != 5)   # True
 
 Comparisons can be combined with the logical operators `and`, `or`, and `not`:
 
-```python
+```{python}
 print(3 < 5 and 5 < 10)   # True  — both conditions must hold
 print(3 < 5 or  5 > 10)   # True  — at least one condition must hold
 print(not 3 == 5)          # True  — inverts the result

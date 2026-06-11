@@ -1,5 +1,6 @@
 ---
 title: "Lists"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -23,14 +24,10 @@ title: "Lists"
 
 When you need to work with a collection of related values — pressures from a sensor, times in an experiment, filenames to process — storing them in separate variables like `pressure_001`, `pressure_002` quickly becomes unmanageable. A *list* groups any number of values into a single object. Lists are written with square brackets, with values separated by commas:
 
-```python
+```{python}
 pressures = [0.273, 0.275, 0.277, 0.275, 0.276]
 print('pressures:', pressures)
 print('length:', len(pressures))
-```
-```output
-pressures: [0.273, 0.275, 0.277, 0.275, 0.276]
-length: 5
 ```
 
 Lists may contain values of any type, and different types can be mixed in the same list — though in practice a list of the same type is more common and easier to reason about.
@@ -40,18 +37,14 @@ Lists may contain values of any type, and different types can be mixed in the sa
 
 List elements are accessed by position using square brackets, exactly like string characters. Indexing starts at zero, and negative indices count from the end:
 
-```python
+```{python}
 print('zeroth item of pressures:', pressures[0])
 print('fourth item of pressures:', pressures[4])
-```
-```output
-zeroth item of pressures: 0.273
-fourth item of pressures: 0.276
 ```
 
 Slices extract a portion of the list using `[start:stop]` notation, returning a new list. The `start` index is included; `stop` is excluded:
 
-```python
+```{python}
 print(pressures[1:4])   # items at indices 1, 2, 3
 print(pressures[:3])    # first three items
 print(pressures[2:])    # from index 2 to the end
@@ -59,11 +52,8 @@ print(pressures[2:])    # from index 2 to the end
 
 Going out of bounds in a slice never raises an error — Python just returns as many elements as are available. Going out of bounds with a direct index raises an `IndexError`:
 
-```python
+```{python}
 print('99th element of element is:', pressures[99])
-```
-```output
-IndexError: list index out of range
 ```
 
 
@@ -71,23 +61,17 @@ IndexError: list index out of range
 
 Unlike strings, lists are *mutable* — you can change their contents after creation. Assign directly to an indexed position to replace a value:
 
-```python
+```{python}
 pressures[0] = 0.265
 print('pressures is now:', pressures)
-```
-```output
-pressures is now: [0.265, 0.275, 0.277, 0.275, 0.276]
 ```
 
 `del` removes an element by index and shortens the list:
 
-```python
+```{python}
 primes = [2, 3, 5, 7, 9]
 del primes[4]
 print('primes after removing last item:', primes)
-```
-```output
-primes after removing last item: [2, 3, 5, 7]
 ```
 
 
@@ -95,29 +79,22 @@ primes after removing last item: [2, 3, 5, 7]
 
 `append` is a list *method* — a function attached to the list object — that adds a single item to the end:
 
-```python
+```{python}
 primes = [2, 3, 5]
 primes.append(7)
 primes.append(9)
 print('primes has become:', primes)
 ```
-```output
-primes has become: [2, 3, 5, 7, 9]
-```
 
 `extend` merges another list into the end of the existing list, keeping the result flat. If you `append` a list instead, the result is a nested list — a list inside a list:
 
-```python
+```{python}
 teen_primes = [11, 13, 17, 19]
 middle_aged_primes = [37, 41, 43, 47]
 primes.extend(teen_primes)
 print('after extend:', primes)
 primes.append(middle_aged_primes)
 print('after append of a list:', primes)
-```
-```output
-after extend: [2, 3, 5, 7, 9, 11, 13, 17, 19]
-after append of a list: [2, 3, 5, 7, 9, 11, 13, 17, 19, [37, 41, 43, 47]]
 ```
 
 The empty list `[]` is a useful starting point for collecting values inside a loop.
@@ -129,21 +106,15 @@ Use `help(list)` to see the full set of available methods.
 
 Strings behave like lists in many ways — they support indexing and slicing, and `len` measures their length — but they are *immutable*: you cannot change individual characters after creation:
 
-```python
+```{python}
 element = 'carbon'
 print('zeroth character:', element[0])
 print('third character:', element[3])
 ```
-```output
-zeroth character: c
-third character: b
-```
 
-```python
+```{python}
+#| error: true
 element[0] = 'C'
-```
-```error
-TypeError: 'str' object does not support item assignment
 ```
 
 If you need a modified string, create a new one — for example, `'C' + element[1:]` produces `'Carbon'`.
@@ -154,7 +125,7 @@ If you need a modified string, create a new one — for example, `'C' + element[
 
 Fill in the blanks so that the program produces the output shown.
 
-```python
+```{python}
 values = ____
 values.____(1)
 values.____(3)
@@ -172,7 +143,7 @@ second time: [3, 5]
 ::: {.callout-note collapse="true" title="Solution"}
 ## Solution
 
-```python
+```{python}
 values = []
 values.append(1)
 values.append(3)
@@ -203,13 +174,9 @@ If `low` and `high` are both non-negative integers, how many elements does `valu
 ::: {.callout-caution title="Challenge"}
 ## From Strings to Lists and Back
 
-```python
+```{python}
 print('string to list:', list('tin'))
 print('list to string:', ''.join(['g', 'o', 'l', 'd']))
-```
-```output
-['t', 'i', 'n']
-gold
 ```
 
 1. What does `list('some string')` do?
@@ -230,7 +197,7 @@ gold
 
 What does the following program print?
 
-```python
+```{python}
 element = 'helium'
 print(element[-1])
 ```
@@ -259,7 +226,7 @@ The program prints `m`.
 
 What does the following program print?
 
-```python
+```{python}
 element = 'fluorine'
 print(element[::2])
 print(element[::-1])
@@ -288,14 +255,14 @@ eniroulf
 
 What do these two programs print? Explain the difference between `sorted(letters)` and `letters.sort()`.
 
-```python
+```{python}
 # Program A
 letters = list('gold')
 result = sorted(letters)
 print('letters is', letters, 'and result is', result)
 ```
 
-```python
+```{python}
 # Program B
 letters = list('gold')
 result = letters.sort()
@@ -326,7 +293,7 @@ letters is ['d', 'g', 'l', 'o'] and result is None
 
 What do these two programs print? Explain the difference between `new = old` and `new = old[:]`.
 
-```python
+```{python}
 # Program A
 old = list('gold')
 new = old
@@ -334,7 +301,7 @@ new[0] = 'D'
 print('new is', new, 'and old is', old)
 ```
 
-```python
+```{python}
 # Program B
 old = list('gold')
 new = old[:]

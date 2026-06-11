@@ -1,5 +1,6 @@
 ---
 title: "Conditionals"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -21,7 +22,7 @@ title: "Conditionals"
 
 An `if` statement evaluates a condition and executes its indented body only if that condition is `True`. The structure mirrors a `for` loop: the header ends with a colon and the body is indented:
 
-```python
+```{python}
 mass = 3.54
 if mass > 3.0:
     print(mass, 'is large')
@@ -30,21 +31,14 @@ mass = 2.07
 if mass > 3.0:
     print(mass, 'is large')
 ```
-```output
-3.54 is large
-```
 
 On its own, an `if` with a fixed value is not very interesting. Conditionals become powerful inside loops, where the condition is evaluated for each item in the collection:
 
-```python
+```{python}
 masses = [3.54, 2.07, 9.22, 1.86, 1.71]
 for m in masses:
     if m > 3.0:
         print(m, 'is large')
-```
-```output
-3.54 is large
-9.22 is large
 ```
 
 
@@ -52,7 +46,7 @@ for m in masses:
 
 `else` specifies what to do when the `if` condition is not met. `elif` (short for "else if") inserts an additional condition between `if` and `else`. Python tests each condition in order and executes the first branch whose condition is `True`, then skips the rest:
 
-```python
+```{python}
 masses = [3.54, 2.07, 9.22, 1.86, 1.71]
 for m in masses:
     if m > 9.0:
@@ -62,17 +56,10 @@ for m in masses:
     else:
         print(m, 'is small')
 ```
-```output
-3.54 is large
-2.07 is small
-9.22 is HUGE
-1.86 is small
-1.71 is small
-```
 
 The order of branches matters. Python stops at the first true condition, so putting a less-restrictive condition first swallows values that should have matched a later, more-restrictive one:
 
-```python
+```{python}
 grade = 85
 if grade >= 70:
     print('grade is C')    # fires here — Python stops
@@ -80,9 +67,6 @@ elif grade >= 80:
     print('grade is B')    # never reached
 elif grade >= 90:
     print('grade is A')    # never reached
-```
-```output
-grade is C
 ```
 
 Arrange conditions from most to least restrictive to avoid this mistake.
@@ -92,7 +76,7 @@ Arrange conditions from most to least restrictive to avoid this mistake.
 
 Python tests each condition once when execution reaches it and does not re-evaluate after variables change. This is different from how a spreadsheet works:
 
-```python
+```{python}
 velocity = 10.0
 if velocity > 20.0:
     print('moving too fast')
@@ -100,13 +84,10 @@ else:
     print('adjusting velocity')
     velocity = 50.0
 ```
-```output
-adjusting velocity
-```
 
 Even though `velocity` is now 50.0, the `if` branch is not re-visited. Conditionals inside loops can, however, produce evolving behaviour by re-testing the condition on each iteration:
 
-```python
+```{python}
 velocity = 10.0
 for i in range(5):
     print(i, ':', velocity)
@@ -115,14 +96,6 @@ for i in range(5):
     else:
         velocity = velocity + 10.0
 print('final velocity:', velocity)
-```
-```output
-0 : 10.0
-1 : 20.0
-2 : 30.0
-3 : 25.0
-4 : 20.0
-final velocity: 30.0
 ```
 
 A variable-trace table is a useful tool for following this kind of loop:
@@ -140,7 +113,7 @@ A variable-trace table is a useful tool for following this kind of loop:
 
 Use `and`, `or`, and `not` to build compound conditions. When mixing `and` and `or` in the same expression, always add parentheses — the precedence rules are easy to misread:
 
-```python
+```{python}
 # Clear intent with parentheses
 if (mass > 5 and velocity > 20):
     print("Fast heavy object. Duck!")
@@ -156,7 +129,7 @@ Without parentheses, `a or b and c` means `a or (b and c)`, which may not be wha
 
 What does this program print?
 
-```python
+```{python}
 pressure = 71.9
 if pressure > 50.0:
     pressure = 25.0
@@ -183,7 +156,7 @@ The first condition (`pressure > 50.0`) is true when `pressure` is `71.9`, so th
 
 Fill in the blanks so that this program replaces negative values with `0` and positive values (including zero) with `1`:
 
-```python
+```{python}
 original = [-1.5, 0.2, 0.4, 0.0, -1.3, 0.4]
 result = ____
 for value in original:
@@ -201,7 +174,7 @@ print(result)
 ::: {.callout-note collapse="true" title="Solution"}
 ## Solution
 
-```python
+```{python}
 original = [-1.5, 0.2, 0.4, 0.0, -1.3, 0.4]
 result = []
 for value in original:
@@ -221,7 +194,7 @@ print(result)
 
 Modify this program so that it finds the largest and smallest values in the list regardless of the range of values:
 
-```python
+```{python}
 values = [...some test data...]
 smallest, largest = None, None
 for v in values:
@@ -238,7 +211,7 @@ What are the advantages and disadvantages of using `None` as the initial sentine
 ::: {.callout-note collapse="true" title="Solution"}
 ## Solution
 
-```python
+```{python}
 values = [-2, 1, 65, 78, -54, -24, 100]
 smallest, largest = None, None
 for v in values:

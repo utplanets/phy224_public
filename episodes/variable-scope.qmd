@@ -1,5 +1,6 @@
 ---
 title: "Variable Scope"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -24,7 +25,7 @@ There are only so many sensible names for variables, and code written by two dif
 
 A variable defined at the top level of a script — outside any function — is a *global* variable and can be read from anywhere. Variables defined *inside* a function, including its parameters, are *local* variables and exist only for the duration of that function call. They are invisible to the rest of the program:
 
-```python
+```{python}
 pressure = 103.9
 
 def adjust(t):
@@ -34,15 +35,10 @@ def adjust(t):
 
 Here `pressure` is global and is visible inside `adjust`. The parameter `t` and the variable `temperature` are both local to `adjust` — they cease to exist when `adjust` returns. Trying to access `temperature` from outside the function raises a `NameError`:
 
-```python
+```{python}
+#| error: true
 print('adjusted:', adjust(0.9))
 print('temperature after call:', temperature)
-```
-```output
-adjusted: 0.01238691049085659
-```
-```error
-NameError: name 'temperature' is not defined
 ```
 
 This is intentional. The author of a function can use any variable names they like without risking interference with names in the calling code, and callers do not need to know about the internal names a function uses.
@@ -79,7 +75,7 @@ Working from the bottom: the error is a `KeyError` with the message `'Friday'` �
 
 Trace the values of all variables in this program as it executes. Use `---` for variables that do not yet exist or have gone out of scope.
 
-```python
+```{python}
 limit = 100
 
 def clip(value):

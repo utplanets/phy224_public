@@ -1,5 +1,6 @@
 ---
 title: "Variables and Assignment"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -24,7 +25,7 @@ title: "Variables and Assignment"
 
 A variable is a name that refers to a value stored in memory. You create a variable by writing its name on the left of `=` and the value you want to store on the right. Python creates the variable the moment you assign something to it — there is no separate declaration step.
 
-```python
+```{python}
 age = 42
 first_name = 'Ahmed'
 ```
@@ -38,11 +39,8 @@ Good variable names are worth the extra typing. Python will run code with names 
 
 The built-in `print` function writes values to the screen as text. You pass it one or more arguments inside parentheses, separated by commas, and it prints them on a single line with a space between each item:
 
-```python
+```{python}
 print(first_name, 'is', age, 'years old')
-```
-```output
-Ahmed is 42 years old
 ```
 
 `print` automatically adds a newline at the end, so each call starts on a fresh line. You will use it constantly while exploring and debugging code.
@@ -52,11 +50,9 @@ Ahmed is 42 years old
 
 Python evaluates each line in order. If you reference a variable that has not yet been assigned — or that you have accidentally mis-spelled — Python raises a `NameError` rather than silently guessing a default value:
 
-```python
+```{python}
+#| error: true
 print(last_name)
-```
-```error
-NameError: name 'last_name' is not defined
 ```
 
 When you see an error like this, the last line of the message is usually the most useful: it names the variable Python could not find. A full discussion of reading error messages appears [later](variable-scope.qmd#reading-error-messages).
@@ -66,12 +62,9 @@ When you see an error like this, the last line of the message is usually the mos
 
 Once a variable exists you can use it anywhere you would use a literal value, including on the right-hand side of its own assignment. Python evaluates the right-hand side first, then stores the result back into the variable:
 
-```python
+```{python}
 age = age + 3
 print('Age in three years:', age)
-```
-```output
-Age in three years: 45
 ```
 
 This is a common pattern for updating a running total or counter. Note that the old value of `age` (42) is used to compute the new value (45), which then replaces it.
@@ -81,28 +74,22 @@ This is a common pattern for updating a running total or counter. Note that the 
 
 A string is an ordered sequence of characters, and Python numbers each position starting from zero. You retrieve a single character by writing its index in square brackets immediately after the variable name:
 
-```python
+```{python}
 atom_name = 'helium'
 print(atom_name[0])   # first character
 print(atom_name[3])   # fourth character
 ```
-```output
-h
-i
-```
 
 Negative indices count backwards from the end, so `atom_name[-1]` gives the last character, `atom_name[-2]` the second-to-last, and so on:
 
-```python
+```{python}
 print(atom_name[-1])
-```
-```output
-m
 ```
 
 Trying to index an integer raises a `TypeError`, because integers are not stored as sequences of digits:
 
-```python
+```{python}
+#| error: true
 a = 123
 print(a[1])   # TypeError: 'int' object is not subscriptable
 ```
@@ -112,23 +99,17 @@ print(a[1])   # TypeError: 'int' object is not subscriptable
 
 A *slice* extracts a contiguous portion of a string using the notation `[start:stop]`, where `start` is the index of the first character you want and `stop` is one past the last character you want. The length of the slice is always `stop - start`:
 
-```python
+```{python}
 atom_name = 'sodium'
 print(atom_name[0:3])   # characters at indices 0, 1, 2
-```
-```output
-sod
 ```
 
 Either bound can be omitted. `atom_name[:3]` means "from the beginning up to index 3", and `atom_name[3:]` means "from index 3to the end". `atom_name[:]` is a copy of the whole string. Slicing never modifies the original — it always returns a new string.
 
 The built-in function `len` returns the number of characters in a string, which is useful when you need to slice relative to the end:
 
-```python
+```{python}
 print(len('helium'))
-```
-```output
-6
 ```
 
 
@@ -138,7 +119,7 @@ print(len('helium'))
 What is the final value of `position` in the program below?
 Try to predict the value without running the program, then check your prediction.
 
-```python
+```{python}
 initial = 'left'
 position = initial
 initial = 'right'
@@ -181,12 +162,9 @@ Hint: think about which code you would rather inherit from someone who is leavin
 
 The program below prints a slice of a string:
 
-```python
+```{python}
 atom_name = 'carbon'
 print('atom_name[1:3] is:', atom_name[1:3])
-```
-```output
-atom_name[1:3] is: ar
 ```
 
 Answer the following without running the code first, then verify:

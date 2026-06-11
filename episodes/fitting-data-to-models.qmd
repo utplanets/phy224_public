@@ -50,13 +50,13 @@ and returns the *best-fit* values of the unknown parameters. Consider measuring 
 distance travelled by an object moving at constant speed, with time as the controlled
 variable:
 
-```python
+```{python}
 def distance(time, speed):
     """Calculate distance travelled at constant speed."""
     return speed * time
 ```
 
-```python
+```{python}
 import numpy
 from scipy.optimize import curve_fit
 
@@ -83,7 +83,7 @@ The model function must follow a fixed convention: its first argument must be th
 array of independent data; any additional arguments are the free parameters that
 `curve_fit` will determine; and it must return the predicted dependent values:
 
-```python
+```{python}
 def good_model_function(xdata, parameter_1, parameter_2, parameter_3):
     # compute and return the model prediction
     return prediction
@@ -101,7 +101,7 @@ parameters appear in the model function definition. For the single-parameter
 `pcov` is the **covariance matrix** — a square matrix whose size equals the number
 of parameters. Its diagonal elements are the *variances* of the fitted parameters:
 
-```python
+```{python}
 pvar = numpy.diag(pcov)          # extract the diagonal
 uncertainties = numpy.sqrt(pvar) # standard errors
 ```
@@ -137,7 +137,7 @@ errors and can be directly compared to your experimental precision.
 In experimental physics you almost always want `absolute_sigma=True`. The difference
 in practice:
 
-```python
+```{python}
 # Without absolute_sigma — sigma used only as weights, uncertainties rescaled
 popt_rel, pcov_rel = curve_fit(distance, measured_times, measured_distances,
                                sigma=distance_errors)
@@ -172,7 +172,7 @@ Always call the model function to make predictions — never rewrite the equatio
 hard-code the fitted value. If you later improve the fit, all predictions update
 automatically:
 
-```python
+```{python}
 d10  = distance(10,  popt[0])
 d100 = distance(100, popt[0])
 print("After  10 s: {:.4g} m".format(d10))
@@ -198,7 +198,7 @@ $$ s = ut + \frac{1}{2} a t^2 $$
 Add `acceleration` as a second parameter, re-run the fit, and `curve_fit` finds
 both simultaneously:
 
-```python
+```{python}
 def distance_with_acceleration(time, speed, acceleration):
     """Distance under constant acceleration from rest."""
     return speed * time + 0.5 * acceleration * time**2
@@ -229,8 +229,9 @@ Before trusting any numerical result, plot the data with error bars and overlay 
 model. A visual check catches problems — wrong model shape, outliers, data entry
 errors — that numbers alone miss:
 
-```python
-%matplotlib inline
+```{python}
+#| label: fig-fitting-data-and-models
+#| fig-cap : "Distance versus time showing the measured data with error bars and two model fits: a constant-velocity model and a constant-acceleration model"
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-v0_8-whitegrid")
 plt.figure(figsize=(8, 6))
@@ -244,13 +245,8 @@ plt.plot(measured_times,
 plt.legend(fontsize=14)
 plt.xlabel("Time (s)")
 plt.ylabel("Distance (m)")
+plt.show()
 ```
-
-![Distance versus time showing the measured data with error bars and two model
-fits: a constant-velocity model and a constant-acceleration model.
-The linear model curves away from the data while the quadratic model passes through
-the points.](fig/16_Curve_fit_24_1.png){alt="Distance versus time with measured data
-and two model fits."}
 
 
 ## Residual plots diagnose model quality
@@ -269,7 +265,9 @@ A trend in the residuals — values that drift positive then negative as the
 independent variable increases, or form a curve — means the model is missing
 something. It is not capturing the shape of the data.
 
-```python
+```{python}
+#| label: fig-fitting-residuals
+#| fig-cap : "Residual plot of model minus data for the two fits"
 plt.figure(figsize=(8, 4))
 plt.axhline(0, color='k', lw=0.8, ls='--')
 plt.plot(measured_times,
@@ -281,11 +279,8 @@ plt.plot(measured_times,
 plt.legend(fontsize=14)
 plt.xlabel("Time (s)")
 plt.ylabel("Residual (m)")
+plt.show()
 ```
-
-![Residual plot of model minus data for the two fits. The linear model shows a
-systematic arch — negative at the ends, positive in the middle — while the quadratic
-model's residuals scatter randomly around zero.](fig/16_Curve_fit_27_1.png){alt="Residual plot for the two model fits."}
 
 The constant-speed residuals form a clear arch — negative at short and long times,
 positive in the middle — which is the signature of a missing quadratic term. The
@@ -336,7 +331,7 @@ Interpreting $\chi_r^2$:
   Either the error estimates are too large (the experiment is more precise than you
   thought), or the model has too many parameters and is over-fitting the data.
 
-```python
+```{python}
 def chi2(y_measure, y_predict, errors):
     """Chi-squared: sum of squared normalised residuals."""
     return numpy.sum((y_measure - y_predict)**2 / errors**2)
@@ -347,7 +342,7 @@ def chi2reduced(y_measure, y_predict, errors, number_of_parameters):
     return chi2(y_measure, y_predict, errors) / dof
 ```
 
-```python
+```{python}
 chi2r_linear = chi2reduced(measured_distances,
                             distance(measured_times, popt[0]),
                             distance_errors, 1)
@@ -377,7 +372,7 @@ good fit.
 Report $\chi_r^2$ to 2–3 significant figures at most. Values of 110 and 1.18 should
 be rounded to 110 and 1.2 respectively:
 
-```python
+```{python}
 print("χ²_r (linear)      =", round(chi2r_linear, -1))   # 110.0
 print("χ²_r (acceleration)=", round(chi2r_accel,   1))   # 1.2
 ```
@@ -403,7 +398,7 @@ values during the fit. What is `curve_fit` doing?
 
 ::: {.callout-note collapse="true" title="Solution"}
 
-```python
+```{python}
 def distance_with_acceleration_print(time, speed, acceleration):
     print("speed=", speed, "acceleration=", acceleration)
     return speed * time + 0.5 * acceleration * time**2
@@ -447,7 +442,7 @@ too far from the true answer. The `p0` keyword provides an initial guess:
 - Being badly wrong (wrong sign, wrong order of magnitude) can cause the fit to
   diverge or converge to the wrong solution.
 
-```python
+```{python}
 iteration = 0
 
 def nonlinear_function(t, a, b, c, verbose=True):
@@ -465,7 +460,7 @@ sigmaNL = numpy.ones(10) * 0.5
 With a good guess the fit converges in ~14 iterations; with a bad guess the
 optimiser may diverge or converge to a wrong minimum entirely:
 
-```python
+```{python}
 # Good guess: I think it's roughly 2.5*t^2 with no offset
 iteration = 0
 poptNL2, pcovNL2 = curve_fit(nonlinear_function, t, y,
@@ -479,7 +474,9 @@ poptNL3, pcovNL3 = curve_fit(nonlinear_function, t, y,
 
 Always verify the result visually and with $\chi_r^2$:
 
-```python
+```{python}
+#| label: fig-fitting-nonlinear-fits
+#| fig-cap : "Two non-linear model fits overlaid on the data: a good initial guess that converges correctly and a bad initial guess that does not"
 plt.figure(figsize=(8, 5))
 plt.errorbar(t, y, yerr=sigmaNL, marker='o', ls='none', label="Data")
 
@@ -492,12 +489,12 @@ plot_and_print(poptNL3, ":",  "Bad guess")
 plt.legend()
 plt.xlabel("Time")
 plt.ylabel("Value")
+plt.show()
 ```
 
-![Two non-linear model fits overlaid on the data: a good initial guess that
-converges correctly and a bad initial guess that does not.](fig/16_Curve_fit_46_3.png){alt="Non-linear fits for a good and a bad initial guess."}
-
-```python
+```{python}
+#| label: fig-fitting-nonlinear-residuals
+#| fig-cap : "Residuals of the two non-linear fits"
 plt.figure(figsize=(8, 4))
 plt.axhline(0, color='k', lw=0.8, ls='--')
 
@@ -511,10 +508,8 @@ plot_residual(y, poptNL3, "<", "Bad guess")
 plt.legend()
 plt.xlabel("Time (s)")
 plt.ylabel("Residual")
+plt.show()
 ```
-
-![Residuals of the two non-linear fits. The good-guess fit shows small random
-residuals; the bad-guess fit shows large systematic residuals.](fig/16_Curve_fit_46_4.png){alt="Residuals of the non-linear fits for two initial guesses."}
 
 
 ::: {.callout-tip title="Key Points"}

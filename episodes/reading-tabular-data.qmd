@@ -1,5 +1,6 @@
 ---
 title: "Reading Tabular Data into Arrays"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -23,31 +24,17 @@ title: "Reading Tabular Data into Arrays"
 
 NumPy's `loadtxt` function reads a plain-text file of numbers and returns them as a two-dimensional array. By default it expects whitespace-separated values and skips lines that start with `#`:
 
-```python
+```{python}
 import numpy
 data = numpy.loadtxt('data/galileo_flat.empty')
 print(data)
 ```
-```output
-[[1500. 1000.]
- [1340.  828.]
- [1328.  800.]
- [1172.  600.]
- [ 800.  300.]]
-```
 
 Real data files often include delimiters, comment lines, and column headers. The `delimiter` keyword specifies the separator character, `comments` sets the comment character to ignore, and `skiprows` skips a fixed number of lines at the top:
 
-```python
+```{python}
 data = numpy.loadtxt('data/galileo_flat.csv', comments="#", skiprows=2, delimiter=',')
 print(data)
-```
-```output
-[[1500. 1000.]
- [1340.  828.]
- [1328.  800.]
- [1172.  600.]
- [ 800.  300.]]
 ```
 
 
@@ -55,11 +42,8 @@ print(data)
 
 The loaded array is shaped with rows first. A file with 5 data rows and 2 columns produces a `(5, 2)` array. You can inspect the shape with the `.shape` attribute:
 
-```python
+```{python}
 print("data shape is ", data.shape)
-```
-```output
-data shape is  (5, 2)
 ```
 
 
@@ -67,22 +51,17 @@ data shape is  (5, 2)
 
 It is often convenient to work with each data column as its own array. Pass `unpack=True` to `loadtxt` and assign the result to multiple variables in a single statement — NumPy will assign one column per variable:
 
-```python
+```{python}
 D, H = numpy.loadtxt('data/galileo_flat.csv', comments="#", skiprows=2,
                      delimiter=',', unpack=True)
 print(D, H)
 print("D shape is ", D.shape)
 print("H shape is ", H.shape)
 ```
-```output
-[1500. 1340. 1328. 1172.  800.] [1000.  828.  800.  600.  300.]
-D shape is  (5,)
-H shape is  (5,)
-```
 
 Alternatively, load the data first and then transpose to unpack columns:
 
-```python
+```{python}
 data = numpy.loadtxt('data/galileo_flat.csv', comments="#", skiprows=2, delimiter=',')
 D, H = data.T
 ```
@@ -92,7 +71,7 @@ D, H = data.T
 
 `numpy.savetxt` mirrors `loadtxt` and writes an array to a text file. The default format is floating-point with 16 significant digits:
 
-```python
+```{python}
 numpy.savetxt("data/mydata.txt", data, delimiter=',')
 ```
 
@@ -101,7 +80,7 @@ numpy.savetxt("data/mydata.txt", data, delimiter=',')
 
 The `fmt` keyword controls the number format. Use a C-style format string to write more compact values:
 
-```python
+```{python}
 numpy.savetxt("data/mydata2.txt", data, delimiter=',', fmt='%.6g')
 ```
 
@@ -111,7 +90,7 @@ numpy.savetxt("data/mydata2.txt", data, delimiter=',', fmt='%.6g')
 
 Add a descriptive header with the `header` keyword. NumPy automatically prepends `#` to header lines so they are ignored when you re-read the file with `loadtxt`:
 
-```python
+```{python}
 header = "Distance (D), Height (H)"
 newdata = numpy.vstack([D, H]).T
 numpy.savetxt("data/mydata3.txt", newdata, delimiter=', ', header=header, fmt='%.6g')
@@ -127,15 +106,11 @@ numpy.savetxt("data/mydata3.txt", newdata, delimiter=', ', header=header, fmt='%
 
 For more complex files you can use the `dtype` keyword to name the columns and control their types individually. The resulting array behaves like a structured record that you can index by column name:
 
-```python
+```{python}
 data = numpy.loadtxt('data/galileo_flat.csv', comments="#", skiprows=2, delimiter=',',
                      dtype={'names': ("Distance", "Height"), 'formats': ('f4', 'f4')})
 print("data shape is ", data.shape)
 print("Distance data is ", data["Distance"])
-```
-```output
-data shape is  (5,)
-Distance data is  [1500. 1340. 1328. 1172.  800.]
 ```
 
 

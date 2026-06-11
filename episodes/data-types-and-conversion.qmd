@@ -1,5 +1,6 @@
 ---
 title: "Data Types and Type Conversion"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -24,7 +25,7 @@ title: "Data Types and Type Conversion"
 
 The [Basics](basics.qmd) lesson introduced the three fundamental types — integers (`int`), floats (`float`), and strings (`str`). Use the built-in `type()` function at any time to check what type a value or variable has:
 
-```python
+```{python}
 print(type(52))       # <class 'int'>
 print(type(3.14))     # <class 'float'>
 print(type('hello'))  # <class 'str'>
@@ -34,52 +35,36 @@ The *variable* is just a label — it is the *value* that carries the type. This
 
 A value's type determines which operations make sense. Arithmetic subtraction works on numbers but not on strings:
 
-```python
+```{python}
 print(5 - 3)
 ```
-```output
-2
-```
 
-```python
+```{python}
+#| error: true
 print('hello' - 'h')
-```
-```error
-TypeError: unsupported operand type(s) for -: 'str' and 'str'
 ```
 
 However, `+` and `*` do work on strings — they just mean something different. Adding two strings concatenates them, and multiplying a string by an integer repeats it:
 
-```python
+```{python}
 full_name = 'Ahmed' + ' ' + 'Walsh'
 print(full_name)
 ```
-```output
-Ahmed Walsh
-```
 
-```python
+```{python}
 separator = '=' * 10
 print(separator)
-```
-```output
-==========
 ```
 
 Strings have a length, countable with `len()`. Numbers do not — calling `len()` on an integer raises a `TypeError`:
 
-```python
+```{python}
 print(len(full_name))
 ```
-```output
-11
-```
 
-```python
+```{python}
+#| error: true
 print(len(52))
-```
-```error
-TypeError: object of type 'int' has no len()
 ```
 
 
@@ -87,18 +72,15 @@ TypeError: object of type 'int' has no len()
 
 You cannot mix numbers and strings in arithmetic directly. Python refuses `1 + '2'` because the intent is ambiguous — should the result be the number `3` or the string `'12'`? Use `int()`, `float()`, or `str()` to convert explicitly first:
 
-```python
+```{python}
 print(1 + int('2'))
 print(str(1) + '2')
-```
-```output
-3
-12
 ```
 
 `float()` will convert a numeric string like `"3.4"` to a float. `int()` will truncate a float to its integer part, discarding the decimal. Conversions that do not make sense raise a `ValueError`:
 
-```python
+```{python}
+#| error: true
 print(float("3.4"))   # 3.4
 print(int(3.4))       # 3  — truncates, does not round
 print(float("Hello")) # ValueError
@@ -111,26 +93,17 @@ Note that `int("3.4")` also raises a `ValueError` — Python does not chain conv
 
 When an expression contains both integers and floats, Python automatically promotes the integer to a float so no precision is lost. The `/` operator always returns a float in Python 3, even when both operands are integers:
 
-```python
+```{python}
 print('half is', 1 / 2.0)
 print('three squared is', 3.0 ** 2)
 print('integer division:', 7 / 2)
 ```
-```output
-half is 0.5
-three squared is 9.0
-integer division: 3.5
-```
 
 To get a whole-number result from division, use `//` (floor division). The `%` operator gives the remainder:
 
-```python
+```{python}
 print('5 // 3:', 5 // 3)
 print('5 % 3:', 5 % 3)
-```
-```output
-5 // 3: 1
-5 % 3: 2
 ```
 
 
@@ -138,14 +111,11 @@ print('5 % 3:', 5 % 3)
 
 Unlike a spreadsheet cell, a Python variable does not update automatically when the values it depended on change. Assignment copies the *current* value — the connection to any previous expression is severed immediately:
 
-```python
+```{python}
 first = 1
 second = 5 * first
 first = 2
 print('first is', first, 'and second is', second)
-```
-```output
-first is 2 and second is 5
 ```
 
 When Python evaluated `5 * first`, it computed `5`, stored that number in `second`, and moved on. Changing `first` later has no effect on `second`.
@@ -161,11 +131,8 @@ What type of value is `3.4`? How can you find out?
 
 It is a float. You can verify with `type()`:
 
-```python
+```{python}
 print(type(3.4))
-```
-```output
-<class 'float'>
 ```
 :::
 :::
@@ -182,12 +149,9 @@ What type of value is `3.25 + 4`?
 
 It is a float. When an integer and a float appear together in an expression, Python converts the integer to a float automatically:
 
-```python
+```{python}
 result = 3.25 + 4
 print(result, 'is', type(result))
-```
-```output
-7.25 is <class 'float'>
 ```
 :::
 :::
@@ -225,15 +189,10 @@ What type of value (integer, float, or string) would you use to represent each o
 
 Given the three division operators in Python 3:
 
-```python
+```{python}
 print('5 // 3:', 5 // 3)
 print('5 / 3:', 5 / 3)
 print('5 % 3:', 5 % 3)
-```
-```output
-5 // 3: 1
-5 / 3: 1.6666666666666667
-5 % 3: 2
 ```
 
 If `num_subjects` is the number of subjects in a study and `num_per_survey` is the number who can participate in one survey, write an expression that calculates the minimum number of surveys needed to reach everyone at least once.
@@ -243,14 +202,11 @@ If `num_subjects` is the number of subjects in a study and `num_per_survey` is t
 
 Floor division gives the number of complete surveys; adding 1 handles the remainder group:
 
-```python
+```{python}
 num_subjects = 600
 num_per_survey = 42
 num_surveys = num_subjects // num_per_survey + 1
 print(num_subjects, 'subjects,', num_per_survey, 'per survey:', num_surveys)
-```
-```output
-600 subjects, 42 per survey: 15
 ```
 :::
 :::
@@ -262,18 +218,14 @@ print(num_subjects, 'subjects,', num_per_survey, 'per survey:', num_surveys)
 
 `float()` converts a numeric string to a float, and `int()` truncates a float to an integer:
 
-```python
+```{python}
 print("string to float:", float("3.4"))
 print("float to int:", int(3.4))
-```
-```output
-string to float: 3.4
-float to int: 3
 ```
 
 What do you expect the following to do? What does it actually do, and why?
 
-```python
+```{python}
 print("fractional string to int:", int("3.4"))
 ```
 
@@ -282,7 +234,7 @@ print("fractional string to int:", int("3.4"))
 
 It raises a `ValueError`. Although it might seem reasonable for Python to convert `"3.4"` to `3.4` and then to `3`, Python requires explicit, step-by-step conversion. If you want the integer, you must do it yourself:
 
-```python
+```{python}
 int(float("3.4"))   # 3
 ```
 :::
@@ -295,7 +247,7 @@ int(float("3.4"))   # 3
 
 Which of the following expressions produce `2.0`? There may be more than one correct answer.
 
-```python
+```{python}
 first = 1.0
 second = "1"
 third = "1.1"

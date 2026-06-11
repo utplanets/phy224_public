@@ -1,5 +1,6 @@
 ---
 title: "Getting Help"
+jupyter: python3
 ---
 
 ::: {.callout-note title="Questions"}
@@ -24,18 +25,8 @@ title: "Getting Help"
 
 Every built-in function and most library functions include built-in documentation. Call `help()` and pass the function name *without* parentheses to display it in the terminal or notebook output:
 
-```python
+```{python}
 help(round)
-```
-```output
-Help on built-in function round in module builtins:
-
-round(...)
-    round(number[, ndigits]) -> number
-
-    Round a number to a given precision in decimal digits (default 0 digits).
-    This returns an int when called with one argument, otherwise the
-    same type as the number. ndigits may be negative.
 ```
 
 In the Jupyter Notebook there are two faster shortcuts:
@@ -45,7 +36,7 @@ In the Jupyter Notebook there are two faster shortcuts:
 
 These shortcuts work for any imported function, including NumPy and SciPy functions:
 
-```python
+```{python}
 import numpy
 numpy.linspace?
 ```
@@ -99,12 +90,9 @@ Use `help(sorted)` or the Python documentation to answer:
 
 `sorted` accepts `key` (a function applied to each element before comparison) and `reverse` (a boolean, default `False`):
 
-```python
+```{python}
 words = ['banana', 'apple', 'cherry']
 print(sorted(words, reverse=True))
-```
-```output
-['cherry', 'banana', 'apple']
 ```
 :::
 :::
