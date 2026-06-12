@@ -416,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -450,7 +450,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="processing-a-list-of-files-with-a-for-loop" class="level2">
 <h2 class="anchored" data-anchor-id="processing-a-list-of-files-with-a-for-loop">Processing a list of files with a <code>for</code> loop</h2>
 <p>A filename is just a string, and strings can be stored in lists. That means you can loop over a list of filenames exactly as you would loop over a list of numbers, applying the same analysis to each file automatically:</p>
-<div id="559beeee" class="cell" data-execution_count="1">
+<div id="0d6476f7" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> [<span class="st">"data/galileo_flat.csv"</span>, <span class="st">"data/galileo_ramp.csv"</span>]:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    distance, height <span class="op">=</span> numpy.loadtxt(filename, skiprows<span class="op">=</span><span class="dv">2</span>,</span>
@@ -465,7 +465,7 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 <section id="finding-files-with-glob" class="level2">
 <h2 class="anchored" data-anchor-id="finding-files-with-glob">Finding files with <code>glob</code></h2>
 <p>Writing out filenames by hand works for two files, but not for two hundred. The <code>glob</code> library provides a function, also called <code>glob</code>, that returns a list of all filenames matching a given pattern. The two most useful wildcards are <code>*</code> (zero or more characters) and <code>?</code> (exactly one character):</p>
-<div id="185a6ba4" class="cell" data-execution_count="2">
+<div id="0005e268" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"all csv files in data/random:"</span>, glob.glob(<span class="st">"data/random/*.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -473,7 +473,7 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 </div>
 </div>
 <p>If no files match the pattern, <code>glob</code> returns an empty list rather than an error:</p>
-<div id="46588fdd" class="cell" data-execution_count="3">
+<div id="dbe26602" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"all txt files in data/random:"</span>, glob.glob(<span class="st">"data/random/*.txt"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>all txt files in data/random: []</code></pre>
@@ -483,13 +483,13 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 <section id="combining-glob-and-for-to-process-batches-of-files" class="level2">
 <h2 class="anchored" data-anchor-id="combining-glob-and-for-to-process-batches-of-files">Combining <code>glob</code> and <code>for</code> to process batches of files</h2>
 <p>Wrapping <code>glob.glob</code> in <code>sorted</code> gives you consistent, predictable ordering. Then it is straightforward to apply the same analysis to every matching file:</p>
-<div id="70267a8c" class="cell" data-execution_count="4">
+<div id="33af101e" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> <span class="bu">sorted</span>(glob.glob(<span class="st">'data/random/*.csv'</span>)):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    distance, height <span class="op">=</span> numpy.loadtxt(filename, delimiter<span class="op">=</span><span class="st">','</span>, unpack<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filename, distance.mean(), height.std())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This pattern — glob a set of files, sort, loop and analyse — is one of the most useful idioms in data-analysis scripts. Name your data files systematically so that simple glob patterns can find the right set. The sort function <em>always</em> sorts alphabetically, so “A before”Z”, but also “10” before “2” but after “02”. Try to pad numbers so they always sort correctly.</p>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -506,7 +506,7 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 <li><code>data/gapminder_gdp_americas.csv</code></li>
 <li><code>data/gapminder_gdp_asia.csv</code></li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -517,15 +517,14 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<section id="solution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<div class="callout-body-container callout-body">
 <p>File 1 is not matched. <code>*as*</code> requires the letters “as” to appear somewhere in the filename. “africa” does not contain “as”, while “americas” and “asia” both do.</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -537,7 +536,7 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 <section id="averaging-across-datasets" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="averaging-across-datasets">Averaging across datasets</h2>
 <p>Write a program that calculates the average <code>distance</code> value across <em>all</em> files in <code>data/random/</code>, rather than printing each file separately.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -548,9 +547,8 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<section id="solution-1" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-1">Solution</h2>
-<div id="a5df89b4" class="cell" data-execution_count="5">
+<div class="callout-body-container callout-body">
+<div id="37582fe7" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -570,12 +568,12 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
   ret = ret.dtype.type(ret / rcount)</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

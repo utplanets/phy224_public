@@ -446,7 +446,7 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -462,7 +462,7 @@ window.Quarto = {
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -492,7 +492,7 @@ window.Quarto = {
 </section>
 <section id="worked-solution-single-equation" class="level2">
 <h2 class="anchored" data-anchor-id="worked-solution-single-equation">Worked solution: single equation</h2>
-<div id="02e2338a" class="cell" data-execution_count="1">
+<div id="1455532a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> fsolve</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -530,7 +530,7 @@ Collision position: 2.5000 m</code></pre>
 <div id="fig-fsolve-collision" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fsolve-collision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="optional-fsolve_files/figure-html/fig-fsolve-collision-output-1.png" width="589" height="429" class="figure-img">
+<img src="optional-fsolve_files/figure-html/fig-fsolve-collision-output-1.png" width="590" height="431" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fsolve-collision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Position versus time for pucks A and B; the intersection is the collision point found by fsolve
@@ -549,7 +549,7 @@ Figure&nbsp;1: Position versus time for pucks A and B; the intersection is the c
 -R_3\,I_1 + (R_2 + R_3)\,I_2 = V_2
 \]</span></p>
 <p>Pass a function that returns the <strong>vector of residuals</strong> and an initial guess vector:</p>
-<div id="4a204522" class="cell" data-execution_count="3">
+<div id="85ad07a1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>R1, R2, R3 <span class="op">=</span> <span class="fl">2.0</span>, <span class="fl">3.0</span>, <span class="fl">1.0</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>V1, V2 <span class="op">=</span> <span class="fl">5.0</span>, <span class="fl">3.0</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -568,7 +568,7 @@ I2 = 1.2727 A</code></pre>
 </div>
 </div>
 <p><code>fsolve</code> returns the vector [I₁, I₂] at which both residuals are zero — i.e., the solution to the system. For linear systems <code>numpy.linalg.solve</code> is more efficient, but <code>fsolve</code> works the same way when the equations become nonlinear.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

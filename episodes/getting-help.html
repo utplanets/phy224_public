@@ -417,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -434,7 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -455,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="help-and-jupyter-inline-help" class="level2">
 <h2 class="anchored" data-anchor-id="help-and-jupyter-inline-help"><code>help()</code> and Jupyter inline help</h2>
 <p>Every built-in function and most library functions include built-in documentation. Call <code>help()</code> and pass the function name <em>without</em> parentheses to display it in the terminal or notebook output:</p>
-<div id="bd42bf8a" class="cell" data-execution_count="1">
+<div id="873627f9" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(<span class="bu">round</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Help on built-in function round in module builtins:
@@ -474,7 +474,7 @@ round(number, ndigits=None)
 <li>Type the function name followed by <code>?</code> and run the cell for the full docstring.</li>
 </ul>
 <p>These shortcuts work for any imported function, including NumPy and SciPy functions:</p>
-<div id="0aadda4c" class="cell" data-execution_count="2">
+<div id="6a2abe30" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>numpy.linspace?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -507,7 +507,7 @@ round(number, ndigits=None)
 <li><strong>Find documentation for any keyword arguments you do not recognise.</strong> A line like <code>numpy.loadtxt(f, delimiter=',', usecols=(0,2))</code> has three arguments: look up <code>usecols</code> if you have not seen it before.</li>
 <li><strong>Check the output shape and type.</strong> Many errors come from mismatches between what a function returns and what the next line expects. <code>print(type(result), result.shape)</code> is a quick sanity check.</li>
 </ol>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -523,7 +523,7 @@ round(number, ndigits=None)
 <li>What arguments does <code>sorted</code> accept besides the iterable?</li>
 <li>How would you sort a list of strings in reverse alphabetical order?</li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -534,22 +534,21 @@ round(number, ndigits=None)
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<section id="solution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<div class="callout-body-container callout-body">
 <p><code>sorted</code> accepts <code>key</code> (a function applied to each element before comparison) and <code>reverse</code> (a boolean, default <code>False</code>):</p>
-<div id="f8d6c9aa" class="cell" data-execution_count="3">
+<div id="8fcb6848" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>words <span class="op">=</span> [<span class="st">'banana'</span>, <span class="st">'apple'</span>, <span class="st">'cherry'</span>]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sorted</span>(words, reverse<span class="op">=</span><span class="va">True</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>['cherry', 'banana', 'apple']</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -561,7 +560,7 @@ round(number, ndigits=None)
 <section id="searching-for-a-function" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="searching-for-a-function">Searching for a Function</h2>
 <p>You want to calculate the median of a NumPy array but you do not know the function name. Describe the search query you would use and identify the correct function.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -572,15 +571,14 @@ round(number, ndigits=None)
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<section id="solution-1" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-1">Solution</h2>
+<div class="callout-body-container callout-body">
 <p>A query like <code>"numpy median array"</code> or browsing the NumPy statistics reference page (<a href="https://numpy.org/doc/stable/reference/routines.statistics.html">numpy.org/doc/stable/reference/routines.statistics.html</a>) will quickly surface <code>numpy.median</code>. You can then confirm its signature with <code>help(numpy.median)</code> or <code>numpy.median?</code>.</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

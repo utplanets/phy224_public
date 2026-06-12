@@ -416,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -433,7 +433,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -458,7 +458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="docstrings-make-functions-self-documenting" class="level2">
 <h2 class="anchored" data-anchor-id="docstrings-make-functions-self-documenting">Docstrings make functions self-documenting</h2>
 <p>If the first statement in a function body is a string literal not assigned to any variable, Python attaches it to the function as its <em>docstring</em> — the text that appears when you call <code>help()</code> on it:</p>
-<div id="d26b4cfc" class="cell" data-execution_count="1">
+<div id="14365b89" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> average(values):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Return average of values, or None if no values are supplied."</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -476,7 +476,7 @@ average(values)
 </div>
 </div>
 <p>For longer descriptions, use triple-quoted strings to span multiple lines:</p>
-<div id="5663c22a" class="cell" data-execution_count="2">
+<div id="7cb6d618" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_bulk_density(mass, volume):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return dry bulk density = powder mass / powder volume.</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -491,14 +491,14 @@ average(values)
 <section id="assertions-check-your-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="assertions-check-your-assumptions">Assertions check your assumptions</h2>
 <p>An <code>assert</code> statement evaluates an expression and raises an <code>AssertionError</code> immediately if it is <code>False</code>. Use assertions to check conditions that <em>must</em> be true for your code to be correct — they act as executable documentation and catch bugs close to their source:</p>
-<div id="5e550524" class="cell" data-execution_count="3">
+<div id="8c494aab" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_bulk_density(mass, volume):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return dry bulk density = powder mass / powder volume."""</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> volume <span class="op">&gt;</span> <span class="dv">0</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mass <span class="op">/</span> volume</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Assertions should contain only simple checks and must never have side effects (no assignments, no function calls that change state).</p>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -510,7 +510,7 @@ average(values)
 <section id="what-will-be-shown" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="what-will-be-shown">What Will Be Shown?</h2>
 <p>Which lines in the code below will appear as online help? Are there lines that <em>should</em> provide help but won’t? Will any lines cause an error?</p>
-<div id="21106c5e" class="cell" data-execution_count="4">
+<div id="728c27d3" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Find maximum edit distance between multiple sequences."</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This finds the maximum distance between all sequences.</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -527,7 +527,7 @@ average(values)
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> highest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -538,15 +538,14 @@ average(values)
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<section id="solution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<div class="callout-body-container callout-body">
 <p>The module-level string <code>"Find maximum edit distance between multiple sequences."</code> is a module docstring — visible via <code>help(module)</code> but not via <code>help(overall_max)</code>. The function docstring <code>'''Determine overall maximum edit distance.'''</code> is what <code>help(overall_max)</code> will display. The string <code>'''Avoid checking sequence against itself.'''</code> inside the loop is <em>not</em> a docstring — it is just a string expression that is evaluated and immediately discarded. It produces no help and no error, but it is confusing and should be a <code>#</code> comment instead.</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -558,7 +557,7 @@ average(values)
 <section id="document-this" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="document-this">Document This</h2>
 <p>Convert the comment below into a proper docstring and verify that <code>help</code> displays it correctly.</p>
-<div id="03eea8fc" class="cell" data-execution_count="5">
+<div id="cb45e04d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> middle(a, b, c):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the middle value of three.</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assumes the values can actually be compared.</span></span>
@@ -566,7 +565,7 @@ average(values)
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    values.sort()</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> values[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -577,9 +576,8 @@ average(values)
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<section id="solution-1" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-1">Solution</h2>
-<div id="e97336e8" class="cell" data-execution_count="6">
+<div class="callout-body-container callout-body">
+<div id="8499d530" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> middle(a, b, c):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return the middle value of three.</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -589,12 +587,12 @@ average(values)
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    values.sort()</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> values[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -611,7 +609,7 @@ average(values)
 <li>Refactor it to be more readable without changing its behaviour. Run it after each change.</li>
 <li>Compare your refactored version with a neighbour’s. What choices did you make differently?</li>
 </ol>
-<div id="d0cd3cb4" class="cell" data-execution_count="7">
+<div id="5c74aa84" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="st">'et cetera'</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s)</span>
@@ -640,7 +638,7 @@ average(values)
 ---*---*-</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -651,9 +649,8 @@ average(values)
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<section id="solution-2" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-2">Solution</h2>
-<div id="d84e6856" class="cell" data-execution_count="8">
+<div class="callout-body-container callout-body">
+<div id="f9590d97" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> string_machine(input_string, iterations):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Generate a new string by replacing each character with '-' if its</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">    neighbours match, or '*' if they differ. Repeat for the given number</span></span>
@@ -688,12 +685,12 @@ average(values)
 ---*---*-</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

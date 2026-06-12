@@ -423,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -440,7 +440,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -462,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="matplotlib-is-pythons-standard-scientific-plotting-library" class="level2">
 <h2 class="anchored" data-anchor-id="matplotlib-is-pythons-standard-scientific-plotting-library">Matplotlib is Python’s standard scientific plotting library</h2>
 <p>The most widely used scientific plotting library in Python is <code>matplotlib</code>.</p>
-<div id="894b60a2" class="cell" data-execution_count="1">
+<div id="ebb3c64c" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -484,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fig-plotting-basic-line" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plotting-basic-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="plotting_files/figure-html/fig-plotting-basic-line-output-1.png" width="593" height="429" class="figure-img">
+<img src="plotting_files/figure-html/fig-plotting-basic-line-output-1.png" width="594" height="431" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plotting-basic-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Line plot of position in km versus time in hours, showing a linear increase from 0 to 300 km over 3 hours
@@ -515,7 +515,7 @@ Figure&nbsp;1: Line plot of position in km versus time in hours, showing a linea
 <div id="fig-plotting-format-strings" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plotting-format-strings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="plotting_files/figure-html/fig-plotting-format-strings-output-1.png" width="585" height="429" class="figure-img">
+<img src="plotting_files/figure-html/fig-plotting-format-strings-output-1.png" width="585" height="431" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plotting-format-strings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Three position versus time plots using different formatting: a blue line (p1), red circles (p2), and a green line with plus markers (p3)
@@ -537,7 +537,7 @@ Figure&nbsp;2: Three position versus time plots using different formatting: a bl
 <div id="fig-plotting-keyword-style" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plotting-keyword-style-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="plotting_files/figure-html/fig-plotting-keyword-style-output-1.png" width="585" height="429" class="figure-img">
+<img src="plotting_files/figure-html/fig-plotting-keyword-style-output-1.png" width="585" height="431" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plotting-keyword-style-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: Three position-versus-time series with a legend: a thick blue line, large red dots, and a green line with plus markers
@@ -550,10 +550,10 @@ Figure&nbsp;3: Three position-versus-time series with a legend: a thick blue lin
 <section id="built-in-styles" class="level2">
 <h2 class="anchored" data-anchor-id="built-in-styles">Built-in styles</h2>
 <p>Matplotlib ships with a set of named styles that control colours, fonts, and backgrounds consistently. List available styles with <code>plt.style.available</code> and apply one with <code>plt.style.use</code>:</p>
-<div id="5b052e0f" class="cell" data-execution_count="5">
+<div id="aeb394c9" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"available style names: "</span>, plt.style.available)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>available style names:  ['Solarize_Light2', '_classic_test_patch', '_mpl-gallery', '_mpl-gallery-nogrid', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'petroff10', 'seaborn-v0_8', 'seaborn-v0_8-bright', 'seaborn-v0_8-colorblind', 'seaborn-v0_8-dark', 'seaborn-v0_8-dark-palette', 'seaborn-v0_8-darkgrid', 'seaborn-v0_8-deep', 'seaborn-v0_8-muted', 'seaborn-v0_8-notebook', 'seaborn-v0_8-paper', 'seaborn-v0_8-pastel', 'seaborn-v0_8-poster', 'seaborn-v0_8-talk', 'seaborn-v0_8-ticks', 'seaborn-v0_8-white', 'seaborn-v0_8-whitegrid', 'tableau-colorblind10']</code></pre>
+<pre><code>available style names:  ['Solarize_Light2', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'petroff10', 'petroff6', 'petroff8', 'seaborn-v0_8', 'seaborn-v0_8-bright', 'seaborn-v0_8-colorblind', 'seaborn-v0_8-dark', 'seaborn-v0_8-dark-palette', 'seaborn-v0_8-darkgrid', 'seaborn-v0_8-deep', 'seaborn-v0_8-muted', 'seaborn-v0_8-notebook', 'seaborn-v0_8-paper', 'seaborn-v0_8-pastel', 'seaborn-v0_8-poster', 'seaborn-v0_8-talk', 'seaborn-v0_8-ticks', 'seaborn-v0_8-white', 'seaborn-v0_8-whitegrid', 'tableau-colorblind10']</code></pre>
 </div>
 </div>
 <div id="cell-fig-plotting-seaborn-style" class="cell" data-execution_count="6">
@@ -568,7 +568,7 @@ Figure&nbsp;3: Three position-versus-time series with a legend: a thick blue lin
 <div id="fig-plotting-seaborn-style" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plotting-seaborn-style-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="plotting_files/figure-html/fig-plotting-seaborn-style-output-1.png" width="589" height="425" class="figure-img">
+<img src="plotting_files/figure-html/fig-plotting-seaborn-style-output-1.png" width="590" height="424" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plotting-seaborn-style-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4: The same three position-versus-time series rendered in the seaborn-v0_8-whitegrid style
@@ -595,7 +595,7 @@ Figure&nbsp;4: The same three position-versus-time series rendered in the seabor
 <div id="fig-plotting-scatter" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plotting-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="plotting_files/figure-html/fig-plotting-scatter-output-1.png" width="567" height="444" class="figure-img">
+<img src="plotting_files/figure-html/fig-plotting-scatter-output-1.png" width="568" height="443" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plotting-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5: Scatter plot with two series: blue dots and green left-pointing triangles
@@ -623,7 +623,7 @@ Figure&nbsp;5: Scatter plot with two series: blue dots and green left-pointing t
 <div id="fig-plotting-errorbar" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plotting-errorbar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="plotting_files/figure-html/fig-plotting-errorbar-output-1.png" width="559" height="444" class="figure-img">
+<img src="plotting_files/figure-html/fig-plotting-errorbar-output-1.png" width="560" height="443" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plotting-errorbar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6: Error bar plot of ten data points with green circle markers and vertical error bars
@@ -743,7 +743,7 @@ Figure&nbsp;10: Three bar charts arranged side by side in a 1x3 subplot row
 <div id="fig-plotting-savefig" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plotting-savefig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="plotting_files/figure-html/fig-plotting-savefig-output-1.png" width="627" height="259" class="figure-img">
+<img src="plotting_files/figure-html/fig-plotting-savefig-output-1.png" width="627" height="258" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plotting-savefig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;11: Line plot produced for the savefig example
@@ -783,7 +783,7 @@ Figure&nbsp;12: Example of saving via a captured current figure reference after 
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

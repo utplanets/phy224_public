@@ -418,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -434,7 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -462,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="worked-solution" class="level2">
 <h2 class="anchored" data-anchor-id="worked-solution">Worked solution</h2>
-<div id="8d819987" class="cell" data-execution_count="1">
+<div id="28a4a304" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -482,7 +482,7 @@ gapminder_gdp_oceania.csv</code></pre>
 </div>
 </div>
 <p><code>glob</code> returns a generator; <code>sorted</code> converts it to a sorted list of <code>Path</code> objects. Each <code>Path</code> carries its full location, so you can pass it directly to <code>pd.read_csv</code>:</p>
-<div id="beb7245a" class="cell" data-execution_count="2">
+<div id="fb9e002f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> path <span class="kw">in</span> gdp_files:</span>
@@ -508,7 +508,7 @@ oceania       mean GDP 2007: $29,810</code></pre>
 <section id="filtering-by-a-second-pattern" class="level2">
 <h2 class="anchored" data-anchor-id="filtering-by-a-second-pattern">Filtering by a second pattern</h2>
 <p>To restrict to files matching a more specific pattern — only files whose name contains <code>"americas"</code> or <code>"europe"</code> — filter after globbing:</p>
-<div id="2084b6ce" class="cell" data-execution_count="3">
+<div id="4f110991" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>target_regions <span class="op">=</span> {<span class="st">"americas"</span>, <span class="st">"europe"</span>}</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> path <span class="kw">in</span> gdp_files:</span>
@@ -526,7 +526,7 @@ europe: 30 countries</code></pre>
 <section id="building-output-paths-alongside-input-paths" class="level2">
 <h2 class="anchored" data-anchor-id="building-output-paths-alongside-input-paths">Building output paths alongside input paths</h2>
 <p>A common pattern is writing a processed file next to each source file. Use the <code>Path</code> methods to construct the output path from the input path:</p>
-<div id="63e55d5b" class="cell" data-execution_count="4">
+<div id="19affa0e" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> path <span class="kw">in</span> gdp_files:</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    output_path <span class="op">=</span> path.parent <span class="op">/</span> (path.stem <span class="op">+</span> <span class="st">"_summary.txt"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>path<span class="sc">.</span>name<span class="sc">}</span><span class="ss">  -&gt;  </span><span class="sc">{</span>output_path<span class="sc">.</span>name<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -539,7 +539,7 @@ europe: 30 countries</code></pre>
 </div>
 </div>
 <p><code>path.parent</code> is the directory, <code>/</code> is Path’s concatenation operator, and <code>path.stem + "_summary.txt"</code> builds the new filename.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

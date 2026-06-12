@@ -446,7 +446,7 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -463,7 +463,7 @@ window.Quarto = {
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -498,7 +498,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="worked-solution">Worked solution</h2>
 <p>Rewrite the equation as <span class="math inline">\(f(x) = 0\)</span> and compute its derivative:</p>
 <p><span class="math display">\[f(x) = 5\left(1 - e^{-x}\right) - x \qquad f'(x) = 5e^{-x} - 1\]</span></p>
-<div id="4f9ea244" class="cell" data-execution_count="1">
+<div id="4eb36ccb" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -520,7 +520,7 @@ window.Quarto = {
 <div id="fig-newton-fplot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-newton-fplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="optional-newton_files/figure-html/fig-newton-fplot-output-1.png" width="587" height="429" class="figure-img">
+<img src="optional-newton_files/figure-html/fig-newton-fplot-output-1.png" width="588" height="430" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newton-fplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: f(x) = 5(1 − e^{−x}) − x has a trivial root at x = 0 and the physical root near x ≈ 4.97
@@ -530,7 +530,7 @@ Figure&nbsp;1: f(x) = 5(1 − e^{−x}) − x has a trivial root at x = 0 and th
 </div>
 </div>
 <p>Run the Newton-Raphson iteration, recording each estimate so we can plot convergence:</p>
-<div id="0e28138a" class="cell" data-execution_count="3">
+<div id="08880872" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">5.0</span>          <span class="co"># starting guess, away from the trivial root at 0</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tolerance <span class="op">=</span> <span class="fl">1e-12</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>max_iter <span class="op">=</span> <span class="dv">20</span></span>
@@ -552,7 +552,7 @@ x root  = 4.9651142317</code></pre>
 </div>
 </div>
 <p>Convert the dimensionless root back to Wien’s displacement constant <span class="math inline">\(b = hc / (x k)\)</span> and the peak wavelength of the Sun:</p>
-<div id="785febe9" class="cell" data-execution_count="4">
+<div id="3270a3b6" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="fl">6.626e-34</span>   <span class="co"># J·s</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="fl">3.0e8</span>       <span class="co"># m/s</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>k_B <span class="op">=</span> <span class="fl">1.381e-23</span> <span class="co"># J/K</span></span>
@@ -585,7 +585,7 @@ Peak wavelength  = 501.7 nm  (visible green-yellow)</code></pre>
 <div id="fig-newton-convergence" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-newton-convergence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="optional-newton_files/figure-html/fig-newton-convergence-output-1.png" width="600" height="429" class="figure-img">
+<img src="optional-newton_files/figure-html/fig-newton-convergence-output-1.png" width="601" height="430" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newton-convergence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Each Newton-Raphson iterate plotted on f(x); the steps reach the root in just a few iterations
@@ -603,7 +603,7 @@ Figure&nbsp;2: Each Newton-Raphson iterate plotted on f(x); the steps reach the 
 <li><strong>Derivative near zero</strong>: f′(x) = 5e^{−x} − 1 = 0 at x = ln 5 ≈ 1.61, directly between the two roots. Starting there causes a very large step.</li>
 </ul>
 <p>For a guaranteed result, <code>scipy.optimize.brentq</code> only needs a bracket where f changes sign — no derivative required:</p>
-<div id="250d14b1" class="cell" data-execution_count="6">
+<div id="73ca35e6" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> brentq</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># f(3) &gt; 0 and f(6) &lt; 0, confirmed by the plot above</span></span>
@@ -618,7 +618,7 @@ Difference: 0.00e+00</code></pre>
 </div>
 </div>
 <p>Both methods agree to full floating-point precision. <code>brentq</code> is easier to use if you can’t calculate a gradient for your function, and it’s <code>safer</code> if there are multiple roots or the starting location is not obvious. Newton-Raphson is useful when you want to inspect each iteration or when an analytic derivative is available and fast convergence matters.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

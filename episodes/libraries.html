@@ -417,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -433,7 +433,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -459,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="importing-a-module" class="level2">
 <h2 class="anchored" data-anchor-id="importing-a-module">Importing a module</h2>
 <p>A module must be imported before you can use anything it contains. The <code>import</code> statement loads the module into memory and makes its contents accessible under the module’s name, using dot notation (<code>module_name.thing_name</code>):</p>
-<div id="ee549f2b" class="cell" data-execution_count="1">
+<div id="e1dab577" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'pi is'</span>, math.pi)</span>
@@ -475,7 +475,7 @@ cos(pi) is -1.0</code></pre>
 <section id="importing-specific-items" class="level2">
 <h2 class="anchored" data-anchor-id="importing-specific-items">Importing specific items</h2>
 <p>If you only need a few things from a module, you can import them directly using <code>from ... import ...</code>. This lets you use their names without the module prefix:</p>
-<div id="5670ae43" class="cell" data-execution_count="2">
+<div id="b79e1112" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> cos, pi</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'cos(pi) is'</span>, cos(pi))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -488,7 +488,7 @@ cos(pi) is -1.0</code></pre>
 <section id="creating-an-alias-on-import" class="level2">
 <h2 class="anchored" data-anchor-id="creating-an-alias-on-import">Creating an alias on import</h2>
 <p>For modules with long names that you use frequently, <code>import ... as ...</code> lets you give the module a shorter alias:</p>
-<div id="b5508327" class="cell" data-execution_count="3">
+<div id="7d3e73b2" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math <span class="im">as</span> m</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'cos(pi) is'</span>, m.cos(m.pi))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -497,7 +497,7 @@ cos(pi) is -1.0</code></pre>
 </div>
 </div>
 <p>This is a common convention in scientific Python. You will see <code>import numpy as np</code> and <code>import matplotlib.pyplot as plt</code> throughout these lessons.</p>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -512,7 +512,7 @@ cos(pi) is -1.0</code></pre>
 <li>What function in <code>math</code> can you use to calculate a square root <em>without</em> using <code>sqrt</code>?</li>
 <li>If that alternative exists, why does <code>sqrt</code> also exist?</li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -523,18 +523,17 @@ cos(pi) is -1.0</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<section id="solution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li><code>math.pow(x, 0.5)</code> raises <code>x</code> to the power 0.5, which is the square root.</li>
 <li><code>math.sqrt(x)</code> is more readable when implementing formulas — the intent is immediately clear. The function also has its roots in the C standard library, which Python’s <code>math</code> module mirrors.</li>
 </ol>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -546,7 +545,7 @@ cos(pi) is -1.0</code></pre>
 <section id="locating-the-right-module" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="locating-the-right-module">Locating the Right Module</h2>
 <p>You want to select a random character from the string:</p>
-<div id="abc97f09" class="cell" data-execution_count="4">
+<div id="b9bb1f85" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bases <span class="op">=</span> <span class="st">'ACTTGCTTGAC'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
@@ -554,7 +553,7 @@ cos(pi) is -1.0</code></pre>
 <li>Which function from that module would you use? Are there alternatives?</li>
 <li>Write a short program that uses the function.</li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -565,10 +564,9 @@ cos(pi) is -1.0</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<section id="solution-1" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-1">Solution</h2>
+<div class="callout-body-container callout-body">
 <p>The <code>random</code> module is the right choice. The string has 11 characters (indices 0–10), so you can generate a random index and use it to select a character:</p>
-<div id="d238f0dc" class="cell" data-execution_count="5">
+<div id="2baeabd9" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> randrange</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>random_index <span class="op">=</span> randrange(<span class="bu">len</span>(bases))</span>
@@ -578,19 +576,19 @@ cos(pi) is -1.0</code></pre>
 </div>
 </div>
 <p><code>random.sample</code> is a more compact alternative that returns a list, so you need to extract the first element:</p>
-<div id="5bc16faf" class="cell" data-execution_count="6">
+<div id="4dfa4822" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> sample</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sample(bases, <span class="dv">1</span>)[<span class="dv">0</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>T</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -604,7 +602,7 @@ cos(pi) is -1.0</code></pre>
 <p>A colleague types <code>help(math)</code> and gets:</p>
 <pre class="error"><code>NameError: name 'math' is not defined</code></pre>
 <p>What did they forget to do?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -615,10 +613,9 @@ cos(pi) is -1.0</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<section id="solution-2" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-2">Solution</h2>
+<div class="callout-body-container callout-body">
 <p>They forgot to import the module first. <code>help(math)</code> requires that <code>math</code> is already loaded into memory:</p>
-<div id="a968423a" class="cell" data-execution_count="7">
+<div id="21f02e4c" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(math)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -920,12 +917,12 @@ FILE
 </code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -944,7 +941,7 @@ FILE
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math <span class="im">as</span> m</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>angle <span class="op">=</span> ____.degrees(____.pi <span class="op">/</span> <span class="dv">2</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(____)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -955,9 +952,8 @@ FILE
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<section id="solution-3" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-3">Solution</h2>
-<div id="67b14502" class="cell" data-execution_count="8">
+<div class="callout-body-container callout-body">
+<div id="b1cb9245" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math <span class="im">as</span> m</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>angle <span class="op">=</span> m.degrees(m.pi <span class="op">/</span> <span class="dv">2</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(angle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -966,7 +962,7 @@ FILE
 </div>
 </div>
 <p>Without the alias:</p>
-<div id="52b016b9" class="cell" data-execution_count="9">
+<div id="65019ae8" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>angle <span class="op">=</span> math.degrees(math.pi <span class="op">/</span> <span class="dv">2</span>)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(angle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -975,12 +971,12 @@ FILE
 </div>
 </div>
 <p>When you wrote the code yourself, the short alias feels natural. Months later, or when reading someone else’s code, the spelled-out <code>math.degrees</code> is clearer — especially when there are many modules involved.</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1005,7 +1001,7 @@ FILE
 <li><code>import math as m</code></li>
 <li><code>from math import *</code></li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1016,19 +1012,18 @@ FILE
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<section id="solution-4" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-4">Solution</h2>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li>→ library calls 1 or 4 (both make <code>sin</code> and <code>pi</code> available as bare names)</li>
 <li>→ library call 3 (uses the alias <code>m</code>)</li>
 <li>→ library call 2 (uses the full module name <code>math</code>)</li>
 </ol>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1047,7 +1042,7 @@ FILE
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>____ math <span class="im">import</span> ____, ____</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>angle <span class="op">=</span> degrees(pi <span class="op">/</span> <span class="dv">2</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(angle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1058,9 +1053,8 @@ FILE
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<section id="solution-5" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-5">Solution</h2>
-<div id="9c29772d" class="cell" data-execution_count="10">
+<div class="callout-body-container callout-body">
+<div id="8b73c29f" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> degrees, pi</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>angle <span class="op">=</span> degrees(pi <span class="op">/</span> <span class="dv">2</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(angle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1069,12 +1063,12 @@ FILE
 </div>
 </div>
 <p>This form is often the most readable for short scripts. The main reason not to use it everywhere is name collisions: if you also define a variable called <code>degrees</code>, or import <code>degrees</code> from another library, the later import silently replaces the earlier one, which can cause subtle bugs.</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1091,7 +1085,7 @@ FILE
 </ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> log</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>log(<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1102,18 +1096,17 @@ FILE
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
-<section id="solution-6" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-6">Solution</h2>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li>The logarithm is only defined for positive numbers, so <code>log(0)</code> is mathematically undefined.</li>
 <li>Python raises a <code>ValueError: math domain error</code>. The error type tells you the function received a value outside its valid domain.</li>
 </ol>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

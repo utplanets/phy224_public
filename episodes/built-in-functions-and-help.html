@@ -418,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -435,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -455,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="comments-document-your-code" class="level2">
 <h2 class="anchored" data-anchor-id="comments-document-your-code">Comments document your code</h2>
 <p>A <code>#</code> character tells Python to ignore the rest of the line. Use comments to explain <em>why</em> your code does something when the reason is not obvious from reading it:</p>
-<div id="8966361f" class="cell" data-execution_count="1">
+<div id="ede186ca" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This sentence isn't executed by Python.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>adjustment <span class="op">=</span> <span class="fl">0.5</span>   <span class="co"># Neither is this - anything after '#' is ignored.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -464,7 +464,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="functions-take-arguments-and-return-results">Functions take arguments and return results</h2>
 <p>A function is a named piece of reusable code that you invoke by writing its name followed by parentheses. Values passed inside the parentheses are called <em>arguments</em>. You must always include the parentheses — even when calling a function with no arguments — so Python knows you are making a call rather than referencing the function object itself.</p>
 <p><code>print</code> takes zero or more arguments and displays them on a single line, separated by spaces. With no arguments it prints a blank line:</p>
-<div id="224ee0bd" class="cell" data-execution_count="2">
+<div id="d5e6266f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'before'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'after'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -479,7 +479,7 @@ after</code></pre>
 <section id="commonly-used-built-in-functions" class="level2">
 <h2 class="anchored" data-anchor-id="commonly-used-built-in-functions">Commonly-used built-in functions</h2>
 <p><code>max</code> and <code>min</code> return the largest and smallest values from a set of arguments. They work on both numbers and strings (strings are compared character by character using Unicode order):</p>
-<div id="f6724641" class="cell" data-execution_count="3">
+<div id="7ca18605" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">max</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">min</span>(<span class="st">'a'</span>, <span class="st">'A'</span>, <span class="st">'0'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -488,7 +488,7 @@ after</code></pre>
 </div>
 </div>
 <p><code>round</code> rounds a floating-point number. By default it rounds to zero decimal places; pass a second argument to specify the precision:</p>
-<div id="8484db8c" class="cell" data-execution_count="4">
+<div id="5818c917" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(<span class="fl">3.712</span>))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(<span class="fl">3.712</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -497,7 +497,7 @@ after</code></pre>
 </div>
 </div>
 <p>Functions enforce their requirements. <code>max</code> and <code>min</code> need at least one argument, and the arguments must be mutually comparable — mixing incompatible types raises a <code>TypeError</code>:</p>
-<div id="6280f547" class="cell" data-execution_count="5">
+<div id="3f28d7d6" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">max</span>(<span class="dv">1</span>, <span class="st">'a'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -514,7 +514,7 @@ after</code></pre>
 <section id="every-function-returns-something" class="level2">
 <h2 class="anchored" data-anchor-id="every-function-returns-something">Every function returns something</h2>
 <p>Every function call produces a result. If a function has no meaningful value to return it returns the special value <code>None</code>. <code>print</code> is a common example — its job is the side effect of writing to the screen, not producing a value:</p>
-<div id="f721ce79" class="cell" data-execution_count="6">
+<div id="73519efe" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="bu">print</span>(<span class="st">'example'</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'result of print is'</span>, result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -527,7 +527,7 @@ result of print is None</code></pre>
 <section id="syntax-errors-versus-runtime-errors" class="level2">
 <h2 class="anchored" data-anchor-id="syntax-errors-versus-runtime-errors">Syntax errors versus runtime errors</h2>
 <p>Python checks your code for <em>syntax errors</em> — structural problems that make the program impossible to parse — before running a single line. A forgotten closing quote, a misplaced <code>=</code>, or an unclosed parenthesis will produce a <code>SyntaxError</code> with a <code>^</code> pointing at approximately where the problem is:</p>
-<div id="18d549dc" class="cell" data-execution_count="7">
+<div id="75e7ba13" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">'Feng</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -539,7 +539,7 @@ result of print is None</code></pre>
 </div>
 </div>
 </div>
-<div id="f0371bf7" class="cell" data-execution_count="8">
+<div id="c18af841" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello world"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -552,7 +552,7 @@ result of print is None</code></pre>
 </div>
 </div>
 <p><em>Runtime errors</em> only appear when the problematic line actually executes. A misspelled variable name raises a <code>NameError</code>:</p>
-<div id="19ba1d98" class="cell" data-execution_count="9">
+<div id="4e20bac7" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">53</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>remaining <span class="op">=</span> <span class="dv">100</span> <span class="op">-</span> aege  <span class="co"># mis-spelled 'age'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
@@ -569,7 +569,7 @@ result of print is None</code></pre>
 </div>
 <p>Fix syntax errors by reading the source code carefully around the <code>^</code> marker; fix runtime errors by tracing what value each variable holds when the error line is reached.</p>
 <p>For detailed guidance on finding answers when you are stuck, see the <a href="../episodes/getting-help.html">Getting Help</a> lesson.</p>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -584,11 +584,11 @@ result of print is None</code></pre>
 <li>Explain the order of operations in the program below.</li>
 <li>What is the final value of <code>radiance</code>?</li>
 </ol>
-<div id="f5da8cad" class="cell" data-execution_count="10">
+<div id="32652730" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>radiance <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>radiance <span class="op">=</span> <span class="bu">max</span>(<span class="fl">2.1</span>, <span class="fl">2.0</span> <span class="op">+</span> <span class="bu">min</span>(radiance, <span class="fl">1.1</span> <span class="op">*</span> radiance <span class="op">-</span> <span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -599,8 +599,7 @@ result of print is None</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<section id="solution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li>Inside out:
 <ol type="1">
@@ -612,12 +611,12 @@ result of print is None</code></pre>
 </ol></li>
 <li><code>radiance = 2.6</code></li>
 </ol>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -632,7 +631,7 @@ result of print is None</code></pre>
 <li>Predict what each <code>print</code> statement below will output.</li>
 <li>Does <code>max(len(rich), poor)</code> run or raise an error? If it runs, does the result make sense?</li>
 </ol>
-<div id="72153b17" class="cell" data-execution_count="11">
+<div id="6a00f481" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>easy_string <span class="op">=</span> <span class="st">"abc"</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">max</span>(easy_string))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>rich <span class="op">=</span> <span class="st">"gold"</span></span>
@@ -645,7 +644,7 @@ tin
 4</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -656,8 +655,7 @@ tin
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<section id="solution-1" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-1">Solution</h2>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li></li>
 </ol>
@@ -667,12 +665,12 @@ tin
 <ol start="2" type="1">
 <li><code>max(len(rich), poor)</code> raises a <code>TypeError</code> — it tries to compare the integer <code>4</code> with the string <code>'tin'</code>, which Python cannot order.</li>
 </ol>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -684,7 +682,7 @@ tin
 <section id="why-not" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="why-not">Why Not?</h2>
 <p>Why don’t <code>max</code> and <code>min</code> return <code>None</code> when given no arguments?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -695,15 +693,14 @@ tin
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<section id="solution-2" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-2">Solution</h2>
+<div class="callout-body-container callout-body">
 <p>Returning <code>None</code> silently would hide a programming mistake — the caller would store <code>None</code>, use it later, and get a confusing error far from the actual problem. Raising a <code>TypeError</code> immediately points you directly to the bug.</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -715,7 +712,7 @@ tin
 <section id="last-character-of-a-string" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="last-character-of-a-string">Last Character of a String</h2>
 <p>If Python indexes from zero and <code>len</code> returns the number of characters, what index expression retrieves the last character of <code>name</code>?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -726,16 +723,15 @@ tin
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<section id="solution-3" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-3">Solution</h2>
+<div class="callout-body-container callout-body">
 <p><code>name[len(name) - 1]</code></p>
 <p>(A simpler form using negative indexing — <code>name[-1]</code> — is covered in the Variables and Assignment lesson.)</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

@@ -448,7 +448,7 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -464,7 +464,7 @@ window.Quarto = {
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -485,7 +485,7 @@ window.Quarto = {
 <section id="the-problem-python-gives-too-many-digits" class="level2">
 <h2 class="anchored" data-anchor-id="the-problem-python-gives-too-many-digits">The problem: Python gives too many digits</h2>
 <p><code>curve_fit</code> returns parameter values and a covariance matrix, and the numbers come out with fifteen or sixteen decimal digits — far more than any experiment justifies. Reporting all of them misleads the reader about the precision of the result.</p>
-<div id="1a3453d5" class="cell" data-execution_count="1">
+<div id="8c1f3812" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -525,7 +525,7 @@ slope_err = 0.05190574911517593</code></pre>
 <section id="computing-the-number-of-decimal-places" class="level2">
 <h2 class="anchored" data-anchor-id="computing-the-number-of-decimal-places">Computing the number of decimal places</h2>
 <p>The key step is finding which decimal place holds the leading digit of the uncertainty. <code>numpy.floor(numpy.log10(sigma))</code> gives the exponent of that digit, and negating it gives the number of decimal places needed:</p>
-<div id="761d36d3" class="cell" data-execution_count="2">
+<div id="33d270cb" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> slope_err</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>exponent  <span class="op">=</span> <span class="bu">int</span>(np.floor(np.log10(<span class="bu">abs</span>(sigma))))  <span class="co"># e.g. -2 for sigma ~ 0.05</span></span>
@@ -581,14 +581,14 @@ ndigits  = 2</code></pre>
 <section id="formatting-with-f-strings" class="level2">
 <h2 class="anchored" data-anchor-id="formatting-with-f-strings">Formatting with f-strings</h2>
 <p>Pass <code>ndigits</code> directly into an f-string format specifier to control the number of decimal places:</p>
-<div id="d1e2124a" class="cell" data-execution_count="3">
+<div id="394292f3" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"slope     = </span><span class="sc">{</span>slope<span class="sc">:.</span>{ndigits}f<span class="sc">}</span><span class="ss"> ± </span><span class="sc">{</span>sigma<span class="sc">:.</span>{ndigits}f<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>slope     = 2.54 ± 0.05</code></pre>
 </div>
 </div>
 <p>Apply the same pattern to the intercept, computing its own <code>ndigits</code>:</p>
-<div id="75dd8532" class="cell" data-execution_count="4">
+<div id="7f2a63e3" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>int_exponent <span class="op">=</span> <span class="bu">int</span>(np.floor(np.log10(<span class="bu">abs</span>(intercept_err))))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>int_ndigits  <span class="op">=</span> <span class="op">-</span>int_exponent</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -598,7 +598,7 @@ ndigits  = 2</code></pre>
 </div>
 </div>
 <p>For convenience, wrap this in a small helper:</p>
-<div id="5405f150" class="cell" data-execution_count="5">
+<div id="aa899354" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> format_result(value, uncertainty):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return 'value ± uncertainty' rounded to 1 sig fig on the uncertainty."""</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    ndigits <span class="op">=</span> <span class="op">-</span><span class="bu">int</span>(np.floor(np.log10(<span class="bu">abs</span>(uncertainty))))</span>
@@ -621,7 +621,7 @@ intercept 1.1 ± 0.3</code></pre>
 <section id="warning-round-drops-trailing-zeros" class="level2">
 <h2 class="anchored" data-anchor-id="warning-round-drops-trailing-zeros">Warning: <code>round()</code> drops trailing zeros</h2>
 <p>A common mistake is to round a value with <code>round()</code> and then print it, expecting to see the correct number of decimal places. Python floats carry no information about trailing zeros — <code>2.50</code> and <code>2.5</code> are identical objects — so whenever the rounded value ends in zero, Python prints the shorter form:</p>
-<div id="cf6477b5" class="cell" data-execution_count="6">
+<div id="46932cc1" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># concrete example: a value that rounds to X.X0</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>demo_value <span class="op">=</span> <span class="fl">3.5049</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>demo_ndigits <span class="op">=</span> <span class="dv">2</span></span>
@@ -635,7 +635,7 @@ formatted at print:      3.50</code></pre>
 </div>
 </div>
 <p>The same problem appears with the fit parameters: if <code>slope</code> happened to round to <code>2.50</code>, storing it first would silently drop the trailing zero:</p>
-<div id="24aa35b4" class="cell" data-execution_count="7">
+<div id="dc9ffe3a" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># wrong approach: round first, then print</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>x_stored <span class="op">=</span> <span class="bu">round</span>(slope, ndigits)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"stored then printed: </span><span class="sc">{</span>x_stored<span class="sc">}</span><span class="ss">"</span>)    <span class="co"># trailing zero may vanish</span></span>
@@ -654,7 +654,7 @@ formatted at print:  2.54</code></pre>
 <h2 class="anchored" data-anchor-id="note-why-1-significant-figure-is-enough">Note: why 1 significant figure is enough</h2>
 <p>Reporting more than 1 sig fig on an uncertainty implies a precision in the uncertainty itself that the data usually cannot support.</p>
 <p>The standard deviation <span class="math inline">\(\sigma\)</span> estimated from <span class="math inline">\(N\)</span> measurements has its own statistical uncertainty of approximately <span class="math inline">\(\sigma / \sqrt{2(N-1)}\)</span>. For typical lab datasets:</p>
-<div id="3c13bcdc" class="cell" data-execution_count="8">
+<div id="73131ab3" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> N <span class="kw">in</span> [<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">100</span>]:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    rel_unc <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> (N <span class="op">-</span> <span class="dv">1</span>))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"N = </span><span class="sc">{</span>N<span class="sc">:2d}</span><span class="ss">  -&gt;  uncertainty on σ ≈ </span><span class="sc">{</span>rel_unc<span class="op">*</span><span class="dv">100</span><span class="sc">:.0f}</span><span class="ss">%"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -668,7 +668,7 @@ N = 100  -&gt;  uncertainty on σ ≈ 7%</code></pre>
 </div>
 <p>With 10 measurements the standard deviation is itself only known to about 24%. Reporting <code>σ = 0.052</code> instead of <code>σ = 0.05</code> implies you know the uncertainty to better than 4% — a level of precision that requires hundreds of measurements to achieve. The second digit is not meaningful.</p>
 <p>This is why the convention “1 sig fig on the uncertainty” is so widely used. Unless you make 5,000 measurements you can’t be certain of the value of the second significant figure.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

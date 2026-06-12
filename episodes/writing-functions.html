@@ -417,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -433,7 +433,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -458,12 +458,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="defining-a-function" class="level2">
 <h2 class="anchored" data-anchor-id="defining-a-function">Defining a function</h2>
 <p>A function definition begins with the keyword <code>def</code>, followed by the function name, its <em>parameters</em> in parentheses, and a colon. The indented block that follows is the <em>body</em> — the code that runs every time the function is called:</p>
-<div id="26553543" class="cell" data-execution_count="1">
+<div id="93c46bef" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_greeting():</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Hello!'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Defining a function does not run it. Think of <code>def</code> as storing the bundle for later. The function executes only when you call it:</p>
-<div id="11c52a18" class="cell" data-execution_count="2">
+<div id="0cfa0acd" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>print_greeting()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Hello!</code></pre>
@@ -473,7 +473,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="parameters-and-arguments" class="level2">
 <h2 class="anchored" data-anchor-id="parameters-and-arguments">Parameters and arguments</h2>
 <p>A function that always does the same thing is limited. Parameters make a function general: they are placeholder names that receive the values passed by the caller (the <em>arguments</em>) at call time. If you do not name the arguments in the call, they are matched to parameters in the order they are defined:</p>
-<div id="e98f41a7" class="cell" data-execution_count="3">
+<div id="6bca9eca" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_date(year, month, day):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    joined <span class="op">=</span> <span class="bu">str</span>(year) <span class="op">+</span> <span class="st">'/'</span> <span class="op">+</span> <span class="bu">str</span>(month) <span class="op">+</span> <span class="st">'/'</span> <span class="op">+</span> <span class="bu">str</span>(day)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(joined)</span>
@@ -484,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>You can also pass arguments by name (<em>keyword arguments</em>), which lets you specify them in any order:</p>
-<div id="25df1de8" class="cell" data-execution_count="4">
+<div id="c266b16b" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>print_date(month<span class="op">=</span><span class="dv">3</span>, day<span class="op">=</span><span class="dv">19</span>, year<span class="op">=</span><span class="dv">1871</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1871/3/19</code></pre>
@@ -495,26 +495,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="returning-values" class="level2">
 <h2 class="anchored" data-anchor-id="returning-values">Returning values</h2>
 <p>Use <code>return</code> to send a value back to the caller. The function stops executing immediately when it reaches a <code>return</code> statement. Functions that do not include an explicit <code>return</code> automatically return <code>None</code>:</p>
-<div id="0670b551" class="cell" data-execution_count="5">
+<div id="6a309578" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> average(values):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(values) <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(values) <span class="op">/</span> <span class="bu">len</span>(values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="97ec4d31" class="cell" data-execution_count="6">
+<div id="1de7c636" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'average of actual values:'</span>, average([<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>average of actual values: 2.6666666666666665</code></pre>
 </div>
 </div>
-<div id="4dfa8b29" class="cell" data-execution_count="7">
+<div id="d5131d58" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'average of empty list:'</span>, average([]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>average of empty list: None</code></pre>
 </div>
 </div>
 <p><code>print_date</code> from earlier is an example of a function that returns <code>None</code> — its job is the side effect of printing, not producing a value:</p>
-<div id="1fd343ee" class="cell" data-execution_count="8">
+<div id="5b1e0366" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> print_date(<span class="dv">1871</span>, <span class="dv">3</span>, <span class="dv">19</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'result of call is:'</span>, result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -523,7 +523,7 @@ result of call is: None</code></pre>
 </div>
 </div>
 <p>The function must also be <em>defined before it is called</em>. Python executes files from top to bottom, so calling a function before its <code>def</code> statement raises a <code>NameError</code>.</p>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -543,7 +543,7 @@ result of call is: None</code></pre>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Syntax errors are annoying."</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>   <span class="bu">print</span>(<span class="st">"But at least python tells us about them!"</span>)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"So they are usually not too hard to fix."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -554,21 +554,20 @@ result of call is: None</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<section id="solution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<div class="callout-body-container callout-body">
 <p>The function definition is missing both the parentheses after the name and the colon. The second <code>print</code> is over-indented. Corrected:</p>
-<div id="3c02ac8f" class="cell" data-execution_count="9">
+<div id="d017b006" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> another_function():</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Syntax errors are annoying."</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"But at least Python tells us about them!"</span>)</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"So they are usually not too hard to fix."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -580,16 +579,16 @@ result of call is: None</code></pre>
 <section id="definition-and-use" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="definition-and-use">Definition and Use</h2>
 <p>What does the following program print?</p>
-<div id="47d96097" class="cell" data-execution_count="10">
+<div id="37f678bc" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> report(pressure):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'pressure is'</span>, pressure)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'calling'</span>, report, <span class="fl">22.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>calling &lt;function report at 0x7fe23174f1a0&gt; 22.5</code></pre>
+<pre><code>calling &lt;function report at 0x7fd646ed5580&gt; 22.5</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -600,11 +599,10 @@ result of call is: None</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<section id="solution-1" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-1">Solution</h2>
+<div class="callout-body-container callout-body">
 <pre class="output"><code>calling &lt;function report at 0x7fd128ff1bf8&gt; 22.5</code></pre>
 <p>Without parentheses, <code>report</code> refers to the function object itself rather than calling it. The correct way to call the function and then print is:</p>
-<div id="6f3fce16" class="cell" data-execution_count="11">
+<div id="1f7f2861" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"calling"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>report(<span class="fl">22.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -612,12 +610,12 @@ result of call is: None</code></pre>
 pressure is 22.5</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -629,7 +627,7 @@ pressure is 22.5</code></pre>
 <section id="order-of-operations" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="order-of-operations">Order of Operations</h2>
 <p>The example below prints two lines. Explain why they appear in that order. What is wrong with the second code block?</p>
-<div id="dd03bc43" class="cell" data-execution_count="12">
+<div id="f8293cab" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> print_date(<span class="dv">1871</span>, <span class="dv">3</span>, <span class="dv">19</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'result of call is:'</span>, result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -637,7 +635,7 @@ pressure is 22.5</code></pre>
 result of call is: None</code></pre>
 </div>
 </div>
-<div id="3e330fe5" class="cell" data-execution_count="13">
+<div id="9e953bcc" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> print_date(<span class="dv">1871</span>, <span class="dv">3</span>, <span class="dv">19</span>)   <span class="co"># call comes before the definition</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_date(year, month, day):</span>
@@ -647,7 +645,7 @@ result of call is: None</code></pre>
 <pre><code>1871/3/19</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -658,16 +656,15 @@ result of call is: None</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<section id="solution-2" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-2">Solution</h2>
+<div class="callout-body-container callout-body">
 <p>The first block: all the code inside <code>print_date</code> runs before <code>print_date</code> returns, so the date is printed first and <code>result of call is: None</code> second.</p>
 <p>The second block fails because Python reads the file from top to bottom. When it reaches the call on line 1, <code>print_date</code> has not been defined yet — a <code>NameError</code> results. Always define functions before calling them.</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -684,7 +681,7 @@ result of call is: None</code></pre>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> min_in_data(____):</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> ____</span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ____</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -695,21 +692,20 @@ result of call is: None</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<section id="solution-3" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-3">Solution</h2>
-<div id="7ef0797c" class="cell" data-execution_count="14">
+<div class="callout-body-container callout-body">
+<div id="f20b4e19" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> min_in_data(filename):</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> numpy.genfromtxt(filename, delimiter<span class="op">=</span><span class="st">','</span>, skip_header<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> numpy.nanmin(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -725,7 +721,7 @@ result of call is: None</code></pre>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> v <span class="kw">in</span> ____:</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> ____:</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> ____</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -736,21 +732,20 @@ result of call is: None</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<section id="solution-4" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-4">Solution</h2>
-<div id="dfa28aa8" class="cell" data-execution_count="15">
+<div class="callout-body-container callout-body">
+<div id="42cb3310" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> first_negative(values):</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> v <span class="kw">in</span> values:</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="op">&lt;</span> <span class="dv">0</span>:</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> v</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If the list is empty (or contains no negative values), the function reaches the end without hitting a <code>return</code> and implicitly returns <code>None</code>.</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -762,7 +757,7 @@ result of call is: None</code></pre>
 <section id="calling-by-name" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="calling-by-name">Calling by Name</h2>
 <p>We saw that <code>print_date</code> can be called with keyword arguments:</p>
-<div id="91bc9193" class="cell" data-execution_count="16">
+<div id="15653ae8" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>print_date(day<span class="op">=</span><span class="dv">1</span>, month<span class="op">=</span><span class="dv">2</span>, year<span class="op">=</span><span class="dv">2003</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2003/2/1</code></pre>
@@ -773,7 +768,7 @@ result of call is: None</code></pre>
 <li>Where else have you seen keyword arguments in these lessons?</li>
 <li>When is using keyword arguments especially valuable?</li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -784,19 +779,18 @@ result of call is: None</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<section id="solution-5" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-5">Solution</h2>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li><code>2003/2/1</code></li>
 <li>In <code>numpy.loadtxt</code> — arguments like <code>delimiter=','</code> and <code>skiprows=1</code> are keyword arguments.</li>
 <li>When a function has many parameters and positional order is easy to mix up, naming arguments makes the call self-documenting and prevents subtle ordering mistakes.</li>
 </ol>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

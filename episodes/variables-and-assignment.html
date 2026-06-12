@@ -419,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -436,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -457,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="variables-store-values" class="level2">
 <h2 class="anchored" data-anchor-id="variables-store-values">Variables store values</h2>
 <p>A variable is a name that refers to a value stored in memory. You create a variable by writing its name on the left of <code>=</code> and the value you want to store on the right. Python creates the variable the moment you assign something to it — there is no separate declaration step.</p>
-<div id="407f3417" class="cell" data-execution_count="1">
+<div id="002c4bfa" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">42</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>first_name <span class="op">=</span> <span class="st">'Ahmed'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -467,7 +467,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="displaying-values-with-print" class="level2">
 <h2 class="anchored" data-anchor-id="displaying-values-with-print">Displaying values with <code>print</code></h2>
 <p>The built-in <code>print</code> function writes values to the screen as text. You pass it one or more arguments inside parentheses, separated by commas, and it prints them on a single line with a space between each item:</p>
-<div id="f03ded29" class="cell" data-execution_count="2">
+<div id="21236d17" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(first_name, <span class="st">'is'</span>, age, <span class="st">'years old'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ahmed is 42 years old</code></pre>
@@ -478,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="variables-must-exist-before-they-are-used" class="level2">
 <h2 class="anchored" data-anchor-id="variables-must-exist-before-they-are-used">Variables must exist before they are used</h2>
 <p>Python evaluates each line in order. If you reference a variable that has not yet been assigned — or that you have accidentally mis-spelled — Python raises a <code>NameError</code> rather than silently guessing a default value:</p>
-<div id="a802068d" class="cell" data-execution_count="3">
+<div id="854d6edc" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(last_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -496,7 +496,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-variables-in-calculations" class="level2">
 <h2 class="anchored" data-anchor-id="using-variables-in-calculations">Using variables in calculations</h2>
 <p>Once a variable exists you can use it anywhere you would use a literal value, including on the right-hand side of its own assignment. Python evaluates the right-hand side first, then stores the result back into the variable:</p>
-<div id="c52aa999" class="cell" data-execution_count="4">
+<div id="457acf8e" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> age <span class="op">+</span> <span class="dv">3</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Age in three years:'</span>, age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -508,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="indexing-strings" class="level2">
 <h2 class="anchored" data-anchor-id="indexing-strings">Indexing strings</h2>
 <p>A string is an ordered sequence of characters, and Python numbers each position starting from zero. You retrieve a single character by writing its index in square brackets immediately after the variable name:</p>
-<div id="42e716d1" class="cell" data-execution_count="5">
+<div id="26252681" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>atom_name <span class="op">=</span> <span class="st">'helium'</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(atom_name[<span class="dv">0</span>])   <span class="co"># first character</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(atom_name[<span class="dv">3</span>])   <span class="co"># fourth character</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -518,14 +518,14 @@ i</code></pre>
 </div>
 </div>
 <p>Negative indices count backwards from the end, so <code>atom_name[-1]</code> gives the last character, <code>atom_name[-2]</code> the second-to-last, and so on:</p>
-<div id="85c7a008" class="cell" data-execution_count="6">
+<div id="61260c48" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(atom_name[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>m</code></pre>
 </div>
 </div>
 <p>Trying to index an integer raises a <code>TypeError</code>, because integers are not stored as sequences of digits:</p>
-<div id="cf1a5cbb" class="cell" data-execution_count="7">
+<div id="85dd523b" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">123</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a[<span class="dv">1</span>])   <span class="co"># TypeError: 'int' object is not subscriptable</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
@@ -544,7 +544,7 @@ i</code></pre>
 <section id="slicing-strings" class="level2">
 <h2 class="anchored" data-anchor-id="slicing-strings">Slicing strings</h2>
 <p>A <em>slice</em> extracts a contiguous portion of a string using the notation <code>[start:stop]</code>, where <code>start</code> is the index of the first character you want and <code>stop</code> is one past the last character you want. The length of the slice is always <code>stop - start</code>:</p>
-<div id="6bf442b0" class="cell" data-execution_count="8">
+<div id="b49ff642" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>atom_name <span class="op">=</span> <span class="st">'sodium'</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(atom_name[<span class="dv">0</span>:<span class="dv">3</span>])   <span class="co"># characters at indices 0, 1, 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -553,13 +553,13 @@ i</code></pre>
 </div>
 <p>Either bound can be omitted. <code>atom_name[:3]</code> means “from the beginning up to index 3”, and <code>atom_name[3:]</code> means “from index 3to the end”. <code>atom_name[:]</code> is a copy of the whole string. Slicing never modifies the original — it always returns a new string.</p>
 <p>The built-in function <code>len</code> returns the number of characters in a string, which is useful when you need to slice relative to the end:</p>
-<div id="5dfed8f4" class="cell" data-execution_count="9">
+<div id="b67ada75" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(<span class="st">'helium'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>6</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -571,12 +571,12 @@ i</code></pre>
 <section id="predicting-values" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="predicting-values">Predicting Values</h2>
 <p>What is the final value of <code>position</code> in the program below? Try to predict the value without running the program, then check your prediction.</p>
-<div id="28183f5e" class="cell" data-execution_count="10">
+<div id="e3ca5406" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>initial <span class="op">=</span> <span class="st">'left'</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>position <span class="op">=</span> initial</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>initial <span class="op">=</span> <span class="st">'right'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -587,16 +587,15 @@ i</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<section id="solution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<div class="callout-body-container callout-body">
 <pre class="output"><code>'left'</code></pre>
 <p>Assignment copies the <em>value</em> at the time of the statement, not a link to the other variable. When <code>position = initial</code> runs, <code>initial</code> holds <code>'left'</code>, so <code>position</code> receives <code>'left'</code>. The subsequent reassignment of <code>initial</code> to <code>'right'</code> has no effect on <code>position</code>.</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -613,7 +612,7 @@ i</code></pre>
 <li><code>tot_sec = min * 60 + sec</code></li>
 <li><code>total_seconds = minutes * 60 + seconds</code></li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -624,15 +623,14 @@ i</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<section id="solution-1" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution-1">Solution</h2>
+<div class="callout-body-container callout-body">
 <p><code>minutes</code> is the clearest choice. <code>m</code> is too cryptic to mean anything on its own, and <code>min</code> is easily confused with Python’s built-in <code>min()</code> function, which returns the smallest item in a sequence. <code>total_seconds = minutes * 60 + seconds</code> reads almost like plain English and leaves no ambiguity about what each variable holds.</p>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -644,7 +642,7 @@ i</code></pre>
 <section id="slicing" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="slicing">Slicing</h2>
 <p>The program below prints a slice of a string:</p>
-<div id="10d75042" class="cell" data-execution_count="11">
+<div id="c49e1634" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>atom_name <span class="op">=</span> <span class="st">'carbon'</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'atom_name[1:3] is:'</span>, atom_name[<span class="dv">1</span>:<span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -662,7 +660,7 @@ i</code></pre>
 </ol>
 </section>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

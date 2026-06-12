@@ -415,7 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -452,7 +452,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="variable-scope-controls-visibility">Variable scope controls visibility</h2>
 <p>There are only so many sensible names for variables, and code written by two different people will inevitably reuse the same names. Scope is the mechanism Python uses to keep those names from colliding: a variable is only <em>visible</em> in the part of the program where it is defined.</p>
 <p>A variable defined at the top level of a script — outside any function — is a <em>global</em> variable and can be read from anywhere. Variables defined <em>inside</em> a function, including its parameters, are <em>local</em> variables and exist only for the duration of that function call. They are invisible to the rest of the program:</p>
-<div id="ac2f19f5" class="cell" data-execution_count="1">
+<div id="fa601bae" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pressure <span class="op">=</span> <span class="fl">103.9</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> adjust(t):</span>
@@ -460,7 +460,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here <code>pressure</code> is global and is visible inside <code>adjust</code>. The parameter <code>t</code> and the variable <code>temperature</code> are both local to <code>adjust</code> — they cease to exist when <code>adjust</code> returns. Trying to access <code>temperature</code> from outside the function raises a <code>NameError</code>:</p>
-<div id="61d3a9b5" class="cell" data-execution_count="2">
+<div id="2858a993" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'adjusted:'</span>, adjust(<span class="fl">0.9</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'temperature after call:'</span>, temperature)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -499,7 +499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 KeyError: 'Friday'</code></pre>
 <p>Working from the bottom: the error is a <code>KeyError</code> with the message <code>'Friday'</code> — the key <code>"Friday"</code> was not found in a dictionary. The arrow <code>--&gt;</code> on line 11 of <code>errors_02.py</code>, inside the function <code>print_message</code>, is where the error actually occurred. The traceback above that shows how execution arrived there: the top-level script called <code>print_friday_message</code> (line 2), which called <code>print_message("Friday")</code> (line 15).</p>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -511,7 +511,7 @@ KeyError: 'Friday'</code></pre>
 <section id="local-and-global-variable-use" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="local-and-global-variable-use">Local and Global Variable Use</h2>
 <p>Trace the values of all variables in this program as it executes. Use <code>---</code> for variables that do not yet exist or have gone out of scope.</p>
-<div id="b0ca39da" class="cell" data-execution_count="3">
+<div id="adb21a9b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>limit <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clip(value):</span>
@@ -525,7 +525,7 @@ KeyError: 'Friday'</code></pre>
 </div>
 </section>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled" title="Challenge">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -545,7 +545,7 @@ KeyError: 'Friday'</code></pre>
 <li>What type of error is it?</li>
 <li>What is the error message?</li>
 </ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -556,8 +556,7 @@ KeyError: 'Friday'</code></pre>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<section id="solution" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li>Three levels: the top-level script, <code>print_friday_message</code>, and <code>print_message</code>.</li>
 <li><code>/Users/ghopper/thesis/code/errors_02.py</code></li>
@@ -566,12 +565,12 @@ KeyError: 'Friday'</code></pre>
 <li><code>KeyError</code></li>
 <li><code>'Friday'</code> — the key was not present in the dictionary.</li>
 </ol>
+</div>
+</div>
+</div>
 </section>
 </div>
-</div>
-</section>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>

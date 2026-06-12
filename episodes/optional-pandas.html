@@ -446,7 +446,7 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled" title="Questions">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -462,7 +462,7 @@ window.Quarto = {
 </ul>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Objectives">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -491,7 +491,7 @@ window.Quarto = {
 </section>
 <section id="worked-solution" class="level2">
 <h2 class="anchored" data-anchor-id="worked-solution">Worked solution</h2>
-<div id="b79193ed" class="cell" data-execution_count="1">
+<div id="5797efe4" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -528,7 +528,7 @@ max    573.000000  1000.000000</code></pre>
 <div id="fig-pandas-raw" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pandas-raw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="optional-pandas_files/figure-html/fig-pandas-raw-output-1.png" width="593" height="429" class="figure-img">
+<img src="optional-pandas_files/figure-html/fig-pandas-raw-output-1.png" width="594" height="431" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pandas-raw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Horizontal distance D versus release height H from Galileo’s ramp experiment
@@ -538,7 +538,7 @@ Figure&nbsp;1: Horizontal distance D versus release height H from Galileo’s ra
 </div>
 </div>
 <p>Define the model and fit. <code>curve_fit</code> accepts any array-like, including a pandas Series, as data:</p>
-<div id="1524fef0" class="cell" data-execution_count="3">
+<div id="9eed68f0" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> model(H, k):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> k <span class="op">*</span> np.sqrt(H)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -564,7 +564,7 @@ Figure&nbsp;1: Horizontal distance D versus release height H from Galileo’s ra
 <div id="fig-pandas-fit" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pandas-fit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="optional-pandas_files/figure-html/fig-pandas-fit-output-1.png" width="593" height="429" class="figure-img">
+<img src="optional-pandas_files/figure-html/fig-pandas-fit-output-1.png" width="594" height="431" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pandas-fit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Horizontal distance D versus sqrt(H) with the best-fit model overlaid
@@ -577,7 +577,7 @@ Figure&nbsp;2: Horizontal distance D versus sqrt(H) with the best-fit model over
 <section id="selecting-subsets-with-pandas" class="level2">
 <h2 class="anchored" data-anchor-id="selecting-subsets-with-pandas">Selecting subsets with pandas</h2>
 <p>A common task is filtering rows before fitting — for example, keeping only measurements above a threshold height:</p>
-<div id="e1bd774b" class="cell" data-execution_count="5">
+<div id="e092907c" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_high <span class="op">=</span> df[df[<span class="st">"H"</span>] <span class="op">&gt;=</span> <span class="dv">600</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(df_high)<span class="sc">}</span><span class="ss"> rows with H ≥ 600 mm"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -589,7 +589,7 @@ k (H ≥ 600) = 18.895 ± 0.584</code></pre>
 </div>
 </div>
 <p>Boolean indexing (<code>df[condition]</code>) returns a new DataFrame with only the matching rows — the index, column names, and types are all preserved.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Points">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
