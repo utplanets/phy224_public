@@ -17,6 +17,7 @@ vendor/
 .docker-vendor/
 Gemfile.lock
 .*history
+.notebooks
 
 /.quarto/
 **/*.quarto_ipynb
