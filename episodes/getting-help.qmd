@@ -3,16 +3,16 @@ title: "Getting Help"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I find out what a function does?
 - How do I search for answers when I am stuck?
 - How do I read package documentation?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Use `help()` and Jupyter's inline help to read function documentation.
 - Find the official documentation for NumPy, SciPy, and Matplotlib.
 - Form effective search queries for Python errors and tasks.
@@ -77,7 +77,8 @@ Documentation examples and Stack Overflow answers are written for a generic audi
 4. **Check the output shape and type.** Many errors come from mismatches between what a function returns and what the next line expects. `print(type(result), result.shape)` is a quick sanity check.
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Reading Documentation
 
 Use `help(sorted)` or the Python documentation to answer:
@@ -85,7 +86,7 @@ Use `help(sorted)` or the Python documentation to answer:
 1. What arguments does `sorted` accept besides the iterable?
 2. How would you sort a list of strings in reverse alphabetical order?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 `sorted` accepts `key` (a function applied to each element before comparison) and `reverse` (a boolean, default `False`):
@@ -99,12 +100,13 @@ print(sorted(words, reverse=True))
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Searching for a Function
 
 You want to calculate the median of a NumPy array but you do not know the function name. Describe the search query you would use and identify the correct function.
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 A query like `"numpy median array"` or browsing the NumPy statistics reference page ([numpy.org/doc/stable/reference/routines.statistics.html](https://numpy.org/doc/stable/reference/routines.statistics.html)) will quickly surface `numpy.median`. You can then confirm its signature with `help(numpy.median)` or `numpy.median?`.
@@ -112,8 +114,8 @@ A query like `"numpy median array"` or browsing the NumPy statistics reference p
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Use `help(function)` or Jupyter's `Shift+Tab` / `?` shortcuts to read documentation without leaving the notebook.
 - The official NumPy, SciPy, and Matplotlib documentation sites have examples and cross-references that `help()` does not.
 - Effective searches include the library name, the error type (not the full traceback), and exact function names in quotes.

@@ -3,14 +3,14 @@ title: "Looping Over Data Sets"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I process many data files with the same code?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Use `glob.glob` to build a list of filenames matching a pattern.
 - Combine `glob` and a `for` loop to process batches of files.
 
@@ -60,7 +60,8 @@ This pattern — glob a set of files, sort, loop and analyse — is one of the m
 The sort function *always* sorts alphabetically, so "A before "Z", but also "10" before "2" but after "02". Try to pad numbers so they always sort correctly.
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Determining Matches
 
 Which of these files is *not* matched by `glob.glob('data/*as*.csv')`?
@@ -69,7 +70,7 @@ Which of these files is *not* matched by `glob.glob('data/*as*.csv')`?
 2. `data/gapminder_gdp_americas.csv`
 3. `data/gapminder_gdp_asia.csv`
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 File 1 is not matched. `*as*` requires the letters "as" to appear somewhere in the filename. "africa" does not contain "as", while "americas" and "asia" both do.
@@ -78,12 +79,13 @@ File 1 is not matched. `*as*` requires the letters "as" to appear somewhere in t
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Averaging across datasets
 
 Write a program that calculates the average `distance` value across *all* files in `data/random/`, rather than printing each file separately.
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```{python}
@@ -101,8 +103,8 @@ print("Overall mean distance:", np.mean(all_distances))
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - A filename is a string; lists of filenames can be used as loop collections.
 - `glob.glob(pattern)` returns a list of filenames matching the pattern; `*` matches any sequence of characters.
 - Wrapping `glob.glob` in `sorted` gives predictable ordering.

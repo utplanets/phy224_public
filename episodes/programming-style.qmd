@@ -3,16 +3,16 @@ title: "Programming Style"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I write code that others (including future me) can read?
 - How do I document what a function does?
 - How do I check assumptions in my code?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Apply PEP 8 conventions for naming, indentation, and spacing.
 - Write docstrings that appear in `help()` output.
 - Use `assert` statements to check internal invariants.
@@ -72,7 +72,8 @@ def calc_bulk_density(mass, volume):
 Assertions should contain only simple checks and must never have side effects (no assignments, no function calls that change state).
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## What Will Be Shown?
 
 Which lines in the code below will appear as online help? Are there lines that *should* provide help but won't? Will any lines cause an error?
@@ -95,7 +96,7 @@ def overall_max(sequences):
     return highest
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 The module-level string `"Find maximum edit distance between multiple sequences."` is a module docstring — visible via `help(module)` but not via `help(overall_max)`. The function docstring `'''Determine overall maximum edit distance.'''` is what `help(overall_max)` will display. The string `'''Avoid checking sequence against itself.'''` inside the loop is *not* a docstring — it is just a string expression that is evaluated and immediately discarded. It produces no help and no error, but it is confusing and should be a `#` comment instead.
@@ -104,7 +105,8 @@ The module-level string `"Find maximum edit distance between multiple sequences.
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Document This
 
 Convert the comment below into a proper docstring and verify that `help` displays it correctly.
@@ -118,7 +120,7 @@ def middle(a, b, c):
     return values[1]
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```{python}
@@ -136,7 +138,8 @@ def middle(a, b, c):
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Clean Up This Code
 
 1. Read the program and try to predict what it does.
@@ -161,7 +164,7 @@ while i < n:
     i += 1
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```{python}
@@ -190,8 +193,8 @@ string_machine('et cetera', 10)
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Follow PEP 8: use spaces (not tabs), meaningful names, and consistent spacing.
 - A docstring is the first string literal in a function body; `help()` displays it.
 - Use `assert condition` to check internal invariants — violations raise `AssertionError` immediately.

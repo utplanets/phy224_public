@@ -3,15 +3,15 @@ title: "Writing Functions"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I create my own reusable functions?
 - How do arguments and return values work?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Define a function using `def` with parameters and a body.
 - Distinguish between defining a function and calling it.
 - Call a function with positional and named arguments.
@@ -95,7 +95,8 @@ print('result of call is:', result)
 The function must also be *defined before it is called*. Python executes files from top to bottom, so calling a function before its `def` statement raises a `NameError`.
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Identifying Syntax Errors
 
 1. Read the code below and identify the errors *without* running it.
@@ -109,7 +110,7 @@ def another_function
   print("So they are usually not too hard to fix.")
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 The function definition is missing both the parentheses after the name and the colon. The second `print` is over-indented. Corrected:
@@ -125,7 +126,8 @@ def another_function():
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Definition and Use
 
 What does the following program print?
@@ -137,7 +139,7 @@ def report(pressure):
 print('calling', report, 22.5)
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```output
@@ -155,7 +157,8 @@ report(22.5)
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Order of Operations
 
 The example below prints two lines. Explain why they appear in that order. What is wrong with the second code block?
@@ -173,7 +176,7 @@ def print_date(year, month, day):
     print(joined)
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 The first block: all the code inside `print_date` runs before `print_date` returns, so the date is printed first and `result of call is: None` second.
@@ -184,7 +187,8 @@ The second block fails because Python reads the file from top to bottom. When it
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Encapsulation
 
 Fill in the blanks to create a function that loads a CSV file and returns its minimum value:
@@ -197,7 +201,7 @@ def min_in_data(____):
     return ____
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```{python}
@@ -212,7 +216,8 @@ def min_in_data(filename):
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Find the First
 
 Fill in the blanks to create a function that returns the first negative value in a list. What does your function return if the list is empty?
@@ -224,7 +229,7 @@ def first_negative(values):
             return ____
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```{python}
@@ -240,7 +245,8 @@ If the list is empty (or contains no negative values), the function reaches the 
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Calling by Name
 
 We saw that `print_date` can be called with keyword arguments:
@@ -253,7 +259,7 @@ print_date(day=1, month=2, year=2003)
 2. Where else have you seen keyword arguments in these lessons?
 3. When is using keyword arguments especially valuable?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 1. `2003/2/1`
@@ -263,8 +269,8 @@ print_date(day=1, month=2, year=2003)
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Use `def name(parameters):` to define a function; the indented body is the code that runs.
 - Defining a function does not run it — call it by name with parentheses.
 - Arguments in a call are matched to parameters by position; keyword arguments can be passed in any order.

@@ -3,15 +3,15 @@ title: "Lists"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I store and work with a collection of values?
 - How are lists different from strings?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Create lists and access individual elements by index.
 - Slice a list to extract a sub-sequence.
 - Modify a list by assignment, `append`, `extend`, and `del`.
@@ -121,7 +121,8 @@ element[0] = 'C'
 If you need a modified string, create a new one — for example, `'C' + element[1:]` produces `'Carbon'`.
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Fill in the Blanks
 
 Fill in the blanks so that the program produces the output shown.
@@ -141,7 +142,7 @@ first time: [1, 3, 5]
 second time: [3, 5]
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```{python}
@@ -158,12 +159,13 @@ print('second time:', values)
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## How Large is a Slice?
 
 If `low` and `high` are both non-negative integers, how many elements does `values[low:high]` contain?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 `high - low` elements. For example, `values[1:4]` contains the 3 elements at indices 1, 2, and 3.
@@ -172,7 +174,8 @@ If `low` and `high` are both non-negative integers, how many elements does `valu
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## From Strings to Lists and Back
 
 ```{python}
@@ -183,7 +186,7 @@ print('list to string:', ''.join(['g', 'o', 'l', 'd']))
 1. What does `list('some string')` do?
 2. What does `'-'.join(['x', 'y'])` produce?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 1. It splits the string into a list of its individual characters.
@@ -193,7 +196,8 @@ print('list to string:', ''.join(['g', 'o', 'l', 'd']))
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Working With the End
 
 What does the following program print?
@@ -208,7 +212,7 @@ print(element[-1])
 3. If `values` is a list, what does `del values[-1]` do?
 4. How can you display all elements but the last without changing `values`?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 The program prints `m`.
@@ -222,7 +226,8 @@ The program prints `m`.
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Stepping Through a List
 
 What does the following program print?
@@ -236,7 +241,7 @@ print(element[::-1])
 1. What does the third value in `[low:high:stride]` do?
 2. What expression selects all even-indexed items from a collection?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```output
@@ -251,7 +256,8 @@ eniroulf
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Sort and Sorted
 
 What do these two programs print? Explain the difference between `sorted(letters)` and `letters.sort()`.
@@ -270,7 +276,7 @@ result = letters.sort()
 print('letters is', letters, 'and result is', result)
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 Program A:
@@ -289,7 +295,8 @@ letters is ['d', 'g', 'l', 'o'] and result is None
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Copying (or Not)
 
 What do these two programs print? Explain the difference between `new = old` and `new = old[:]`.
@@ -310,7 +317,7 @@ new[0] = 'D'
 print('new is', new, 'and old is', old)
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 Program A:
@@ -328,8 +335,8 @@ new is ['D', 'o', 'l', 'd'] and old is ['g', 'o', 'l', 'd']
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - A list stores an ordered, mutable collection of values in a single variable.
 - Access elements with `list[index]` (zero-based) and extract sub-sequences with slices.
 - Lists can be modified: assign to an index, use `append` or `extend` to add, and `del` to remove.

@@ -2,14 +2,14 @@
 title: "Running and Quitting"
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How can I run Python programs?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Launch the Jupyter Notebook, create new notebooks, and exit the Notebook.
 - Create Markdown cells in a notebook.
 - Create and run Python cells in a notebook.
@@ -44,8 +44,8 @@ Jupyter notebooks organize your work into individual cells, each of which can ho
 ![Example Jupyter Notebook](fig/jupyter.png){alt="Example Jupyter Notebook"}
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Python programs are plain text.
 - Use the Jupyter Notebook for editing and running Python.
 - The Notebook has Command and Edit modes.

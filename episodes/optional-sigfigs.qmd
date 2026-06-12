@@ -3,15 +3,15 @@ title: "Reporting Values to the Right Number of Digits"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I decide how many decimal places to report for a measured value?
 - How do I print a value and its uncertainty rounded consistently in Python?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Apply the rule: round the uncertainty to 1 significant figure, then round the value
   to the same decimal place.
 - Compute the required number of decimal places automatically from the uncertainty.
@@ -191,8 +191,8 @@ achieve. The second digit is not meaningful.
 This is why the convention "1 sig fig on the uncertainty" is so widely used. Unless you make 5,000 measurements
 you can't be certain of the value of the second significant figure.
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Round the uncertainty to 1 significant figure; round the value to the same decimal
   place.
 - Compute decimal places with `ndigits = -int(numpy.floor(numpy.log10(abs(sigma))))`.

@@ -3,14 +3,14 @@ title: "Conditionals"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How does a program choose between different actions?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Write `if`, `elif`, and `else` statements to branch program execution.
 - Combine comparisons with `and`, `or`, and `not`.
 - Trace the execution of a conditional inside a loop.
@@ -124,7 +124,8 @@ elif (mass > 2 and mass <= 5 and velocity <= 20):
 Without parentheses, `a or b and c` means `a or (b and c)`, which may not be what you intended.
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Tracing Execution
 
 What does this program print?
@@ -138,7 +139,7 @@ elif pressure <= 50.0:
 print(pressure)
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```output
@@ -151,7 +152,8 @@ The first condition (`pressure > 50.0`) is true when `pressure` is `71.9`, so th
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Trimming Values
 
 Fill in the blanks so that this program replaces negative values with `0` and positive values (including zero) with `1`:
@@ -171,7 +173,7 @@ print(result)
 [0, 1, 1, 1, 0, 1]
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```{python}
@@ -189,7 +191,8 @@ print(result)
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Initializing
 
 Modify this program so that it finds the largest and smallest values in the list regardless of the range of values:
@@ -208,7 +211,7 @@ print(smallest, largest)
 
 What are the advantages and disadvantages of using `None` as the initial sentinel value?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```{python}
@@ -228,8 +231,8 @@ Using `None` as a sentinel means the code works correctly regardless of the rang
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - An `if` statement executes its body only when the condition is `True`.
 - `elif` adds additional conditions; `else` handles everything not caught above.
 - Conditions are tested in order; execution stops at the first true branch.

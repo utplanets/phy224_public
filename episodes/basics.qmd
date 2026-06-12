@@ -3,14 +3,14 @@ title: "Basics"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - What are the standard features available in all python programs?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Understand the basics of the Python language.
 - Learn the difference between numbers, strings, functions, and more complex objects.
 :::
@@ -107,8 +107,8 @@ print(not 3 == 5)          # True  — inverts the result
 
 Comparisons are most useful when combined with conditionals, which let your program take different actions depending on whether a condition is true. You will use them extensively in the [conditionals](conditionals.qmd) lesson.
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Python values have types: `int`, `float`, `str`, `list`, `dict`, and others.
 - Arithmetic operators follow standard mathematical precedence; use parentheses to be explicit.
 - `+` and `*` work on strings (concatenation and repetition) but other arithmetic operators do not.

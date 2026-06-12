@@ -3,16 +3,16 @@ title: "Root Finding by Iteration: Newton-Raphson"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How does Newton-Raphson find the zero of a function by iteration?
 - How do I implement the iteration and detect when it has converged?
 - When does the method fail, and what do I do about it?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Implement a Newton-Raphson loop in Python.
 - Apply it to find the zero of a transcendental equation from physics.
 - Visualise the iterative steps converging to the root.
@@ -161,8 +161,8 @@ for your function, and it's `safer` if there are multiple roots or the starting 
 when you want to inspect each iteration or when an analytic derivative is available and fast convergence matters.
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Rewrite the physical condition as $f(x) = 0$ and compute $f'(x)$ analytically.
 - Always plot $f(x)$ first to count the roots and choose a starting guess away from
   trivial or spurious roots.

@@ -2,16 +2,16 @@
 title: "Fitting data to models"
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I find the best-fit parameters for a physical model?
 - How do I report the uncertainty in those parameters correctly?
 - How do I know whether a model is a good fit to my data?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Use `scipy.optimize.curve_fit` to fit a model function to experimental data.
 - Interpret `popt` and `pcov` to report parameter values and uncertainties.
 - Explain the difference between `sigma` with and without `absolute_sigma=True`.
@@ -160,14 +160,14 @@ estimate errors, while `absolute_sigma=True` used the ruler precision you provid
 The correct choice depends on which you trust more — but for physics experiments
 where you have a calibrated measurement process, always use `absolute_sigma=True`.
 
-::: {.callout-caution title="Challenge"}
-
+::: {.callout-caution}
+## Challenge
 ## Predicting with the model
 
 Use the fitted model to predict the distance travelled after 10 s and after 100 s.
 
-::: {.callout-note collapse="true" title="Solution"}
-
+::: {.callout-note collapse="true"}
+## Solution
 Always call the model function to make predictions — never rewrite the equation or
 hard-code the fitted value. If you later improve the fit, all predictions update
 automatically:
@@ -389,15 +389,15 @@ you whether your measurement errors are consistent with your model. If you omit
 rescaling `pcov`, so calculating $\chi_r^2$ afterwards with your original sigma
 values will give a meaningless number.
 
-::: {.callout-caution title="Challenge"}
-
+::: {.callout-caution}
+## Challenge
 ## Watching the parameters change
 
 Put a `print` statement inside `distance_with_acceleration` to trace the parameter
 values during the fit. What is `curve_fit` doing?
 
-::: {.callout-note collapse="true" title="Solution"}
-
+::: {.callout-note collapse="true"}
+## Solution
 ```{python}
 def distance_with_acceleration_print(time, speed, acceleration):
     print("speed=", speed, "acceleration=", acceleration)
@@ -512,8 +512,8 @@ plt.show()
 ```
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - `curve_fit(model, x, y, sigma=errors, absolute_sigma=True)` returns `popt`
   (best-fit parameters) and `pcov` (covariance matrix); use `numpy.sqrt(numpy.diag(pcov))` for uncertainties.
 - Always use `absolute_sigma=True` when your `sigma` values represent real measurement errors in physical units.

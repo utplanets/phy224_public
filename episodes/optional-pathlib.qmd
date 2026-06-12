@@ -3,15 +3,15 @@ title: "Iterating Over Many Files with pathlib"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I find all data files in a directory without hard-coding their names?
 - How do I loop over those files and run the same analysis on each one?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Use `pathlib.Path` to build file paths that work on any operating system.
 - Use `Path.glob` to find files matching a pattern.
 - Loop over the results to apply an analysis function to each file.
@@ -111,8 +111,8 @@ for path in gdp_files:
 `path.stem + "_summary.txt"` builds the new filename.
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - `Path("dir").glob("*.csv")` finds all matching files; wrap in `sorted()` for a
   reproducible order.
 - Pass a `Path` object directly to `pd.read_csv` or `open()` — no conversion needed.

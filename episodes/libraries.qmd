@@ -3,15 +3,15 @@ title: "Libraries"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I use code that other people have written?
 - How do I find out what a library provides?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Explain what libraries and modules are and why they exist.
 - Import a library module and use `module.name` notation to access its contents.
 - Use `help()` to explore a module's contents.
@@ -69,13 +69,14 @@ print('cos(pi) is', m.cos(m.pi))
 This is a common convention in scientific Python. You will see `import numpy as np` and `import matplotlib.pyplot as plt` throughout these lessons.
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Exploring the Math Module
 
 1. What function in `math` can you use to calculate a square root *without* using `sqrt`?
 2. If that alternative exists, why does `sqrt` also exist?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 1. `math.pow(x, 0.5)` raises `x` to the power 0.5, which is the square root.
@@ -85,7 +86,8 @@ This is a common convention in scientific Python. You will see `import numpy as 
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Locating the Right Module
 
 You want to select a random character from the string:
@@ -98,7 +100,7 @@ bases = 'ACTTGCTTGAC'
 2. Which function from that module would you use? Are there alternatives?
 3. Write a short program that uses the function.
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 The `random` module is the right choice. The string has 11 characters (indices 0–10), so you can generate a random index and use it to select a character:
@@ -121,7 +123,8 @@ print(sample(bases, 1)[0])
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## When Is Help Available?
 
 A colleague types `help(math)` and gets:
@@ -132,7 +135,7 @@ NameError: name 'math' is not defined
 
 What did they forget to do?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 They forgot to import the module first. `help(math)` requires that `math` is already loaded into memory:
@@ -146,7 +149,8 @@ help(math)
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Importing With Aliases
 
 1. Fill in the blanks so that the program prints `90.0`.
@@ -159,7 +163,7 @@ angle = ____.degrees(____.pi / 2)
 print(____)
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```{python}
@@ -182,7 +186,8 @@ When you wrote the code yourself, the short alias feels natural. Months later, o
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Many Ways to Import
 
 Match each `print` statement to the library call that makes it work.
@@ -200,7 +205,7 @@ Library calls:
 3. `import math as m`
 4. `from math import *`
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 1. → library calls 1 or 4 (both make `sin` and `pi` available as bare names)
@@ -211,7 +216,8 @@ Library calls:
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Importing Specific Items
 
 1. Fill in the blanks so that the program prints `90.0`.
@@ -224,7 +230,7 @@ angle = degrees(pi / 2)
 print(angle)
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```{python}
@@ -239,7 +245,8 @@ This form is often the most readable for short scripts. The main reason not to u
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Reading Error Messages
 
 1. Read the code below and try to identify the error without running it.
@@ -250,7 +257,7 @@ from math import log
 log(0)
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 1. The logarithm is only defined for positive numbers, so `log(0)` is mathematically undefined.
@@ -263,8 +270,8 @@ log(0)
 [stdlib]: https://docs.python.org/3/library/
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - A library is a collection of modules containing reusable functions, constants, and other objects.
 - Use `import module_name` to load a module; access its contents with `module_name.thing_name`.
 - Use `help(module_name)` to see what a module provides.

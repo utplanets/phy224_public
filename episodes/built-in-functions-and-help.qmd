@@ -3,16 +3,16 @@ title: "Built-in Functions"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - What built-in functions does Python provide?
 - How do I call a function and use its result?
 - What kinds of errors can occur in programs?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Call built-in Python functions with the correct number and type of arguments.
 - Nest function calls and predict the order of evaluation.
 - Distinguish between syntax errors and runtime errors.
@@ -108,7 +108,8 @@ Fix syntax errors by reading the source code carefully around the `^` marker; fi
 For detailed guidance on finding answers when you are stuck, see the [Getting Help](getting-help.qmd) lesson.
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## What Happens When
 
 1. Explain the order of operations in the program below.
@@ -119,7 +120,7 @@ radiance = 1.0
 radiance = max(2.1, 2.0 + min(radiance, 1.1 * radiance - 0.5))
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 1. Inside out:
@@ -134,7 +135,8 @@ radiance = max(2.1, 2.0 + min(radiance, 1.1 * radiance - 0.5))
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Spot the Difference
 
 1. Predict what each `print` statement below will output.
@@ -149,7 +151,7 @@ print(max(rich, poor))
 print(max(len(rich), len(poor)))
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 1.
@@ -164,12 +166,13 @@ tin
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Why Not?
 
 Why don't `max` and `min` return `None` when given no arguments?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 Returning `None` silently would hide a programming mistake — the caller would store `None`, use it later, and get a confusing error far from the actual problem. Raising a `TypeError` immediately points you directly to the bug.
@@ -178,12 +181,13 @@ Returning `None` silently would hide a programming mistake — the caller would 
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Last Character of a String
 
 If Python indexes from zero and `len` returns the number of characters, what index expression retrieves the last character of `name`?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 `name[len(name) - 1]`
@@ -193,8 +197,8 @@ If Python indexes from zero and `len` returns the number of characters, what ind
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Use comments (`#`) to document the *why* behind non-obvious code.
 - Call a function by writing its name followed by arguments in parentheses; parentheses are always required.
 - `max`, `min`, and `round` are commonly-used built-in functions.

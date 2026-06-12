@@ -2,15 +2,15 @@
 title: "Wrap-Up"
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - Where do I go next?
 - How do I find help when I'm stuck?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Identify key Python community resources for documentation, packages, and help.
 
 :::
@@ -41,8 +41,8 @@ The [Python 3 documentation](https://docs.python.org/3/) is the authoritative re
 [Stack Overflow](https://stackoverflow.com/questions/tagged/python) has answers to an enormous range of Python questions. Search for your specific error message or problem — the answer is usually already there. The [NumPy](https://stackoverflow.com/questions/tagged/numpy), [SciPy](https://stackoverflow.com/questions/tagged/scipy), and [Matplotlib](https://stackoverflow.com/questions/tagged/matplotlib) tags have dedicated question threads.
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - The official Python documentation, NumPy/SciPy docs, and Stack Overflow cover almost every question that comes up in scientific Python.
 - The Matplotlib gallery is the fastest way to find example code for a specific plot type.
 - PyPI is where to look for additional packages; install them with `pip`.

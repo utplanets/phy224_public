@@ -3,16 +3,16 @@ title: "Variables and Assignment"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I store and reuse values in a Python program?
 - How do I read and extract parts of a string?
 - Why do variable names matter?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Assign values to variables and use those variables in calculations.
 - Predict how a variable's value changes as a program runs.
 - Index and slice a string to extract individual characters or substrings.
@@ -113,7 +113,8 @@ print(len('helium'))
 ```
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Predicting Values
 
 What is the final value of `position` in the program below?
@@ -125,7 +126,7 @@ position = initial
 initial = 'right'
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 ```output
@@ -138,7 +139,8 @@ Assignment copies the *value* at the time of the statement, not a link to the ot
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Choosing a Name
 
 Which is a better variable name, `m`, `min`, or `minutes`? Why?
@@ -148,7 +150,7 @@ Hint: think about which code you would rather inherit from someone who is leavin
 2. `tot_sec = min * 60 + sec`
 3. `total_seconds = minutes * 60 + seconds`
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 `minutes` is the clearest choice. `m` is too cryptic to mean anything on its own, and `min` is easily confused with Python's built-in `min()` function, which returns the smallest item in a sequence. `total_seconds = minutes * 60 + seconds` reads almost like plain English and leaves no ambiguity about what each variable holds.
@@ -157,7 +159,8 @@ Hint: think about which code you would rather inherit from someone who is leavin
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Slicing
 
 The program below prints a slice of a string:
@@ -178,8 +181,8 @@ Answer the following without running the code first, then verify:
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - A variable is created by assigning a value to a name with `=`; it must be assigned before it can be used.
 - `print` displays one or more values, separated by spaces, followed by a newline.
 - Variables can appear in expressions; the right-hand side is evaluated before the assignment is made.

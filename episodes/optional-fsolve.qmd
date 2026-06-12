@@ -3,15 +3,15 @@ title: "Solving Systems of Equations with scipy.fsolve"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I find the value where two physical models agree?
 - How do I solve a system of two equations with two unknowns numerically?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Use `scipy.optimize.fsolve` to find the root of a single equation.
 - Extend `fsolve` to a system of two equations and two unknowns.
 - Recognise when a problem reduces to root-finding.
@@ -112,8 +112,8 @@ solution to the system. For linear systems `numpy.linalg.solve` is more efficien
 but `fsolve` works the same way when the equations become nonlinear.
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Rewrite f(x) = g(x) as h(x) = f(x) − g(x) = 0 and pass `h` to `fsolve`.
 - For two unknowns, return a two-element list from the residual function and pass a
   two-element initial guess.

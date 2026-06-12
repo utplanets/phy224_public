@@ -4,16 +4,16 @@ jupyter: python3
 
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I plot my data?
 - How do I customise a plot's appearance?
 - How do I save a plot to a file?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Create line plots, scatter plots, error bar plots, bar charts, and histograms with Matplotlib.
 - Customise line styles, colours, and markers.
 - Add axis labels, titles, and legends.
@@ -243,8 +243,8 @@ plt.show()
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Import `matplotlib.pyplot as plt` 
 - `plt.plot` draws lines; `plt.scatter` draws unconnected points; `plt.errorbar` adds uncertainty bars.
 - Format strings (`'b-'`, `'ro'`) or keyword arguments control colour, linestyle, and markers.

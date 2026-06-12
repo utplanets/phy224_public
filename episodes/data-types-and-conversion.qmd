@@ -3,16 +3,16 @@ title: "Data Types and Type Conversion"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How does a value's type affect what I can do with it?
 - How do I convert between types?
 - What happens when integers and floats are mixed in an expression?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Use `type()` to identify the type of a value or variable.
 - Explain which operations are valid for numbers versus strings.
 - Convert between types using `int()`, `float()`, and `str()`.
@@ -119,12 +119,13 @@ print('first is', first, 'and second is', second)
 When Python evaluated `5 * first`, it computed `5`, stored that number in `second`, and moved on. Changing `first` later has no effect on `second`.
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Fractions
 
 What type of value is `3.4`? How can you find out?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 It is a float. You can verify with `type()`:
@@ -137,12 +138,13 @@ print(type(3.4))
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Automatic Type Conversion
 
 What type of value is `3.25 + 4`?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 It is a float. When an integer and a float appear together in an expression, Python converts the integer to a float automatically:
@@ -156,7 +158,8 @@ print(result, 'is', type(result))
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Choose a Type
 
 What type of value (integer, float, or string) would you use to represent each of the following? Try to think of more than one defensible answer for each.
@@ -168,7 +171,7 @@ What type of value (integer, float, or string) would you use to represent each o
 5. Current population of a city.
 6. Average population of a city over time.
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 1. Integer — the count lies between 1 and 365 and is always whole.
@@ -182,7 +185,8 @@ What type of value (integer, float, or string) would you use to represent each o
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Division Types
 
 Given the three division operators in Python 3:
@@ -195,7 +199,7 @@ print('5 % 3:', 5 % 3)
 
 If `num_subjects` is the number of subjects in a study and `num_per_survey` is the number who can participate in one survey, write an expression that calculates the minimum number of surveys needed to reach everyone at least once.
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 Floor division gives the number of complete surveys; adding 1 handles the remainder group:
@@ -211,7 +215,8 @@ print(num_subjects, 'subjects,', num_per_survey, 'per survey:', num_surveys)
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Strings to Numbers
 
 `float()` converts a numeric string to a float, and `int()` truncates a float to an integer:
@@ -227,7 +232,7 @@ What do you expect the following to do? What does it actually do, and why?
 print("fractional string to int:", int("3.4"))
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 It raises a `ValueError`. Although it might seem reasonable for Python to convert `"3.4"` to `3.4` and then to `3`, Python requires explicit, step-by-step conversion. If you want the integer, you must do it yourself:
@@ -240,7 +245,8 @@ int(float("3.4"))   # 3
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Arithmetic with Different Types
 
 Which of the following expressions produce `2.0`? There may be more than one correct answer.
@@ -258,7 +264,7 @@ third = "1.1"
 5. `int(first) + int(float(third))`
 6. `2.0 * second`
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 Answers 1 and 4 produce `2.0`.
@@ -267,7 +273,8 @@ Answers 1 and 4 produce `2.0`.
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Complex Numbers
 
 Python supports complex numbers written as `1.0+2.0j`. The real and imaginary parts are accessible as `.real` and `.imag`.
@@ -276,7 +283,7 @@ Python supports complex numbers written as `1.0+2.0j`. The real and imaginary pa
 2. What does `1+2j + 3` produce?
 3. What is `4j`? What about `4 j` or `4 + j`?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 1. The convention comes from electrical engineering, where `i` is already used for current. Python adopted the engineering notation early on and it has never changed — see the [Stack Overflow discussion](https://stackoverflow.com/questions/24812444/why-are-complex-numbers-in-python-denoted-with-j-instead-of-i) for more history.
@@ -286,8 +293,8 @@ Python supports complex numbers written as `1.0+2.0j`. The real and imaginary pa
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - Every value has a type: `int`, `float`, or `str` are the most common.
 - Use `type()` to find out what type a value has.
 - Types control which operations are allowed.

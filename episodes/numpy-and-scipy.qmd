@@ -3,16 +3,16 @@ title: "Numpy and Scipy"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I work with arrays of numerical data in Python?
 - How do I perform element-wise calculations and aggregations?
 - How do I integrate tabular data numerically?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Import NumPy and use the standard `np` alias.
 - Create arrays with `zeros`, `ones`, `arange`, and `linspace`.
 - Perform element-wise arithmetic and understand shape requirements.
@@ -164,7 +164,8 @@ print(a[10:5:-2])    # descending: 9, 7
 ```
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## `arange` vs `linspace`
 
 There is also a `linspace` function that takes similar arguments to `arange`. Explain the difference. What does the following code print?
@@ -174,7 +175,7 @@ print(numpy.arange(1., 9, 3))
 print(numpy.linspace(1., 9, 3))
 ```
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 `arange(start, stop, step)` generates values from `start` up to but not including `stop`, advancing by `step`. `linspace(start, stop, num)` generates exactly `num` values evenly spaced from `start` to `stop` *inclusive*.
@@ -190,12 +191,13 @@ Use `arange` when you care about the step size; use `linspace` when you care abo
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Row Minimums
 
 Generate a 10×3 array of random numbers using `numpy.random.rand`. From each row, find the minimum absolute value. The result should be a one-dimensional array of length 10.
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 Pass `axis=1` to aggregate across each row:
@@ -233,8 +235,8 @@ print("integral with fine grid and x values:", scipy.integrate.trapezoid(y, x))
 We will return to `scipy.optimize` in the [fitting data to models](fitting-data-to-models.qmd) lesson.
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - NumPy arrays are typed, multi-dimensional collections that support element-wise arithmetic.
 - Create arrays with `zeros`, `ones`, `arange`, and `linspace`; reshape with `.reshape()`.
 - Arithmetic between arrays is element-by-element; shapes must be compatible.

@@ -3,15 +3,15 @@ title: "Reading Tabular Data into Arrays"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - How do I load numerical data from a text file into Python?
 - How do I save an array back to a file?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Use `numpy.loadtxt` to read a delimited text file into a NumPy array.
 - Control how headers, comments, and delimiters are handled.
 - Split a multi-column array into separate variables.
@@ -115,8 +115,8 @@ print("Distance data is ", data["Distance"])
 ```
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - `numpy.loadtxt` reads whitespace- or delimiter-separated numerical data into a 2D array.
 - Use `delimiter`, `comments`, and `skiprows` to handle formatted CSV files.
 - Loaded arrays have shape `(rows, columns)`; use `.shape` to inspect.

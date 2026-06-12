@@ -3,15 +3,15 @@ title: "Variable Scope"
 jupyter: python3
 ---
 
-::: {.callout-note title="Questions"}
-
+::: {.callout-note}
+## Questions
 - Why can't I see variables that were defined inside a function?
 - How do I read a Python traceback?
 
 :::
 
-::: {.callout-note title="Objectives"}
-
+::: {.callout-note}
+## Objectives
 - Distinguish between local and global variables.
 - Explain why function parameters are local variables.
 - Read a traceback to identify the file, function, line number, error type, and message.
@@ -67,7 +67,8 @@ KeyError: 'Friday'
 Working from the bottom: the error is a `KeyError` with the message `'Friday'` — the key `"Friday"` was not found in a dictionary. The arrow `-->` on line 11 of `errors_02.py`, inside the function `print_message`, is where the error actually occurred. The traceback above that shows how execution arrived there: the top-level script called `print_friday_message` (line 2), which called `print_message("Friday")` (line 15).
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Local and Global Variable Use
 
 Trace the values of all variables in this program as it executes. Use `---` for variables that do not yet exist or have gone out of scope.
@@ -86,7 +87,8 @@ print(clip(value))
 
 
 
-::: {.callout-caution title="Challenge"}
+::: {.callout-caution}
+## Challenge
 ## Reading Error Messages
 
 Read the traceback shown in this lesson and answer:
@@ -98,7 +100,7 @@ Read the traceback shown in this lesson and answer:
 5. What type of error is it?
 6. What is the error message?
 
-::: {.callout-note collapse="true" title="Solution"}
+::: {.callout-note collapse="true"}
 ## Solution
 
 1. Three levels: the top-level script, `print_friday_message`, and `print_message`.
@@ -111,8 +113,8 @@ Read the traceback shown in this lesson and answer:
 :::
 
 
-::: {.callout-tip title="Key Points"}
-
+::: {.callout-tip}
+## Key Points
 - A *global* variable is defined outside any function and is visible everywhere.
 - A *local* variable is defined inside a function (including its parameters) and is only visible within that function.
 - Scope prevents name collisions between function internals and calling code.
