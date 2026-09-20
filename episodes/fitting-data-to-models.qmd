@@ -381,7 +381,7 @@ print("χ²_r (acceleration)=", round(chi2r_accel,   1))   # 1.2
 
 ### $\chi_r^2$ and the connection back to `absolute_sigma`
 
-The $\chi_r^2$ calculation and `absolute_sigma=True` are two sides of the same coin.
+The $\chi_r^2$ calculation and `absolute_sigma=True` are two sides of the same issue.
 When you use `absolute_sigma=True`, the uncertainties from `pcov` are physically
 meaningful, and the $\chi_r^2$ you calculate has a clear interpretation: it tells
 you whether your measurement errors are consistent with your model. If you omit

@@ -10,6 +10,7 @@ dependencies = [
     "pandas",
     "pyyaml",
     "scipy",
+    "shiny>=1.8.0",
 ]
 
 # Not a package: only manages the environment used to render the site.
