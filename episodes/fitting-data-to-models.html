@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-366cb8ec674e47143b072bc2c76f74d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b18179ac568ab07409960006a9dec0c2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -503,12 +506,12 @@ window.Quarto = {
 <section id="scipy.optimize.curve_fit-fits-a-model-function-to-data" class="level2">
 <h2 class="anchored" data-anchor-id="scipy.optimize.curve_fit-fits-a-model-function-to-data"><code>scipy.optimize.curve_fit</code> fits a model function to data</h2>
 <p><code>scipy</code> provides <code>curve_fit</code>, which takes a model function and a set of measurements and returns the <em>best-fit</em> values of the unknown parameters. Consider measuring the distance travelled by an object moving at constant speed, with time as the controlled variable:</p>
-<div id="9a012f6c" class="cell" data-execution_count="1">
+<div id="f93045ba" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distance(time, speed):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate distance travelled at constant speed."""</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> speed <span class="op">*</span> time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="09174df8" class="cell" data-execution_count="2">
+<div id="ed233465" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -532,7 +535,7 @@ Uncertainty in speed is 0.0296 m/s</code></pre>
 <pre class="output"><code>Speed is 13.66 m/s
 Uncertainty in speed is 0.0296 m/s</code></pre>
 <p>The model function must follow a fixed convention: its first argument must be the array of independent data; any additional arguments are the free parameters that <code>curve_fit</code> will determine; and it must return the predicted dependent values:</p>
-<div id="38b6d38a" class="cell" data-execution_count="3">
+<div id="5788c1b9" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> good_model_function(xdata, parameter_1, parameter_2, parameter_3):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute and return the model prediction</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> prediction</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -543,7 +546,7 @@ Uncertainty in speed is 0.0296 m/s</code></pre>
 <p><code>curve_fit</code> always returns exactly two arrays.</p>
 <p><code>popt</code> is a 1D array of the best-fit parameter values, in the same order as the parameters appear in the model function definition. For the single-parameter <code>distance</code> function, <code>popt[0]</code> is the fitted speed.</p>
 <p><code>pcov</code> is the <strong>covariance matrix</strong> — a square matrix whose size equals the number of parameters. Its diagonal elements are the <em>variances</em> of the fitted parameters:</p>
-<div id="47b18c09" class="cell" data-execution_count="4">
+<div id="4658c7ad" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pvar <span class="op">=</span> numpy.diag(pcov)          <span class="co"># extract the diagonal</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>uncertainties <span class="op">=</span> numpy.sqrt(pvar) <span class="co"># standard errors</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -556,7 +559,7 @@ Uncertainty in speed is 0.0296 m/s</code></pre>
 <p><strong>Without <code>absolute_sigma=True</code></strong> (the default), <code>curve_fit</code> treats <code>sigma</code> as <em>relative</em> weights only. After finding the best-fit parameters it rescales the covariance matrix so that the reduced chi-squared (see below) is exactly 1. The reported uncertainties are then self-consistent — they reflect the scatter of the data around the model — but they are <strong>not</strong> in the physical units of your measurement errors. If your ruler really is accurate to ±5 m, the default mode ignores that.</p>
 <p><strong>With <code>absolute_sigma=True</code></strong>, the sigma values are taken at face value as physically meaningful standard deviations. The covariance matrix is <strong>not</strong> rescaled, so the reported uncertainties are in the same units as your measurement errors and can be directly compared to your experimental precision.</p>
 <p>In experimental physics you almost always want <code>absolute_sigma=True</code>. The difference in practice:</p>
-<div id="461100dd" class="cell" data-execution_count="5">
+<div id="a8327e72" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without absolute_sigma — sigma used only as weights, uncertainties rescaled</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>popt_rel, pcov_rel <span class="op">=</span> curve_fit(distance, measured_times, measured_distances,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                               sigma<span class="op">=</span>distance_errors)</span>
@@ -599,7 +602,7 @@ Uncertainty (absolute sigma):  0.0296 m/s</code></pre>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Always call the model function to make predictions — never rewrite the equation or hard-code the fitted value. If you later improve the fit, all predictions update automatically:</p>
-<div id="3ad0a13b" class="cell" data-execution_count="6">
+<div id="70900486" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d10  <span class="op">=</span> distance(<span class="dv">10</span>,  popt[<span class="dv">0</span>])</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>d100 <span class="op">=</span> distance(<span class="dv">100</span>, popt[<span class="dv">0</span>])</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After  10 s: </span><span class="sc">{:.4g}</span><span class="st"> m"</span>.<span class="bu">format</span>(d10))</span>
@@ -622,7 +625,7 @@ After 100 s: 1366 m</code></pre>
 <p>What if the object was actually accelerating? The model becomes</p>
 <p><span class="math display">\[ s = ut + \frac{1}{2} a t^2 \]</span></p>
 <p>Add <code>acceleration</code> as a second parameter, re-run the fit, and <code>curve_fit</code> finds both simultaneously:</p>
-<div id="a5df9425" class="cell" data-execution_count="7">
+<div id="be948cc7" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distance_with_acceleration(time, speed, acceleration):</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Distance under constant acceleration from rest."""</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> speed <span class="op">*</span> time <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> acceleration <span class="op">*</span> time<span class="op">**</span><span class="dv">2</span></span>
@@ -689,11 +692,11 @@ Figure&nbsp;1: Distance versus time showing the measured data with error bars an
 <div id="cell-fig-fitting-residuals" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>, lw<span class="op">=</span><span class="fl">0.8</span>, ls<span class="op">=</span><span class="st">'--'</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(measured_times,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         distance(measured_times, popt[<span class="dv">0</span>]) <span class="op">-</span> measured_distances,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.errorbar(measured_times,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         distance(measured_times, popt[<span class="dv">0</span>]) <span class="op">-</span> measured_distances,yerr<span class="op">=</span>distance_errors,</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="st">'$s=ut$'</span>, marker<span class="op">=</span><span class="st">'s'</span>, ls<span class="op">=</span><span class="st">''</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.plot(measured_times,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>         distance_with_acceleration(measured_times, popt2[<span class="dv">0</span>], popt2[<span class="dv">1</span>]) <span class="op">-</span> measured_distances,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.errorbar(measured_times,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>         distance_with_acceleration(measured_times, popt2[<span class="dv">0</span>], popt2[<span class="dv">1</span>]) <span class="op">-</span> measured_distances,yerr<span class="op">=</span>distance_errors,</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="vs">r'</span><span class="dv">$</span><span class="vs">s=ut</span><span class="op">+</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}{2}</span><span class="vs">at</span><span class="dv">^</span><span class="vs">2</span><span class="dv">$</span><span class="vs">'</span>, marker<span class="op">=</span><span class="st">'&lt;'</span>, ls<span class="op">=</span><span class="st">''</span>)</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time (s)"</span>)</span>
@@ -734,7 +737,7 @@ Figure&nbsp;2: Residual plot of model minus data for the two fits
 <li><strong><span class="math inline">\(\chi_r^2 \gg 1\)</span></strong> — the residuals are much larger than the measurement errors. Either the model is wrong (missing physics), the error estimates are too small, or there are outliers or systematic effects.</li>
 <li><strong><span class="math inline">\(\chi_r^2 \ll 1\)</span></strong> — the residuals are much smaller than the measurement errors. Either the error estimates are too large (the experiment is more precise than you thought), or the model has too many parameters and is over-fitting the data.</li>
 </ul>
-<div id="10082a01" class="cell" data-execution_count="10">
+<div id="f420320c" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> chi2(y_measure, y_predict, errors):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Chi-squared: sum of squared normalised residuals."""</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> numpy.<span class="bu">sum</span>((y_measure <span class="op">-</span> y_predict)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> errors<span class="op">**</span><span class="dv">2</span>)</span>
@@ -744,7 +747,7 @@ Figure&nbsp;2: Residual plot of model minus data for the two fits
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    dof <span class="op">=</span> y_measure.size <span class="op">-</span> number_of_parameters</span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> chi2(y_measure, y_predict, errors) <span class="op">/</span> dof</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="76ad6aec" class="cell" data-execution_count="11">
+<div id="821cf1ad" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>chi2r_linear <span class="op">=</span> chi2reduced(measured_distances,</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                            distance(measured_times, popt[<span class="dv">0</span>]),</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                            distance_errors, <span class="dv">1</span>)</span>
@@ -774,7 +777,7 @@ Constant acceleration model χ²_r = 1.18</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Report <span class="math inline">\(\chi_r^2\)</span> to 2–3 significant figures at most. Values of 110 and 1.18 should be rounded to 110 and 1.2 respectively:</p>
-<div id="94a1cf03" class="cell" data-execution_count="12">
+<div id="649010bd" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"χ²_r (linear)      ="</span>, <span class="bu">round</span>(chi2r_linear, <span class="op">-</span><span class="dv">1</span>))   <span class="co"># 110.0</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"χ²_r (acceleration)="</span>, <span class="bu">round</span>(chi2r_accel,   <span class="dv">1</span>))   <span class="co"># 1.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -787,7 +790,7 @@ Constant acceleration model χ²_r = 1.18</code></pre>
 </section>
 <section id="chi_r2-and-the-connection-back-to-absolute_sigma" class="level3">
 <h3 class="anchored"><span class="math inline">\(\chi_r^2\)</span> and the connection back to <code>absolute_sigma</code></h3>
-<p>The <span class="math inline">\(\chi_r^2\)</span> calculation and <code>absolute_sigma=True</code> are two sides of the same coin. When you use <code>absolute_sigma=True</code>, the uncertainties from <code>pcov</code> are physically meaningful, and the <span class="math inline">\(\chi_r^2\)</span> you calculate has a clear interpretation: it tells you whether your measurement errors are consistent with your model. If you omit <code>absolute_sigma=True</code>, the default behaviour forces <span class="math inline">\(\chi_r^2 = 1\)</span> internally by rescaling <code>pcov</code>, so calculating <span class="math inline">\(\chi_r^2\)</span> afterwards with your original sigma values will give a meaningless number.</p>
+<p>The <span class="math inline">\(\chi_r^2\)</span> calculation and <code>absolute_sigma=True</code> are two sides of the same issue. When you use <code>absolute_sigma=True</code>, the uncertainties from <code>pcov</code> are physically meaningful, and the <span class="math inline">\(\chi_r^2\)</span> you calculate has a clear interpretation: it tells you whether your measurement errors are consistent with your model. If you omit <code>absolute_sigma=True</code>, the default behaviour forces <span class="math inline">\(\chi_r^2 = 1\)</span> internally by rescaling <code>pcov</code>, so calculating <span class="math inline">\(\chi_r^2\)</span> afterwards with your original sigma values will give a meaningless number.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -812,7 +815,7 @@ Constant acceleration model χ²_r = 1.18</code></pre>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="101d2abc" class="cell" data-execution_count="13">
+<div id="517d8e49" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> distance_with_acceleration_print(time, speed, acceleration):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"speed="</span>, speed, <span class="st">"acceleration="</span>, acceleration)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> speed <span class="op">*</span> time <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> acceleration <span class="op">*</span> time<span class="op">**</span><span class="dv">2</span></span>
@@ -854,7 +857,7 @@ speed= 10.257717023193093 acceleration= 0.0958943850247661
 <li>Being too precise is not necessary; the optimiser does the fine-tuning.</li>
 <li>Being badly wrong (wrong sign, wrong order of magnitude) can cause the fit to diverge or converge to the wrong solution.</li>
 </ul>
-<div id="0647df3e" class="cell" data-execution_count="14">
+<div id="89c41561" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>iteration <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> nonlinear_function(t, a, b, c, verbose<span class="op">=</span><span class="va">True</span>):</span>
@@ -869,7 +872,7 @@ speed= 10.257717023193093 acceleration= 0.0958943850247661
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>sigmaNL <span class="op">=</span> numpy.ones(<span class="dv">10</span>) <span class="op">*</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>With a good guess the fit converges in ~14 iterations; with a bad guess the optimiser may diverge or converge to a wrong minimum entirely:</p>
-<div id="8f50e938" class="cell" data-execution_count="15">
+<div id="d0241504" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Good guess: I think it's roughly 2.5*t^2 with no offset</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>iteration <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>poptNL2, pcovNL2 <span class="op">=</span> curve_fit(nonlinear_function, t, y,</span>
@@ -899,9 +902,9 @@ speed= 10.257717023193093 acceleration= 0.0958943850247661
 3 a= 3.0 b= -2.0 c= 0.10000000149011612</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_2948/3523950367.py:8: RuntimeWarning: divide by zero encountered in power
+<pre><code>/tmp/ipykernel_2764/3523950367.py:8: RuntimeWarning: divide by zero encountered in power
   return a * t**(b - 1) + c
-/tmp/ipykernel_2948/2588263260.py:8: OptimizeWarning: Covariance of the parameters could not be estimated
+/tmp/ipykernel_2764/2588263260.py:8: OptimizeWarning: Covariance of the parameters could not be estimated
   poptNL3, pcovNL3 = curve_fit(nonlinear_function, t, y,</code></pre>
 </div>
 </div>
@@ -921,7 +924,7 @@ speed= 10.257717023193093 acceleration= 0.0958943850247661
 <span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Value"</span>)</span>
 <span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_2948/3523950367.py:8: RuntimeWarning: divide by zero encountered in power
+<pre><code>/tmp/ipykernel_2764/3523950367.py:8: RuntimeWarning: divide by zero encountered in power
   return a * t**(b - 1) + c</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -953,7 +956,7 @@ Figure&nbsp;3: Two non-linear model fits overlaid on the data: a good initial gu
 <span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Residual"</span>)</span>
 <span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_2948/3523950367.py:8: RuntimeWarning: divide by zero encountered in power
+<pre><code>/tmp/ipykernel_2764/3523950367.py:8: RuntimeWarning: divide by zero encountered in power
   return a * t**(b - 1) + c</code></pre>
 </div>
 <div class="cell-output cell-output-display">

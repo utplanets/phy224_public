@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-366cb8ec674e47143b072bc2c76f74d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b18179ac568ab07409960006a9dec0c2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -455,7 +458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="lists-store-many-values-in-a-single-structure" class="level2">
 <h2 class="anchored" data-anchor-id="lists-store-many-values-in-a-single-structure">Lists store many values in a single structure</h2>
 <p>When you need to work with a collection of related values — pressures from a sensor, times in an experiment, filenames to process — storing them in separate variables like <code>pressure_001</code>, <code>pressure_002</code> quickly becomes unmanageable. A <em>list</em> groups any number of values into a single object. Lists are written with square brackets, with values separated by commas:</p>
-<div id="3457af5c" class="cell" data-execution_count="1">
+<div id="79b00539" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pressures <span class="op">=</span> [<span class="fl">0.273</span>, <span class="fl">0.275</span>, <span class="fl">0.277</span>, <span class="fl">0.275</span>, <span class="fl">0.276</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'pressures:'</span>, pressures)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'length:'</span>, <span class="bu">len</span>(pressures))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -469,7 +472,7 @@ length: 5</code></pre>
 <section id="indexing-and-slicing-lists" class="level2">
 <h2 class="anchored" data-anchor-id="indexing-and-slicing-lists">Indexing and slicing lists</h2>
 <p>List elements are accessed by position using square brackets, exactly like string characters. Indexing starts at zero, and negative indices count from the end:</p>
-<div id="d150d789" class="cell" data-execution_count="2">
+<div id="68842e78" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'zeroth item of pressures:'</span>, pressures[<span class="dv">0</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'fourth item of pressures:'</span>, pressures[<span class="dv">4</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -478,7 +481,7 @@ fourth item of pressures: 0.276</code></pre>
 </div>
 </div>
 <p>Slices extract a portion of the list using <code>[start:stop]</code> notation, returning a new list. The <code>start</code> index is included; <code>stop</code> is excluded:</p>
-<div id="9a8828f4" class="cell" data-execution_count="3">
+<div id="eb48631c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pressures[<span class="dv">1</span>:<span class="dv">4</span>])   <span class="co"># items at indices 1, 2, 3</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pressures[:<span class="dv">3</span>])    <span class="co"># first three items</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pressures[<span class="dv">2</span>:])    <span class="co"># from index 2 to the end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -489,7 +492,7 @@ fourth item of pressures: 0.276</code></pre>
 </div>
 </div>
 <p>Going out of bounds in a slice never raises an error — Python just returns as many elements as are available. Going out of bounds with a direct index raises an <code>IndexError</code>:</p>
-<div id="af3b13a9" class="cell" data-execution_count="4">
+<div id="d9a42408" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'99th element of element is:'</span>, pressures[<span class="dv">99</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -506,7 +509,7 @@ fourth item of pressures: 0.276</code></pre>
 <section id="lists-are-mutable" class="level2">
 <h2 class="anchored" data-anchor-id="lists-are-mutable">Lists are mutable</h2>
 <p>Unlike strings, lists are <em>mutable</em> — you can change their contents after creation. Assign directly to an indexed position to replace a value:</p>
-<div id="785910be" class="cell" data-execution_count="5">
+<div id="3165d98b" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pressures[<span class="dv">0</span>] <span class="op">=</span> <span class="fl">0.265</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'pressures is now:'</span>, pressures)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -514,7 +517,7 @@ fourth item of pressures: 0.276</code></pre>
 </div>
 </div>
 <p><code>del</code> removes an element by index and shortens the list:</p>
-<div id="52c060eb" class="cell" data-execution_count="6">
+<div id="c6b62885" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>primes <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> primes[<span class="dv">4</span>]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'primes after removing last item:'</span>, primes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -526,7 +529,7 @@ fourth item of pressures: 0.276</code></pre>
 <section id="adding-elements" class="level2">
 <h2 class="anchored" data-anchor-id="adding-elements">Adding elements</h2>
 <p><code>append</code> is a list <em>method</em> — a function attached to the list object — that adds a single item to the end:</p>
-<div id="b4cddf0d" class="cell" data-execution_count="7">
+<div id="43dbcaad" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>primes <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>]</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>primes.append(<span class="dv">7</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>primes.append(<span class="dv">9</span>)</span>
@@ -536,7 +539,7 @@ fourth item of pressures: 0.276</code></pre>
 </div>
 </div>
 <p><code>extend</code> merges another list into the end of the existing list, keeping the result flat. If you <code>append</code> a list instead, the result is a nested list — a list inside a list:</p>
-<div id="0b7cb7fb" class="cell" data-execution_count="8">
+<div id="b6332f10" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>teen_primes <span class="op">=</span> [<span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">17</span>, <span class="dv">19</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>middle_aged_primes <span class="op">=</span> [<span class="dv">37</span>, <span class="dv">41</span>, <span class="dv">43</span>, <span class="dv">47</span>]</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>primes.extend(teen_primes)</span>
@@ -554,7 +557,7 @@ after append of a list: [2, 3, 5, 7, 9, 11, 13, 17, 19, [37, 41, 43, 47]]</code>
 <section id="strings-are-immutable-sequences" class="level2">
 <h2 class="anchored" data-anchor-id="strings-are-immutable-sequences">Strings are immutable sequences</h2>
 <p>Strings behave like lists in many ways — they support indexing and slicing, and <code>len</code> measures their length — but they are <em>immutable</em>: you cannot change individual characters after creation:</p>
-<div id="45149612" class="cell" data-execution_count="9">
+<div id="70fcf971" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'carbon'</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'zeroth character:'</span>, element[<span class="dv">0</span>])</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'third character:'</span>, element[<span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -563,7 +566,7 @@ after append of a list: [2, 3, 5, 7, 9, 11, 13, 17, 19, [37, 41, 43, 47]]</code>
 third character: b</code></pre>
 </div>
 </div>
-<div id="805357da" class="cell" data-execution_count="10">
+<div id="d725c512" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>element[<span class="dv">0</span>] <span class="op">=</span> <span class="st">'C'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -610,7 +613,7 @@ second time: [3, 5]</code></pre>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="6c5f0d4b" class="cell" data-execution_count="11">
+<div id="c90fc9c3" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> []</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>values.append(<span class="dv">1</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>values.append(<span class="dv">3</span>)</span>
@@ -669,7 +672,7 @@ second time: [3, 5]</code></pre>
 </div>
 <section id="from-strings-to-lists-and-back" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="from-strings-to-lists-and-back">From Strings to Lists and Back</h2>
-<div id="b07077a6" class="cell" data-execution_count="12">
+<div id="bfcbd6fe" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'string to list:'</span>, <span class="bu">list</span>(<span class="st">'tin'</span>))</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'list to string:'</span>, <span class="st">''</span>.join([<span class="st">'g'</span>, <span class="st">'o'</span>, <span class="st">'l'</span>, <span class="st">'d'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -714,7 +717,7 @@ list to string: gold</code></pre>
 <section id="working-with-the-end" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="working-with-the-end">Working With the End</h2>
 <p>What does the following program print?</p>
-<div id="5a6e2ad7" class="cell" data-execution_count="13">
+<div id="84b1d3ed" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'helium'</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(element[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -763,7 +766,7 @@ list to string: gold</code></pre>
 <section id="stepping-through-a-list" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="stepping-through-a-list">Stepping Through a List</h2>
 <p>What does the following program print?</p>
-<div id="7d9a8a97" class="cell" data-execution_count="14">
+<div id="45dfd0d5" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>element <span class="op">=</span> <span class="st">'fluorine'</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(element[::<span class="dv">2</span>])</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(element[::<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -811,7 +814,7 @@ eniroulf</code></pre>
 <section id="sort-and-sorted" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="sort-and-sorted">Sort and Sorted</h2>
 <p>What do these two programs print? Explain the difference between <code>sorted(letters)</code> and <code>letters.sort()</code>.</p>
-<div id="99f4f75f" class="cell" data-execution_count="15">
+<div id="34436dfb" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Program A</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> <span class="bu">list</span>(<span class="st">'gold'</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="bu">sorted</span>(letters)</span>
@@ -820,7 +823,7 @@ eniroulf</code></pre>
 <pre><code>letters is ['g', 'o', 'l', 'd'] and result is ['d', 'g', 'l', 'o']</code></pre>
 </div>
 </div>
-<div id="d1b8b065" class="cell" data-execution_count="16">
+<div id="ab2d4b03" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Program B</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> <span class="bu">list</span>(<span class="st">'gold'</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> letters.sort()</span>
@@ -863,7 +866,7 @@ eniroulf</code></pre>
 <section id="copying-or-not" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="copying-or-not">Copying (or Not)</h2>
 <p>What do these two programs print? Explain the difference between <code>new = old</code> and <code>new = old[:]</code>.</p>
-<div id="46941c33" class="cell" data-execution_count="17">
+<div id="bbaf6c18" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Program A</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>old <span class="op">=</span> <span class="bu">list</span>(<span class="st">'gold'</span>)</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>new <span class="op">=</span> old</span>
@@ -873,7 +876,7 @@ eniroulf</code></pre>
 <pre><code>new is ['D', 'o', 'l', 'd'] and old is ['D', 'o', 'l', 'd']</code></pre>
 </div>
 </div>
-<div id="cf5bc4ae" class="cell" data-execution_count="18">
+<div id="ed76675b" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Program B</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>old <span class="op">=</span> <span class="bu">list</span>(<span class="st">'gold'</span>)</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>new <span class="op">=</span> old[:]</span>

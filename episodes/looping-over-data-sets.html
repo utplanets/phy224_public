@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-366cb8ec674e47143b072bc2c76f74d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b18179ac568ab07409960006a9dec0c2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -450,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="processing-a-list-of-files-with-a-for-loop" class="level2">
 <h2 class="anchored" data-anchor-id="processing-a-list-of-files-with-a-for-loop">Processing a list of files with a <code>for</code> loop</h2>
 <p>A filename is just a string, and strings can be stored in lists. That means you can loop over a list of filenames exactly as you would loop over a list of numbers, applying the same analysis to each file automatically:</p>
-<div id="0d6476f7" class="cell" data-execution_count="1">
+<div id="5dd3a18e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> [<span class="st">"data/galileo_flat.csv"</span>, <span class="st">"data/galileo_ramp.csv"</span>]:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    distance, height <span class="op">=</span> numpy.loadtxt(filename, skiprows<span class="op">=</span><span class="dv">2</span>,</span>
@@ -465,7 +468,7 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 <section id="finding-files-with-glob" class="level2">
 <h2 class="anchored" data-anchor-id="finding-files-with-glob">Finding files with <code>glob</code></h2>
 <p>Writing out filenames by hand works for two files, but not for two hundred. The <code>glob</code> library provides a function, also called <code>glob</code>, that returns a list of all filenames matching a given pattern. The two most useful wildcards are <code>*</code> (zero or more characters) and <code>?</code> (exactly one character):</p>
-<div id="0005e268" class="cell" data-execution_count="2">
+<div id="d935c3e7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"all csv files in data/random:"</span>, glob.glob(<span class="st">"data/random/*.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -473,7 +476,7 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 </div>
 </div>
 <p>If no files match the pattern, <code>glob</code> returns an empty list rather than an error:</p>
-<div id="dbe26602" class="cell" data-execution_count="3">
+<div id="3958597c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"all txt files in data/random:"</span>, glob.glob(<span class="st">"data/random/*.txt"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>all txt files in data/random: []</code></pre>
@@ -483,7 +486,7 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 <section id="combining-glob-and-for-to-process-batches-of-files" class="level2">
 <h2 class="anchored" data-anchor-id="combining-glob-and-for-to-process-batches-of-files">Combining <code>glob</code> and <code>for</code> to process batches of files</h2>
 <p>Wrapping <code>glob.glob</code> in <code>sorted</code> gives you consistent, predictable ordering. Then it is straightforward to apply the same analysis to every matching file:</p>
-<div id="33af101e" class="cell" data-execution_count="4">
+<div id="cee952f4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> <span class="bu">sorted</span>(glob.glob(<span class="st">'data/random/*.csv'</span>)):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    distance, height <span class="op">=</span> numpy.loadtxt(filename, delimiter<span class="op">=</span><span class="st">','</span>, unpack<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filename, distance.mean(), height.std())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -548,7 +551,7 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="37582fe7" class="cell" data-execution_count="5">
+<div id="8f4f3bfc" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -562,9 +565,9 @@ data/galileo_ramp.csv 253.0 1000.0</code></pre>
 <pre><code>Overall mean distance: nan</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:3824: RuntimeWarning: Mean of empty slice
+<pre><code>/home/runner/work/phy224_public/phy224_public/.venv/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:3824: RuntimeWarning: Mean of empty slice
   return _methods._mean(a, axis=axis, dtype=dtype,
-/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+/home/runner/work/phy224_public/phy224_public/.venv/lib/python3.11/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
   ret = ret.dtype.type(ret / rcount)</code></pre>
 </div>
 </div>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-366cb8ec674e47143b072bc2c76f74d8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b18179ac568ab07409960006a9dec0c2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -484,7 +487,7 @@ window.Quarto = {
 <section id="types-control-what-operations-are-allowed" class="level2">
 <h2 class="anchored" data-anchor-id="types-control-what-operations-are-allowed">Types control what operations are allowed</h2>
 <p>The <a href="../episodes/basics.html">Basics</a> lesson introduced the three fundamental types — integers (<code>int</code>), floats (<code>float</code>), and strings (<code>str</code>). Use the built-in <code>type()</code> function at any time to check what type a value or variable has:</p>
-<div id="92734ca7" class="cell" data-execution_count="1">
+<div id="57e69a5e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="dv">52</span>))       <span class="co"># &lt;class 'int'&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="fl">3.14</span>))     <span class="co"># &lt;class 'float'&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="st">'hello'</span>))  <span class="co"># &lt;class 'str'&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -495,13 +498,13 @@ window.Quarto = {
 </div>
 </div>
 <p>The <em>variable</em> is just a label — it is the <em>value</em> that carries the type. A value’s type determines which operations make sense. For exmaple, arithmetic subtraction works on numbers but not on strings:</p>
-<div id="e70349bc" class="cell" data-execution_count="2">
+<div id="e34df126" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">-</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>2</code></pre>
 </div>
 </div>
-<div id="8f616508" class="cell" data-execution_count="3">
+<div id="315013f8" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'hello'</span> <span class="op">-</span> <span class="st">'h'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -515,14 +518,14 @@ window.Quarto = {
 </div>
 </div>
 <p>However, <code>+</code> and <code>*</code> do work on strings — they just mean something different. Adding two strings concatenates them, and multiplying a string by an integer repeats it:</p>
-<div id="b6f32e1d" class="cell" data-execution_count="4">
+<div id="20651819" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>full_name <span class="op">=</span> <span class="st">'Ahmed'</span> <span class="op">+</span> <span class="st">' '</span> <span class="op">+</span> <span class="st">'Walsh'</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(full_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Ahmed Walsh</code></pre>
 </div>
 </div>
-<div id="4b7b4750" class="cell" data-execution_count="5">
+<div id="400a458a" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>separator <span class="op">=</span> <span class="st">'='</span> <span class="op">*</span> <span class="dv">10</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(separator)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -530,13 +533,13 @@ window.Quarto = {
 </div>
 </div>
 <p>Strings have a length, countable with <code>len()</code>. Numbers do not — calling <code>len()</code> on an integer raises a <code>TypeError</code>:</p>
-<div id="ace6274e" class="cell" data-execution_count="6">
+<div id="ee2275d8" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(full_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>11</code></pre>
 </div>
 </div>
-<div id="ab56135f" class="cell" data-execution_count="7">
+<div id="e5c06770" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(<span class="dv">52</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -553,7 +556,7 @@ window.Quarto = {
 <section id="converting-between-types" class="level2">
 <h2 class="anchored" data-anchor-id="converting-between-types">Converting between types</h2>
 <p>You cannot mix numbers and strings in arithmetic directly. Python refuses <code>1 + '2'</code> because the intent is ambiguous — should the result be the number <code>3</code> or the string <code>'12'</code>? Use <code>int()</code>, <code>float()</code>, or <code>str()</code> to convert explicitly first:</p>
-<div id="f8a488b3" class="cell" data-execution_count="8">
+<div id="5429e873" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span> <span class="op">+</span> <span class="bu">int</span>(<span class="st">'2'</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">str</span>(<span class="dv">1</span>) <span class="op">+</span> <span class="st">'2'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -571,7 +574,7 @@ window.Quarto = {
 <section id="mixing-integers-and-floats" class="level2">
 <h2 class="anchored" data-anchor-id="mixing-integers-and-floats">Mixing integers and floats</h2>
 <p>When an expression contains both integers and floats, Python automatically promotes the integer to a float so no precision is lost. The <code>/</code> operator always returns a float in Python 3, even when both operands are integers:</p>
-<div id="62712263" class="cell" data-execution_count="9">
+<div id="bb8353d0" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'half is'</span>, <span class="dv">1</span> <span class="op">/</span> <span class="fl">2.0</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'three squared is'</span>, <span class="fl">3.0</span> <span class="op">**</span> <span class="dv">2</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'integer division:'</span>, <span class="dv">7</span> <span class="op">/</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -582,7 +585,7 @@ integer division: 3.5</code></pre>
 </div>
 </div>
 <p>To get a whole-number result from division, use <code>//</code> (floor division). The <code>%</code> operator gives the remainder:</p>
-<div id="2b2da386" class="cell" data-execution_count="10">
+<div id="d319935c" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'5 // 3:'</span>, <span class="dv">5</span> <span class="op">//</span> <span class="dv">3</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'5 % 3:'</span>, <span class="dv">5</span> <span class="op">%</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -594,7 +597,7 @@ integer division: 3.5</code></pre>
 <section id="variables-only-change-when-assigned" class="level2">
 <h2 class="anchored" data-anchor-id="variables-only-change-when-assigned">Variables only change when assigned</h2>
 <p>Unlike a spreadsheet cell, a Python variable does not update automatically when the values it depended on change. Assignment copies the <em>current</em> value — the connection to any previous expression is severed immediately:</p>
-<div id="1fa67590" class="cell" data-execution_count="11">
+<div id="58c3a9ba" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>second <span class="op">=</span> <span class="dv">5</span> <span class="op">*</span> first</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> <span class="dv">2</span></span>
@@ -629,7 +632,7 @@ integer division: 3.5</code></pre>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>It is a float. You can verify with <code>type()</code>:</p>
-<div id="1ab5f024" class="cell" data-execution_count="12">
+<div id="ce9d2fb3" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="fl">3.4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'float'&gt;</code></pre>
@@ -665,7 +668,7 @@ integer division: 3.5</code></pre>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>It is a float. When an integer and a float appear together in an expression, Python converts the integer to a float automatically:</p>
-<div id="053d66d9" class="cell" data-execution_count="13">
+<div id="9833759f" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="fl">3.25</span> <span class="op">+</span> <span class="dv">4</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result, <span class="st">'is'</span>, <span class="bu">type</span>(result))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -734,7 +737,7 @@ integer division: 3.5</code></pre>
 <section id="division-types" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="division-types">Division Types</h2>
 <p>Given the three division operators in Python 3:</p>
-<div id="8902e0a8" class="cell" data-execution_count="14">
+<div id="462fb1d5" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'5 // 3:'</span>, <span class="dv">5</span> <span class="op">//</span> <span class="dv">3</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'5 / 3:'</span>, <span class="dv">5</span> <span class="op">/</span> <span class="dv">3</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'5 % 3:'</span>, <span class="dv">5</span> <span class="op">%</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -758,7 +761,7 @@ integer division: 3.5</code></pre>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Floor division gives the number of complete surveys; adding 1 handles the remainder group:</p>
-<div id="56fc6c87" class="cell" data-execution_count="15">
+<div id="b50207de" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>num_subjects <span class="op">=</span> <span class="dv">600</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>num_per_survey <span class="op">=</span> <span class="dv">42</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>num_surveys <span class="op">=</span> num_subjects <span class="op">//</span> num_per_survey <span class="op">+</span> <span class="dv">1</span></span>
@@ -784,7 +787,7 @@ integer division: 3.5</code></pre>
 <section id="strings-to-numbers" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="strings-to-numbers">Strings to Numbers</h2>
 <p><code>float()</code> converts a numeric string to a float, and <code>int()</code> truncates a float to an integer:</p>
-<div id="a903eded" class="cell" data-execution_count="16">
+<div id="8814cd75" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"string to float:"</span>, <span class="bu">float</span>(<span class="st">"3.4"</span>))</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"float to int:"</span>, <span class="bu">int</span>(<span class="fl">3.4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -807,7 +810,7 @@ float to int: 3</code></pre>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>It raises a <code>ValueError</code>. Although it might seem reasonable for Python to convert <code>"3.4"</code> to <code>3.4</code> and then to <code>3</code>, Python requires explicit, step-by-step conversion. If you want the integer, you must do it yourself:</p>
-<div id="67335da1" class="cell" data-execution_count="17">
+<div id="eb4b8ab3" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(<span class="bu">float</span>(<span class="st">"3.4"</span>))   <span class="co"># 3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>3</code></pre>
@@ -830,7 +833,7 @@ float to int: 3</code></pre>
 <section id="arithmetic-with-different-types" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="arithmetic-with-different-types">Arithmetic with Different Types</h2>
 <p>Which of the following expressions produce <code>2.0</code>? There may be more than one correct answer.</p>
-<div id="9ced37fb" class="cell" data-execution_count="18">
+<div id="aadbe8c0" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>second <span class="op">=</span> <span class="st">"1"</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>third <span class="op">=</span> <span class="st">"1.1"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
