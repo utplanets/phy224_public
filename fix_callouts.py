@@ -3,8 +3,8 @@
 Convert Quarto callout blocks in .ipynb files to HTML alert/details elements.
 
 Usage:
-    python3 fix_callouts.py episodes/basics.ipynb
-    python3 fix_callouts.py episodes/          # all .ipynb in directory
+    uv run python fix_callouts.py episodes/basics.ipynb
+    uv run python fix_callouts.py episodes/          # all .ipynb in directory
 """
 
 import json

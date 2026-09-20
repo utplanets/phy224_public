@@ -1,0 +1,17 @@
+[project]
+name = "phy224-public"
+version = "0.1.0"
+description = "PHY224 Python review lesson, rendered with Quarto"
+requires-python = ">=3.11"
+dependencies = [
+    "jupyter",
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "pyyaml",
+    "scipy",
+]
+
+# Not a package: only manages the environment used to render the site.
+[tool.uv]
+package = false

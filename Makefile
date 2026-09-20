@@ -38,7 +38,7 @@ $(ZIP_TARGET): $(IPYNB_FILES)
 
 $(NOTEBOOKS_DIR)/%.ipynb: episodes/%.qmd fix_callouts.py | $(NOTEBOOKS_DIR)
 	quarto convert $< --output $@
-	python3 fix_callouts.py $@
+	uv run python fix_callouts.py $@
 
 $(NOTEBOOKS_DIR):
 	mkdir -p $@

@@ -17,10 +17,15 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with: {python-version: '3.11', cache: 'pip'}
-      - run: pip install -r requirements.txt 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+      - name: Install Python dependencies
+        run: uv sync --locked
+      # Quarto's Jupyter engine picks its Python from QUARTO_PYTHON
+      - name: Point Quarto at the uv environment
+        run: echo "QUARTO_PYTHON=$PWD/.venv/bin/python" >> "$GITHUB_ENV"
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         env:
