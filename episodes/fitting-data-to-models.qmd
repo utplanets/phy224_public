@@ -270,11 +270,11 @@ something. It is not capturing the shape of the data.
 #| fig-cap : "Residual plot of model minus data for the two fits"
 plt.figure(figsize=(8, 4))
 plt.axhline(0, color='k', lw=0.8, ls='--')
-plt.plot(measured_times,
-         distance(measured_times, popt[0]) - measured_distances,
+plt.errorbar(measured_times,
+         distance(measured_times, popt[0]) - measured_distances,yerr=distance_errors,
          label='$s=ut$', marker='s', ls='')
-plt.plot(measured_times,
-         distance_with_acceleration(measured_times, popt2[0], popt2[1]) - measured_distances,
+plt.errorbar(measured_times,
+         distance_with_acceleration(measured_times, popt2[0], popt2[1]) - measured_distances,yerr=distance_errors,
          label=r'$s=ut+\frac{1}{2}at^2$', marker='<', ls='')
 plt.legend(fontsize=14)
 plt.xlabel("Time (s)")
